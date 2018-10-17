@@ -7,6 +7,10 @@
 	margin: 12px 15px;
 }
 
+.carrossel{
+	width: 25em;
+}
+
 @font-face {
 	font-family: biysk;
 	src: url(fonts/Biysk.ttf);
@@ -51,6 +55,10 @@ header {
 
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
+
+	header {
+		font-size: 1.3em;
+	}
 
 	#home {
 
