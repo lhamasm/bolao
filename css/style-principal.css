@@ -11,6 +11,13 @@
 	width: 25em;
 }
 
+.scroll {
+	overflow-y: scroll;
+}
+@font-face{
+	font-family: grooving;
+	src: url(fonts/Aa.otf);
+}
 @font-face {
 	font-family: biysk;
 	src: url(fonts/Biysk.ttf);
@@ -74,10 +81,28 @@ body {
 	background-attachment: fixed;
 }
 
-#programa {
+#como-jogar, #programa {
 	background-color: #f8f9fa;
 }
 
 .nome{
 	font-size: 3em;
+}
+
+.dinheiro {
+	font-size: 1.2em;
+}
+
+#not{
+	width: 50em;
+}
+
+#not img{
+	width: 50em;
+	height: 500px;
+}
+
+.fundo-titulo {
+	background: rgba(0,0,0,0.7);
+	padding: 0 1em;
 }
