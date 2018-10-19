@@ -1,24 +1,199 @@
-.footer {
-	opacity: 0.7;
+/*Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) {
+
+	#home {
+		padding: 7em 0;
+	}
+
+	#home h1 {
+		font-size: 2.5em;
+	}
+
+	#home p {
+		font-size: 0.9em;
+	}
+
+	#carousel-participantes, #carousel-participantes .card, #carousel-noticias{
+		width: 100%;
+		height: 70%;
+	}
+
+	#carousel-noticias .carousel-caption h2 {
+		font-size: 1.0rem;
+	}
 }
 
-.divisor {
-	width: 1px;
-	margin: 12px 15px;
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+	#home {
+		padding: 7em 0;
+	}
+
+	#home h1 {
+		font-size: 2.5em;
+	}
+
+	#home p {
+		font-size: 0.9em;
+	}
+
+	#carousel-participantes, #carousel-participantes .card, #carousel-noticias{
+		width: 100%;
+		height: 70%;
+	}
+
+	#carousel-noticias .carousel-caption h2 {
+		font-size: 1.0rem;
+	}
+
+	#carousel-noticias .carousel-caption p {
+		font-size: 0.8rem;
+	}
+
+	#img-programa img{
+		width: 13em;
+		text-align: center;
+	}
+
+	
+}
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+	#home {
+		padding: 7em 0;
+	}
+
+	#home h1 {
+		font-size: 3.0em;
+	}
+
+	#home p {
+		font-size: 1.1em;
+	}
+
+	#carousel-participantes, #carousel-participantes .card, #carousel-noticias{
+		width: 100%;
+		height: 70%;
+	}
+
+	#ranking{
+		width: 100%;
+		height: 90%;
+		text-align: center;
+	}
+
+	#ranking li{
+		list-style: none;
+		margin-left: -1em;
+		border-bottom: 1px solid #f0f0f0
+	}
+
+	#ranking h4 {
+		font-size: 0.7em;
+	}
+
+	#ranking img {
+		font-size: 0.7em;
+	}
+
+	#carousel-noticias .carousel-caption h2 {
+		font-size: 1.5rem;
+	}
+
+	#carousel-noticias .carousel-caption p {
+		font-size: 1.0rem;
+	}
+
+	#img-programa img{
+		width: 17em;
+		text-align: center;
+	}
+
+	.scroll {
+		overflow-y: auto;
+		height: 40.3em;
+	}
+
+}
+/* Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+
+	#home {
+		padding: 16em 0;
+	}
+
+	#home h1 {
+		font-size: 3.5em;
+	}
+
+	#home p {
+		font-size: 1.3em;
+	}
+
+	#img-programa img{
+		width: 23em;
+	}
+
+	#ranking{
+		width: 100%;
+		height: 91%;
+		text-align: center;
+	}
+
+	#ranking h4 {
+		font-size: 0.8em;
+	}
+
+	#ranking img {
+		font-size: 0.7em;
+	}
+
+	.scroll {
+		overflow-y: auto;
+		height: 43.5em;
+	}
+
+}
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+
+	header {
+		font-size: 1.3em;
+	}
+
+	#home {
+		padding: 16em 0;
+	}
+
+	#home h1 {
+		font-size: 3.5em;
+	}
+
+	#home p {
+		font-size: 1.3em;
+	}
+
+	#participante .card {
+		width: 25em;
+	}
+
+	#img-programa img{
+		width: 27em;
+	}
+
+	.scroll {
+		overflow-y: auto;
+		height: 43.5em;
+	}
 }
 
-.carrossel{
-	width: 25em;
-}
-
-.scroll {
-	overflow-y: auto;
-	height: 43.5em;
-}
 @font-face{
 	font-family: grooving;
 	src: url(fonts/Aa.otf);
 }
+
 @font-face {
 	font-family: biysk;
 	src: url(fonts/Biysk.ttf);
@@ -34,47 +209,6 @@ header {
 	font-size: 1.4em;
 }
 
-/*Extra small devices (portrait phones, less than 576px)*/
-@media (max-width: 575.98px) {
-
-}
-
-/*Small devices (landscape phones, 576px and up)*/
-@media (min-width: 576px) and (max-width: 767.98px) {
-
-}
-
-/*Medium devices (tablets, 768px and up)*/
-@media (min-width: 768px) and (max-width: 991.98px) {
-
-}
-
-/* Large devices (desktops, 992px and up)*/
-@media (min-width: 992px) and (max-width: 1199.98px) { 
-	header {
-		font-size: 1.2em;
-	}
-
-	#home {
-
-		padding: 16em 0;
-	}
-}
-
-/*Extra large devices (large desktops, 1200px and up)*/
-@media (min-width: 1200px) {
-
-	header {
-		font-size: 1.3em;
-	}
-
-	#home {
-
-		padding: 16em 0;
-	}
-
-}
-
 
 body {
 	background: url(../images/participantes.png),
@@ -87,8 +221,13 @@ ol li {
 	font-family: grooving;
 }
 
-#como-jogar, #programa {
+
+#programa, #como-jogar, #forum {
 	background-color: #f8f9fa;
+}
+
+#programa, #participantes, #como-jogar, #noticias, #forum {
+	padding: 1.5em 0 3.0em 0;
 }
 
 .nome{
@@ -99,13 +238,27 @@ ol li {
 	font-size: 1.2em;
 }
 
-#not{
-	width: 50em;
+#como-jogar i {
+	font-size: 5em; 
+	color: #B22222;
 }
 
-#not img{
-	width: 50em;
-	height: 500px;
+#carousel-noticias{
+	width: 100%;
+}
+
+
+.footer {
+	opacity: 0.7;
+}
+
+.divisor {
+	width: 1px;
+	margin: 12px 15px;
+}
+
+.carrossel{
+	width: 25em;
 }
 
 .fundo-titulo {
@@ -120,3 +273,5 @@ ol li {
 .eliminado {
 	color: #6c757d;
 }
+
+
