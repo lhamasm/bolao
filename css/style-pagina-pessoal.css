@@ -1,0 +1,38 @@
+@font-face {
+	font-family: robotok;
+	src: url(fonts/Roboto-Thin.ttf);
+}
+
+@font-face {
+	font-family: cap;
+	src: url(fonts/cap.ttf);
+}
+
+@font-face {
+	font-family: vonique;
+	src: url(fonts/vonique.otf);
+}
+
+header {
+	font-family: robotok, Helvetica,Arial,sans-serif;
+	background-color: #8B0000;
+}
+
+#resto {
+	background-color: #F0F0F0;
+}
+
+#navbar {
+	font-family: cap, Helvetica,Arial,sans-serif;
+	font-size: 1.5em;
+	font-weight: bold;
+	background-color: #B22222;
+}
+
+#navbar a {
+	color: white;
+}
+
+#navbar a:hover {
+	border-bottom: 5px solid white;
+}

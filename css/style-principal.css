@@ -274,4 +274,6 @@ ol li {
 	color: #6c757d;
 }
 
-
+.grayscale{
+	filter: grayscale(100%);
+}

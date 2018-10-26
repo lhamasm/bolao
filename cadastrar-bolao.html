@@ -1,0 +1,211 @@
+<!doctype html>
+
+<html lang="pt-br">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Bolão MasterChef Brasil</title>
+
+		 <!-- Icone da aba -->
+	    <link rel="icon" href="images/logo-vermelho.png">
+
+	    <link rel="stylesheet" type="text/css" href="css/style-pagina-pessoal.css">
+
+	    <!-- Font Awesome -->
+	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+	    <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	</head>
+
+
+	<body>
+		
+		<header>			
+			<nav class="navbar navbar-expand-lg text-white navbar-light">
+				<div class="container">
+					<ul class="navbar-nav">
+						<li class="nav-item"><strong>MASTERCHEF BRASIL 2018 - PROFISSIONAIS</strong> | </li>
+						<li class="nav-item ml-2">POSIÇÃO: posição | </li>
+						<li class="nav-item ml-2">PONTUAÇÃO: pontuação</li>
+					</ul>
+
+					<ul class="navbar-nav">
+						<li class="nav-item ml-auto">BEM-VINDO(A) <strong>SABRINA COSME</strong></li>
+						<!-- trocar de modalidade -->
+						<li class="nav-item ml-4"><a href="#"><i class="fas fa-exchange-alt text-white"></i></a></li>
+						<!-- convites -->
+						<li class="nav-item ml-2"><a href="#"><i class="far fa-envelope text-white"></i></a></li>
+						<!-- minha conta -->
+						<li class="nav-item ml-2"><a href="#"><i class="far fa-user text-white"></i></a></li>
+						<!-- sair -->
+						<li class="nav-item ml-2"><a href="index-principal.html"><i class="fas fa-sign-out-alt text-white"></i></a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+
+		<section id="navbar">
+			<nav class="navbar navbar-expand-lg">
+				<div class="container">
+					<img class="navbar-brand" src="images/logo-preto.png" style="width: 100px;filter: invert(100%); ">
+
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-collapse">
+			        	<span class="navbar-toggler-icon"></span>
+			        </button>
+
+			        <div class="collapse navbar-collapse" id="nav-collapse">
+			        	<ul class="navbar-nav">
+			            	<li class="nav-item">
+			                	<a class="nav-link" href="#">PÁGINA INICIAL</a>
+			              	</li>
+
+			              	<li class="nav-item">
+			                	<a class="nav-link" href="#">CRIAR BOLÃO</a>
+			              	</li>
+
+			              	<li class="nav-item">
+			                	<a class="nav-link" href="#">MEUS BOLÕES</a>
+			              	</li>
+
+			              	<li class="nav-item">
+			                	<a class="nav-link" href="#">MINHAS APOSTAS</a>
+			              	</li>
+
+			              	<li class="nav-item">
+			                	<a class="nav-link" href="#">MEU HISTÓRICO DE APOSTAS</a>
+			              	</li>
+			            </ul>
+					</div>
+				</div>
+			</nav>
+		</section>
+
+		<section>
+			<div class="container">
+				<h1 class="nome" style="font-family: biysk">Cadastrar Bolão</h1>
+				<div class="row">
+
+					<div class="col-md-6 offset-3">
+						<form>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="campeonato">Campeonato*</label>
+										<select class="form-control custom-select" name="campeonato" id="campeonato">
+											<option value="profissionais" selected>MasterChef Profissionais</option>
+											<option value="amadores">MasterChef Amadores</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="tipo-bolao">Tipo do Bolão*</label>
+										<select class="form-control custom-select" name="tipo-bolao" id="tipo-bolao">
+											<option value="publico" selected>Público</option>
+											<option value="privado">Privado</option>
+										</select>
+									</div>
+								</div>
+
+							</div>
+							
+							<div class="form-group">
+								<label for="nome">Nome*</label>
+								<input class="form-control" type="text" name="nome" id="nome" placeholder="Digite o nome para o bolão">
+							</div>
+
+							<div class="form-group">
+								<label for="descricao">Descrição</label>
+								<textarea class="form-control" style="resize: none;" id="descricao"></textarea>
+							</div>
+
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-6">
+										<label for="participantes">Número de Participantes</label>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-5">
+										<input class="form-control" type="text" name="participantes" id="participantes">
+									</div>
+									<div class="col-md-7">
+										<input type="checkbox" name="unlimited" id="unlimited">
+										<label for="unlimited">Sem limite</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="escolhas">Escolhas de Aposta</label>
+								<textarea class="mb-2 form-control" id="escolhas"></textarea>
+								<div class="row">
+									<div class="col-md-6 input-group">
+										<input class="form-control" id="opcao" type="text">
+										<div class="input-group-append">
+											<button class="btn btn-info" onclick="carrega_escolha()"><i class="fas fa-plus"></i></button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="tipo-jogo">Tipo de Jogo*</label>
+								<div class="row">
+									<div class="col-md-6">
+										<input type="checkbox" name="caixa-misteriosa" id="caixa-misteriosa">
+										<label for="caixa-misteriosa">Prova da Caixa Misteriosa</label><br>
+										<input type="checkbox" name="equipes" id="equipes">
+										<label for="equipes">Prova em Equipes</label><br>
+										<input type="checkbox" name="eliminacao" id="eliminacao">
+										<label for="eliminacao">Prova de Eliminação</label>
+									</div>
+
+									<div class="col-md-6">
+										<input type="checkbox" name="repescagem" id="repescagem">
+										<label for="repescagem">Prova de Repescagem</label><br>
+										<input type="checkbox" name="semifinal" id="semifinal">
+										<label for="semifinal">Semifinal</label><br>
+										<input type="checkbox" name="final" id="final">
+										<label for="final">Final</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label >Tipo de Aposta*</label><br>
+								<input type="radio" name="tipo-jogo" id="tema">
+								<label for="tema">Qual será o tema da prova?</label><br>
+								<input type="radio" name="tipo-jogo" id="ingredientes">
+								<label for="ingredientes">Quais serão os ingredientes utilizados na prova?</label><br>
+								<input type="radio" name="tipo-jogo" id="ganhador">
+								<label for="ganhador">Quem será que vai ganhar?</label><br>
+								<input type="radio" name="tipo-jogo" id="perdedor">
+								<label for="perdedor">Quem será que vai perder/eliminado?</label><br>
+								<input type="radio" name="tipo-jogo" id="outro">
+								<input type="text" placeholder="Outro">
+							</div>							
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</section>
+
+		<script type="text/javascript">
+	    	function carrega_escolha() {
+	    		document.getElementById('escolhas').value = document.getElementById('opcao').value; 
+	    	}
+	    </script>
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>	
+	</body>
+
+</html>
