@@ -2,6 +2,11 @@
     box-sizing: border-box;
 }
 
+.modal-body{
+    height: 30em;
+    overflow-y: auto;
+}
+
 .form {
 	width: 30em;
 	margin-left: 10.9em;
