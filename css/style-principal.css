@@ -112,6 +112,7 @@
 	}
 
 	.scroll {
+		overflow-x: hidden;
 		overflow-y: auto;
 		height: 40.3em;
 	}
@@ -151,6 +152,7 @@
 	}
 
 	.scroll {
+		overflow-x: hidden;
 		overflow-y: auto;
 		height: 43.5em;
 	}
@@ -184,6 +186,7 @@
 	}
 
 	.scroll {
+		overflow-x: hidden;
 		overflow-y: auto;
 		height: 43.5em;
 	}
