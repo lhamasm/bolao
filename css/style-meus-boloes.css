@@ -1,0 +1,60 @@
+.scroll{
+	overflow-x: hidden;
+	overflow-y: auto;
+	height: 50%;
+}
+
+@font-face {
+	font-family: robotok;
+	src: url(fonts/Roboto-Thin.ttf);
+}
+
+@font-face {
+	font-family: robotoBold;
+	src: url(fonts/Roboto-Bold.ttf);
+}
+
+@font-face {
+	font-family: cap;
+	src: url(fonts/cap.ttf);
+}
+
+@font-face {
+	font-family: vonique;
+	src: url(fonts/vonique.otf);
+}
+
+@font-face {
+	font-family: Aa;
+	src: url(fonts/Aa.otf);
+}
+
+header {
+	font-family: robotok, Helvetica,Arial,sans-serif;
+	background-color: #B22222;
+}
+
+.titulo {
+	font-family: robotoBold;
+}
+
+.mc-pro:hover, .mc-amadores:hover{
+	opacity: 0.5;
+}
+
+img.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    left: 680px;
+}
+
+#navbar {
+	font-family: cap, Helvetica,Arial,sans-serif;
+	font-size: 1.5em;
+	font-weight: bolder;
+}
+
+#navbar a:hover {
+	border-bottom: 5px solid #dc3545;
+}
