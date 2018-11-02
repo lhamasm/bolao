@@ -1,8 +1,3 @@
-.modal-body{
-    height: 30em;
-    overflow-y: auto;
-}
-
 @font-face {
 	font-family: robotok;
 	src: url(fonts/Roboto-Thin.ttf);
