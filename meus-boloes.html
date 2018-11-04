@@ -81,27 +81,210 @@
 			</nav>
 		</section>
 
-		<section id="boloes-disponiveis" class="scroll">
+		<section id="boloes-disponiveis" class="scroll my-3">
 			<div class="container">
-				<h3 style="margin-left: 6em; margin-top: 0.5em;">Em Aberto</h3>
+				<h3 style="margin-left: 6.3em; font-family: robotok;">Em Aberto</h3>
 				<div class="row">
 					<div class="col-md-2"></div>
-					<div class="col-md-8" style="background-color:#FFE4E1; margin: 1em 0; padding: 1em;">
-						<div class="row">
+					<div class="col-md-8 bg-info" style="margin: 1em 0; padding: 1em;">
+						<div class="row text-white">
 							<div class="col-md-3">
-								<i></i>
-								<h5>2/10</h5>
+								<h5 class="titulo"><i class="fas fa-user"></i> 2/10</h5>
 							</div>
 							<div class="col-md-3">
 								<i></i>
-								<h5>Nome</h5>
+								<h5 class="titulo">Nome</h5>
 							</div>
 							<div class="col-md-5">
 								<i></i>
-								<h5>01/01/2000 20h00</h5>
+								<h5 class="titulo"><i class="far fa-calendar-alt"></i> 01/01/2000 | <i class="far fa-clock"></i> 20h00</h5>
 							</div>
 							<div class="col-md-1">
-								<i style="padding: 0.5em;" class="fas fa-angle-down"></i>
+								<a href="#" onclick="dados_boloes('dados-boloes')">
+									<i id="change" style="font-size: 1.5em; color: white;" class="fas fa-angle-down"></i>
+								</a>
+							</div>
+						</div>
+						<div class="row" style="background-color:white;">
+							<div id="dados-boloes" style="display: none;">
+								<div class="row p-3">
+									<div class="col-md-6">
+										<h5 class="titulo">Descrição</h5>
+										<p>Lorem ipsum donec nunc eget interdum nulla facilisis risus, donec semper curabitur inceptos himenaeos cubilia nibh, consectetur id dapibus aliquam dapibus mi elementum.</p>
+										<h5 class="titulo">Escolhas de Aposta</h5>
+										<div class="px-3">
+											<div class="row">
+												<div id="user" class="col-4 alert alert-info text-center">
+													<button type="button" class="close" data-dismiss="alert">&times;</button>
+													Teste 1
+												</div>
+												<div class="col-4 alert alert-info text-center">
+													<button type="button" class="close" data-dismiss="alert">&times;</button>
+													Teste 2
+												</div>
+												<div class="col-4 alert alert-info text-center">
+													<button type="button" class="close" data-dismiss="alert">&times;</button>
+													Teste 3
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<h5 class="titulo">Tipo de Jogo</h5>
+										<ol style="font-family: robotok;">
+											<li>Prova da Caixa Misteriosa</li>
+											<li>Prova de Eliminação</li>
+											<li>Semifinal</li>
+											<li>Final</li>
+										</ol>
+
+										<h5 class="titulo">Tipo de Aposta</h5>
+										<p>Quem vai ganhar?</p>
+									</div>
+								</div>
+
+								<div class="row px-3">
+									<div class="col-12">
+										<h5 class="titulo">Participantes</h5>
+										<div class="px-3">
+											<div class="row">
+												<div class="col-3 alert alert-info text-center">
+													<button type="button" class="close" data-toggle="modal" data-target="#confirmar"><i class="fas fa-user-times text-danger"></i></button>
+													Fulano
+
+													<div id="confirmar" class="modal fade">
+														<div class="modal-dialog modal-dialog-centered">
+															<div class="modal-content text-center">
+																<div class="modal-header">
+																	<h4 class="modal-title titulo">Deseja remover o usuário o bolão?</h4>
+																	<button type="button" class="close" data-dismiss="modal">&times</button>
+																</div>
+																<div class="modal-body">
+																	<button class="btn btn-success" type="button" class="close" data-dismiss="modal" onclick="$('.alert').hide()"><i class="fas fa-check"></i> Confirmar</button>
+																	<button class="btn btn-danger" type="button" class="close" data-dismiss="modal"><i class="far fa-times"></i> Cancelar</button>
+																</div>
+															</div>
+														</div>
+													</div>
+
+												</div>
+
+												<div class="col-3 offset-1 alert alert-info text-center">
+													<button type="button" class="close" data-dismiss="alert"><i class="fas fa-user-times text-danger"></i></button>
+													Ciclano
+												</div>
+
+												<div class="col-3 offset-1 alert alert-info text-center">
+													<button type="button" class="close" data-dismiss="alert"><i class="fas fa-user-times text-danger"></i></button>
+													Beltrano
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-2"></div>
+					<div class="col-md-8 bg-info" style="margin: 1em 0; padding: 1em;">
+						<div class="row text-white">
+							<div class="col-md-3">
+								<h5 class="titulo"><i class="fas fa-user"></i> 2/10</h5>
+							</div>
+							<div class="col-md-3">
+								<i></i>
+								<h5 class="titulo">Nome</h5>
+							</div>
+							<div class="col-md-5">
+								<i></i>
+								<h5 class="titulo"><i class="far fa-calendar-alt"></i> 01/01/2000 | <i class="far fa-clock"></i> 20h00</h5>
+							</div>
+							<div class="col-md-1">
+								<a href="#" onclick="dados_boloes('dados-boloes')">
+									<i id="change" style="font-size: 1.5em; color: white;" class="fas fa-angle-down"></i>
+								</a>
+							</div>
+						</div>
+						<div class="row" style="background-color:white;">
+							<div id="dados-boloes" style="display: none;">
+								<div class="row p-3">
+									<div class="col-md-6">
+										<h5 class="titulo">Descrição</h5>
+										<p>Lorem ipsum donec nunc eget interdum nulla facilisis risus, donec semper curabitur inceptos himenaeos cubilia nibh, consectetur id dapibus aliquam dapibus mi elementum.</p>
+										<h5 class="titulo">Escolhas de Aposta</h5>
+										<div class="px-3">
+											<div class="row">
+												<div id="user" class="col-4 alert alert-info text-center">
+													<button type="button" class="close" data-dismiss="alert">&times;</button>
+													Teste 1
+												</div>
+												<div class="col-4 alert alert-info text-center">
+													<button type="button" class="close" data-dismiss="alert">&times;</button>
+													Teste 2
+												</div>
+												<div class="col-4 alert alert-info text-center">
+													<button type="button" class="close" data-dismiss="alert">&times;</button>
+													Teste 3
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<h5 class="titulo">Tipo de Jogo</h5>
+										<ol style="font-family: robotok;">
+											<li>Prova da Caixa Misteriosa</li>
+											<li>Prova de Eliminação</li>
+											<li>Semifinal</li>
+											<li>Final</li>
+										</ol>
+
+										<h5 class="titulo">Tipo de Aposta</h5>
+										<p>Quem vai ganhar?</p>
+									</div>
+								</div>
+
+								<div class="row px-3">
+									<div class="col-12">
+										<h5 class="titulo">Participantes</h5>
+										<div class="px-3">
+											<div class="row">
+												<div class="col-3 alert alert-info text-center">
+													<button type="button" class="close" data-toggle="modal" data-target="#confirmar"><i class="fas fa-user-times text-danger"></i></button>
+													Fulano
+
+													<div id="confirmar" class="modal fade">
+														<div class="modal-dialog modal-dialog-centered">
+															<div class="modal-content text-center">
+																<div class="modal-header">
+																	<h4 class="modal-title titulo">Deseja remover o usuário o bolão?</h4>
+																	<button type="button" class="close" data-dismiss="modal">&times</button>
+																</div>
+																<div class="modal-body">
+																	<button class="btn btn-success" type="button" class="close" data-dismiss="modal" onclick="$('.alert').hide()"><i class="fas fa-check"></i> Confirmar</button>
+																	<button class="btn btn-danger" type="button" class="close" data-dismiss="modal"><i class="far fa-times"></i> Cancelar</button>
+																</div>
+															</div>
+														</div>
+													</div>
+
+												</div>
+
+												<div class="col-3 offset-1 alert alert-info text-center">
+													<button type="button" class="close" data-dismiss="alert"><i class="fas fa-user-times text-danger"></i></button>
+													Ciclano
+												</div>
+
+												<div class="col-3 offset-1 alert alert-info text-center">
+													<button type="button" class="close" data-dismiss="alert"><i class="fas fa-user-times text-danger"></i></button>
+													Beltrano
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -114,36 +297,27 @@
 
 		<section id="boloes-passados" class="scroll">
 			<div class="container">
-				<h3 style="margin-left: 6em;">Encerrados</h3>
+				<h3 style="margin-left: 6.3em; font-family: robotok;">Encerrados</h3>
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8 justify-content-center" style="background-color: #D3D3D3; margin: 1em 0; padding: 1em;">
-						<div class="row">
+						<div class="row text-dark">
 							<div class="col-md-3">
-								<i></i>
-								<h5>2/10</h5>
+								<h5 class="titulo"><i class="fas fa-user"></i> 2/10</h5>
 							</div>
 							<div class="col-md-3">
 								<i></i>
-								<h5>Nome</h5>
+								<h5 class="titulo">Nome</h5>
 							</div>
 							<div class="col-md-5">
 								<i></i>
-								<h5>01/01/2000 20h00</h5>
+								<h5 class="titulo"><i class="far fa-calendar-alt"></i> 01/01/2000 | <i class="far fa-clock"></i> 20h00</h5>
 							</div>
 							<div class="col-md-1">
-								<i style="padding: 0.5em;" class="fas fa-angle-down"></i>
+								<a href="#" onclick="dados_boloes('dados-boloes')">
+									<i id="change" style="font-size: 1.5em; color: white;" class="fas fa-angle-down"></i>
+								</a>
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2"></div>
-					<div class="col-md-8 justify-content-center">
-						<div class="col-md-6">
-							<h6>Descrição</h6>
-							<p align="justify" style="font-size: 0.8em;">Lorem ipsum donec nunc eget interdum nulla facilisis risus, donec semper curabitur inceptos himenaeos cubilia nibh, consectetur id dapibus aliquam dapibus mi elementum.
-							</p>
 						</div>
 					</div>
 				</div>
@@ -171,6 +345,16 @@
 				</div>
 			</nav>
 		</footer>
+
+		<script type="text/javascript">
+			function dados_boloes(bolao){
+				if(document.getElementById(bolao).style.display == "none"){
+					document.getElementById(bolao).style.display = "block";
+				} else {
+					document.getElementById(bolao).style.display = "none";
+				}
+			}
+		</script>
 
 
 

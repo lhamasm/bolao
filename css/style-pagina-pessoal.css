@@ -52,3 +52,19 @@ img.sticky {
 #navbar a:hover, .atual {
 	border-bottom: 5px solid #dc3545;
 }
+
+#boloes-disponiveis h2, #ultimos-resultados h2, #resultados-boloes h2,
+#boloes-disponiveis p, #resultados-boloes p, #ultimos-resultados a{
+	font-family: robotok;
+}
+
+
+
+#ultimos-resultados a:hover {
+	text-decoration: none;
+	font-family: robotoBold;
+}
+
+#ultimos-resultados a:hover img{
+	opacity: 0.5;
+}
