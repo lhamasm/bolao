@@ -1,0 +1,36 @@
+@font-face{
+	font-family: grooving;
+	src: url(fonts/Aa.otf);
+}
+
+@font-face {
+	font-family: biysk;
+	src: url(fonts/Biysk.ttf);
+}
+
+@font-face {
+	font-family: joy;
+	src: url("fonts/Joy Kim.otf");
+}
+
+@font-face {
+	font-family: robotoBold;
+	src: url(fonts/Roboto-Bold.ttf);
+}
+
+header {
+	font-family: biysk, Helvetica,Arial,sans-serif;
+	font-size: 1.4em;
+}
+
+.divisor {
+	width: 1px;
+	margin: 12px 15px;
+}
+
+.form {
+	width: 25em;
+	padding: 2em;
+	border-radius: 1em;	
+	background-color: rgba(220,220,220,0.5);
+}
