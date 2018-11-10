@@ -68,3 +68,13 @@ img.sticky {
 #ultimos-resultados a:hover img{
 	opacity: 0.5;
 }
+
+#apostas {
+	border-radius: 25px;
+	margin-left: 10em;
+	margin-right: 10em;
+	margin-top: 2em;
+	padding: 2em;
+	background: #D0F5A9;
+	color: #585858;
+}
