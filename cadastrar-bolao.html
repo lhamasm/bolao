@@ -38,7 +38,7 @@
 						<!-- convites -->
 						<li class="nav-item ml-3"><a href="#"><i class="far fa-envelope text-white"></i></a></li>
 						<!-- minha conta -->
-						<li class="nav-item ml-3"><a href="#"><i class="far fa-user text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="minha-conta.html" title="Minha Conta"><i class="far fa-user text-white"></i></a></li>
 						<!-- sair -->
 						<li class="nav-item ml-3"><a href="index-principal.html"><i class="fas fa-sign-out-alt text-white"></i></a></li>
 					</ul>
@@ -88,7 +88,7 @@
 
 					<div class="col-md-6">
 						<h1 class="titulo text-center py-3 text-info">Cadastrar Bolão</h1>
-						<form class="p-4 shadow">
+						<form class="p-4 shadow" method="post" action="php/cadastrar-bolao.php">
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
@@ -123,7 +123,7 @@
 
 							<div class="form-group">
 								<label class="titulo" for="descricao">Descrição</label>
-								<textarea class="form-control" style="resize: none;" id="descricao"></textarea>
+								<textarea class="form-control" style="resize: none;" id="descricao" name="descricao"></textarea>
 							</div>
 
 							<div class="form-group">
@@ -149,7 +149,7 @@
 								<div class="mb-2" id="escolhas" style="background-color: #C0C0C0; padding: 0.2em;" required></div>
 								<div class="row">
 									<div class="col-md-6 input-group">
-										<input class="form-control" id="opcao" type="text">
+										<input class="form-control" id="opcao" name="opcao" type="text">
 										<div class="input-group-append">
 											<button class="btn btn-info" type="button" onclick="carrega_escolha()"><i class="fas fa-plus"></i></button>
 										</div>
@@ -183,15 +183,15 @@
 
 							<div class="form-group">
 								<label class="titulo">Tipo de Aposta <span class="text-danger">*</span></label><br>
-								<input type="radio" name="tipo-jogo" id="tema" required>
+								<input type="radio" name="tipo-aposta" id="tema" required>
 								<label for="tema">Qual será o tema da prova?</label><br>
-								<input type="radio" name="tipo-jogo" id="ingredientes">
+								<input type="radio" name="tipo-aposta" id="ingredientes">
 								<label for="ingredientes">Quais serão os ingredientes utilizados na prova?</label><br>
-								<input type="radio" name="tipo-jogo" id="ganhador">
+								<input type="radio" name="tipo-aposta" id="ganhador">
 								<label for="ganhador">Quem será que vai ganhar?</label><br>
-								<input type="radio" name="tipo-jogo" id="perdedor">
+								<input type="radio" name="tipo-aposta" id="perdedor">
 								<label for="perdedor">Quem será que vai perder/eliminado?</label><br>
-								<input type="radio" name="tipo-jogo" id="outro">
+								<input type="radio" name="tipo-aposta" id="outro">
 								<input type="text" placeholder="Outro">
 							</div>				
 
