@@ -34,9 +34,9 @@
 						<!-- trocar de modalidade -->
 						<li class="nav-item ml-4"><a href="#"><i class="fas fa-exchange-alt text-white"></i></a></li>
 						<!-- convites -->
-						<li class="nav-item ml-3"><a href="#"><i class="far fa-envelope text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="convites.html"><i class="far fa-envelope text-white"></i></a></li>
 						<!-- minha conta -->
-						<li class="nav-item ml-3"><a href="#"><i class="far fa-user text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="minha-conta.html"><i class="far fa-user text-white"></i></a></li>
 						<!-- sair -->
 						<li class="nav-item ml-3"><a href="index-principal.html"><i class="fas fa-sign-out-alt text-white"></i></a></li>
 					</ul>
@@ -147,9 +147,7 @@
 								</div>
 								<div class="form-group">
 									<label style="margin-right: 1em;">Valor da Aposta:</label>
-									<input id="valoraposta" value="100" type="text">
-									<button style="border: 1px solid;" onclick="subvalue()"><i class="fas fa-caret-down"></i></button>
-									<button style="border: 1px solid;" onclick="incvalue()"><i class="fas fa-caret-up"></i></button>
+									<input id="valoraposta" value="100" min=0 type="number" pattern="[0-9],[0-9]{2}">
 								</div>
 								<div class="form-group">
 									<label style="margin-right: 1em;">Opção de Aposta:</label>
@@ -192,15 +190,7 @@
 		</footer>
 
 		<script type="text/javascript">
-			function incvalue(){
-				document.getElementById('valoraposta').value.parseInt += 1;
-			}
-
-			function subvalue(){
-				if (document.getElementById('valoraposta').value.parseInt > 0) {
-					document.getElementById('valoraposta').value.parseInt -= 1;
-				}
-			}
+			
 		</script>
 
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
