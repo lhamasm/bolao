@@ -73,43 +73,43 @@
 						<div class="align-self-center">
 							<img class="col-md-auto logo" style="width:7.9em;" src="images/logo-vermelho.png">
 						
-							<form class="form shadow">
+							<form class="form shadow" method="post" action="/php/cadastro.php">
 								<div class="phrase pb-1">
 									<h1 class="text-info" style="text-align:center; font-size: 0.45em; font-family: robotoBold;">Cadastre-se agora!</h1>
 								</div>
 								<div class="form-group">
 									<label class="titulo" for="nome">Nome Completo <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="nome" id="nome">
+									<input class="form-control" type="text" name="nome" id="nome" pattern="[A-Za-z ]*" required>
 								</div>
 
 								<div class="form-group">
 									<label class="titulo" for="username">Nome de Usuário <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="username" id="username">
+									<input class="form-control" type="text" name="username" id="username" required>
 								</div>
 
 								<div class="form-group">
 									<label class="titulo" for="email">Email <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="email" id="email">
+									<input class="form-control" type="email" name="email" id="email" required>
 								</div>
 						
 								<div class="form-group">
 									<label class="titulo" for="cmfemail">Confirmar Email <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="cmfemail" id="cmfemail">
+									<input class="form-control" type="email" name="cmfemail" id="cmfemail" required>
 								</div>
 
 								<div class="form-group">
 									<label class="titulo" for="senha">Senha <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="senha" name="senha" id="senha" placeholder="De 6-10 caracteres">
+									<input class="form-control" type="password" name="senha" id="senha" placeholder="De 6-10 caracteres" required>
 								</div>
 					
 								<div class="form-group">
 									<label class="titulo" for="cmfsenha">Confirmar Senha <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="senha" name="cmfsenha" id="cmfsenha">
+									<input class="form-control" type="password" name="cmfsenha" id="cmfsenha" required>
 								</div>
 
 								<div class="form-group">
 									<label class="titulo" for="nascimento">Data de Nascimento <span class="text-danger">*</span>:</label><br>
-									<select class="select-1">
+									<select class="select-1" name="dia" required>
 										<option value="non-selected">Dia</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
@@ -145,7 +145,7 @@
 
 									</select>
 									
-									<select class="select-1">
+									<select class="select-1" name="mes" required>
 										<option value="non-selected">Mês</option>
 										<option value="janeiro">Janeiro</option>
 										<option value="fevereiro">Fevereiro</option>
@@ -162,7 +162,7 @@
 
 									</select>
 
-									<select>
+									<select name="ano" required>
 										<option value="non-selected">Ano</option>
 										<option value="2000">2000</option>
 										<option value="1999">1999</option>
@@ -211,7 +211,7 @@
 
 								<div class="form-group">
 									<label class="titulo" for="genero">Gênero <span class="text-danger">*</span>:</label><br>
-									<select>
+									<select name="genero" required>
 										<option value="nonselected" style="color:lightgray;">[selecione]</option>
 										<option value="feminino">Feminino</option>
 										<option value="masculino">Masculino</option>
@@ -221,27 +221,27 @@
 
 								<div class="form-group">
 									<label class="titulo" for="banco">Banco <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="banco" id="banco">
+									<input class="form-control" type="text" name="banco" id="banco" size="3"required>
 								</div>
 
 								<div class="form-group">
 									<label class="titulo" for="agencia">Agência <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="agencia" id="agencia">
+									<input class="form-control" type="text" name="agencia" id="agencia" size="5" required>
 								</div>
 
 								<div class="form-group">
 									<label class="titulo" for="conta">Conta <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="conta" id="conta">
+									<input class="form-control" type="text" name="conta" id="conta" size="6" required>
 								</div>
 
 								<div class="form-group">
 									<label>
-                    					<input class="mt-2" type="checkbox"> Concordo com os <button type="button" style="padding: 0; border: none; background: none; color: #FF8C00" data-toggle="modal" data-target="#termos">Termos de Uso</button>
+                    					<input class="mt-2" type="checkbox" name="termos" required> Concordo com os <button type="button" style="padding: 0; border: none; background: none; color: #FF8C00" data-toggle="modal" data-target="#termos">Termos de Uso</button>
                   					</label>
 								</div>
 
 								<div class="row form-group">
-									<button class="mb-1 col-sm-5 mb-sm-0 mr-sm-2 btn btn-danger" type="button" name="confirmar">Confirmar</button>
+									<button class="mb-1 col-sm-5 mb-sm-0 mr-sm-2 btn btn-danger" type="submit" name="confirmar">Confirmar</button>
 								</div>
 
 							</form>
@@ -293,11 +293,21 @@
 		    </div>
 		</footer>
 
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
+
+	<script type="text/javascript">
+			
+		$('#agencia').mask('0000-0');
+		$('#conta').mask('00000-0');
+		$('#banco').mask('000');			
+
+	</script>
   </body>
 </html>
