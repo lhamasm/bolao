@@ -80,33 +80,63 @@
 		<section>
 			<div class="container">
 				<div class="row">
+
+					<!-- menu -->
 					<div class="col-3 menu">
-						<button class="botao" onclick="show_plz('divNoticias')">Campeonato</button><br>
-						<button class="botao" onclick="show_plz('divNoticias')">Participantes</button><br>
-						<button class="botao" onclick="show_plz('divNoticias')">Rankings</button><br>
+						<button class="botao" onclick="show_plz('divCampeonato')">Campeonato</button><br>
+						<button class="botao" onclick="show_plz('divParticipantes')">Participantes</button><br>
+						<button class="botao" onclick="show_plz('divRanking')">Rankings</button><br>
 						<button class="botao" onclick="show_plz('divNoticias')">Notícias</button><br>
 					</div>
+
+					<!-- seção noticias -->
 					<div id="divNoticias" class="col-8 division" style="display: none;">
 						<button class="btn btn-info" data-toggle="modal" data-target="#addnoticia" style="margin: 1em;"><i class="fas fa-plus mr-2"></i>Adicionar Notícia</button><br>
-						<div id="notVisiveis">
+
+						<!-- noticias visiveis -->
+						<div id="notEscondidos">
 							<h5 class="ml-3 mt-3">Visíveis</h5>
 							<button data-toggle="modal" data-target="#dynamicmodal" class="linksmenu openmodal">Internet vai à loucura e comemora eliminação de Thales</button>
 							<button class="umbotao ml-2" data-toggle="tooltip" data-placement="bottom" title="Esconder Notícia"><i class="fas fa-eye-slash"></i></button>
-							<button class="umbotao ml-2" data-toggle="tooltip" data-placement="bottom" title="Excluir Notícia"><i class="fas fa-times"></i></button>
+							<span data-toggle="modal" data-target="#sure">
+								<button class="umbotao ml-2" onclick="mensagemsure('essa notícia')" data-toggle="tooltip" data-placement="bottom" title="Excluir Notícia"><i class="fas fa-times"></i></button>
+							</span>
 							<button data-toggle="modal" data-target="#dynamicmodal" class="linksmenu openmodal">Cozinheiros preparam pratos monocromáticos para eliminação</button>
 							<button class="umbotao ml-2" data-toggle="tooltip" data-placement="bottom" title="Esconder Notícia"><i class="fas fa-eye-slash"></i></button>
-							<button class="umbotao ml-2" data-toggle="tooltip" data-placement="bottom" title="Excluir Notícia"><i class="fas fa-times"></i></button>
+							<span data-toggle="modal" data-target="#sure">
+								<button class="umbotao ml-2" onclick="mensagemsure('essa notícia')" data-toggle="tooltip" data-placement="bottom" title="Excluir Notícia"><i class="fas fa-times"></i></button>
+							</span>
 							<button data-toggle="modal" data-target="#dynamicmodal" class="linksmenu openmodal">Participantes cozinham em meio à natureza e precisam fazer o próprio fogo</button>
 							<button class="umbotao ml-2" data-toggle="tooltip" data-placement="bottom" title="Esconder Notícia"><i class="fas fa-eye-slash"></i></button>
-							<button class="umbotao ml-2" data-toggle="tooltip" data-placement="bottom" title="Excluir Notícia"><i class="fas fa-times"></i></button>
+							<span data-toggle="modal" data-target="#sure">
+								<button class="umbotao ml-2" onclick="mensagemsure('essa notícia')" data-toggle="tooltip" data-placement="bottom" title="Excluir Notícia"><i class="fas fa-times"></i></button>
+							</span>
 						</div>
-						<div id="notEscondidos">
+
+						<!-- noticias não  visiveis -->
+						<div id="notVisiveis">
 							<h5 class="ml-3 mt-3">Escondidos</h5>
 						</div>
+					</div>
+
+					<!-- seção rankings -->
+					<div id="divRanking" class="col-8 division" style="display: none;">
+						çljpjp
+					</div>
+
+					<!-- seção participantes -->
+					<div id="divParticipantes" class="col-8 division" style="display: none;">
+						fgdgd
+					</div>
+
+					<!-- seção campeonato -->
+					<div id="divCampeonato" class="col-8 division" style="display: none;">
+						sdgsg
 					</div>
 				</div>
 			</div>
 
+			<!-- modal ver & editar noticia -->
 			<div class="modal hide" id="dynamicmodal">
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
@@ -118,41 +148,40 @@
 						<div class="modal-body">
 							<div id="formdyn" class="container">
 								<form>
-									<div id="tit" class="row mb-2">
+									<div class="row mb-2">
 										<div class="form-group ml-3"> 
 											<label for="titnoticia">Título<span class="text-danger">*</span></label>
-											<input class="form-control w-100" type="text" name="titnoticia" value="Título" disabled>
+											<input class="form-control w-100" type="text" id="tit" name="titnoticia" value="Título" disabled>
 										</div>
-										<button onclick="editnoticia('tit')" class="otobotao"><i class="fas fa-edit mr-3 col-1"></i></button> 
+										<button type="button" onclick="enable('tit')" class="otobotao"><i class="fas fa-edit mr-3 col-1"></i></button> 
 									</div>
-									<div id="desc" class="row mb-2">
+									<div class="row mb-2">
 										<div class="form-group ml-3"> 
 											<label for="descnoticia">Descrição<span class="text-danger">*</span></label>
-											<input class="form-control w-100" type="text" name="descnoticia" value="Descrição" disabled>
+											<input class="form-control w-100" type="text" id="desc" name="descnoticia" value="Descrição" disabled>
 										</div>
-
-										<button onclick="editnoticia('desc')" class="otobotao"><i class="fas fa-edit mr-3 col-1"></i></button> 
+										<button type="button" onclick="enable('desc')" class="otobotao"><i class="fas fa-edit mr-3 col-1"></i></button> 
 									</div>
-									<div id="li" class="row mb-2">
+									<div class="row mb-2">
 										<div class="form-group ml-3"> 
 											<label for="linoticia">Link</label>
-											<input class="form-control w-100" type="url" name="linoticia" value="https://www.github.com/lhamasm/bolao" disabled> 
+											<input class="form-control w-100" type="url" id="li" name="linoticia" value="https://www.github.com/lhamasm/bolao" disabled> 
 										</div>
-										<button onclick="editnoticia('li')" class="otobotao"><i class="fas fa-edit mr-3 col-1"></i></button>
+										<button type="button" onclick="enable('li')" class="otobotao"><i class="fas fa-edit mr-3 col-1"></i></button>
 									</div>
-									<div id="daten" class="row mb-2">
+									<div class="row mb-2">
 										<div class="form-group ml-3"> 
 											<label for="datenoticia">Data</label>
-											<input class="form-control" type="date" name="datenoticia" value="2018-11-11" disabled> 
+											<input class="form-control" type="date" id="daten" name="datenoticia" value="2018-11-11" disabled> 
 										</div>
-										<button onclick="editnoticia('daten')" class="otobotao"><i class="fas fa-edit mr-3 col-1"></i></button>
+										<button type="button" onclick="enable('daten')" class="otobotao"><i class="fas fa-edit mr-3 col-1"></i></button>
 									</div>
-									<div id="pic" class="row mb-2">
+									<div class="row mb-2">
 										<div class="form-group ml-3"> 
 											<label for="picnoticia">Imagem<span class="text-danger">*</span></label><br>
-											<input type="file" name="picnoticia" accept="image/*" disabled>
+											<input type="file" id="pic" name="picnoticia" accept="image/*" disabled>
 										</div>
-										<button onclick="editnoticia('pic')" class="otobotao"><i class="fas fa-edit mr-3 col-1"></i></button>
+										<button type="button" onclick="enable('pic')" class="otobotao"><i class="fas fa-edit mr-3 col-1"></i></button>
 									</div>
 								</form>
 							</div>
@@ -165,6 +194,7 @@
 				</div>
 			</div>
 
+			<!-- modal adicionar noticia -->
 			<div class="modal" id="addnoticia">
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
@@ -173,6 +203,11 @@
 						</div>
 						<div class="modal-body">
 							<form>
+								<div class="form-group">
+									<input type="radio" name="visivel" value="vis"> <label for="visivel">Vísivel</label>
+									<input class="ml-1" type="radio" name="visivel" value="esc"> <label for="escondido">Escondido</label>
+								</div>
+
 								<div class="form-group">
 									<label for="titulonoticia">Título da Notícia<span class="text-danger">*</span></label>
 									<input class="form-control" type="text" name="titulonoticia" id="titulonoticia" required>
@@ -204,6 +239,53 @@
 			</div>
 		</section>
 
+		<!-- modal excluir alguma coisa -->
+		<div class="modal" id="sure">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header text-center justify-content-center">
+						<i class="fas fa-exclamation-triangle" style="font-size: 2em; color: #FF002F"></i>
+					</div>
+					<div id="textosure" class="modal-body">
+						<p class="text-center" style="margin: 2em;"><strong>Tem certeza que quer remover sua aposta neste bolão?</strong></p>
+						<div>
+							<button type="button" class="col-6 close" style="padding: 0.5em; background-color: #C0C0C0;" data-dismiss="modal">Cancelar</button>
+							<button type="button" class="col-6 close" style="padding: 0.5em; background-color: #FF0000;" data-dismiss="modal">Sim</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- modal termos e condições editável -->
+		<div class="modal" id="termos">
+    		<div class="modal-dialog modal-dialog-centered">
+    			<div class="modal-content">
+
+    				<div class="modal-header text-center">
+    					<div class="col-2"></div>
+    					<h4 class="col-8 modal-title w-100">Termos e Condições</h4>
+    					<button type="button" class="col-2 close" data-dismiss="modal">&times;</button>
+    				</div>
+    				
+    				<div class="modal-body" style="height: 30em;">
+    					<textarea id="conteudotec" class="w-100 h-100" disabled>
+    						Lorem ipsum semper libero justo porta aenean hendrerit dui, massa eleifend quisque cubilia auctor sagittis mauris placerat venenatis, augue lorem pellentesque porttitor mollis tempus pretium. mollis mi netus in torquent suspendisse mattis urna porttitor nostra, non vel venenatis elit eleifend adipiscing vulputate curabitur malesuada neque, molestie est habitasse ad fringilla sapien vehicula luctus. lectus vestibulum volutpat metus curae laoreet sollicitudin fames bibendum commodo, ultricies facilisis scelerisque cubilia bibendum per nisl lorem, vestibulum convallis aliquam turpis sapien rutrum non tortor. elit non id tempor duis ornare justo dui curabitur senectus, scelerisque feugiat commodo molestie vestibulum egestas rhoncus mi, maecenas senectus rhoncus quis suscipit nullam eros viverra.
+    						Habitant aptent fames conubia bibendum in praesent bibendum dictum est, risus venenatis mi eget lacus sem rutrum ligula curabitur feugiat, congue risus massa a lorem ornare tellus potenti. dapibus pharetra potenti egestas vivamus sollicitudin euismod tincidunt sed volutpat est nostra viverra imperdiet, lobortis nam mauris porta metus donec venenatis varius etiam aliquam elementum. amet neque proin lacinia phasellus neque proin class cursus augue, aliquam aptent hendrerit pharetra imperdiet ac aliquam magna at, torquent molestie viverra rutrum donec turpis fringilla eget. taciti amet vitae lobortis nibh primis rutrum maecenas donec, massa enim feugiat hendrerit porta vehicula at cras, quisque nam ligula ad leo felis purus. 
+    						Senectus primis nostra turpis lorem fames ante class, ornare ante purus curabitur condimentum aenean eu lorem, sem morbi erat dapibus dictum imperdiet. nullam ad donec magna accumsan elit varius condimentum, pellentesque lectus nec feugiat conubia rutrum sociosqu non, est blandit eget tellus habitant condimentum. leo sit consequat aliquam phasellus facilisis mollis est nostra aenean tempor porta interdum, hendrerit faucibus morbi venenatis augue congue dolor feugiat malesuada sed. in pharetra cubilia cras ante nec tortor, ullamcorper fringilla fusce at eu laoreet quam, eu suspendisse tortor bibendum himenaeos. eu accumsan tristique ipsum lectus lobortis volutpat tellus habitasse lobortis egestas tempor a vitae justo augue velit, non accumsan porta ad felis pulvinar leo pretium cursus et proin eu vestibulum bibendum.
+							Fermentum est nisl elit conubia platea amet mattis vitae curabitur facilisis quam, metus tempus a suscipit accumsan curabitur aptent ut orci. conubia vivamus interdum sodales ac erat quis, malesuada convallis posuere dictum urna quisque, cras aenean euismod lacinia etiam. amet rutrum inceptos pretium eu nullam blandit nisi condimentum, tempus quam justo metus cras fringilla nec feugiat, semper lectus eleifend varius cursus a etiam potenti, hendrerit rutrum urna habitant risus luctus sollicitudin. fusce id fringilla lobortis neque eget sem elementum, quis lacus euismod eros tempus dolor curabitur tempor, feugiat libero mauris leo sociosqu turpis. 
+							Aliquet imperdiet luctus at arcu porta sodales lacinia, nullam hendrerit justo luctus iaculis egestas fermentum, venenatis vestibulum primis cursus sed et. pulvinar dolor fames nulla suscipit cras lacus bibendum, suscipit proin tortor aptent vel malesuada, consectetur netus nisl nec tellus volutpat. malesuada sociosqu aptent neque sagittis semper risus cubilia eros praesent taciti diam nostra in donec volutpat ac torquent auctor augue habitant, etiam elit molestie semper nunc nostra nulla phasellus aliquam habitasse mi vitae conubia cras mollis pellentesque ac libero feugiat.
+						</textarea>
+    				</div>
+
+    				<div class="modal-footer text-center justify-content-center">
+    					<button class="btn" id="tecsalvar" onclick="tecs()" style="background-color: #d9534f">Salvar</button>
+    					<button class="btn" id="teceditar" onclick="enable('conteudotec')" style="background-color: #009999">Editar</button>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+
 		<footer style="background-color: #B22222;">
 			<nav class="navbar navbar-expand-lg text-white navbar-dark">
 				<div class="container">
@@ -216,7 +298,7 @@
 							<a class="nav-link" href="#">FAQ</a>
 						</li>
 						<li class="nav-item ml-md-2">
-							<a class="nav-link" href="cadastro.html#termos" data-toggle="modal">TERMOS E CONDIÇÕES</a>
+							<a class="nav-link" data-target="#termos" data-toggle="modal">TERMOS E CONDIÇÕES</a>
 						</li>
 						<li class="nav-item ml-md-2">
 							<a class="nav-link" href="#">REPORTAR BUGS</a>
@@ -231,35 +313,47 @@
     			$('[data-toggle="tooltip"]').tooltip();
 			});
 
-			function editnoticia(idin){
-				if(idin=='tit'){
-					document.getElementById(idin).innerHTML = '<div class="form-group ml-3"> <label for="titnoticia">Título<span class="text-danger">*</span></label><br><input class="form-control w-80" type="text" name="titnoticia" value="Título"> </div>';
-				}
-				else if(idin=='desc'){
-					document.getElementById(idin).innerHTML = '<div class="form-group ml-3"> <label for="descnoticia">Descrição<span class="text-danger">*</span></label><br><input class="form-control w-80" type="text" name="descnoticia" value="Descrição"> </div>';
-				}
-				else if(idin=='daten'){
-					document.getElementById(idin).innerHTML = '<div class="form-group ml-3"> <label for="datenoticia">Data</label><br><input class="form-control" type="date" name="datenoticia" value="2018-11-11"> </div>';
-				}
-				else if(idin=='li'){
-					document.getElementById(idin).innerHTML = '<div class="form-group ml-3"> <label for="linoticia">Link</label><br><input class="form-control w-80" type="url" name="linoticia" value="https://www.github.com/lhamasm/bolao"> </div>';
-				}
-				else if(idin=='pic'){
-					document.getElementById(idin).innerHTML = '<div class="form-group ml-3"> <label for="picnoticia">Imagem<span class="text-danger">*</span></label><br><input type="file" name="picnoticia" accept="image/*"> </div>';
-				}	
-			}
-
 			function show_plz(ash){
 				if(document.getElementById(ash).style.display == "none"){
 					document.getElementById(ash).style.display = "block";
 				} else {
 					document.getElementById(ash).style.display = "none";
 				}
+				auxfuncao(ash);
+			}
+
+			function auxfuncao(ash) {
+				if (ash == 'divCampeonato') {
+					document.getElementById('divParticipantes').style.display = "none";
+					document.getElementById('divRanking').style.display = "none";
+					document.getElementById('divNoticias').style.display = "none";
+				} else if (ash == 'divRanking') {
+					document.getElementById('divParticipantes').style.display = "none";
+					document.getElementById('divCampeonato').style.display = "none";
+					document.getElementById('divNoticias').style.display = "none";
+				} else if (ash == 'divNoticias') {
+					document.getElementById('divParticipantes').style.display = "none";
+					document.getElementById('divRanking').style.display = "none";
+					document.getElementById('divCampeonato').style.display = "none";
+				} else {
+					document.getElementById('divNoticias').style.display = "none";
+					document.getElementById('divRanking').style.display = "none";
+					document.getElementById('divCampeonato').style.display = "none";
+				}
+			}
+
+			// função faz aparecer um modal dizendo "tem certeza que deseja excluir 'message'?"
+			function mensagemsure(message){
+				document.getElementById('textosure').innerHTML = '<div id="textosure" class="modal-body"> <p class="text-center" style="margin: 2em;"><strong>Tem certeza que quer excluir ' + message + '?</strong></p> <div><button type="button" class="col-6 close" style="padding: 0.5em; background-color: #C0C0C0;" data-dismiss="modal">Cancelar</button><button type="button" class="col-6 close" style="padding: 0.5em; background-color: #FF0000;" data-dismiss="modal">Sim</button></div></div>';
 			}
 
 			function savenoticia(){
-				document.getElementById('notVisiveis').innerHTML += '<br><button data-toggle="modal" data-target="#dynamicmodal" class="linksmenu openmodal">' + document.getElementById('titulonoticia').value + '</button> <button class="umbotao ml-2" data-toggle="tooltip" data-placement="bottom" title="Esconder Notícia"><i class="fas fa-eye-slash"></i></button> <button class="umbotao ml-2" data-toggle="tooltip" data-placement="bottom" title="Excluir Notícia"><i class="fas fa-times"></i></button>';
+				document.getElementById('notEscondidos').innerHTML += '<br><button data-toggle="modal" data-target="#dynamicmodal" class="linksmenu openmodal">' + document.getElementById('titulonoticia').value + '</button> <button class="umbotao ml-2" data-toggle="tooltip" data-placement="bottom" title="Esconder Notícia"><i class="fas fa-eye-slash"></i></button> <span data-toggle="modal" data-target="#sure"> <button class="umbotao ml-2" onclick="mensagemsure("essa notícia")" data-toggle="tooltip" data-placement="bottom" title="Excluir Notícia"><i class="fas fa-times"></i></button></span>';
 				
+			}
+
+			function enable(message){
+				document.getElementById(message).disabled = false;
 			}
     			 
 		</script>
