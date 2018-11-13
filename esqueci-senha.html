@@ -80,12 +80,12 @@
 	    <section style="height: 87.3vh;">
 	    	<div class="container">
 	    		<div class="row">
-	    			<div id="tela-1" class="col-4 align-self-center">
+	    			<div id="tela-1" class="col-4 offset-1 align-self-center">
 	    				<h3 class="text-info" style="font-family: robotoBold;">Recuperar Senha</h3>
 	    				<form class="form shadow p-3">
 	    					<div class="form-group">
 	    						<label style="font-family: robotoBold;" for="cpf">CPF</label>
-	    						<input class="form-control" type="text" id="cpf" placeholder="Digite apenas números">
+	    						<input class="form-control" type="text" id="cpf" placeholder="Digite apenas números" style="width:60%;">
 	    					</div>
 	    					<div class="form-group">
 	    						<label style="font-family: robotoBold;" for="email">Email</label>
@@ -93,7 +93,7 @@
 	    					</div>
 	    					<div class="form-group">
 	    						<label style="font-family: robotoBold;" for="ddn">Data de Nascimento</label>
-	    						<input class="form-control data-mask" style="width: 50%;" type="text" id="ddn" placeholder="DD/MM/AAAA">
+	    						<input class="form-control data-mask" style="width: 60%;" type="text" id="ddn" placeholder="DD/MM/AAAA">
 	    					</div>
 	    					<div class="form-group">
 	    						<button class="btn btn-danger btn-block" type="button" onclick="recuperar_senha()">Recuperar</button>
@@ -101,8 +101,8 @@
 	    				</form>
 	    			</div>
 
-	    			<div id="tela-2" class="col-4 align-self-center" style="display: none;">
-	    				<div id="alerta" class="alert alert-success" style="display: none; width: 25em;">
+	    			<div id="tela-2" class="col-4 offset-1 align-self-center" style="display: none;">
+	    				<div id="alerta" class="alert alert-success" style="display: none; width: 20em;">
 		    				Senha recuperada com <strong>sucesso</strong>!
 		    			</div>
 	    				<h3 class="text-info" style="font-family: robotoBold;">Recuperar Senha</h3>
@@ -133,7 +133,7 @@
 	    				</form>
 	    			</div>
 
-	    			<div class="col-6  offset-2">
+	    			<div class="col-6">
 	    				<img style="height: 87.3vh;" src="images/chef-frustrado.jpg">
 	    			</div>	    			
 	    		</div>

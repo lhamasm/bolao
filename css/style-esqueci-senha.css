@@ -29,8 +29,9 @@ header {
 }
 
 .form {
-	width: 25em;
+	width: 20em;
 	padding: 2em;
 	border-radius: 1em;	
 	background-color: rgba(220,220,220,0.5);
 }
+
