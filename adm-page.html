@@ -132,6 +132,8 @@
 					<!-- seção campeonato -->
 					<div id="divCampeonato" class="col-8 division" style="display: none;">
 						<button class="btn btn-info" data-toggle="modal" data-target="#addcampeonato" style="margin: 1em;"><i class="fas fa-plus mr-2"></i>Adicionar Campeonato</button><br>
+						<button>Campeonato 1</button>
+						<button>Campeonato 2</button>
 
 					</div>
 				</div>
@@ -309,26 +311,45 @@
     							<label for="Descricaocamp">Descrição</label>
     							<input class="form-control" type="text" name="Descricaocamp">
     						</div>
-    						<div class="form-group">
-    							<label>Participantes</label>
-    							<button class="ml-1 mt-1 umbotao" type="button"><i class="fas fa-plus"></i></button>
-    							<div id="addPartCamp">
-    								<div class="form-group">
-    									<label for="nomePC">Nome<span class="text-danger">*</span></label>
-    									<input type="text" name="nomePC" required>
-    								</div>
-    								<div class="form-group">
-    									<label for="fotoPC">Foto<span class="text-danger">*</span></label>
-    									<input type="file" name="fotoPC" accept="image/*" required>
-    								</div>
-    							</div>
-    						</div>
+    						<label>Participantes</label>
+    						<button class="ml-1 mt-1 umbotao" type="button" onclick="show_plz('addPartCamp'), show_plz('PartCampG')"><i class="fas fa-plus"></i></button>
+							<div id="addPartCamp" style="display: none;">
+								<div class="form-group">
+									<label for="nomePC">Nome<span class="text-danger">*</span></label>
+									<input id="nomePC" type="text" pattern="[A-Za-z ]*" name="nomePC" required>
+								</div>
+								<div class="form-group">
+									<label for="textoPC">Texto Introdutório<span class="text-danger">*</span></label>
+									<textarea class="form-control" name="textoPC" maxlength="336" required></textarea>
+								</div>
+								<div class="form-group">
+									<label for="urlPC">Link do Perfil</label>
+									<input class="form-control" type="url" name="urlPC">
+								</div>
+								<div class="form-group">
+									<label for="fotoPC">Foto<span class="text-danger">*</span></label>
+									<input type="file" id="fotoPC" name="fotoPC" accept="image/*" required>
+								</div>
+								<div class="text-center justify-content-center">
+									<button onclick="addparticipante(), show_plz('addPartCamp'), show_plz('PartCampG')" class="btn btn-outline-danger">Adicionar</button>
+								</div>
+							</div>
+							<div id="PartCampG" class="form-group" style="background-color: #fadbd8; padding: 1em; margin: 1em;">
+								<ul id="PartCamp">
+									<li>
+										<div>
+											<img src="images/adriana.jpg" style="height: 2.5em; width: 2.5em; margin-right: 0.6em;">
+											Pessoa P
+										</div>
+									</li>
+								</ul>
+							</div>
+    						<div class="mt-2 form-group text-center justify-content-center">
+								<button type="submit" onclick="savenoticia()" class="btn btn-danger">Salvar</button>
+								<button class="btn" onclick="resetarform('formAddCamp')" data-dismiss="modal">Cancelar</button>
+							</div>
     					</form>
     				</div>
-    				<div class="modal-footer text-center justify-content-center">
-						<button type="submit" onclick="savenoticia()" class="btn btn-danger">Salvar</button>
-						<button class="btn" onclick="resetarform('formAddCamp')" data-dismiss="modal">Cancelar</button>
-					</div>
     			</div>
     		</div>
     	</div>
@@ -416,6 +437,10 @@
 
 			function resetarform(id){
 				document.getElementById(id).reset();
+			}
+
+			function addparticipante() {
+				document.getElementById('PartCamp').innerHTML += '<li class="mt-1"><div><img src="' + document.getElementById('fotoPC') + '" style="height: 2.5em; width: 2.5em; margin-right: 0.6em;">'+ document.getElementById('nomePC').value + '</div></li>';
 			}
     			 
 		</script>
