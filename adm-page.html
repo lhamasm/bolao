@@ -97,17 +97,17 @@
 						<div id="notEscondidos">
 							<h5 class="ml-3 mt-3">Visíveis</h5>
 							<button data-toggle="modal" data-target="#dynamicmodal" class="linksmenu openmodal">Internet vai à loucura e comemora eliminação de Thales</button>
-							<button class="umbotao ml-2" data-toggle="tooltip" data-placement="bottom" title="Esconder Notícia"><i class="fas fa-eye-slash"></i></button>
+							<button class="umbotao ml-2" onclick="mudar_vizualizacao_noticia('notEscondidos', 'Internet vai à loucura e comemora eliminação de Thales')" data-toggle="tooltip" data-placement="bottom" title="Esconder Notícia"><i class="fas fa-eye-slash"></i></button>
 							<span data-toggle="modal" data-target="#sure">
 								<button class="umbotao ml-2" onclick="mensagemsure('essa notícia')" data-toggle="tooltip" data-placement="bottom" title="Excluir Notícia"><i class="fas fa-times"></i></button>
 							</span>
 							<button data-toggle="modal" data-target="#dynamicmodal" class="linksmenu openmodal">Cozinheiros preparam pratos monocromáticos para eliminação</button>
-							<button class="umbotao ml-2" data-toggle="tooltip" data-placement="bottom" title="Esconder Notícia"><i class="fas fa-eye-slash"></i></button>
+							<button class="umbotao ml-2" onclick="mudar_vizualizacao_noticia('notEscondidos', 'Cozinheiros preparam pratos monocromáticos para eliminação')" data-toggle="tooltip" data-placement="bottom" title="Esconder Notícia"><i class="fas fa-eye-slash"></i></button>
 							<span data-toggle="modal" data-target="#sure">
 								<button class="umbotao ml-2" onclick="mensagemsure('essa notícia')" data-toggle="tooltip" data-placement="bottom" title="Excluir Notícia"><i class="fas fa-times"></i></button>
 							</span>
 							<button data-toggle="modal" data-target="#dynamicmodal" class="linksmenu openmodal">Participantes cozinham em meio à natureza e precisam fazer o próprio fogo</button>
-							<button class="umbotao ml-2" data-toggle="tooltip" data-placement="bottom" title="Esconder Notícia"><i class="fas fa-eye-slash"></i></button>
+							<button class="umbotao ml-2" onclick="mudar_vizualizacao_noticia('notEscondidos', 'Participantes cozinham em meio à natureza e precisam fazer o próprio fogo')" data-toggle="tooltip" data-placement="bottom" title="Esconder Notícia"><i class="fas fa-eye-slash"></i></button>
 							<span data-toggle="modal" data-target="#sure">
 								<button class="umbotao ml-2" onclick="mensagemsure('essa notícia')" data-toggle="tooltip" data-placement="bottom" title="Excluir Notícia"><i class="fas fa-times"></i></button>
 							</span>
@@ -131,7 +131,8 @@
 
 					<!-- seção campeonato -->
 					<div id="divCampeonato" class="col-8 division" style="display: none;">
-						sdgsg
+						<button class="btn btn-info" data-toggle="modal" data-target="#addcampeonato" style="margin: 1em;"><i class="fas fa-plus mr-2"></i>Adicionar Campeonato</button><br>
+
 					</div>
 				</div>
 			</div>
@@ -187,8 +188,8 @@
 							</div>
 						</div>
 						<div class="modal-footer text-center justify-content-center">
-							<button class="btn btn-danger">Salvar</button>
-							<button class="btn">Cancelar</button>
+							<button type="submit" class="btn btn-danger">Salvar</button>
+							<button data-dismiss="modal" class="btn">Cancelar</button>
 						</div>
 					</div>
 				</div>
@@ -202,7 +203,7 @@
 							Adicionar Notícia
 						</div>
 						<div class="modal-body">
-							<form>
+							<form id="formAddNot">
 								<div class="form-group">
 									<input type="radio" name="visivel" value="vis"> <label for="visivel">Vísivel</label>
 									<input class="ml-1" type="radio" name="visivel" value="esc"> <label for="escondido">Escondido</label>
@@ -231,8 +232,8 @@
 							</form>
 						</div>
 						<div class="modal-footer text-center justify-content-center">
-							<button onclick="savenoticia()" class="btn btn-danger">Salvar</button>
-							<button class="btn" data-dismiss="modal">Cancelar</button>
+							<button type="submit" onclick="savenoticia()" class="btn btn-danger">Salvar</button>
+							<button class="btn" onclick="resetarform('formAddNot')" data-dismiss="modal">Cancelar</button>
 						</div>
 					</div>
 				</div>
@@ -286,6 +287,53 @@
     		</div>
     	</div>
 
+    	<!-- modal adicionar campeonato-->
+    	<div class="modal" id="addcampeonato">
+    		<div class="modal-dialog modal-dialog-centered">
+    			<div class="modal-content">
+    				<div class="modal-header text-center">
+    					<div class="col-2"></div>
+    					<h5 class="col-8 modal-title">Adicionar Campeonato</h5>
+    					<button class="col-2 close" onclick="resetarform('formAddCamp')" data-dismiss="modal">&times;</button>
+    				</div>
+    				<div class="modal-body">
+    					<form id="formAddCamp">
+    						<div class="form-group">
+    							<input type="checkbox" name="ativoCampeonato"> Ativo
+    						</div>
+    						<div class="form-group">
+    							<label for="Nomecamp">Nome<span class="text-danger">*</span></label>
+    							<input class="form-control" type="text" name="Nomecamp" required>
+    						</div>
+    						<div class="form-group">
+    							<label for="Descricaocamp">Descrição</label>
+    							<input class="form-control" type="text" name="Descricaocamp">
+    						</div>
+    						<div class="form-group">
+    							<label>Participantes</label>
+    							<button class="ml-1 mt-1 umbotao" type="button"><i class="fas fa-plus"></i></button>
+    							<div id="addPartCamp">
+    								<div class="form-group">
+    									<label for="nomePC">Nome<span class="text-danger">*</span></label>
+    									<input type="text" name="nomePC" required>
+    								</div>
+    								<div class="form-group">
+    									<label for="fotoPC">Foto<span class="text-danger">*</span></label>
+    									<input type="file" name="fotoPC" accept="image/*" required>
+    								</div>
+    							</div>
+    						</div>
+    					</form>
+    				</div>
+    				<div class="modal-footer text-center justify-content-center">
+						<button type="submit" onclick="savenoticia()" class="btn btn-danger">Salvar</button>
+						<button class="btn" onclick="resetarform('formAddCamp')" data-dismiss="modal">Cancelar</button>
+					</div>
+    			</div>
+    		</div>
+    	</div>
+
+    	<!-- foooooooooter -->
 		<footer style="background-color: #B22222;">
 			<nav class="navbar navbar-expand-lg text-white navbar-dark">
 				<div class="container">
@@ -308,11 +356,13 @@
 			</nav>
 		</footer>
 
+		<!-- scriiiiiiiiiiiipt-->
 		<script type="text/javascript">
 			$(document).ready(function(){
     			$('[data-toggle="tooltip"]').tooltip();
 			});
 
+			// função que faz as divs campeonato, noticias, ranking e participantes sumirem e aparecerem ao click do menu
 			function show_plz(ash){
 				if(document.getElementById(ash).style.display == "none"){
 					document.getElementById(ash).style.display = "block";
@@ -348,18 +398,24 @@
 			}
 
 			function savenoticia(){
-
 				if($('input[name=visivel]:checked').val() == 'vis'){
-					document.getElementById('notEscondidos').innerHTML += '<br><button data-toggle="modal" data-target="#dynamicmodal" class="linksmenu openmodal">' + document.getElementById('titulonoticia').value + '</button> <button class="umbotao ml-2" data-toggle="tooltip" data-placement="bottom" title="Esconder Notícia"><i class="fas fa-eye-slash"></i></button> <span data-toggle="modal" data-target="#sure"> <button class="umbotao ml-2" onclick="mensagemsure("essa notícia")" data-toggle="tooltip" data-placement="bottom" title="Excluir Notícia"><i class="fas fa-times"></i></button></span>';
+					saveaux('notEscondidos', 'Esconder Notícia"><i class="fas fa-eye-slash"></i>', document.getElementById('titulonoticia').value);
 				} else {
-					document.getElementById('notVisiveis').innerHTML += '<br><button data-toggle="modal" data-target="#dynamicmodal" class="linksmenu openmodal">' + document.getElementById('titulonoticia').value + '</button> <button class="umbotao ml-2" data-toggle="tooltip" data-placement="bottom" title="Esconder Notícia"><i class="fas fa-eye-slash"></i></button> <span data-toggle="modal" data-target="#sure"> <button class="umbotao ml-2" onclick="mensagemsure("essa notícia")" data-toggle="tooltip" data-placement="bottom" title="Excluir Notícia"><i class="fas fa-times"></i></button></span>';
+					saveaux('notVisiveis', 'Tornar Visível"><i class="fas fa-eye"></i>', document.getElementById('titulonoticia').value);
 				}
-				
-				
+				resetarform('formAddNot');	
+			}
+
+			function saveaux(id, icon, title){
+				document.getElementById(id).innerHTML += '<br><button data-toggle="modal" data-target="#dynamicmodal" class="linksmenu openmodal">' + title + '</button> <button class="umbotao ml-2" data-toggle="tooltip" data-placement="bottom" title="' + icon + '</button> <span data-toggle="modal" data-target="#sure"> <button class="umbotao ml-2" onclick="mensagemsure("essa notícia")" data-toggle="tooltip" data-placement="bottom" title="Excluir Notícia"><i class="fas fa-times"></i></button></span>';
 			}
 
 			function enable(message){
 				document.getElementById(message).disabled = false;
+			}
+
+			function resetarform(id){
+				document.getElementById(id).reset();
 			}
     			 
 		</script>

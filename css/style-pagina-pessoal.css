@@ -121,6 +121,17 @@ img.sticky {
 	margin-bottom: 2em;
 }
 
+#divNoticias, #divRanking, #divParticipantes, #divCampeonato {
+	overflow-y: auto;
+	height: 25em;
+}
+
+#addPartCamp{
+	margin-left: 2em;
+	margin-right: 2em;
+	font-size: 0.9em;
+}
+
 @media (max-width: 575.98px) {
 
 }
