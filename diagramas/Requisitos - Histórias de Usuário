@@ -1,5 +1,29 @@
 Requisitos - Histórias de Usuário
 
+Critérios funcionais definidos pelo cliente Professor Ivan Machado:
+	- Um usuário poderá criar um bolão
+
+	- Um usuário pode participar de um bolão, mediante convite do administrador
+
+	- um bolão pode considerar um ou mais jogos
+
+	- após registrar-se em um bolão, o usuário visualiza a lista de jogos cadastrados para aquele bolão
+
+	- o usuário, agora apostador, poderá inserir os seus palpites (apostas) para os jogos de um dado bolão
+
+	- enquanto o jogo não ocorrer, o apostador poderá editar o seu palpite
+
+	- o palpite não poderá ser editado em momento prévio ao jogo (tempo limite - antes da realização do jogo - permitido deve ser determinado pelo administrador do bolão)
+
+	- alguém (pode ser um sistema externo, automaticamente; ou o administrador do bolão, manualmente) registra o resultado de um jogo
+
+	- o usuário poderá acompanhar os resultados dos jogos, e verificar a sua pontuação no bolão (considerando que cada bolão é composto de uma série de apostadores, um ranking poderá ser estabelecido)
+
+	- o administrador de um bolão poderá definir as regras de pontuação especificas para o seu bolao (ex: acertar o placar, 100 pontos; acertar o vencedor ou empate, independente do placar, 50 pontos; acertar a quantidade de gols de um time, independente do placar, 10 pontos; e assim por diante)
+
+	- o administrador de um bolão PODERÁ definir os critérios de desempate, já que o bolão poderá ter APENAS um vencedor
+	
+
 Página de cadastros com:
 	- Pedindo informações pessoais e bancárias, registrando - as
 
