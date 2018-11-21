@@ -88,14 +88,14 @@
 				<div class="row text-dark">
 					<div class="col-8 offset-2">
 						
-						<form>
+						<form method="post" action="">
 							<div class="row">
 								<div class="col-4 form-group">
 									<label class="titulo" for="username">Nome de Usuário <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="username" id="username">
+									<input class="form-control" type="text" name="username" id="username" disabled>
 								</div>
 
-								<div class="col-4 offset-4 form-group">
+								<div id="senha" class="col-4 offset-4 form-group" style="display: none;">
 									<label class="titulo" for="nova-senha">Criar Nova Senha <span class="text-danger">*</span>:</label>
 									<input class="form-control" type="password" name="nova-senha" id="nova-senha">
 								</div>
@@ -104,10 +104,10 @@
 							<div class="row">
 								<div class="col-6 form-group">
 									<label class="titulo" for="email">Email <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="password" name="email" id="email">
+									<input class="form-control" type="password" name="email" id="email" disabled>
 								</div>
 
-								<div class="col-4 offset-2 form-group">
+								<div id="confirmar" class="col-4 offset-2 form-group" style="display: none;">
 									<label class="titulo" for="confirmar-nova-senha">Confirmar Nova Senha <span class="text-danger">*</span>:</label>
 									<input class="form-control" type="text" name="confirmar-nova-senha" id="confirmar-nova-senha">
 								</div>
@@ -119,12 +119,12 @@
 							<div class="row">
 								<div class="col-7 form-group">
 									<label class="titulo" for="nome">Nome Completo <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="nome" id="nome">
+									<input class="form-control" type="text" name="nome" id="nome" disabled>
 								</div>
 
 								<div class="col-4 offset-1 form-group">
 									<label class="titulo" for="genero">Gênero <span class="text-danger">*</span></label><br>
-									<select>
+									<select id="genero" disabled>
 										<option value="nonselected" style="color:lightgray;">[selecione]</option>
 										<option value="feminino">Feminino</option>
 										<option value="masculino">Masculino</option>
@@ -136,31 +136,31 @@
 							<div class="row">
 								<div class="col-4 form-group">
 									<label class="titulo" for="rg">RG <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="rg" id="rg">
+									<input class="form-control" type="text" name="rg" id="rg" disabled>
 								</div>
 
 								<div class="col-4 offset-4 form-group">
 									<label class="titulo" for="cpf">CPF <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="cpf" id="cpf">
+									<input class="form-control" type="text" name="cpf" id="cpf" disabled>
 								</div>
 							</div>	
 
 							<div class="row">
 								<div class="col-4 form-group">
 									<label class="titulo" for="ddn">Data de Nascimento <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="ddn" id="ddn">
+									<input class="form-control" type="date" name="ddn" id="ddn" disabled>
 								</div>
 							</div>
 
 							<div class="row">
 								<div class="col-4 form-group">
 									<label class="titulo" for="telefone">Telefone <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="telefone" id="telefone">
+									<input class="form-control" type="text" name="telefone" id="telefone" disabled>
 								</div>
 
 								<div class="col-4 offset-4 form-group">
 									<label class="titulo" for="celular">Celular <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="celular" id="celular">
+									<input class="form-control" type="text" name="celular" id="celular" disabled>
 								</div>
 							</div>	
 
@@ -170,15 +170,15 @@
 							<div class="row">
 								<div class="col-4 form-group">
 									<label class="titulo" for="banco">Banco <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="banco" id="banco">
+									<input class="form-control" type="text" name="banco" id="banco" disabled>
 								</div>
 								<div class="col-4 form-group">
 									<label class="titulo" for="agencia">Agência <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="agencia" id="agencia">
+									<input class="form-control" type="text" name="agencia" id="agencia" disabled>
 								</div>
 								<div class="col-4 offset-4form-group">
 									<label class="titulo" for="conta">Conta <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="conta" id="conta">
+									<input class="form-control" type="text" name="conta" id="conta" disabled>
 								</div>
 							</div>
 
@@ -186,7 +186,8 @@
 
 							<div class="row">
 								<div class="col-12 form-group">
-									<button class="btn btn-info btn-block py-2" type="button">Alterar Dados</button>
+									<button id="alterar-dados" class="btn btn-info btn-block py-2" type="button" onclick="alterar_dados()">Alterar Dados</button>
+									<button id="salvar-alteracao" class="btn btn-success btn-block py-2" type="submit" style="display: none;">Salvar Alterações</button>
 								</div>
 							</div>
 						</form>
@@ -231,11 +232,30 @@
 			
 			$('#rg').mask('00.000.000-00');
 			$('#cpf').mask('000.000.000-00');
-			$('#ddn').mask('00/00/0000');
 			$('#telefone').mask('+00 00 0000-0000');
 			$('#celular').mask('+00 00 0 0000-0000');
 			$('#agencia').mask('0000-0');
 			$('#conta').mask('00000-0');
+
+			function alterar_dados() {
+				document.getElementById('senha').style.display = 'block';
+				document.getElementById('confirmar').style.display = 'block';
+				document.getElementById('alterar-dados').style.display = 'none';
+				document.getElementById('salvar-alteracao').style.display = 'block';
+
+				document.getElementById('username').disabled = false;
+				document.getElementById('email').disabled = false;
+				document.getElementById('nome').disabled = false;
+				document.getElementById('genero').disabled = false;
+				document.getElementById('rg').disabled = false;
+				document.getElementById('cpf').disabled = false;
+				document.getElementById('ddn').disabled = false;
+				document.getElementById('telefone').disabled = false;
+				document.getElementById('celular').disabled = false;
+				document.getElementById('banco').disabled = false;
+				document.getElementById('agencia').disabled = false;
+				document.getElementById('conta').disabled = false;
+			}
 
 		</script>
 

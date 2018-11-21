@@ -33,6 +33,7 @@
 	margin: 12px 15px;
 }
 
+
 @font-face {
 	font-family: biysk;
 	src: url(fonts/Biysk.ttf);
@@ -46,16 +47,25 @@ header {
 /*Extra small devices (portrait phones, less than 576px)*/
 @media (max-width: 575.98px) {
 
+	#login {
+		margin: 28vw auto;
+	}
+	
 }
 
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) and (max-width: 767.98px) {
 
+	#login {
+		margin: 28vw auto;
+	}
 }
 
 /*Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) and (max-width: 991.98px) {
-
+	#login {
+		margin: 20vw auto;
+	}
 }
 
 /* Large devices (desktops, 992px and up)*/
@@ -63,10 +73,17 @@ header {
 	header {
 		font-size: 1.2em;
 	}
+
+	#login {
+		margin: 10vw auto;
+	}
 }
 
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
 
+	#login {
+		margin: 10vw auto;
+	}
 }
 
