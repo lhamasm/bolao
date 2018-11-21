@@ -132,6 +132,14 @@ img.sticky {
 	font-size: 0.9em;
 }
 
+.filterBolao{
+	margin-bottom: 1em;
+	float: right;
+    width: 100%;
+    padding: 0.5em;
+    border: 0.1em solid #ddd;
+    margin-bottom: 12px; 
+
 @media (max-width: 575.98px) {
 
 }
