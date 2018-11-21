@@ -370,6 +370,40 @@
     			</div>
     		</div>
     	</div>
+
+		<!-- modal reportar bugs -->
+    	<div class="modal" id="repbugs">
+    		<div class="modal-dialog modal-dialog-centered">
+    			<div class="modal-content">
+    				<div class="modal-header text-center">
+    					<div class="col-2"></div>
+    					<h5 class="col-8 modal-title">Reportar Bugs</h5>
+    					<button class="col-2 close" onclick="resetarform('formAddCamp')" data-dismiss="modal">&times;</button>
+    				</div>
+    				<div class="modal-body">
+    					<div>
+    						<form>
+    							<div class="form-group">
+    								<label for="localbug">Onde ocorreu o bug?</label>
+    								<input class="form-control" type="text" name="localbug" id="localbug" required>
+    							</div>
+    							<div class="form-group">
+    								<label for="descricaobug">Descreva o bug:</label>
+    								<textarea class="form-control" rows="3" id="descricaobug" name="descricaobug" required></textarea>
+    							</div>
+    							<div class="form-group">
+    								<label for="acrescinfobug">Algo a acrescentar?</label>
+    								<input class="form-control" type="text" name="acrescinfobug" id="acrescinfobug" required>
+    							</div>
+    							<div class="text-center justify-content-center">
+    								<input class="btn btn-danger" type="submit" name="Enviar">
+    							</div>
+    						</form>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
     	
 
     	<!-- foooooooooter -->
@@ -388,7 +422,7 @@
 							<a class="nav-link" data-target="#termos" data-toggle="modal">TERMOS E CONDIÇÕES</a>
 						</li>
 						<li class="nav-item ml-md-2">
-							<a class="nav-link" href="#">REPORTAR BUGS</a>
+							<a data-toggle="modal" data-target="#repbugs" class="nav-link">REPORTAR BUGS</a>
 						</li>
 					</ul>
 				</div>

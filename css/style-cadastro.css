@@ -77,6 +77,11 @@ header {
 	font-family: robotoBold;
 }
 
+.botaoEntrar{
+	float: right;
+	height: 2.5em;
+}
+
 /*Extra small devices (portrait phones, less than 576px)*/
 @media (max-width: 575.98px) {
 
