@@ -139,6 +139,25 @@ img.sticky {
     padding: 0.5em;
     border: 0.1em solid #ddd;
     margin-bottom: 12px; 
+}
+
+#sucessoAposta {
+	background-color: #00cc00;
+	padding: 1em;
+	color: white;
+	margin: 0.5em;
+	opacity: 0.6;
+	transition: opacity 0.6s;
+}
+
+.closebtn {
+	margin-left: 1em;
+    font-weight: bold;
+    float: right;
+    font-size: 1.5em;
+    line-height: 1em;
+    cursor: pointer;
+}
 
 @media (max-width: 575.98px) {
 

@@ -125,7 +125,7 @@
 						    						<h6><strong>Data de Término</strong></h6>
 						    						<p>01/01/2018 | 20h00</p>
 						    						<span data-target="#apostar" data-toggle="modal">
-						    							<button class="btn btn-danger" onclick="apostadaptada('#FA8072', '#FFDAB9', '')" data-placement="bottom" data-toggle="tooltip" title="Apostar"><i class="fas fa-user-plus"></i></button>
+						    							<button class="btn btn-danger" data-placement="bottom" data-toggle="tooltip" title="Apostar"><i class="fas fa-user-plus"></i></button>
 						    						</span>
 						    						<button class="btn btn-info"><i class="far fa-eye"></i></button>
 						    					</div>
@@ -780,7 +780,7 @@
 						<h5 class=" col-8 modal-title">Titulo do Bolão</h5>
 						<button type="button" class="col-2 close" data-dismiss="modal">&times</button>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body" style="background-color: #F8F8FF">
 						<form>
 							<div class="form-group">
 								<label for="valoraposta">Valor:</label>
@@ -803,9 +803,37 @@
 								<button type="submit" class="mt-2 btn btn-danger">Prosseguir</button>
 							</div>
 						</form>
+
+						<form>
+							<div class="form-group">
+								<label for="banco">Banco:</label><br>
+								<input type="text" id="banco" name="banco" disabled value="333">
+							</div>
+							<div class="form-group">
+								<label for="agencia">Agência:</label><br>
+								<input type="text" id="agencia" name="agencia" disabled value="222">
+							</div>
+							<div class="form-group">
+								<label for="conta">Conta:</label><br>
+								<input type="text" id="conta" name="conta" disabled value="5555">
+							</div>
+							<div class="text-center justify-content-center">
+								<div class="progress">
+									<div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+									</div>
+								</div>
+								<button type="submit" class="mt-2 btn btn-danger">Confirmar</button>
+								<a class="mt-2 btn-outline-danger btn" href="minha-conta.html#banco">Editar informações</a>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
+		</div>
+
+		<div id="sucessoAposta" class="alert">
+			<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  			Sua aposta foi realizada com sucesso!
 		</div>
 
 		<footer style="background-color: #B22222">
@@ -877,6 +905,13 @@
 			}
 
 			$('#valoraposta').mask('#.#00,00', {reverse : true});
+
+			document.getElementByClassName("closebtn").onclick = function(){
+	        	var div = this.parentElement;
+	        	div.style.opacity = "0";
+	        	setTimeout(function(){ div.style.display = "none"; }, 600);
+	    	}
+	    
 		</script>
 
 	</body>
