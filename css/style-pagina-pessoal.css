@@ -159,6 +159,19 @@ img.sticky {
     cursor: pointer;
 }
 
+<<<<<<< HEAD
+.not-active {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+}
+
+.not-active i {
+	color: #c0c0c0;
+}
+
+=======
+>>>>>>> bb236707b95364b3f4ea6712f42520d1cd403c0e
 @media (max-width: 575.98px) {
 
 }
