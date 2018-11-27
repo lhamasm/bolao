@@ -1,7 +1,10 @@
 <?php
 
+	require_once 'sistema.php';
+
 	class Bolao {
 
+		protected $id;
 		protected $criador;
 		protected $tipo;
 		protected $campeonato;
@@ -14,8 +17,13 @@
 		protected $opcoesAposta;
 		protected $senha;
 		protected $resultado;
+		protected $ganhadores;
+		protected $dinheiros;
+		protected $tempoLimite;
+		protected $apostas;
 
-		function Bolao($criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $participantes,$tipoJogo, $tipoAposta, $opcoesAposta, $senha){
+		function Bolao($id, $criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $participantes,$tipoJogo, $tipoAposta, $opcoesAposta, $senha){
+			$this->id = $id;
 			$this->criador = $criador;
 			$this->tipo = $tipo;
 			$this->campeonato = $campeonato;
@@ -27,6 +35,15 @@
 			$this->tipoAposta = $tipoAposta;
 			$this->opcoesAposta = $opcoesAposta;
 			$this->senha = $senha;
+			$this->dinheiros = 0;
+			$this->ganhadores = array();
+			$this->resultado = array();
+			$this->tempoLimite = 0;
+			$this->apostas = array();
+		}
+
+		function setId($id){
+			$this->id = $id;
 		}
 
 		function setCriador($criador){
@@ -77,6 +94,22 @@
 			$this->resultado = $resultado;
 		}
 
+		function setDinheiros($valor){
+			$this->dinheiros += $valor;
+		}
+
+		function setTempoLimite($tempoLimite){
+			$this->tempoLimite = $tempoLimite;
+		}
+
+		function setApostas($apostas){
+			array_push($this->apostas, $apostas);
+		}
+
+		function getId(){
+			return $this->id;
+		}
+
 		function getCriador(){
 			return $this->criador;
 		}
@@ -121,24 +154,45 @@
 			return $this->resultado;
 		}
 
+		function getTempoLimite(){
+			return $this->tempoLimite;
+		}
+
+		function getApostas($apostas){
+			return $this->apostas;
+		}
+
 		function determinarVencedor(){
+
+			for($i = 0; $i < count($tipoJogo); $i++){
+				for($j = 0; $j < count($jogos); $j++){
+					if($tipoJogo[$i]->getId() == $jogos[$j]->getId()){
+						if($jogos[$j]->getResultado == ''){
+							return -1;
+						}
+					}
+				}
+			}
+
+			for($i = 0; $i < count($participantes); $i++){
+				$a = $participantes[$i]->getApostas();
+				for($j = 0; $j < count($a); $j++){
+					if($a[$j]->getBolao() == $this->titulo) {
+						if($a[$j]->getOpcaoDeAposta() == $this->resultado){
+							array_push($this->ganhadores, $participantes[$i]);
+						}
+					}
+				}
+			}
+
+			return $this->ganhadores;
 
 		}
 
 		function calcularValorVencedor(){
+			$g = determinarVencedor();
 
-		}
-
-		function exibirJogos(){
-
-		}
-
-		function determinarTempoLimiteApostas(){
-
-		}
-
-		function verificarPosicaoRanking(){
-			
+			return $this->dinheiros/count($g);
 		}
 	}
 

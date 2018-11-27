@@ -2,7 +2,7 @@
 
 	require_once 'administrador.php';
 
-	class AdministradorBolao {
+	class AdministradorBolao extends Administrador {
 		protected $bolao;
 
 		function AdministradorBolao($bolao){

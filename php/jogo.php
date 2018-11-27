@@ -24,13 +24,5 @@
 		function getResultado(){
 			return $this->resultado;
 		}
-
-		function exibirResultado(){
-
-		}
-
-		function armazenarResultados(){
-			
-		}
 	}
 ?>

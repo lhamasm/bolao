@@ -18,7 +18,7 @@
 		protected $banco;
 		protected $agencia;
 		protected $conta;
-		protected $apostas;
+		protected $mensagens;
 
 		# Construtor
 		function Usuario($nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta){
@@ -36,6 +36,7 @@
 			$this->banco = $banco;
 			$this->agencia = $agencia;
 			$this->conta = $conta;
+			$this->mensagens = array();
 
 		}
 
@@ -93,8 +94,8 @@
 			return $this->conta;
 		}
 
-		function getApostas(){
-			return $apostas;
+		function getMensagem(){
+			return $this->mensagens;
 		}
 
 		function setNome($nome){
@@ -149,8 +150,8 @@
 			$this->conta = $conta;
 		}
 
-		function setApostas($apostas){
-			$this->apostas = $apostas;
+		function setMensagem($mensagem){
+			array_push($this->mensagens , $mensagem);
 		}
 
 		# Métodos

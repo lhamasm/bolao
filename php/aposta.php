@@ -28,6 +28,15 @@
 		function setOpcaoDeAposta($opcaoDeAposta){
 			$this->opcaoDeAposta = $opcaoDeAposta;
 		}
+
+		function getBolao(){
+			return $this->bolao;
+		}
+
+		function getOpcaoDeAposta(){
+			return $this->opcaoDeAposta;
+		}
+
 	}
 
 ?>
