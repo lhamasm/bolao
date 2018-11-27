@@ -1,4 +1,8 @@
 <?php
+
+	require_once 'sistema.php';
+	require_once 'bolao.php';
+	require_once 'jogo.php';
 	
 	class Usuario {
 		protected $nome;
@@ -14,6 +18,7 @@
 		protected $banco;
 		protected $agencia;
 		protected $conta;
+		protected $apostas;
 
 		# Construtor
 		function Usuario($nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta){
@@ -88,6 +93,10 @@
 			return $this->conta;
 		}
 
+		function getApostas(){
+			return $apostas;
+		}
+
 		function setNome($nome){
 			$this->nome = $nome;
 		}
@@ -140,25 +149,47 @@
 			$this->conta = $conta;
 		}
 
+		function setApostas($apostas){
+			$this->apostas = $apostas;
+		}
+
 		# Métodos
-		function criarBolao(){
+		function criarBolao($criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $participantes,$tipoJogo, $tipoAposta, $opcoesAposta, $senha){
+
+			$bolao = new Bolao($criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $participantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha);
 
 		}
 
 		function verificarResultado($bolao){
-
+			for($i = 0; $i < count($boloes); $i++){
+				if($boloes[$i]->getTitulo() == $bolao){
+					return $boloes[$i]->getResultado();
+				}
+			}
 		}
 
-		function consultarBolao(){
-
+		function consultarBolao($bolao){
+			for($i = 0; $i < count($boloes); $i++){
+				if($boloes[$i]->getTitulo() == $bolao){
+					return $boloes[$i];
+				}
+			}
 		}
 
-		function consultarHistoricoAposta(){
-
+		function consultarHistoricoAposta($usuario){
+			for($i = 0; $i < count($usuarios); $i++){
+				if($usuarios[$i]->getCpf() == $usuario){
+					return $usuarios[$i]->getApostas();
+				}
+			}
 		}
 
 		function verificarResultado($jogo) {
-
+			for($i = 0; $i < count($jogos); $i++){
+				if($jogos[$i]->getId() == $jogo){
+					return $jogos[$i];
+				}
+			}
 		}
 	}
 
