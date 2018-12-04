@@ -158,18 +158,11 @@
 								</div>
 
 								<div class="col-4 offset-4 form-group">
-									<label class="titulo" for="cpf">CPF <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="cpf" id="cpf" value="<?php echo $_SESSION["login"]; ?>" disabled>
-								</div>
-							</div>	
-
-							<div class="row">
-								<div class="col-4 form-group">
 									<label class="titulo" for="ddn">Data de Nascimento <span class="text-danger">*</span>:</label>
 									<input class="form-control" type="text" name="ddn" id="ddn" value="<?php echo $_SESSION["ddn"]; ?>" disabled>
 								</div>
-							</div>
-
+							</div>	
+							
 							<div class="row">
 								<div class="col-4 form-group">
 									<label class="titulo" for="telefone">Telefone <span class="text-danger">*</span>:</label>
@@ -205,7 +198,7 @@
 							<div class="row">
 								<div class="col-12 form-group">
 									<button id="alterar-dados" class="btn btn-info btn-block py-2" type="button" onclick="alterar_dados()">Alterar Dados</button>
-									<button id="salvar-alteracao" class="btn btn-success btn-block py-2" type="submit" style="display: none;">Salvar Alterações</button>
+									<button id="salvar-alteracao" class="btn btn-success btn-block py-2" type="submit" style="display: none;" onclick="salvar_alteracoes()">Salvar Alterações</button>
 								</div>
 							</div>
 						</form>
@@ -267,12 +260,34 @@
 				document.getElementById('genero').disabled = false;
 				document.getElementById('rg').disabled = false;
 				document.getElementById('cpf').disabled = false;
+				document.getElementById('ddn').type = 'date';
 				document.getElementById('ddn').disabled = false;
 				document.getElementById('telefone').disabled = false;
 				document.getElementById('celular').disabled = false;
 				document.getElementById('banco').disabled = false;
 				document.getElementById('agencia').disabled = false;
 				document.getElementById('conta').disabled = false;
+			}
+
+			function salvar_alteracoes() {
+				document.getElementById('senha').style.display = 'none';
+				document.getElementById('confirmar').style.display = 'none';
+				document.getElementById('alterar-dados').style.display = 'block';
+				document.getElementById('salvar-alteracao').style.display = 'none';
+
+				document.getElementById('username').disabled = true;
+				document.getElementById('email').disabled = true;
+				document.getElementById('nome').disabled = true;
+				document.getElementById('genero').disabled = true;
+				document.getElementById('rg').disabled = true;
+				document.getElementById('cpf').disabled = true;
+				document.getElementById('ddn').type = 'text';
+				document.getElementById('ddn').disabled = true;
+				document.getElementById('telefone').disabled = true;
+				document.getElementById('celular').disabled = true;
+				document.getElementById('banco').disabled = true;
+				document.getElementById('agencia').disabled = true;
+				document.getElementById('conta').disabled = true;
 			}
 
 		</script>
