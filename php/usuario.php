@@ -192,6 +192,10 @@
 				}
 			}
 		}
+
+		function recebermensagem($mensagem){
+
+		}
 	}
 
 ?>

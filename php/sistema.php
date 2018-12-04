@@ -61,4 +61,9 @@
 		}
 	}
 
+	function consultarUsuario($cpf, $senha){
+		// ação que estamos realizando em login.php na verdade é aqui
+	}
+
+
 ?>
