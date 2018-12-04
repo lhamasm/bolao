@@ -22,7 +22,7 @@
 		protected $tempoLimite;
 		protected $apostas;
 
-		function Bolao($id, $criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $participantes,$tipoJogo, $tipoAposta, $opcoesAposta, $senha){
+		function Bolao($id, $criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha){
 			$this->id = $id;
 			$this->criador = $criador;
 			$this->tipo = $tipo;
@@ -30,7 +30,7 @@
 			$this->titulo = $titulo;
 			$this->descricao = $descricao;
 			$this->limiteDeParticipantes = $limiteDeParticipantes;
-			$this->participantes = $participantes;
+			$this->participantes = array();
 			$this->tipoJogo = $tipoJogo;
 			$this->tipoAposta = $tipoAposta;
 			$this->opcoesAposta = $opcoesAposta;

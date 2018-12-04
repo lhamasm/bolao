@@ -4,7 +4,7 @@
 	require_once 'usuario.php';
 
 	class Mensagem {
-		$mensagem;
+		protected $mensagem;
 
 		function Mensagem($mensagem){
 			$this->mensagem = $mensagem;

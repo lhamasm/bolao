@@ -155,9 +155,9 @@
 		}
 
 		# Métodos
-		function criarBolao($criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $participantes,$tipoJogo, $tipoAposta, $opcoesAposta, $senha){
+		function criarBolao($criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha){
 
-			$bolao = new Bolao($criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $participantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha);
+			$bolao = new Bolao($criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha);
 
 		}
 
