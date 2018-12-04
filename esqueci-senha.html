@@ -60,11 +60,8 @@
 		                <a class="nav-link" href="index-principal.html#noticias">Noticias</a>
 		              </li>
 
-<<<<<<< HEAD
-=======
 		              <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
 
->>>>>>> bb236707b95364b3f4ea6712f42520d1cd403c0e
 		            </ul>
 		            <div class="row" style="margin-left: 2em;">
 						<a class="btn btn-outline-info" style="height: 2.5em; margin-left: 5em; margin-top: 1em;" href="index.html">Entrar</a>
@@ -83,7 +80,7 @@
 	    		<div class="row">
 	    			<div id="tela-1" class="col-4 offset-1 align-self-center">
 	    				<h3 class="text-info" style="font-family: robotoBold;">Recuperar Senha</h3>
-	    				<form class="form shadow p-3">
+	    				<form class="form shadow p-3" method="post" action="php/recuperacao-senha.php">
 	    					<div class="form-group">
 	    						<label style="font-family: robotoBold;" for="cpf">CPF</label>
 	    						<input class="form-control" type="text" id="cpf" placeholder="Apenas números" style="width:60%;">
@@ -97,7 +94,7 @@
 	    						<input class="form-control data-mask" style="width: 60%;" type="date" id="ddn" placeholder="DD/MM/AAAA">
 	    					</div>
 	    					<div class="form-group">
-	    						<button class="btn btn-danger btn-block" type="button" onclick="recuperar_senha()">Recuperar</button>
+	    						<button class="btn btn-danger btn-block" type="submit" onclick="recuperar_senha()">Recuperar</button>
 	    					</div>
 	    				</form>
 	    			</div>
