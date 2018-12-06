@@ -28,6 +28,11 @@ header {
 	background-color: #B22222;
 }
 
+.altura{
+    height: 30em;
+    overflow-y: auto;
+}
+
 .titulo {
 	font-family: robotoBold;
 }
@@ -75,7 +80,7 @@ img.sticky {
 	margin-right: 10em;
 	margin-top: 2em;
 	padding: 2em;
-	background: #D0F5A9;
+	background: #d1e0e0;
 	color: #585858;
 }
 
