@@ -132,8 +132,8 @@
 					<!-- seção campeonato -->
 					<div id="divCampeonato" class="col-8 division" style="display: none;">
 						<button class="btn btn-info" data-toggle="modal" data-target="#addcampeonato" style="margin: 1em;"><i class="fas fa-plus mr-2"></i>Adicionar Campeonato</button><br>
-						<button style="font-size: 2em;" class="linksmenu">Campeonato 1</button><br>
-						<button style="font-size: 2em;" class="linksmenu">Campeonato 2</button><br>
+						<button style="font-size: 2em;" data-toggle="modal" data-target="#verCampeonato" class="linksmenu">Campeonato 1</button><br>
+						<button style="font-size: 2em;" data-toggle="modal" data-target="#verCampeonato" class="linksmenu">Campeonato 2</button><br>
 
 					</div>
 				</div>
@@ -355,14 +355,49 @@
     	</div>
 
     	<!-- modal ver campeonato-->
-    	<div class="modal">
+    	<div id="verCampeonato" class="modal">
     		<div class="modal-dialog modal-dialog-centered">
     			<div class="modal-content">
-    				<div class="modal-header">
-    					
+    				<div class="modal-header text-center">
+    					<div class="col-2"></div>
+    					<h5 class="modal-title col-8">Campeonato X</h5>
+    					<button class="close col-2" data-dismiss="modal">x</button>
     				</div>
-    				<div class="modal-body">
-    					
+    				<div class="modal-body altura">
+    					<div>
+    						<input type="checkbox" name="Ativo"> Ativo
+    						<br>
+    					</div>
+    					<div>
+    						<h6>Número de Bolões do sistema:</h6>
+    						<p>4596426</p>
+    					</div>
+    					<div>
+    						<h6>Número de Bolões pessoais:</h6>
+    						<p>5654685</p>
+    					</div>
+    					<div>
+    						<h6>Descrição:</h6>
+    						<p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque fringilla faucibus tellus vel tincidunt. Aenean sodales faucibus nunc. In quam quam, convallis in ipsum eget, porttitor fringilla velit. Donec ante mauris, lobortis et dignissim in, eleifend vel quam. Morbi congue tristique magna, eget interdum libero consequat sit amet. Morbi sodales tortor in erat tristique, eget finibus libero molestie.  </p>
+    					</div>
+    					<div>
+    						<h6>Participantes:</h6>
+    						<ul>
+    							<li>
+    								<img src="images/adriana.jpg" style="height: 2.5em; width: 2.5em;">
+    								Fulano
+    							</li>
+    							<li>
+    								<img src="images/adriana.jpg" style="height: 2.5em; width: 2.5em;">
+    								Beltrano
+    							</li>
+    							<li>
+    								<img src="images/adriana.jpg" style="height: 2.5em; width: 2.5em;">
+    								Sicrano
+    							</li>
+    							<button>Ver todos</button>
+    						</ul>
+    					</div>
     				</div>
     				<div class="modal-footer">
     					
