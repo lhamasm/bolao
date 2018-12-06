@@ -28,6 +28,10 @@ header {
 	background-color: #B22222;
 }
 
+td {
+	padding: 1em;
+}
+
 #verCampeonato p{
 	color: #484848;
 }
