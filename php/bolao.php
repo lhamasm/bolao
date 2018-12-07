@@ -2,6 +2,10 @@
 
 	require_once 'sistema.php';
 
+	interface BolaoInterface{
+		function notificarApostadores(){}
+	}
+
 	class Bolao {
 
 		protected $id;
@@ -22,8 +26,8 @@
 		protected $tempoLimite;
 		protected $apostas;
 
-		function Bolao($id, $criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha){
-			$this->id = $id;
+		function Bolao($criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha){
+			$this->id = $id; // pôr um random aqui
 			$this->criador = $criador;
 			$this->tipo = $tipo;
 			$this->campeonato = $campeonato;
@@ -162,6 +166,41 @@
 			return $this->apostas;
 		}
 
+		function excluirApostador($bolao, $apostador){
+			for($i = 0; $i < count($boloes); $i++){
+				if($boloes[$i]->getTitulo() == $bolao){
+					$p = $boloes[$i]->getParticipantes();
+					for($j = 0; $j < count($p); $j++){
+						if($p[$j]->getCpf() == $apostador){
+							array_splice($p, $j, 1);
+						}
+					}
+				}
+			}
+		}
+
+		function apostar($usuario, $bolao, $valor, $opcaoDeAposta){
+			if ($bolao->getLimiteDeParticipantes() > count($bolao->getParticipantes()) ) {
+				$aposta = new Aposta($usuario, $bolao, $valor,$opcaoDeAposta);
+				array_push($this->apostas, $aposta);
+
+				for ($i=0; $i < count($bolao->getParticipantes()); $i++) { 
+					if (($bolao->getParticipantes())[$i] == $usuario) {
+						break;
+					}
+				}
+				if (i ==  count($bolao->getParticipantes())) {
+					$bolao->setParticipantes($usuario);
+				}
+				
+				$bolao->setApostas($aposta);
+
+			}
+			else{
+				return -1;
+			}
+		}
+
 		function determinarVencedor(){
 
 			for($i = 0; $i < count($tipoJogo); $i++){
@@ -193,6 +232,26 @@
 			$g = determinarVencedor();
 
 			return $this->dinheiros/count($g);
+		}
+
+		function participarBolao(){
+			// tem a ver com o observer pattern
+		}
+
+		function sairBolao(){
+			// tem a ver com o observer pattern
+		}
+
+		function notificarApostadores(){
+			// tem a ver com o observer pattern
+		}
+
+		function getParticipantesLength(){
+
+		}
+
+		function excluirAposta(){
+			//retorna booleano
 		}
 	}
 

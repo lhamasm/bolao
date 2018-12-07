@@ -1,17 +1,23 @@
 <?php
 
 	require_once 'usuario.php';
+
+	interface Participante{
+		function atualizarResultadoBolao($bolao){}
+	}
 	
-	class Apostador extends Usuario {
+	class Apostador extends Usuario implements Participante{
 		protected $posicao;
 		protected $pontuacao;
 		protected $apostas;
+		protected $boloesresultados; //parte do pattern obeserver, guarda o status do subject
 
 		# Construtor
 		function Apostador($posicao, $pontuacao){
 			$this->posicao = $posicao;
 			$this->pontuacao = $pontuacao;
 			$this->apostas = array();
+			$this->boloesresultados = array();
 		}
 
 		# Gettes e Setters
@@ -24,7 +30,7 @@
 		}
 
 		function getApostas(){
-			return $apostas;
+			return $this->apostas;
 		}
 
 		function setPosicao($posicao) {
@@ -39,49 +45,27 @@
 			$this->apostas = $apostas;
 		}
 
+		function getBoloesResultados(){
+			return $this->boloesresultados;
+		}
+
+		function setBoloesResultados($bolao){ 
+			// guardar resultado do bolao no array
+		}
+
 		# Métodos
 		function reportarBugs($texto) {
 			$mensagem = new Mensagem($texto);
 			$sistema->setBugs($mensagem);
 		}
 
-		function apostar($usuario, $bolao, $valor, $opcaoDeAposta){
-			if ($bolao->getLimiteDeParticipantes() > count($bolao->getParticipantes()) ) {
-				$aposta = new Aposta($usuario, $bolao, $valor,$opcaoDeAposta);
-				array_push($this->apostas, $aposta);
-
-				for ($i=0; $i < count($bolao->getParticipantes()); $i++) { 
-					if (($bolao->getParticipantes())[$i] == $usuario) {
-						break;
-					}
-				}
-				if (i ==  count($bolao->getParticipantes())) {
-					$bolao->setParticipantes($usuario);
-				}
-				
-				$bolao->setApostas($aposta);
-
-			}
-			else{
-				return -1;
-			}
+		function responderConvite($resposta, $convite) {
+			// resposta é um bool
 		}
 
-		function editarAposta($aposta, $data) {
-			if ($data < $bolao->getTempoLimite()) {
-				for ($i=0; $i < count(($aposta->getBolao())->getApostas()); $i++) { 
-					if ((($aposta->getBolao())->getApostas())[$i] == $aposta) {
-						# edit aposta here
-					}
-				}
-			}
-			else {
-				return -1;
-			}
-		}
+		function atualizarResultadoBolao($bolao){ 
+			//atualiza status do subject
 
-		function aceitarConvite() {
-			
 		}
 	}
 

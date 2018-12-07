@@ -1,8 +1,4 @@
 <?php
-
-	require_once 'sistema.php';
-	require_once 'bolao.php';
-	require_once 'jogo.php';
 	
 	class Usuario {
 		protected $nome;
@@ -154,48 +150,6 @@
 			array_push($this->mensagens , $mensagem);
 		}
 
-		# Métodos
-		function criarBolao($criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha){
-
-			$bolao = new Bolao($criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha);
-
-		}
-
-		function verificarResultado($bolao){
-			for($i = 0; $i < count($boloes); $i++){
-				if($boloes[$i]->getTitulo() == $bolao){
-					return $boloes[$i]->getResultado();
-				}
-			}
-		}
-
-		function consultarBolao($bolao){
-			for($i = 0; $i < count($boloes); $i++){
-				if($boloes[$i]->getTitulo() == $bolao){
-					return $boloes[$i];
-				}
-			}
-		}
-
-		function consultarHistoricoAposta($usuario){
-			for($i = 0; $i < count($usuarios); $i++){
-				if($usuarios[$i]->getCpf() == $usuario){
-					return $usuarios[$i]->getApostas();
-				}
-			}
-		}
-
-		function verificarResultado($jogo) {
-			for($i = 0; $i < count($jogos); $i++){
-				if($jogos[$i]->getId() == $jogo){
-					return $jogos[$i];
-				}
-			}
-		}
-
-		function recebermensagem($mensagem){
-
-		}
 	}
 
 ?>

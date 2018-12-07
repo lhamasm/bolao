@@ -13,22 +13,6 @@
 			}
 		}
 
-		function excluirBolao($bolao){
-			for($i = 0; $i < count($boloes); $i++){
-				if($boloes[$i]->getTitulo() == $bolao){
-					array_splice($boloes, $i, 1);
-				}
-			}
-		}
-
-		function excluirUsuario($usuario) {
-			for($i = 0; $i < count($usuarios); $i++){
-				if($usuarios[$i]->getCpf() == $usuario){
-					array_splice($usuarios, $i, 1);
-				}
-			}
-		}
-
 		function consultarUsuario($usuario) {
 			for($i = 0; $i < count($usuarios); $i++){
 				if($usuarios[$i]->getCpf() == $usuario){
@@ -37,7 +21,7 @@
 			}
 		}
 
-		function sendMensagem($username, $texto){
+		function enviarMensagem($username, $texto){
 			for($i = 0; $i < count($usuarios); $i++){
 				if($usuarios[$i]->getUsername() == $username){
 					$mensagem = new Mensagem($texto);
