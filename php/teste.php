@@ -1,9 +1,13 @@
 <?php
+
+	require_once 'sistema.php';
 	require_once 'apostador.php';
 	require_once 'usuario.php';
-	require_once 'sistema.php';
-	require_once 'index.php';
-	require_once 'funcoes.php';
+	require_once 'login.php';
+	//require_once 'funcoes.php';
+
+	session_start();
+	//require_once 'index.php';
 
 	$tipo = 0;
 	$nome = "";
@@ -57,7 +61,7 @@
 				$apostador = new Apostador($_SESSION['numero_usuarios']+1, 0);
 				$apostador = $usuario;	
 
-				$cadastro = $tipo . ';' . $nome . ';' . $username . ';' . $email . ';' . $senha . ';' . $dataNascimento . ';' . $genero . ';' . $rg . ';' . $cpf . ';' . $telefone . ';' . $celular . ';' . $banco . ';' . $agencia . ';' . $conta . ';\n';
+				$cadastro = $tipo . ';' . $nome . ';' . $username . ';' . $email . ';' . $senha . ';' . $dataNascimento . ';' . $genero . ';' . $rg . ';' . $cpf . ';' . $telefone . ';' . $celular . ';' . $banco . ';' . $agencia . ';' . $conta  . '\n';
 
 				for($i = 0; $i < count($usuarios); $i++){
 					if($usuarios[$i]->getCpf() == $cpf){
@@ -67,17 +71,18 @@
 					}
 				}
 
-				$arquivo = fopen('../bd/usuarios.txt', 'a+') or die("Não foi possível abrir o arquivo");
+				$arquivo = fopen('cadastros_usuarios.txt', 'a+');
 				fwrite($arquivo, $cadastro);
 				fclose($arquivo);
 
 				$sistema->setUsuarios($apostador);
 				$_SESSION['sistema'] = $sistema;
-				$_SESSION['numero_usuarios'] = $_SESSION['numero_usuarios'] + 1;
+				$_SESSION["numero_usuarios"] = $_SESSION['numero_usuarios'] + 1;
 
 				echo "Cadastro realizado com sucesso!";
-				header('Location: ../login.php');
+				header('Location: ../index.php');
 				exit();
+				
 			} else {
 				echo 'Senha errada';	
 			}
