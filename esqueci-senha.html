@@ -12,6 +12,7 @@
 
 	    <link rel="stylesheet" type="text/css" href="css/style-esqueci-senha.css">
 
+
 	    <!-- Font Awesome -->
 	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
@@ -38,25 +39,25 @@
 		          <div class="collapse navbar-collapse" id="nav-collapse">
 		            <ul class="navbar-nav">
 		              <li class="nav-item">
-		                <a class="nav-link" href="#programa">O programa</a>
+		                <a class="nav-link" href="index-principal.html#programa">O programa</a>
 		              </li>
 
 		              <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
 
 		              <li class="nav-item">
-		                <a class="nav-link" href="#participantes">Os participantes</a>
+		                <a class="nav-link" href="index-principal.html#participantes">Os participantes</a>
 		              </li>
 
 		              <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
 
 		              <li class="nav-item">
-		                <a class="nav-link" href="#aux-section">Como jogar</a>
+		                <a class="nav-link" href="index-principal.html#aux-section">Como jogar</a>
 		              </li>
 
 		              <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
 
 		              <li class="nav-item">
-		                <a class="nav-link" href="#noticias">Noticias</a>
+		                <a class="nav-link" href="index-principal.html#noticias">Noticias</a>
 		              </li>
 
 		              <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
@@ -79,7 +80,7 @@
 	    		<div class="row">
 	    			<div id="tela-1" class="col-4 offset-1 align-self-center">
 	    				<h3 class="text-info" style="font-family: robotoBold;">Recuperar Senha</h3>
-	    				<form class="form shadow p-3">
+	    				<form class="form shadow p-3" method="post" action="php/recuperacao-senha.php">
 	    					<div class="form-group">
 	    						<label style="font-family: robotoBold;" for="cpf">CPF</label>
 	    						<input class="form-control" type="text" id="cpf" placeholder="Apenas números" style="width:60%;">
@@ -93,7 +94,7 @@
 	    						<input class="form-control data-mask" style="width: 60%;" type="date" id="ddn" placeholder="DD/MM/AAAA">
 	    					</div>
 	    					<div class="form-group">
-	    						<button class="btn btn-danger btn-block" type="button" onclick="recuperar_senha()">Recuperar</button>
+	    						<button class="btn btn-danger btn-block" type="submit" onclick="recuperar_senha()">Recuperar</button>
 	    					</div>
 	    				</form>
 	    			</div>
@@ -103,7 +104,7 @@
 		    				Senha recuperada com <strong>sucesso</strong>!
 		    			</div>
 	    				<h3 class="text-info" style="font-family: robotoBold;">Recuperar Senha</h3>
-	    				<form class="form shadow p-3">
+	    				<form class="form shadow p-3" method="post" action="php/alterar-senha.php">
 	    					<div class="form-group">
 	    						<label style="font-family: robotoBold;" for="pwd">Nova Senha</label>
 	    						<div class="input-group">
@@ -137,7 +138,7 @@
 	    	</div>
 	    </section>
 
-	    <footer style="background-color: #B22222">
+	    <footer class="fixed-bottom" style="background-color: #B22222">
       		<nav class="navbar navbar-expand-lg text-white navbar-dark">
         		<div class="container justify-content-center">
           			<ul class="navbar-nav">

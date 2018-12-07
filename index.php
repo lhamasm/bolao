@@ -1,0 +1,669 @@
+<?php
+	require_once 'php/index.php';
+?>
+
+<!doctype html>
+
+<html lang="pt-br">
+	
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Bolão MasterChef Brasil</title>
+
+		 <!-- Icone da aba -->
+	    <link rel="icon" href="images/logo-vermelho.png">
+
+	    <link rel="stylesheet" type="text/css" href="css/style-principal.css">
+
+	    <!-- Font Awesome -->
+	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+	    <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	</head>
+
+	<body data-spy="scroll" data-target=".navbar">
+
+		<header>
+	      <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgba(248,249,250,0.7);">
+	        <div class="container">
+
+	          <a class="navbar-brand" href="index.php">
+	            <img style="width: 2.5em" src="images/logo-vermelho.png">
+	          </a>
+
+	          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-collapse">
+	            <span class="navbar-toggler-icon"></span>
+	          </button>
+
+	          <div class="collapse navbar-collapse" id="nav-collapse">
+	            <ul class="navbar-nav">
+	              <li class="nav-item">
+	                <a class="nav-link" href="#programa">O programa</a>
+	              </li>
+
+	              <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
+
+	              <li class="nav-item">
+	                <a class="nav-link" href="#participantes">Os participantes</a>
+	              </li>
+
+	              <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
+
+	              <li class="nav-item">
+	                <a class="nav-link" href="#aux-section">Como jogar</a>
+	              </li>
+
+	              <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
+
+	              <li class="nav-item">
+	                <a class="nav-link" href="#noticias">Noticias</a>
+	              </li>
+	            </ul>
+	            <div class="row" style="margin-left: 2em;">
+					<a class="btn btn-outline-info" style="height: 2.5em; margin-left: 5em; margin-top: 1em;" href="login.php">Entrar</a>
+
+	            	<vr class="nav-item divisor d-none d-lg-block" style="background-color: black;">
+
+	            	<a class="mt-lg-1 ml-lg-3 btn btn-outline-danger" style="height: 2.5em;" href="cadastro.php">Cadastrar</a>
+	        	</div>
+	          </div>
+	        </div>
+	      </nav>
+	    </header>
+
+	    <section id="home">
+	    	<div class="container">
+	    		<div class="row">
+	    			<div class="col-12">
+			    		<div class="text-center text-white justify-content-center">
+			    			<h1 style="font-family: grooving;" class="display-4">BOLÃO MASTERCHEF BRASIL</h1>
+
+				    		<p>Aposte com seus amigos quem vai ser o mais novo MasterChef do Brasil</p>
+
+				    		<a class="btn btn-danger btn-lg" style="width: 10em; font-family: grooving;" href="cadastro.php">Cadastre-se</a>
+			    		</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	    </section>
+
+	    <section id="programa">
+	    	<div class="container">
+	    		<h1 class="nome" style="font-family: biysk">O Programa</h1>
+	    		<div class="row">
+
+	    			<div class="col-md-6" style="text-align: justify;">
+			    		<p class="lead"> 
+			    			O <strong>MasterChef</strong> é o maior programa de culinária do Brasil, onde cozinheiros amadores ou profissionais de todo o país competem por vários prêmios.
+			    		</p>
+						<p class="lead"> O programa é apresentado por <strong>Ana Paula Padrão</strong>.</p>
+						<p class="lead"> Os cozinheiros passam por várias etapas onde serão julgados por três jurados: <strong>Erick Jacquin</strong>, <strong>Paola Carosella</strong> e <strong>Henrique Fogaça</strong>.<p>
+						<p class="lead"> As principais provas são:
+							<ul class="lead">
+								<li><strong>Caixa Misteriosa</strong>: Como o próprio nome já diz, a prova Caixa Misteriosa é sempre cheia de surpresas. Os participantes tem que se virar apenas com os ingredientes da caixa para preparar um delicioso prato que garante a permanência no programa. Quem não conseguir surpreender os jurados já tem destino certo: Prova de Eliminação. </li>
+							</ul>
+						</p>						
+	    			</div>
+
+	    			<div class="col-md-6" style="text-align: justify;">
+    					<ul class="lead">
+	    					<li class="mb-4"><strong>Prova em Equipe</strong>: Na Prova em Equipes, os participantes são divididos em times. Cada time, geralmente, tem que preparar diversos pratos para um público em especial. O time vencedor garante vaga para o próximo programa, enquanto que o(s) time(s) perdedor(es) vão para a Prova de Eliminação.</li>
+							<li><strong>Prova de Eliminação</strong>: Como o próprio nome já diz, na Prova de Eliminação, um dos participantes deixa a competição e volta para casa. Será eliminado aquele que fizer o pior prato. Geralmente, a prova de eliminação consiste de apenas uma etapa. Entretanto, a prova pode ser feita em diversas etapas, chamadas de <em>rounds</em>.</li>
+	    				</ul>
+	    				<a class="d-block text-right" href="https://entretenimento.band.uol.com.br/masterchef/profissionais/" target="_blank">Veja Mais</a>	
+	    			</div>
+
+	    		</div>
+
+	    		<div class="row d-none d-sm-inline">
+
+	    			<div class="col-12" id="img-programa">
+	    				<img class="offset-sm-1 img-fluid rounded" alt="Jurados e apresentadora" src="images/jurados.jpg"></img>
+	    				<img class="offset-md-1 img-fluid rounded" alt="Participante cozinhando em prova" src="images/programa.jpg"></img>
+	    			</div>
+
+	    		</div>
+	    	</div>
+	    </section>
+
+	    <section id="participantes">
+	    	<div class="container">
+	    		<div class="row">
+	    			<div class="col-10 offset-sm-1 col-md-6 offset-md-1">
+
+	    				<h1 class="nome text-white" style="font-family: biysk">Os Participantes</h1>
+
+	    				<div id="carousel-participantes" class="carousel slide carrossel" data-ride="carousel">
+
+	    					<div class="carousel-inner">
+	    						<div class="carousel-item active">
+
+	    							<div class="card shadow">
+							    		<img class="card-img" src="images/adriana-media.png">
+							    		<div class="card-body">
+							    			<h4 class="card-title"><kbd>Adriana</kbd></h4>
+							    			<p align="justify" class="card-text">Mineira de Ituiutaba, Adriana é adepta de uma das linhas gastronômicas que mais crescem nos últimos anos: a cozinha vegana. Encarar as provas do MasterChef Profissionais, que muitas vezes inclui a preparação de carnes, é um enorme desafio que Adriana diz estar pronta para enfrentar. </p>
+							    			<a class="btn btn-outline-info btn-sm" href="https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/adriana" target="_blank">Saiba Mais</a>
+							    		</div>
+							    	</div>
+
+	    						</div>
+
+	    						<div class="carousel-item">
+
+	    							<div class="card shadow">
+							    		<img class="card-img" src="images/alex-media.jpg">
+							    		<div class="card-body">
+							    			<h4 class="card-title"><kbd>Alex</kbd></h4>
+							    			<p align="justify" class="card-text">Descendente de família chinesa, Alex passou a trabalhar na área quando foi morar nos EUA, onde cozinhou em pequenos restaurantes na Flórida. Excêntrico, se considera artesão e food designer. Sua especialidade é a cozinha oriental e promete trazer o tempero asiático para o MasterChef Profissionais. </p>
+							    			<a class="btn btn-outline-info btn-sm" href="https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/alex" target="_blank">Saiba Mais</a>
+							    		</div>
+							    	</div>
+
+	    						</div>
+
+	    						<div class="carousel-item">
+
+	    							<div class="card shadow">
+							    		<img class="card-img" src="images/andre-media.jpg">
+							    		<div class="card-body">
+							    			<h4 class="card-title"><kbd>André</kbd></h4>
+							    			<p align="justify" class="card-text">Andre cresceu vendo o pai fazendo pães. Apesar de fazer parte de uma família com grande identificação com cozinha, diz ser o único profissional. Apesar da pouca idade, possui um currículo extenso e é um dos cozinheiros mais versáteis desta temporada. Promete surpreender os jurados com sua cozinha autoral e regionalista. </p>
+							    			<a class="btn btn-outline-info btn-sm" href="https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/andre-p" target="_blank">Saiba Mais</a>
+							    		</div>
+							    	</div>
+
+	    						</div>
+
+	    						<div class="carousel-item">
+
+	    							<div class="card shadow">
+							    		<img class="card-img" src="images/andreR-media.jpg">
+							    		<div class="card-body">
+							    			<h4 class="card-title"><kbd>André R</kbd></h4>
+							    			<p align="justify" class="card-text">André é formado em engenharia elétrica, mas a paixão pela gastronomia falou mais alto. Cozinha profissionalmente desde 2010 e hoje considera a cozinha italiana sua especialidade. Segundo ele, além dos dotes culinários, seus pontos fortes na competição serão, a inteligência, a segurança e sua personalidade forte. </p>
+							    			<a class="btn btn-outline-info btn-sm" href="https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/andre-r" target="_blank">Saiba Mais</a>
+							    		</div>
+							    	</div>
+
+	    						</div>
+
+	    						<div class="carousel-item">
+
+	    							<div class="card shadow">
+							    		<img class="card-img" src="images/daniel-media.jpg">
+							    		<div class="card-body">
+							    			<h4 class="card-title"><kbd>Daniel</kbd></h4>
+							    			<p align="justify" class="card-text"> Daniel é presidente da Associação dos Cozinheiros Profissionais do Pantanal. Foi pupilo do chef Marcílio Galeano e trabalhou em um cruzeiro onde viajou para mais de 20 países. Hoje ele comanda o próprio restaurante e sonha alçar voos muito mais altos caso ganhe o MasterChef Profissionais. </p>
+							    			<a class="btn btn-outline-info btn-sm" href="https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/daniel" target="_blank">Saiba Mais</a>
+							    		</div>
+							    	</div>
+
+	    						</div>
+
+	    						<div class="carousel-item">
+
+	    							<div class="card shadow">
+							    		<img class="card-img" src="images/heaven-media.jpg">
+							    		<div class="card-body">
+							    			<h4 class="card-title"><kbd>Heaven</kbd></h4>
+							    			<p align="justify" class="card-text">Cresceu dentro de uma cozinha observando a mãe. Estagiou em restaurantes conceituados na França e em Portugal. No Brasil, passou por boas cozinhas até abrir seu próprio restaurante no Rio de Janeiro. Heaven é uma cozinheira muito técnica e garante possuir as qualidades necessárias para ser a próxima MasterChef Profissionais do Brasil. </p>
+							    			<a class="btn btn-outline-info btn-sm" href="https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/heaven" target="_blank">Saiba Mais</a>
+							    		</div>
+							    	</div>
+
+	    						</div>
+
+	    						<div class="carousel-item">
+
+	    							<div class="card shadow">
+							    		<img class="card-img" src="images/manuela-media.jpg">
+							    		<div class="card-body">
+							    			<h4 class="card-title"><kbd>Manoela</kbd></h4>
+							    			<p align="justify" class="card-text">Passou por alguns restaurantes até chegar na cozinha do DOM, restaurante estrelado do chef Alex Atala. Lá conheceu o marido, com quem divide a cozinha numa empresa de jantares e eventos. Manoela está no MasterChef Profissionais para provar a si mesma que, apesar de ser autodidata, é capaz de vencer a competição. </p>
+							    			<a class="btn btn-outline-info btn-sm" href="https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/manoela" target="_blank">Saiba Mais</a>
+							    		</div>
+							    	</div>
+
+	    						</div>
+
+	    						<div class="carousel-item">
+
+	    							<div class="card shadow">
+							    		<img class="card-img" src="images/marcela-media.jpg">
+							    		<div class="card-body">
+							    			<h4 class="card-title"><kbd>Marcela</kbd></h4>
+							    			<p align="justify" class="card-text">Já trabalhou em bistrôs, passou pela cozinha de navios e, há dois anos, comanda a cozinha do renomado restaurante do chef Gastón Acurio na capital paulista. Sua especialidade são os peixes e frutos do mar, mas também se aventura na cozinha indiana, filipina e grega. Promete fazer o que sabe de melhor: cozinhar, cozinhar e cozinhar. </p>
+							    			<a class="btn btn-outline-info btn-sm" href="https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/marcela" target="_blank">Saiba Mais</a>
+							    		</div>
+							    	</div>
+
+	    						</div>
+
+	    						<div class="carousel-item">
+
+	    							<div class="card shadow">
+							    		<img class="card-img" src="images/paulo-media.jpg">
+							    		<div class="card-body">
+							    			<h4 class="card-title"><kbd>Paulo</kbd></h4>
+							    			<p align="justify" class="card-text">Possui um restaurante na pequena Marechal Deodoro, Alagoas, onde combina técnicas diversas de gastronomia com elementos e inspirações de pratos da região. Se orgulha de dizer que ganhou todos os concursos que participou, dentre eles o Enchefs Alagoas 2016. Se depender dele, no MasterChef Profissionais não será diferente. </p>
+							    			<a class="btn btn-outline-info btn-sm" href="https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/paulo" target="_blank">Saiba Mais</a>
+							    		</div>
+							    	</div>
+
+	    						</div>
+
+	    						<div class="carousel-item">
+
+	    							<div class="card shadow">
+							    		<img class="card-img" src="images/rafael-media.jpg">
+							    		<div class="card-body">
+							    			<h4 class="card-title"><kbd>Rafael</kbd></h4>
+							    			<p align="justify" class="card-text">Dono de um vasto repertório gastronômico. Começou a cozinhar no exterior aos 19 anos e desde então passou pela cozinha de diversos restaurantes renomados na Europa e nos EUA. Hoje, possui um restaurante em Paris onde imprime o seu próprio estilo de cozinha contemporânea. </p>
+							    			<a class="btn btn-outline-info btn-sm" href="https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/rafael" target="_blank">Saiba Mais</a>
+							    		</div>
+							    	</div>
+
+	    						</div>
+
+	    						<div class="carousel-item">
+
+	    							<div class="card shadow">
+							    		<img class="card-img" src="images/roberta-media.jpg">
+							    		<div class="card-body">
+							    			<h4 class="card-title"><kbd>Roberta</kbd></h4>
+							    			<p align="justify" class="card-text">Formada em gastronomia, é profissional há sete anos. Começou como estagiária no DOM e depois trabalhou no Dalva e Dito, ambos do chef Alex Atala. Também passou pelo badalado Hot Pork, dos chefs Janaína e Jefferson Rueda. Entrou no MasterChef Profissionais para testar seus limites e levar o troféu para casa. </p>
+							    			<a class="btn btn-outline-info btn-sm" href="https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/roberta" target="_blank">Saiba Mais</a>
+							    		</div>
+							    	</div>
+
+	    						</div>
+
+	    						<div class="carousel-item">
+
+	    							<div class="card shadow">
+							    		<img class="card-img" src="images/simone-media.jpg">
+							    		<div class="card-body">
+							    			<h4 class="card-title"><kbd>Simone</kbd></h4>
+							    			<p align="justify" class="card-text">Junto com o marido comanda há 22 anos a cozinha do primeiro restaurante de comida peruana do Brasil. Já ganhou o prêmio Dólmã de melhor chef de Alagoas em 2015 e ganhou a condecoração de Embaixadora da gastronomia do Alagoas pelo Enchefs. Quer provar que possui as qualidades necessárias para ganhar a competição. </p>
+							    			<a class="btn btn-outline-info btn-sm" href="https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/simone" target="_blank">Saiba Mais</a>
+							    		</div>
+							    	</div>
+
+	    						</div>
+
+	    						<div class="carousel-item">
+
+	    							<div class="card shadow">
+							    		<img class="card-img" src="images/thalles-media.jpg">
+							    		<div class="card-body">
+							    			<h4 class="card-title"><kbd>Thales</kbd></h4>
+							    			<p align="justify" class="card-text">É professor de gastronomia, já teve uma empresa de eventos e trabalhou como personal chef. Formado pela Universidade Católica de Brasília com menção honrosa acadêmica. Metódico e dedicado, Thales estudou a fundo a competição e diz ser o mais preparado para ganhar esta temporada. </p>
+							    			<a class="btn btn-outline-info btn-sm" href="https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/thales" target="_blank">Saiba Mais</a>
+							    		</div>
+							    	</div>
+
+	    						</div>
+
+	    						<div class="carousel-item">
+
+	    							<div class="card shadow">
+							    		<img class="card-img" src="images/will-media.jpg">
+							    		<div class="card-body">
+							    			<h4 class="card-title"><kbd>William</kbd></h4>
+							    			<p align="justify" class="card-text">Viajou para Espanha para estudar cozinha criativa no Instituto El Cett, trabalhou em restaurantes estrelados por lá como o DiverXo e o Comerç 24. Hoje é subchef do Manioca, restaurante da premiada chef Helena Rizzo. Encontrou no programa a oportunidade de sair da sombra dos grandes chefs e seguir seu próprio caminho. </p>
+							    			<a class="btn btn-outline-info btn-sm" href="https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/william" target="_blank">Saiba Mais</a>
+							    		</div>
+							    	</div>
+
+	    						</div>
+
+	    					</div>
+
+	    					<a class="carousel-control-prev" href="#carousel-participantes" data-slide="prev">
+	    						<span class="carousel-control-prev-icon"></span>
+	    					</a>
+	    					<a class="carousel-control-next" href="#carousel-participantes" data-slide="next">
+	    						<span class="carousel-control-next-icon"></span>
+	    					</a>
+
+	    				</div>
+
+	    			</div>
+
+	    			<div class="col-12 col-md-4 d-none d-md-block">
+
+	    				<h1 class="nome text-white" style="font-family: biysk; text-align: center;">Ranking</h1>
+
+	    				<div id="ranking" class="pt-2" style="background-color: rgba(248,249,250,0.7); border-radius: 25px;">
+
+	    					<div class="scroll">
+
+		    					<ol>
+		    						<li class="mb-3">
+		    							<div class="row">
+
+		    								<div class="col-lg-6">
+		    									<img class="rounded-circle img-fluid" src="images/andre.jpg">
+		    								</div>
+
+		    								<div class="col-lg-6 align-self-center texto-ranking">
+		    									<h4 class="d-inline nome-ranking">André</h4> <br>
+		    									<h4 class="d-inline">R$ 3000,00</h4>
+		    								</div>
+
+		    							</div>
+		    						</li>
+
+		    						<li class="mb-3">
+		    							<div class="row">
+
+		    								<div class="col-lg-6">
+		    									<img class="rounded-circle img-fluid" src="images/rafael.jpg">
+		    								</div>
+
+		    								<div class="col-lg-6 align-self-center texto-ranking">
+		    									<h4 class="d-inline nome-ranking">Rafael</h4> <br>
+		    									<h4 class="d-inline">R$ 3000,00</h4>
+		    								</div>
+
+		    							</div>
+		    						</li>
+
+		    						<li class="mb-3">
+		    							<div class="row">
+
+		    								<div class="col-lg-6">
+		    									<img class="rounded-circle img-fluid" src="images/manuela.jpg">
+		    								</div>
+
+		    								<div class="col-lg-6 align-self-center texto-ranking">
+		    									<h4 class="d-inline nome-ranking">Manoela</h4> <br>
+		    									<h4 class="d-inline">R$ 2500,00</h4>
+		    								</div>
+
+		    							</div>
+		    						</li>
+
+		    						<li class="mb-3">
+		    							<div class="row">
+
+		    								<div class="col-lg-6">
+		    									<img class="rounded-circle img-fluid" src="images/will.jpg">
+		    								</div>
+
+		    								<div class="col-lg-6 align-self-center texto-ranking">
+		    									<h4 class="d-inline nome-ranking">William</h4> <br>
+		    									<h4 class="d-inline">R$ 2500,00</h4>
+		    								</div>
+
+		    							</div>
+		    						</li>
+
+		    						<li class="mb-3">
+		    							<div class="row">
+
+		    								<div class="col-lg-6">
+		    									<img class="rounded-circle img-fluid" src="images/heaven.jpg">
+		    								</div>
+
+		    								<div class="col-lg-6 align-self-center texto-ranking">
+		    									<h4 class="d-inline nome-ranking">Heaven</h4> <br>
+		    									<h4 class="d-inline">R$ 2000,00</h4>
+		    								</div>
+
+		    							</div>
+		    						</li>
+
+		    						<li class="mb-3">
+		    							<div class="row">
+
+		    								<div class="col-lg-6">
+		    									<img class="rounded-circle img-fluid" src="images/daniel.jpg">
+		    								</div>
+
+		    								<div class="col-lg-6 align-self-center texto-ranking">
+		    									<h4 class="d-inline nome-ranking">Daniel</h4> <br>
+		    									<h4 class="d-inline">R$ 1500,00</h4>
+		    								</div>
+
+		    							</div>
+		    						</li>
+
+		    						<li class="mb-3">
+		    							<div class="row">
+
+		    								<div class="col-lg-6">
+		    									<img class="rounded-circle img-fluid grayscale" src="images/thalles.jpg">
+		    								</div>
+
+		    								<div class="col-lg-6 align-self-center texto-ranking">
+		    									<h4 class="d-inline eliminado">Thales</h4> <br>
+		    									<h4 class="d-inline">R$ 1500,00</h4>
+		    								</div>
+
+		    							</div>
+		    						</li>
+
+		    						<li class="mb-3">
+		    							<div class="row">
+
+		    								<div class="col-lg-6">
+		    									<img class="rounded-circle img-fluid grayscale" src="images/adriana.jpg">
+		    								</div>
+
+		    								<div class="col-lg-6 align-self-center texto-ranking">
+		    									<h4 class="d-inline eliminado">Adriana</h4> <br>
+		    									<h4 class="d-inline">R$ 1000,00</h4>
+		    								</div>
+
+		    							</div>
+		    						</li>
+
+		    						<li class="mb-3">
+		    							<div class="row">
+
+		    								<div class="col-lg-6">
+		    									<img class="rounded-circle img-fluid grayscale" src="images/marcela.jpg">
+		    								</div>
+
+		    								<div class="col-lg-6 align-self-center texto-ranking">
+		    									<h4 class="d-inline eliminado">Marcela</h4> <br>
+		    									<h4 class="d-inline">R$ 1000,00</h4>
+		    								</div>
+
+		    							</div>
+		    						</li>
+
+		    						<li class="mb-3">
+		    							<div class="row">
+
+		    								<div class="col-lg-6">
+		    									<img class="rounded-circle img-fluid grayscale" src="images/paulo.jpg">
+		    								</div>
+
+		    								<div class="col-lg-6 align-self-center texto-ranking">
+		    									<h4 class="d-inline eliminado">Paulo</h4> <br>
+		    									<h4 class="d-inline">R$ 1000,00</h4>
+		    								</div>
+
+		    							</div>
+		    						</li>
+
+		    						<li class="mb-3">
+		    							<div class="row">
+
+		    								<div class="col-lg-6">
+		    									<img class="rounded-circle img-fluid grayscale" src="images/alex.jpg">
+		    								</div>
+
+		    								<div class="col-lg-6 align-self-center texto-ranking">
+		    									<h4 class="d-inline eliminado">Alex</h4> <br>
+		    									<h4 class="d-inline">R$ 500,00</h4>
+		    								</div>
+
+		    							</div>
+		    						</li>
+
+		    						<li class="mb-3">
+		    							<div class="row">
+
+		    								<div class="col-lg-6">
+		    									<img class="rounded-circle img-fluid" src="images/roberta.jpg">
+		    								</div>
+
+		    								<div class="col-lg-6 align-self-center texto-ranking">
+		    									<h4 class="d-inline nome-ranking">Roberta</h4> <br>
+		    									<h4 class="d-inline">R$ 500,00</h4>
+		    								</div>
+
+		    							</div>
+		    						</li>
+
+		    						<li class="mb-3">
+		    							<div class="row">
+
+		    								<div class="col-lg-6">
+		    									<img class="rounded-circle img-fluid grayscale" src="images/simone.jpg">
+		    								</div>
+
+		    								<div class="col-lg-6 align-self-center texto-ranking">
+		    									<h4 class="d-inline nome-ranking">Simone</h4> <br>
+		    									<h4 class="d-inline">R$ 500,00</h4>
+		    								</div>
+
+		    							</div>
+		    						</li>
+
+		    						<li>
+		    							<div class="row">
+
+		    								<div class="col-lg-6">
+		    									<img class="rounded-circle img-fluid grayscale" src="images/andreR.jpg">
+		    								</div>
+
+		    								<div class="col-lg-6 align-self-center texto-ranking">
+		    									<h4 class="d-inline eliminado">André R</h4> <br>
+		    									<h4 class="d-inline">R$ 0,00</h4>
+		    								</div>
+
+		    							</div>
+		    						</li>
+		    					</ol>
+
+		    				</div>
+
+	    				</div>
+	    				
+	    			</div>
+	    		</div>
+	    	</div>
+	    </section>
+
+	    <section id="aux-section">
+	    	<br>
+	    	<br>
+	    	<br>
+	    </section>
+
+	    <section id="como-jogar">
+	    	<div id="blank-space" class="container" >
+	    		<h1 class="nome text-center py-4" style="font-family: biysk">Como jogar</h1>
+
+	    		<div class="row">
+	    			<div class="col-md-6 col-lg-3">
+	    				<i class="d-block text-center fas fa-user-circle pb-1"></i>
+	    				<h4 style="font-family:grooving;" class="text-center">CADASTRE-SE</h4>
+	    				<p class="lead" style="text-align: center">Crie uma conta e inicie a sessão para começar a jogar</p>
+	    			</div>
+
+	    			<div class="col-md-6 col-lg-3">
+	    				<i class="d-block text-center fas fa-check-circle text-center pb-1"></i>
+	    				<h4 style="font-family:grooving;" class="text-center">ESCOLHA UM BOLÃO</h4>
+	    				<p class="lead" style="text-align: center">Escolha um bolão e convide outras pessoas para jogar ou crie o seu bolão particular e jogue com seus amigos</p>
+
+	    			</div>
+
+	    			<div class="col-md-6 col-lg-3">
+	    				<i color: #B22222;" class="d-block text-center fas fa-dollar-sign text-center pb-1"></i>
+	    				<h4 style="font-family:grooving;" class="text-center">FAÇA SUAS APOSTAS</h4>
+	    				<p class="lead" style="text-align: center">Os valores das apostas devem estar entre R$20,00 e R$1000,00</p>
+
+	    			</div>
+
+	    			<div class="col-md-6 col-lg-3">
+	    				<i class="d-block text-center fas fa-check-double text-center pb-1"></i>
+	    				<h4 style="font-family:grooving;" class="text-center">ACOMPANHE</h4>
+	    				<p class="lead" style="text-align: center">Acesse seus bolões para saber quem está apostando, quais os valores das apostas e quanto o bolão está valendo</p>
+
+	    			</div>
+
+	    		</div>
+	    		<h3 class="text-center py-4" style="font-size: 2.3em; font-family:grooving;">DIVIRTA-SE</h3>
+	    	</div>
+
+	    </section>
+
+	    <section id="noticias">
+	    	<div class="container">
+	    		<div class="row">
+	    			<div class="col-10 offset-1">
+	    				<h1 class="nome text-white pb-4" style="font-family: biysk">Noticias</h1>
+
+				    	<div id="carousel-noticias" class="carousel slide" data-ride="carousel">
+				    		<div class="carousel-inner">
+
+				    			<div class="carousel-item active">
+				    				<a href="https://entretenimento.band.uol.com.br/masterchef/profissionais/noticias/100000935607/internet-vai-a-loucura-e-comemora-eliminacao-de-thales.html"><img class="img-fluid" src="images/thales-eliminacao.jpg"></a>
+				    				<div class="carousel-caption fundo-titulo">
+				    					<h2 style="text-align: left;">Internet vai à loucura e comemora eliminação de Thales</h2>
+				    					<p class="d-none d-sm-block" style="text-align: left; color: rgba(248,249,250,0.7);">Participante que no início cativou o público por sua história de vida se tornou o grande ranço dessa edição</p>
+				    				</div>
+				    			</div>
+
+				    			<div class="carousel-item">
+				    				<a href="https://entretenimento.band.uol.com.br/masterchef/profissionais/fotos/10000013838/cozinheiros-preparam-pratos-monocromaticos-para-eliminacao.html"><img class="img-fluid" src="images/mono-prato.jpg"></a>
+				    				<div class="carousel-caption fundo-titulo">
+				    					<h2 style="text-align: left;">Cozinheiros preparam pratos monocromáticos para eliminação</h2>
+				    					<p class="d-none d-sm-block" style="text-align: left; color: rgba(248,249,250,0.7);">Tema da prova de eliminação exige dos participantes a construção de pratos monocromáticos nas cores laranja, vermelho, amarelo e roxo</p>
+				    				</div>				    				
+				    			</div>
+
+				    			<div class="carousel-item">
+				    				<a href="https://entretenimento.band.uol.com.br/masterchef/profissionais/noticias/100000935344/participantes-cozinham-na-natureza-e-precisam-fazer-o-proprio-fogo.html"><img class="img-fluid" src="images/prova-equipe.jpg"></a>
+				    				<div class="carousel-caption fundo-titulo">
+				    					<h2 style="text-align: left;">Participantes cozinham em meio à natureza e precisam fazer o próprio fogo</h2>
+				    					<p class="d-none d-sm-block" style="text-align: left; color: rgba(248,249,250,0.7);">Divididos em dois times, os cozinheiros profissionais deverão voltar às origens da gastronomia</p>
+				    				</div>	
+				    			</div>
+
+				    			<a class="carousel-control-prev" href="#carousel-noticias" data-slide="prev"><span class="carousel-control-prev-icon"></span></a>
+				    			<a class="carousel-control-next" href="#carousel-noticias" data-slide="next"><span class="carousel-control-next-icon"></span></a>
+				    			
+				    		</div>
+				    	</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	    </section>
+
+	    <footer style="background-color: #B22222">
+      		<nav class="navbar navbar-expand-lg text-white navbar-dark">
+        		<div class="container justify-content-center">
+          			<ul class="navbar-nav">
+           	 			<li class="nav-item">&copy Bolão MasterChef Brasil</li>
+          			</ul>
+        		</div>
+      		</nav>
+    	</footer>
+
+
+
+	     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   		 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    	 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	</body>
+
+</html>

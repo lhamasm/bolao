@@ -1,4 +1,4 @@
-﻿<? php
+﻿<?php
 	session_start();
 ?>
 
@@ -23,7 +23,7 @@
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	        <div class="container">
 
-	          <a class="navbar-brand col-1" href="index-principal.html">
+	          <a class="navbar-brand col-1" href="index.php">
 	            <img style="width: 2.5em" src="images/logo-vermelho.png">
 	          </a>
 
@@ -34,29 +34,29 @@
 	          <div class="collapse navbar-collapse" id="nav-collapse">
 	            <ul class="navbar-nav">
 	              <li class="nav-item">
-	                <a class="nav-link" href="index-principal.html#programa">O programa</a>
+	                <a class="nav-link" href="index.php#programa">O programa</a>
 	              </li>
 
 	              <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
 
 	              <li class="nav-item">
-	                <a class="nav-link" href="index-principal.html#participantes">Os participantes</a>
+	                <a class="nav-link" href="index.php#participantes">Os participantes</a>
 	              </li>
 
 	              <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
 
 	              <li class="nav-item">
-	                <a class="nav-link" href="index-principal.html#aux-section">Como jogar</a>
+	                <a class="nav-link" href="index.php#aux-section">Como jogar</a>
 	              </li>
 
 	              <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
 
 	              <li class="nav-item">
-	                <a class="nav-link" href="index-principal.html#noticias">Noticias</a>
+	                <a class="nav-link" href="index.php#noticias">Noticias</a>
 	              </li>
 	            </ul>
 	            <div class="col-3">
-					<a class="btn btn-outline-info botaoEntrar" href="index.html">Entrar</a>
+					<a class="btn btn-outline-info botaoEntrar" href="index.php">Entrar</a>
 	        	</div>
 	          </div>
 	        </div>
@@ -71,7 +71,7 @@
 						<div class="align-self-center">
 							<img class="col-md-auto logo" style="width:7.9em;" src="images/logo-vermelho.png">
 						
-							<form class="form shadow" method="post" action="/php/cadastro.php">
+							<form class="form shadow" method="post" action="php/cadastro.php">
 								<div class="phrase pb-1">
 									<h1 class="text-info" style="text-align:center; font-size: 0.45em; font-family: robotoBold;">Cadastre-se agora!</h1>
 								</div>

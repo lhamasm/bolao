@@ -2,7 +2,7 @@
 	session_start();
 ?>
 
-<!doctype hmtl>
+<!doctype html>
 
 <html lang="pt-br">
 
@@ -29,7 +29,7 @@
 			<nav class="navbar navbar-expand-lg text-white navbar-light" style="font-size: 0.9em;">
 				<div class="container">
 					<ul class="navbar-nav">
-						<li class="nav-item"><strong>MASTERCHEF BRASIL 2018 - PROFISSIONAIS</strong> | </li>
+						<li class="nav-item"><strong>MASTERCHEF BRASIL 2018 - <?php echo $_GET['a'] == 'amadores' ? 'AMADORES' : 'PROFISSIONAIS';?></strong> | </li>
 						<li class="nav-item ml-2">POSIÇÃO: posição | </li>
 						<li class="nav-item ml-2">PONTUAÇÃO: pontuação</li>
 					</ul>
@@ -243,8 +243,8 @@
 			
 			$('#rg').mask('00.000.000-00');
 			$('#cpf').mask('000.000.000-00');
-			$('#telefone').mask('+00 00 0000-0000');
-			$('#celular').mask('+00 00 0 0000-0000');
+			$('#telefone').mask('00 0000-0000');
+			$('#celular').mask('00 0 0000-0000');
 			$('#agencia').mask('0000-0');
 			$('#conta').mask('00000-0');
 
