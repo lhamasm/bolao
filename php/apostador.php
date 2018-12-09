@@ -8,7 +8,8 @@
 		protected $apostas;
 
 		# Construtor
-		function Apostador($posicao, $pontuacao){
+		function Apostador($tipo, $nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta, $posicao, $pontuacao){
+			parent::Usuario($tipo, $nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta);
 			$this->posicao = $posicao;
 			$this->pontuacao = $pontuacao;
 			$this->apostas = array();
@@ -24,7 +25,7 @@
 		}
 
 		function getApostas(){
-			return $apostas;
+			return $this->apostas;
 		}
 
 		function setPosicao($posicao) {
@@ -46,8 +47,8 @@
 		}
 
 		function apostar($usuario, $bolao, $valor, $opcaoDeAposta){
-			if ($bolao->getLimiteDeParticipantes() > count($bolao->getParticipantes()) ) {
-				$aposta = new Aposta($usuario, $bolao, $valor,$opcaoDeAposta);
+			if ($bolao->getLimiteDeParticipantes() > count($bolao->getParticipantes())) {
+				$aposta = new Aposta($usuario, $bolao, $valor, $opcaoDeAposta);
 				array_push($this->apostas, $aposta);
 
 				for ($i=0; $i < count($bolao->getParticipantes()); $i++) { 
@@ -55,15 +56,17 @@
 						break;
 					}
 				}
-				if (i ==  count($bolao->getParticipantes())) {
+
+				if ($i ==  count($bolao->getParticipantes())) {
 					$bolao->setParticipantes($usuario);
 				}
 				
 				$bolao->setApostas($aposta);
+				$bolao->setDinheiros(doubleval($valor));
 
 			}
-			else{
-				return -1;
+			else {
+				echo 'Limite de Participantes atingido';
 			}
 		}
 

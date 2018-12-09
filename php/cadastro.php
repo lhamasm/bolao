@@ -52,10 +52,10 @@
 			if(confirmation($senha, $confirmarSenha)){
 
 				$dataNascimento = $dia . '/' . $mes . '/' . $ano;
-				$usuario = new Usuario($tipo, $nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta);
+				$usuario = new Apostador($tipo, $nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta, $_SESSION['numero_usuarios']+1, 0);
 
-				$apostador = new Apostador($_SESSION['numero_usuarios']+1, 0);
-				$apostador = $usuario;	
+				//$apostador = new Apostador($_SESSION['numero_usuarios']+1, 0);
+				//$apostador = $usuario;	
 
 				$cadastro = $tipo . ';' . $nome . ';' . $username . ';' . $email . ';' . $senha . ';' . $dataNascimento . ';' . $genero . ';' . $rg . ';' . $cpf . ';' . $telefone . ';' . $celular . ';' . $banco . ';' . $agencia . ';' . $conta . ';\n';
 

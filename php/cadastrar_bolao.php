@@ -41,7 +41,7 @@
 			$descricao = p_respostas($_REQUEST['descricao']);
 		}
 
-		if(isset($_REQUEST['participantes'])){
+		if(isset($_REQUEST['participantes']) && $_REQUEST['participantes'] != ''){
 			$participantes = p_respostas($_REQUEST['participantes']);
 		} else {
 			$participantes = 10;
@@ -90,10 +90,22 @@
 		}
 
 		$dataTermino = $_REQUEST['data'];
+		$data = explode('-', $dataTermino);
+		$dataTermino = $data[2] . '/' . $data[1] . '/' . $data[0];
 
 		$opcoesAposta = explode('-', $_REQUEST['escolhas2']);
 
-		$cadastro = $id . ';' . $_SESSION['login'] . ';' . $tipo . ';' . $campeonato . ';' . $nome . ';' . $descricao . ';' . $participantes . ';;' . $tipoJogo[0] . '-' . $tipoJogo[1] . '-' . $tipoJogo[2] . '-' . $tipoJogo[3] . '-' . $tipoJogo[4] . '-' . $tipoJogo[5] . ';' . $tipoAposta . ';' . $_REQUEST['escolhas2'] . ';' . $senha . ';0;' . $dataTermino . ';\n';
+		$cadastro = $id . ';' . $_SESSION['login'] . ';' . $tipo . ';' . $campeonato . ';' . $nome . ';' . $descricao . ';' . $participantes . ';;' . $tipoJogo[0] . '-' . $tipoJogo[1] . '-' . $tipoJogo[2] . '-' . $tipoJogo[3] . '-' . $tipoJogo[4] . '-' . $tipoJogo[5] . ';' . $tipoAposta . ';';
+
+		for($i = 0; $i < count($opcoesAposta)-1; $i++){
+			if($i == count($opcoesAposta)-2){
+				$cadastro = $cadastro . $opcoesAposta[$i];
+			} else {
+				$cadastro = $cadastro . $opcoesAposta[$i] . '-';
+			}
+		}
+
+		$cadastro = $cadastro . ';' . $senha . ';;0;' . $dataTermino . ';\n';
 
 		$bolao = new Bolao($id, $_SESSION['login'], $tipo, $campeonato, $nome, $descricao, $participantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha, 0);
 		$bolao->setTempoLimite($dataTermino);

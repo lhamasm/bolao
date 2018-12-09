@@ -24,8 +24,8 @@
 			array_push($this->usuarios, $usuario);
 		}
 
-		function setJogos($jogos){
-			$this->jogos = $jogos;
+		function setJogos($jogo){
+			array_push($this->jogos, $jogo);
 		}
 
 		function setBoloes($bolao){

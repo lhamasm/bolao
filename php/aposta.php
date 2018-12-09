@@ -41,6 +41,10 @@
 			return $this->opcaoDeAposta;
 		}
 
+		function getValor(){
+			return $this->valor;
+		}
+
 	}
 
 ?>

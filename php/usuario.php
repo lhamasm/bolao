@@ -3,8 +3,10 @@
 	require_once 'sistema.php';
 	require_once 'bolao.php';
 	require_once 'jogo.php';
+	require_once 'observer.php';
+	require_once 'subject.php';
 	
-	class Usuario {
+	class Usuario extends Observer {
 		protected $tipo; //apostador ou adm
 		protected $nome;
 		protected $username;
@@ -19,7 +21,7 @@
 		protected $banco;
 		protected $agencia;
 		protected $conta;
-		protected $mensagens;
+		//protected $mensagens;
 
 		# Construtor
 		function Usuario($tipo, $nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta){
@@ -38,7 +40,7 @@
 			$this->banco = $banco;
 			$this->agencia = $agencia;
 			$this->conta = $conta;
-			$this->mensagens = array();
+			//$this->mensagens = array();
 
 		}
 
@@ -160,9 +162,9 @@
 			$this->conta = $conta;
 		}
 
-		function setMensagem($mensagem){
+		/*function setMensagem($mensagem){
 			array_push($this->mensagens , $mensagem);
-		}
+		}*/
 
 		# Métodos
 		function criarBolao($criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha){

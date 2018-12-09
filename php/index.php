@@ -20,7 +20,7 @@
         $usuario = fgets($arquivo);
 
         $dados = explode(';', $usuario);
-        $u = new Usuario($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $dados[5], $dados[6], $dados[7], $dados[8], $dados[9], $dados[10], $dados[11], $dados[12], $dados[13]);
+        $u = new Apostador($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $dados[5], $dados[6], $dados[7], $dados[8], $dados[9], $dados[10], $dados[11], $dados[12], $dados[13], 0, 0);
 
         $sistema->setUsuarios($u);
       }
@@ -35,7 +35,7 @@
         $jogo = fgets($arquivo);
 
         $dados = explode(';', $jogo);
-        $j = new Jogo($dados[0], $dados[1]);
+        $j = new Jogo($dados[0], $dados[1], $dados[2]);
 
         $sistema->setJogos($j);
       }
@@ -53,24 +53,22 @@
         $dados = explode(';', $bolao);
 
         $participantes = explode('-', $dados[7]);
-        $tipoJogo = explode('-', $dados[8]);
         $opcoesAposta = explode('-', $dados[10]);
-        $ganhadores = explode('-', $dados[13]);
-        $apostas = explode('-', $dados[16]);
+        $apostas = explode('-', $dados[15]);
+        $tipoJogo = explode('-', $dados[8]);
 
-        $b = new Bolao($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $dados[5], $dados[6], $tipoJogo,$dados[9], $opcoesAposta, $dados[11], $dados[14]);
+        $b = new Bolao($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $dados[5], $dados[6], $tipoJogo, $dados[9], $opcoesAposta, $dados[11], $dados[13]);
 
-        for($i = 0; $i < count($participantes); $i++){
+        for($i=0; $i < count($participantes)-1; $i++){
           $b->setParticipantes($participantes[$i]);
         }
 
-        for($i = 0; $i < count($apostas); $i++){
+        $b->setResultado($dados[12]);
+        $b->setTempoLimite($dados[14]);
+
+        for($i=0; $i < count($apostas); $i++){
           $b->setApostas($apostas[$i]);
         }
-
-        $b->setOpcoesAposta($opcoesAposta);
-        $b->setResultado($dados[12]);
-        $b->setTempoLimite($dados[15]);
 
         $sistema->setBoloes($b);
       }

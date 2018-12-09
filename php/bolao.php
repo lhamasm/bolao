@@ -2,8 +2,14 @@
 
 	require_once 'sistema.php';
 	require_once 'apostador.php';
+	require_once 'jogo.php';
+	require_once 'usuario.php';
+	require_once 'apostador.php';
+	require_once 'subject.php';
+	require_once 'observer.php';
+	
 
-	class Bolao {
+	class Bolao extends subject {
 
 		protected $id;
 		protected $criador;
@@ -73,6 +79,15 @@
 
 		function setParticipantes($participante){
 			array_push($this->participantes, $participante);
+
+			if($this->criador == $participante){
+				$observer = new Observer($participante, 10);
+			} else {
+				$observer = new Observer($participante, 0);
+			}
+
+			$this->attach($observer);
+			$this->setEvent("Bem-vindo ao Bolão" . $this->titulo());
 		}
 
 		function setTipoJogo($tipoJogo){
@@ -83,8 +98,8 @@
 			$this->tipoAposta = $tipoAposta;
 		}
 
-		function setOpcoesAposta($opcoesAposta){
-			$this->opcoesAposta = $opcoesAposta;
+		function setOpcoesAposta($opcao){
+			array_push($this->opcoesAposta, $opcao);
 		}
 
 		function setSenha($senha){
@@ -172,22 +187,27 @@
 		}
 
 
-		/*function determinarVencedor($jogos){
+		function determinarVencedor($jogos, $usuarios){
 
 			for($i = 0; $i < count($this->tipoJogo); $i++){
 				for($j = 0; $j < count($jogos); $j++){
-					if($this->tipoJogo[$i]->getId() == $jogos[$j]->getId()){
-						if($jogos[$j]->getResultado == ''){
-							return -1;
+					if($this->tipoJogo[$i] == $jogos[$j]->getId()){
+						if($jogos[$j]->getResultado() == ''){
+							echo "O(s) resultado(s) do bolão ainda não estão disponíveis";
 						}
 					}
 				}
 			}
 
 			for($i = 0; $i < count($this->participantes); $i++){
-				$a = ($this->participantes[$i])->getApostas();
+				for($j=0; $j < count($usuarios); $j++){
+					if($usuarios[$j]->getCpf() == $participantes[$i]){
+						$a = $usuarios[$j]->getApostas();
+						break;
+					}
+				}
 				for($j = 0; $j < count($a); $j++){
-					if($a[$j]->getBolao() == $this->titulo) {
+					if($a[$j]->getId() == $this->id) {
 						if($a[$j]->getOpcaoDeAposta() == $this->resultado){
 							array_push($this->ganhadores, $this->participantes[$i]);
 						}
@@ -197,7 +217,7 @@
 
 			return $this->ganhadores;
 
-		}*/
+		}
 
 		function calcularValorVencedor(){
 			$g = determinarVencedor();
