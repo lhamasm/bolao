@@ -1,2 +1,1 @@
 $id, $criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $participantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha, $resultado, $dinheiros, $tempolimite. $apostas
-1;858.707.365-60;0;prof;Bolão da Galera;Teste;10;Joao-Maria;0-0-0-0-0-0;ganhar;a-e-i-o-u;;;;22/10/2018;

@@ -39,11 +39,11 @@
 						<!-- trocar de modalidade -->
 						<li class="nav-item ml-4"><a href="#"><i class="fas fa-exchange-alt text-white"></i></a></li>
 						<!-- convites -->
-						<li class="nav-item ml-3"><a href="convites.html"><i class="far fa-envelope text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="convites.php"><i class="far fa-envelope text-white"></i></a></li>
 						<!-- minha conta -->
-						<li class="nav-item ml-3"><a href="minha-conta.html" title="Minha Conta"><i class="far fa-user text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="minha-conta.php" title="Minha Conta"><i class="far fa-user text-white"></i></a></li>
 						<!-- sair -->
-						<li class="nav-item ml-3"><a href="index-principal.html"><i class="fas fa-sign-out-alt text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="index-principal.php"><i class="fas fa-sign-out-alt text-white"></i></a></li>
 					</ul>
 				</div>
 			</nav>
@@ -61,23 +61,23 @@
 			        <div class="collapse navbar-collapse" id="nav-collapse">
 			        	<ul class="navbar-nav">
 			            	<li class="nav-item">
-			                	<a class="nav-link atual" href="index-pagina-pessoal.html">PÁGINA INICIAL</a>
+			                	<a class="nav-link atual" href="index-pagina-pessoal.php">PÁGINA INICIAL</a>
 			              	</li>
 
 			              	<li class="nav-item ml-3">
-			                	<a class="nav-link" href="cadastrar-bolao.html">CRIAR BOLÃO</a>
+			                	<a class="nav-link" href="cadastrar-bolao.php">CRIAR BOLÃO</a>
 			              	</li>
 
 			              	<li class="nav-item ml-3">
-			                	<a class="nav-link" href="meus-boloes.html">MEUS BOLÕES</a>
+			                	<a class="nav-link" href="meus-boloes.php">MEUS BOLÕES</a>
 			              	</li>
 
 			              	<li class="nav-item ml-3">
-			                	<a class="nav-link" href="minhas-apostas.html">MINHAS APOSTAS</a>
+			                	<a class="nav-link" href="minhas-apostas.php">MINHAS APOSTAS</a>
 			              	</li>
 
 			              	<li class="nav-item ml-3">
-			                	<a class="nav-link" href="historico-apostas.html">MEU HISTÓRICO DE APOSTAS</a>
+			                	<a class="nav-link" href="historico-apostas.php">MEU HISTÓRICO DE APOSTAS</a>
 			              	</li>
 			            </ul>
 					</div>
@@ -96,7 +96,7 @@
 							<div class="row">
 								<div class="col-4 form-group">
 									<label class="titulo" for="username">Nome de Usuário <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="username" id="username" value="<?php echo $_SESSION["username"]; ?>" disabled>
+									<input class="form-control" type="text" name="username" id="username" value="<?php echo $_SESSION["username"]; ?>" readonly>
 								</div>
 
 								<div id="senha" class="col-4 offset-4 form-group" style="display: none;">
@@ -108,7 +108,7 @@
 							<div class="row">
 								<div class="col-6 form-group">
 									<label class="titulo" for="email">Email <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="email" name="email" id="email" value="<?php echo $_SESSION["email"]; ?>" disabled>
+									<input class="form-control" type="email" name="email" id="email" value="<?php echo $_SESSION["email"]; ?>" readonly>
 								</div>
 
 								<div id="confirmar" class="col-4 offset-2 form-group" style="display: none;">
@@ -123,12 +123,12 @@
 							<div class="row">
 								<div class="col-7 form-group">
 									<label class="titulo" for="nome">Nome Completo <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="nome" id="nome" value="<?php echo $_SESSION["nome"]; ?>" disabled>
+									<input class="form-control" type="text" name="nome" id="nome" value="<?php echo $_SESSION["nome"]; ?>" readonly>
 								</div>
 
 								<div class="col-4 offset-1 form-group">
 									<label class="titulo" for="genero">Gênero <span class="text-danger">*</span></label><br>
-									<select id="genero" disabled>
+									<select id="genero" readonly>
 										<?php 
 											if($_SESSION["genero"] == 'feminino'){
 												echo '<option value="nonselected" style="color:lightgray;">[selecione]</option>
@@ -154,24 +154,24 @@
 							<div class="row">
 								<div class="col-4 form-group">
 									<label class="titulo" for="rg">RG <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="rg" id="rg" value="<?php echo $_SESSION["rg"]; ?>" disabled>
+									<input class="form-control" type="text" name="rg" id="rg" value="<?php echo $_SESSION["rg"]; ?>" readonly>
 								</div>
 
 								<div class="col-4 offset-4 form-group">
 									<label class="titulo" for="ddn">Data de Nascimento <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="ddn" id="ddn" value="<?php echo $_SESSION["ddn"]; ?>" disabled>
+									<input class="form-control" type="text" name="ddn" id="ddn" value="<?php echo $_SESSION["ddn"]; ?>" readonly>
 								</div>
 							</div>	
 							
 							<div class="row">
 								<div class="col-4 form-group">
 									<label class="titulo" for="telefone">Telefone <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="telefone" id="telefone" value="<?php echo $_SESSION["telefone"]; ?>" disabled>
+									<input class="form-control" type="text" name="telefone" id="telefone" value="<?php echo $_SESSION["telefone"]; ?>" readonly>
 								</div>
 
 								<div class="col-4 offset-4 form-group">
 									<label class="titulo" for="celular">Celular <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="celular" id="celular" value="<?php echo $_SESSION["celular"]; ?>" disabled>
+									<input class="form-control" type="text" name="celular" id="celular" value="<?php echo $_SESSION["celular"]; ?>" readonly>
 								</div>
 							</div>	
 
@@ -181,15 +181,15 @@
 							<div class="row">
 								<div class="col-4 form-group">
 									<label class="titulo" for="banco">Banco <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="banco" id="banco" value="<?php echo $_SESSION["banco"]; ?>" disabled>
+									<input class="form-control" type="text" name="banco" id="banco" value="<?php echo $_SESSION["banco"]; ?>" readonly>
 								</div>
 								<div class="col-4 form-group">
 									<label class="titulo" for="agencia">Agência <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="agencia" id="agencia" value="<?php echo $_SESSION["agencia"]; ?>" disabled>
+									<input class="form-control" type="text" name="agencia" id="agencia" value="<?php echo $_SESSION["agencia"]; ?>" readonly>
 								</div>
 								<div class="col-4 offset-4form-group">
 									<label class="titulo" for="conta">Conta <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="conta" id="conta" value="<?php echo $_SESSION["conta"]; ?>" disabled>
+									<input class="form-control" type="text" name="conta" id="conta" value="<?php echo $_SESSION["conta"]; ?>" readonly>
 								</div>
 							</div>
 
@@ -222,7 +222,7 @@
 							<a class="nav-link" href="#">FAQ</a>
 						</li>
 						<li class="nav-item ml-md-2">
-							<a class="nav-link" href="cadastro.html#termos" data-toggle="modal">TERMOS E CONDIÇÕES</a>
+							<a class="nav-link" href="cadastro.php#termos" data-toggle="modal">TERMOS E CONDIÇÕES</a>
 						</li>
 						<li class="nav-item ml-md-2">
 							<a class="nav-link" href="#">REPORTAR BUGS</a>
@@ -254,19 +254,18 @@
 				document.getElementById('alterar-dados').style.display = 'none';
 				document.getElementById('salvar-alteracao').style.display = 'block';
 
-				document.getElementById('username').disabled = false;
-				document.getElementById('email').disabled = false;
-				document.getElementById('nome').disabled = false;
-				document.getElementById('genero').disabled = false;
-				document.getElementById('rg').disabled = false;
-				document.getElementById('cpf').disabled = false;
+				document.getElementById('username').readOnly = false;
+				document.getElementById('email').readOnly = false;
+				document.getElementById('nome').readOnly = false;
+				document.getElementById('genero').readOnly = false;
+				document.getElementById('rg').readOnly = false;
 				document.getElementById('ddn').type = 'date';
-				document.getElementById('ddn').disabled = false;
-				document.getElementById('telefone').disabled = false;
-				document.getElementById('celular').disabled = false;
-				document.getElementById('banco').disabled = false;
-				document.getElementById('agencia').disabled = false;
-				document.getElementById('conta').disabled = false;
+				document.getElementById('ddn').readOnly = false;
+				document.getElementById('telefone').readOnly = false;
+				document.getElementById('celular').readOnly = false;
+				document.getElementById('banco').readOnly = false;
+				document.getElementById('agencia').readOnly = false;
+				document.getElementById('conta').readOnly = false;
 			}
 
 			function salvar_alteracoes() {
@@ -275,19 +274,18 @@
 				document.getElementById('alterar-dados').style.display = 'block';
 				document.getElementById('salvar-alteracao').style.display = 'none';
 
-				document.getElementById('username').disabled = true;
-				document.getElementById('email').disabled = true;
-				document.getElementById('nome').disabled = true;
-				document.getElementById('genero').disabled = true;
-				document.getElementById('rg').disabled = true;
-				document.getElementById('cpf').disabled = true;
+				document.getElementById('username').readOnly = true;
+				document.getElementById('email').readOnly = true;
+				document.getElementById('nome').readOnly = true;
+				document.getElementById('genero').readOnly = true;
+				document.getElementById('rg').readOnly = true;
 				document.getElementById('ddn').type = 'text';
-				document.getElementById('ddn').disabled = true;
-				document.getElementById('telefone').disabled = true;
-				document.getElementById('celular').disabled = true;
-				document.getElementById('banco').disabled = true;
-				document.getElementById('agencia').disabled = true;
-				document.getElementById('conta').disabled = true;
+				document.getElementById('ddn').readOnly = true;
+				document.getElementById('telefone').readOnly = true;
+				document.getElementById('celular').readOnly = true;
+				document.getElementById('banco').readOnly = true;
+				document.getElementById('agencia').readOnly = true;
+				document.getElementById('conta').readOnly = true;
 			}
 
 		</script>

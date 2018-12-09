@@ -56,7 +56,7 @@
 	              </li>
 	            </ul>
 	            <div class="col-3">
-					<a class="btn btn-outline-info botaoEntrar" href="index.php">Entrar</a>
+					<a class="btn btn-outline-info botaoEntrar" href="login.php">Entrar</a>
 	        	</div>
 	          </div>
 	        </div>

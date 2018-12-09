@@ -43,11 +43,11 @@
 						<!-- trocar de modalidade -->
 						<li class="nav-item ml-4"><a href="#"><i class="fas fa-exchange-alt text-white"></i></a></li>
 						<!-- convites -->
-						<li class="nav-item ml-3"><a href="convites.html"><i class="far fa-envelope text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="convites.php"><i class="far fa-envelope text-white"></i></a></li>
 						<!-- minha conta -->
-						<li class="nav-item ml-3"><a href="minha-conta.html" title="Minha Conta"><i class="far fa-user text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="minha-conta.php" title="Minha Conta"><i class="far fa-user text-white"></i></a></li>
 						<!-- sair -->
-						<li class="nav-item ml-3"><a href="index-principal.html"><i class="fas fa-sign-out-alt text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="index-principal.php"><i class="fas fa-sign-out-alt text-white"></i></a></li>
 					</ul>
 				</div>
 			</nav>
@@ -65,7 +65,7 @@
 			        <div class="collapse navbar-collapse" id="nav-collapse">
 			        	<ul class="navbar-nav">
 			            	<li class="nav-item">
-			                	<a class="nav-link" href="index-pagina-pessoal.html">PÁGINA INICIAL</a>
+			                	<a class="nav-link" href="index-pagina-pessoal.php">PÁGINA INICIAL</a>
 			              	</li>
 
 			              	<li class="nav-item ml-3">
@@ -73,15 +73,15 @@
 			              	</li>
 
 			              	<li class="nav-item ml-3">
-			                	<a class="nav-link" href="meus-boloes.html">MEUS BOLÕES</a>
+			                	<a class="nav-link" href="meus-boloes.php">MEUS BOLÕES</a>
 			              	</li>
 
 			              	<li class="nav-item ml-3">
-			                	<a class="nav-link" href="minhas-apostas.html">MINHAS APOSTAS</a>
+			                	<a class="nav-link" href="minhas-apostas.php">MINHAS APOSTAS</a>
 			              	</li>
 
 			              	<li class="nav-item ml-3">
-			                	<a class="nav-link" href="historico-apostas.html">MEU HISTÓRICO DE APOSTAS</a>
+			                	<a class="nav-link" href="historico-apostas.php">MEU HISTÓRICO DE APOSTAS</a>
 			              	</li>
 			            </ul>
 					</div>
@@ -270,7 +270,7 @@
 							<a class="nav-link" href="#">FAQ</a>
 						</li>
 						<li class="nav-item ml-md-2">
-							<a class="nav-link" href="cadastro.html#termos" data-toggle="modal">TERMOS E CONDIÇÕES</a>
+							<a class="nav-link" href="cadastro.php#termos" data-toggle="modal">TERMOS E CONDIÇÕES</a>
 						</li>
 						<li class="nav-item ml-md-2">
 							<a class="nav-link" href="#">REPORTAR BUGS</a>

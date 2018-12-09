@@ -3,12 +3,31 @@
 	require_once 'php/sistema.php';
 	require_once 'php/bolao.php';
 	require_once 'php/usuario.php';
+	require_once 'php/jogo.php';
+
 
 	session_start();
 
 	$sistema = $_SESSION['sistema'];
 	$boloes = $sistema->getBoloes();
 	$usuarios = $sistema->getUsuarios();
+	$jogos = $sistema->getJogos();
+
+	$boloesEncerrados = array();
+
+	$data1 = date('d/m/Y');
+	$date = DateTime::createFromFormat('d/m/Y', $data1);
+	$data1 = $date->format('Y-m-d');
+
+	for($i=0; $i < count($boloes); $i++){
+		$data2 = date('d/m/Y');
+		$date = DateTime::createFromFormat('d/m/Y', $data2);
+		$data2 = $date->format('Y-m-d');
+
+		if(strtotime($data1) < strtotime($data2)){
+			array_push($boloesEncerrados, $boloes[$i]);
+		}
+	}
 
 ?>
 
@@ -49,7 +68,7 @@
 						<!-- trocar de modalidade -->
 						<li class="nav-item ml-4"><a href="#"><i class="fas fa-exchange-alt text-white"></i></a></li>
 						<!-- convites -->
-						<li class="nav-item ml-3"><a href="convites.html"><i class="far fa-envelope text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="convites.php"><i class="far fa-envelope text-white"></i></a></li>
 						<!-- minha conta -->
 						<li class="nav-item ml-3"><a href="minha-conta.php" title="Minha Conta"><i class="far fa-user text-white"></i></a></li>
 						<!-- sair -->
@@ -79,15 +98,15 @@
 			              	</li>
 
 			              	<li class="nav-item ml-3">
-			                	<a class="nav-link" href="meus-boloes.html">MEUS BOLÕES</a>
+			                	<a class="nav-link" href="meus-boloes.php">MEUS BOLÕES</a>
 			              	</li>
 
 			              	<li class="nav-item ml-3">
-			                	<a class="nav-link" href="minhas-apostas.html">MINHAS APOSTAS</a>
+			                	<a class="nav-link" href="minhas-apostas.php">MINHAS APOSTAS</a>
 			              	</li>
 
 			              	<li class="nav-item ml-3">
-			                	<a class="nav-link" href="historico-apostas.html">MEU HISTÓRICO DE APOSTAS</a>
+			                	<a class="nav-link" href="historico-apostas.php">MEU HISTÓRICO DE APOSTAS</a>
 			              	</li>
 			            </ul>
 					</div>
@@ -176,11 +195,19 @@
 										<button type="button" class="close" data-dismiss="modal">&times</button>
 									</div>
 									<div class="modal-body">
-										<ul class="list-group list-group-flush">
-											<li class="list-group-item list-group-item-info">23/10 - Fulano de Tal</li>
-											<li class="list-group-item">09/10 - Ciclano de Tal</li>
-											<li class="list-group-item">25/09 - Beltrano de Tal</li>
-										</ul>
+										<?php
+											echo '<ul class="list-group list-group-flush">';
+											for($i = 0; $i < count($jogos); $i++){
+												if($jogos[$i]->getId() == '1'){
+													if($i == 0){
+														echo '<li class="list-group-item list-group-item-info">' . $jogos[$i]->getData() . ' - ' . $jogos[$i]->getResultado() . '</li>';
+													} else {
+														echo '<li class="list-group-item">' . $jogos[$i]->getData() . ' - ' . $jogos[$i]->getResultado() . '</li>';
+													}
+												}
+											}
+											echo '</ul>';
+										?>
 									</div>
 									<div>
 										
@@ -203,32 +230,41 @@
 										<button type="button" class="close" data-dismiss="modal">&times</button>
 									</div>
 									<div class="modal-body">
-										<ul class="list-group list-group-flush">
-											<li class="list-group-item list-group-item-info">30/10 - Equipe Vermelha <a href="#" onclick="participantes('equipe-1')"><i class="fas fa-plus-circle"></i></a></li>
-											<div id="equipe-1" style="display: none;">
-												<ol class="list-group" style="font-family: robotok;">
-													<li class="list-group-item">Fulado de Tal</li>
-													<li class="list-group-item">Ciclano de Tal</li>
-													<li class="list-group-item">Beltrano de Tal</li>
-												</ol>
-											</div>
-											<li class="list-group-item">16/10 - Equipe Azul <a href="#" onclick="participantes('equipe-2')"><i class="fas fa-plus-circle"></i></a></li>
-											<div id="equipe-2" style="display: none;">
-												<ol class="list-group" style="font-family: robotok;">
-													<li class="list-group-item">Fulado de Tal 2</li>
-													<li class="list-group-item">Ciclano de Tal 2</li>
-													<li class="list-group-item">Beltrano de Tal 2</li>
-												</ol>
-											</div>
-											<li class="list-group-item">02/09 - Equipe Amarela <a href="#" onclick="participantes('equipe-3')"><i class="fas fa-plus-circle"></i></a></li>
-											<div id="equipe-3" style="display: none;">
-												<ol class="list-group" style="font-family: robotok;">
-													<li class="list-group-item">Fulado de Tal 3</li>
-													<li class="list-group-item">Ciclano de Tal 3</li>
-													<li class="list-group-item">Beltrano de Tal 3</li>
-												</ol>
-											</div>
-										</ul>
+										<?php
+											$count = 0;
+											echo '<ul class="list-group list-group-flush">';
+											for($i = 0; $i < count($jogos); $i++){
+												if($jogos[$i]->getId() == '2'){
+													$count += 1;
+													$resultado = explode('-', $jogos[$i]->getResultado());
+													if($count == 1){
+														echo '<li class="list-group-item list-group-item-info">' . $jogos[$i]->getData() . ' - ' . $resultado[0] . ' <a href="#" onclick="participantes(\'equipe-' . $count . '\')"><i class="fas fa-plus-circle"></i></a></li>';
+														echo '<div id="equipe-' . $count . '" style="display: none;">
+																<ol class="list-group" style="font-family: robotok;">';
+
+														for($j=1; $j<count($resultado); $j++){
+															echo '<li class="list-group-item">' . $resultado[$j] . '</li>';
+														}
+
+														echo '</ol>
+																</div>';
+																
+													} else {
+														echo '<li class="list-group-item">' . $jogos[$i]->getData() . ' - ' . $resultado[0] . ' <a href="#" onclick="participantes("equipe-' . $count . '")"><i class="fas fa-plus-circle"></i></a></li>';
+														echo '<div id="equipe-' . $count . '" style="display: none;">
+																<ol class="list-group" style="font-family: robotok;">';
+
+														for($j=1; $j<count($resultado); $j++){
+															echo '<li class="list-group-item">' . $resultado[$j] . '</li>';
+														}
+
+														echo '</ol>
+																</div>';
+													}
+												}
+											}
+											echo '</ul>';
+										?>
 									</div>
 								</div>
 							</div>
@@ -248,11 +284,21 @@
 										<button type="button" class="close" data-dismiss="modal">&times</button>
 									</div>
 									<div class="modal-body">
-										<ul class="list-group list-group-flush">
-											<li class="list-group-item list-group-item-info">23/10 - Fulano de Tal</li>
-											<li class="list-group-item">09/10 - Ciclano de Tal</li>
-											<li class="list-group-item">25/09 - Beltrano de Tal</li>
-										</ul>
+										<?php
+											echo '<ul class="list-group list-group-flush">';
+											$count = 0;
+											for($i = 0; $i < count($jogos); $i++){
+												if($jogos[$i]->getId() == '3'){
+													$count += 1;
+													if($count == 1){
+														echo '<li class="list-group-item list-group-item-info">' . $jogos[$i]->getData() . ' - ' . $jogos[$i]->getResultado() . '</li>';
+													} else {
+														echo '<li class="list-group-item">' . $jogos[$i]->getData() . ' - ' . $jogos[$i]->getResultado() . '</li>';
+													}
+												}
+											}
+											echo '</ul>';
+										?>
 									</div>
 									<div>
 										
@@ -265,7 +311,83 @@
 
 				<div class="row">
 					<div class="col-12 pt-3">
-						<a class="text-dark" href="#"><i class="far fa-plus-square text-danger"></i> Outras provas</a>
+						<a class="text-dark" href="#" data-target="#outras" data-toggle="modal"><i class="far fa-plus-square text-danger"></i> Outras provas</a>
+					</div>
+
+					<div id="outras" class="modal fade">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title"><strong>Últimos Resultados</strong></h4>
+									<button type="button" class="close" data-dismiss="modal">&times</button>
+								</div>
+								<div class="modal-body">
+									
+									<div class="btn-group mb-2">
+										<button class="btn btn-danger" type="button" onclick="outros_resultados('r')">Repescagem</button>
+										<button class="btn btn-danger" type="button" onclick="outros_resultados('s')">Semifinal </button>
+										<button class="btn btn-danger" type="button" onclick="outros_resultados('f')">Final</button>
+									</div>
+
+									<div id="r" style="display: block;">
+										<?php
+											echo '<ul class="list-group list-group-flush">';
+											$count = 0;
+											for($i = 0; $i < count($jogos); $i++){
+												if($jogos[$i]->getId() == '4'){
+													$count += 1;
+													if($count == 1){
+														echo '<li class="list-group-item list-group-item-info">' . $jogos[$i]->getData() . ' - ' . $jogos[$i]->getResultado() . '</li>';
+													} else {
+														echo '<li class="list-group-item">' . $jogos[$i]->getData() . ' - ' . $jogos[$i]->getResultado() . '</li>';
+													}
+												}
+											}
+											echo '</ul>';
+										?>
+									</div>
+
+									<div id="s" style="display: none;">
+										<?php
+											echo '<ul class="list-group list-group-flush">';
+											$count = 0;
+											for($i = 0; $i < count($jogos); $i++){
+												if($jogos[$i]->getId() == '5'){
+													$count += 1;
+													if($count == 1){
+														echo '<li class="list-group-item list-group-item-info">' . $jogos[$i]->getData() . ' - ' . $jogos[$i]->getResultado() . '</li>';
+													} else {
+														echo '<li class="list-group-item">' . $jogos[$i]->getData() . ' - ' . $jogos[$i]->getResultado() . '</li>';
+													}
+												}
+											}
+											echo '</ul>';
+										?>
+									</div>
+
+									<div id="f" style="display: none;">
+										<?php
+											echo '<ul class="list-group list-group-flush">';
+											$count = 0;
+											for($i = 0; $i < count($jogos); $i++){
+												if($jogos[$i]->getId() == '6'){
+													$count += 1;
+													if($count == 1){
+														echo '<li class="list-group-item list-group-item-info">' . $jogos[$i]->getData() . ' - ' . $jogos[$i]->getResultado() . '</li>';
+													} else {
+														echo '<li class="list-group-item">' . $jogos[$i]->getData() . ' - ' . $jogos[$i]->getResultado() . '</li>';
+													}
+												}
+											}
+											echo '</ul>';
+										?>
+									</div>
+								</div>
+								<div>
+									
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>	
@@ -277,268 +399,75 @@
 			<div class="container">
 				<h2 class="my-3">Resultados dos Bolões</h2>
 				<hr>
-				<div class="container">
-					<div class="row">
-						<div class="col-7"></div>
-						<div class="col-4 ml-2">
-							<input class="filterBolao" type="text" placeholder="Buscar Bolão por Nome..." id="filterR" name="filterR">
-						</div>
-						<div class="col-1"></div>
-					</div>
-				</div>
-				<div id="carousel-boloes-resultado" class="carousel slide" data-ride="carousel">
-				    <div class="row">		
-				    	<div class="col-1">		    		
-							<a class="carousel-control-prev" href="#carousel-boloes-resultado" data-slide="prev"><i class="fas fa-chevron-left" style="color: #A9A9A9; font-size: 2.5em;"></i></a>
-						</div>
-						<div class="col-10">
-							<div class="carousel-inner">
-								<div class="carousel-item active">
-						    		<div class="row">
-						    			<div class="col-4">
-						    				<div class="card">
-						    					<div class="card-header bg-dark">
-						    						<div class="row">
-						    							<div class="col-2">
-						    								<i class="fas fa-users py-2 text-white"></i>
-						    							</div>
-						    							<div class="col-10">		    						
-							    							<h3 class="titulo text-white">Titulo do Bolão</h3>
-							    						</div>
-						    						</div>	
-						    					</div>
-						    					<div class="card-body text-center" style="background-color: #F5F5F5">
-						    						<i class="fas fa-trophy" style="color:#FFD700"></i>
-						    						<h6><strong>Ganhadores</strong></h6>
-						    						<p>Fulado | Ciclano | Beltrano</p>
-
-						    						<h6><strong>Prêmio</strong></h6>
-						    						<p>R$ 1000,00</p>
-
-						    						<h6><strong>Descrição</strong></h6>
-						    						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet purus eget volutpat ultricies. Aliquam vitae nibh in nisi semper aliquet.</p>
-						    					</div>
-						    				</div>				    				
-						    			</div>				    			
-						    			<div class="col-4">
-						    				<div class="card">
-						    					<div class="card-header bg-dark">
-						    						<div class="row">
-						    							<div class="col-2">
-						    								<i class="fas fa-users py-2 text-white"></i>
-						    							</div>
-						    							<div class="col-10">		    						
-							    							<h3 class="titulo text-white">Titulo do Bolão</h3>
-							    						</div>
-						    						</div>	
-						    					</div>
-						    					<div class="card-body text-center" style="background-color: #F5F5F5">
-						    						<i class="fas fa-trophy" style="color:#FFD700"></i>
-						    						<h6><strong>Ganhadores</strong></h6>
-						    						<p>Fulado | Ciclano | Beltrano</p>
-
-						    						<h6><strong>Prêmio</strong></h6>
-						    						<p>R$ 1000,00</p>
-
-						    						<h6><strong>Descrição</strong></h6>
-						    						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet purus eget volutpat ultricies. Aliquam vitae nibh in nisi semper aliquet.</p>
-						    					</div>
-						    				</div>				    						
-						    			</div>
-						    			<div class="col-4">
-						    				<div class="card">
-						    					<div class="card-header bg-dark">
-						    						<div class="row">
-						    							<div class="col-2">
-						    								<i class="fas fa-users py-2 text-white"></i>
-						    							</div>
-						    							<div class="col-10">		    						
-							    							<h3 class="titulo text-white">Titulo do Bolão</h3>
-							    						</div>
-						    						</div>	
-						    					</div>
-						    					<div class="card-body text-center" style="background-color: #F5F5F5">
-						    						<i class="fas fa-trophy" style="color:#FFD700"></i>
-						    						<h6><strong>Ganhadores</strong></h6>
-						    						<p>Fulado | Ciclano | Beltrano</p>
-
-						    						<h6><strong>Prêmio</strong></h6>
-						    						<p>R$ 1000,00</p>
-
-						    						<h6><strong>Descrição</strong></h6>
-						    						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet purus eget volutpat ultricies. Aliquam vitae nibh in nisi semper aliquet.</p>
-						    					</div>
-						    				</div>					    						
-						    			</div>
-						    		</div>
-						    	</div>
-
-						    	<div class="carousel-item">
-						    		<div class="row">
-						    			<div class="col-4">
-						    				<div class="card">
-						    					<div class="card-header bg-dark">
-						    						<div class="row">
-						    							<div class="col-2">
-						    								<i class="fas fa-users py-2 text-white"></i>
-						    							</div>
-						    							<div class="col-10">		    						
-							    							<h3 class="titulo text-white">Titulo do Bolão</h3>
-							    						</div>
-						    						</div>	
-						    					</div>
-						    					<div class="card-body text-center" style="background-color: #F5F5F5">
-						    						<i class="fas fa-trophy" style="color:#FFD700"></i>
-						    						<h6><strong>Ganhadores</strong></h6>
-						    						<p>Fulado | Ciclano | Beltrano</p>
-
-						    						<h6><strong>Prêmio</strong></h6>
-						    						<p>R$ 1000,00</p>
-
-						    						<h6><strong>Descrição</strong></h6>
-						    						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet purus eget volutpat ultricies. Aliquam vitae nibh in nisi semper aliquet.</p>
-						    					</div>
-						    				</div>					    				
-						    			</div>				    			
-						    			<div class="col-4">
-						    				<div class="card">
-						    					<div class="card-header bg-dark">
-						    						<div class="row">
-						    							<div class="col-2">
-						    								<i class="fas fa-users py-2 text-white"></i>
-						    							</div>
-						    							<div class="col-10">		    						
-							    							<h3 class="titulo text-white">Titulo do Bolão</h3>
-							    						</div>
-						    						</div>	
-						    					</div>
-						    					<div class="card-body text-center" style="background-color: #F5F5F5">
-						    						<i class="fas fa-trophy" style="color:#FFD700"></i>
-						    						<h6><strong>Ganhadores</strong></h6>
-						    						<p>Fulado | Ciclano | Beltrano</p>
-
-						    						<h6><strong>Prêmio</strong></h6>
-						    						<p>R$ 1000,00</p>
-
-						    						<h6><strong>Descrição</strong></h6>
-						    						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet purus eget volutpat ultricies. Aliquam vitae nibh in nisi semper aliquet.</p>
-						    					</div>
-						    				</div>					    						
-						    			</div>
-						    			<div class="col-4">
-						    				<div class="card">
-						    					<div class="card-header bg-dark">
-						    						<div class="row">
-						    							<div class="col-2">
-						    								<i class="fas fa-users py-2 text-white"></i>
-						    							</div>
-						    							<div class="col-10">		    						
-							    							<h3 class="titulo text-white">Titulo do Bolão</h3>
-							    						</div>
-						    						</div>	
-						    					</div>
-						    					<div class="card-body text-center" style="background-color: #F5F5F5">
-						    						<i class="fas fa-trophy" style="color:#FFD700"></i>
-						    						<h6><strong>Ganhadores</strong></h6>
-						    						<p>Fulado | Ciclano | Beltrano</p>
-
-						    						<h6><strong>Prêmio</strong></h6>
-						    						<p>R$ 1000,00</p>
-
-						    						<h6><strong>Descrição</strong></h6>
-						    						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet purus eget volutpat ultricies. Aliquam vitae nibh in nisi semper aliquet.</p>
-						    					</div>
-						    				</div>					    						
-						    			</div>
-						    		</div>
-						    	</div>
-
-						    	<div class="carousel-item">
-						    		<div class="row">
-						    			<div class="col-4">
-						    				<div class="card">
-						    					<div class="card-header bg-dark">
-						    						<div class="row">
-						    							<div class="col-2">
-						    								<i class="fas fa-users py-2 text-white"></i>
-						    							</div>
-						    							<div class="col-10">		    						
-							    							<h3 class="titulo text-white">Titulo do Bolão</h3>
-							    						</div>
-						    						</div>	
-						    					</div>
-						    					<div class="card-body text-center" style="background-color: #F5F5F5">
-						    						<i class="fas fa-trophy" style="color:#FFD700"></i>
-						    						<h6><strong>Ganhadores</strong></h6>
-						    						<p>Fulado | Ciclano | Beltrano</p>
-
-						    						<h6><strong>Prêmio</strong></h6>
-						    						<p>R$ 1000,00</p>
-
-						    						<h6><strong>Descrição</strong></h6>
-						    						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet purus eget volutpat ultricies. Aliquam vitae nibh in nisi semper aliquet.</p>
-						    					</div>
-						    				</div>					    				
-						    			</div>				    			
-						    			<div class="col-4">
-						    				<div class="card">
-						    					<div class="card-header bg-dark">
-						    						<div class="row">
-						    							<div class="col-2">
-						    								<i class="fas fa-users py-2 text-white"></i>
-						    							</div>
-						    							<div class="col-10">		    						
-							    							<h3 class="titulo text-white">Titulo do Bolão</h3>
-							    						</div>
-						    						</div>	
-						    					</div>
-						    					<div class="card-body text-center" style="background-color: #F5F5F5">
-						    						<i class="fas fa-trophy" style="color:#FFD700"></i>
-						    						<h6><strong>Ganhadores</strong></h6>
-						    						<p>Fulado | Ciclano | Beltrano</p>
-
-						    						<h6><strong>Prêmio</strong></h6>
-						    						<p>R$ 1000,00</p>
-
-						    						<h6><strong>Descrição</strong></h6>
-						    						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet purus eget volutpat ultricies. Aliquam vitae nibh in nisi semper aliquet.</p>
-						    					</div>
-						    				</div>					    						
-						    			</div>
-						    			<div class="col-4">
-						    				<div class="card">
-						    					<div class="card-header bg-dark">
-						    						<div class="row">
-						    							<div class="col-2">
-						    								<i class="fas fa-users py-2 text-white"></i>
-						    							</div>
-						    							<div class="col-10">		    						
-							    							<h3 class="titulo text-white">Titulo do Bolão</h3>
-							    						</div>
-						    						</div>	
-						    					</div>
-						    					<div class="card-body text-center" style="background-color: #F5F5F5">
-						    						<i class="fas fa-trophy" style="color:#FFD700"></i>
-						    						<h6><strong>Ganhadores</strong></h6>
-						    						<p>Fulado | Ciclano | Beltrano</p>
-
-						    						<h6><strong>Prêmio</strong></h6>
-						    						<p>R$ 1000,00</p>
-
-						    						<h6><strong>Descrição</strong></h6>
-						    						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet purus eget volutpat ultricies. Aliquam vitae nibh in nisi semper aliquet.</p>
-						    					</div>
-						    				</div>					    						
-						    			</div>
-						    		</div>
-						    	</div>		    		
+				<?php
+					if(count($boloesEncerrados) > 0){
+						echo'<div class="container">
+							<div class="row">
+								<div class="col-7"></div>
+								<div class="col-4 ml-2">
+									<input class="filterBolao" type="text" placeholder="Buscar Bolão por Nome..." id="filterR" name="filterR">
+								</div>
+								<div class="col-1"></div>
 							</div>
 						</div>
-						<div class="col-1">
-							<a class="carousel-control-next" href="#carousel-boloes-resultado" data-slide="next"><i class="fas fa-chevron-right" style="color: #A9A9A9; font-size: 2.5em;"></i></a>	
+						<div id="carousel-boloes-resultado" class="carousel slide" data-ride="carousel">
+						    <div class="row">		
+						    	<div class="col-1">		    		
+									<a class="carousel-control-prev" href="#carousel-boloes-resultado" data-slide="prev"><i class="fas fa-chevron-left" style="color: #A9A9A9; font-size: 2.5em;"></i></a>
+								</div>
+								<div class="col-10">
+									<div class="carousel-inner">';
+
+								for($i=0; $i < count($boloesEncerrados); $i++){
+
+									echo '<div class="carousel-item active">
+						    		<div class="row">';
+
+						    		for($j=$i; $j < $i+3; $j++){
+						    			if(count($boloesEncerrados) > 0){
+							    			echo '<div class="col-4">
+							    				<div class="card">
+							    					<div class="card-header bg-dark">
+							    						<div class="row">';
+							    						if($boloesEncerrados[$j]->getTipo == '0'){
+							    							echo '<div class="col-2">
+							    								<i class="fas fa-users py-2 text-white"></i>
+							    							</div>';
+							    						}
+							    						echo '<div class="col-10">		    						
+								    							<h3 class="titulo text-white">' . $boloesEncerrados[$j]->getTitulo() . '</h3>
+								    						</div>
+							    						</div>	
+							    					</div>
+							    					<div class="card-body text-center" style="background-color: #F5F5F5">
+							    						<i class="fas fa-trophy" style="color:#FFD700"></i>
+							    						<h6><strong>Ganhadores</strong></h6>
+							    						<p>Fulado | Ciclano | Beltrano</p>
+
+							    						<h6><strong>Prêmio</strong></h6>
+							    						<p>R$ 1000,00</p>
+
+							    						<h6><strong>Descrição</strong></h6>
+							    						<p>' . $boloesEncerrados[$j]->getDescricao() . '</p>
+							    					</div>
+							    				</div>				    				
+							    			</div>';
+						    			}
+						    		}
+						    		echo'	    			
+						    		</div>
+						    	</div>';
+
+						    	}
+						    echo '
+							</div>
 						</div>
 					</div>
-				</div>
+				</div>';	
+					} else {
+						echo '<h3 class="text-center">Não há bolões disponíveis</h3>';
+					}
+				?>					
 			</div>	
 		</section>
 
@@ -614,12 +543,12 @@
 						<div class="modal-content">
 							<div class="modal-header text-center justify-content-center">
 								<div class="col-2"></div>
-								<h4 class="modal-title col-8"><stronger>' . $boloes[$i]->getTitulo() . '</stronger></h4>
+								<h4 class="modal-title col-8 titulo"><stronger>' . $boloes[$i]->getTitulo() . '</stronger></h4>
 								<button class="close col-2" data-dismiss="modal">&times</button>
 							</div>
 							<div class="modal-body p-4" style="background-color: #F8F8FF; height: 30em; overflow-y: auto;">
 								<div>
-									<h5><stronger>Criador</stronger></h5>
+									<h5 class="titulo"><stronger>Criador</stronger></h5>
 									<p><a href="#">@';
 									
 								for($j=0; $j<count($usuarios); $j++){
@@ -632,11 +561,11 @@
 								echo '</a></p>
 								</div>
 								<div>
-									<h5><stronger>Descrição</stronger></h5>
+									<h5 class="titulo"><stronger>Descrição</stronger></h5>
 									<p align="justify">' . $boloes[$i]->getDescricao() . '</p>
 								</div>
 								<div>
-									<h5><stronger>Tipos de Jogo</stronger></h5>
+									<h5 class="titulo"><stronger>Tipos de Jogo</stronger></h5>
 									<ul>';
 
 									$tipoJogo = $boloes[$i]->getTipoJogo();
@@ -679,7 +608,7 @@
 									echo '</ul>
 								</div>
 								<div>
-									<h5><stronger>Tipo de Apostas</stronger></h5>
+									<h5 class="titulo"><stronger>Tipo de Apostas</stronger></h5>
 									<p>';
 
 									if($boloes[$i]->getTipoAposta() == 'ganhar'){
@@ -694,22 +623,22 @@
 
 								echo '</p></div>
 								<div>
-									<h5><stronger>Escolhas de Aposta</stronger></h5>
+									<h5 class="titulo"><stronger>Escolhas de Aposta</stronger></h5>
 									<ul>';
 									$opcoesAposta = $boloes[$i]->getOpcoesAposta();
-									for($j = 0; $j < count($opcoesAposta); $j++){
+									for($j = 0; $j < count($opcoesAposta)-1; $j++){
 										echo '<li><p>' . $opcoesAposta[$j] . '</p></li>';
 									}
 								
 									echo '</ul>
 								</div>
 								<div>
-									<h5><stronger>Número de Participantes</stronger></h5>
+									<h5 class="titulo"><stronger>Número de Participantes</stronger></h5>
 									<p>' . count($boloes[$i]->getParticipantes()) . '/' . $boloes[$i]->getLimiteDeParticipantes() . '</p>
 								</div>
 								<div>
-									<h5><stronger>Data de Término</stronger></h5>
-									<p>' . $boloes[$i]->getTempoLimite() . '| 20h00' . '</p>
+									<h5 class="titulo"><stronger>Data de Término</stronger></h5>
+									<p>' . $boloes[$i]->getTempoLimite() . ' | 20h00' . '</p>
 								</div>
 							</div>
 							<div class="modal-footer">
@@ -859,6 +788,20 @@
 	        	div.style.opacity = "0";
 	        	setTimeout(function(){ div.style.display = "none"; }, 600);
 	    	}*/
+
+	    	function outros_resultados(modalidade){
+	    		document.getElementById(modalidade).style.display = 'block';
+	    		if(modalidade == 'r'){
+	    			document.getElementById('s').style.display = 'none';
+	    			document.getElementById('f').style.display = 'none';
+	    		} else if(modalidade == 's'){
+	    			document.getElementById('r').style.display = 'none';
+	    			document.getElementById('f').style.display = 'none';
+	    		} else {
+	    			document.getElementById('s').style.display = 'none';
+	    			document.getElementById('r').style.display = 'none';
+	    		}
+	    	}
 	    
 		</script>
 
