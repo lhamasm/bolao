@@ -35,7 +35,15 @@ header {
 	color: white;
 }
 
-select {
+#ingredientes {
+	height: 5em;
+	width: 15em;
+	overflow-y: auto;
+	overflow-x: auto;
+	background-color: #eee; 
+}
+
+select, #dataProva {
 	border-radius: 8px;
 	border-color: #4c9593;
 	color: #4c9593;
