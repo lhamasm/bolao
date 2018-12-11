@@ -132,21 +132,21 @@
 
 					$arquivo = fopen('../bd/usuarios.txt', 'w+');
 					for($j=0; $j<count($usuarios); $j++){
-						$alteracao = $usuarios[$j]->getTipo() . ';' . $usuarios[$j]->getNome() . ';' . $usuarios[$j]->getUsername() . ';' . $usuarios[$j]->getEmail() . ';' . $usuarios[$j]->getSenha() . ';' . $usuarios[$j]->getDataNascimento() . ';' . $usuarios[$j]->getGenero() . ';' . $usuarios[$j]->getRg() . ';' . $usuarios[$j]->getCpf() . ';' . $usuarios[$j]->getTelefone() . ';' . $usuarios[$j]->getCelular() . ';' . $usuarios[$j]->getBanco() . ';' . $usuarios[$j]->getAgencia() . ';' . $usuarios[$j]->getConta();
+						$alteracao = $usuarios[$j]->getTipo() . ';' . $usuarios[$j]->getNome() . ';' . $usuarios[$j]->getUsername() . ';' . $usuarios[$j]->getEmail() . ';' . $usuarios[$j]->getSenha() . ';' . $usuarios[$j]->getDataNascimento() . ';' . $usuarios[$j]->getGenero() . ';' . $usuarios[$j]->getRg() . ';' . $usuarios[$j]->getCpf() . ';' . $usuarios[$j]->getTelefone() . ';' . $usuarios[$j]->getCelular() . ';' . $usuarios[$j]->getBanco() . ';' . $usuarios[$j]->getAgencia() . ';' . $usuarios[$j]->getConta() . PHP_EOL;
 						fwrite($arquivo, $alteracao);
 					}
 					fclose($arquivo);
-					echo 'Alteração realizada com sucesso!';
+					$_SESSION['status'] = 1;
 					header('Location: ../minha-conta.php');
 					exit();
 				}
 			} 
 
-			echo 'Erro';
+			$_SESSION['status'] = 0;
 			header('Location: ../minha-conta.php');
 			exit();
 		} else {
-			echo 'Senha incorreta';
+			$_SESSION['status'] = 2;
 			header('Location: ../minha-conta.php');
 			exit();
 		}

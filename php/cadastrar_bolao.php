@@ -24,7 +24,7 @@
 		$boloes = $sistema->getBoloes();
 
 		$id = count($boloes) + 1;
-		$campeonato = $_REQUEST['campeonato'];
+		$campeonato = $_SESSION['modalidade'];
 		
 		if($_REQUEST['tipo-bolao'] == 'publico'){
 			$tipo = 0;
@@ -105,15 +105,16 @@
 			}
 		}
 
-		$cadastro = $cadastro . ';' . $senha . ';;0;' . $dataTermino . ';\n';
+		$cadastro = $cadastro . ';' . $senha . ';;0;' . $dataTermino . PHP_EOL;
 
 		$bolao = new Bolao($id, $_SESSION['login'], $tipo, $campeonato, $nome, $descricao, $participantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha, 0);
 		$bolao->setTempoLimite($dataTermino);
 
 		for($i = 0; $i < count($boloes); $i++){
 			if($boloes[$i]->getCriador() == $_SESSION['login'] && $boloes[$i]->getTitulo() == $nome && $boloes[$i]->getCampeonato() == $campeonato){
+				$_SESSION['status'] = 2;
 				header('Location: ../cadastro-bolao.php');
-		  		echo 'Já existe um bolão com o mesmo nome, administrador e campeonato';
+		  		//echo 'Já existe um bolão com o mesmo nome, administrador e campeonato';
 				exit();	
 			}
 		}
@@ -130,8 +131,9 @@
 		$sistema->setBoloes($bolao);
 		$_SESSION['sistema'] = $sistema;
 
-		echo "Bolão cadastrado com sucesso!";
-		header('Location: ../index-pagina-pessoal.php');
+		$_SESSION['status'] = 3;
+		//echo "Bolão cadastrado com sucesso!";
+		header('Location: ../convidar-amigos.php');
 		exit();
 	}
 

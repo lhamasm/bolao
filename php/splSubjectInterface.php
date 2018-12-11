@@ -1,5 +1,7 @@
 <?php
 
+	require_once 'splObserverInterface.php';
+
 	interface SplSubject {
 
 		public function attach(SplObserver $observer);

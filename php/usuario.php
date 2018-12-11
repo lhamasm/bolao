@@ -6,7 +6,7 @@
 	require_once 'observer.php';
 	require_once 'subject.php';
 	
-	class Usuario extends Observer {
+	class Usuario {
 		protected $tipo; //apostador ou adm
 		protected $nome;
 		protected $username;
@@ -162,9 +162,9 @@
 			$this->conta = $conta;
 		}
 
-		/*function setMensagem($mensagem){
+		function setMensagem($mensagem){
 			array_push($this->mensagens , $mensagem);
-		}*/
+		}
 
 		# Métodos
 		function criarBolao($criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha){

@@ -45,8 +45,14 @@
 		$genero = $_REQUEST['genero'];
 		$rg = p_respostas($_REQUEST['rg']);
 		$cpf = p_respostas($_REQUEST['cpf']);
-		$telefone = p_respostas($_REQUEST['telefone']);
-		$celular = p_respostas($_REQUEST['celular']);
+
+		if(isset($_REQUEST['telefone'])){
+			$telefone = p_respostas($_REQUEST['telefone']);
+		}
+
+		if(isset($_REQUEST['celular'])){
+			$celular = p_respostas($_REQUEST['celular']);
+		}
 
 		if(confirmation($email, $confirmarEmail)){
 			if(confirmation($senha, $confirmarSenha)){
@@ -57,13 +63,13 @@
 				//$apostador = new Apostador($_SESSION['numero_usuarios']+1, 0);
 				//$apostador = $usuario;	
 
-				$cadastro = $tipo . ';' . $nome . ';' . $username . ';' . $email . ';' . $senha . ';' . $dataNascimento . ';' . $genero . ';' . $rg . ';' . $cpf . ';' . $telefone . ';' . $celular . ';' . $banco . ';' . $agencia . ';' . $conta . ';\n';
+				$cadastro = $tipo . ';' . $nome . ';' . $username . ';' . $email . ';' . $senha . ';' . $dataNascimento . ';' . $genero . ';' . $rg . ';' . $cpf . ';' . $telefone . ';' . $celular . ';' . $banco . ';' . $agencia . ';' . $conta . ';'. count($usuarios) . ';0' . PHP_EOL;
 
 				for($i = 0; $i < count($usuarios); $i++){
 					if($usuarios[$i]->getCpf() == $cpf){
-						header('Location: ../cadastro.html');
-				  		echo 'Já existe um usuário cadastrado com esse CPF';
- 						exit;	
+						$_SESSION['status'] = 2;
+						header('Location: ../cadastro.php');
+ 						exit();	
 					}
 				}
 
@@ -75,14 +81,18 @@
 				$_SESSION['sistema'] = $sistema;
 				$_SESSION['numero_usuarios'] = $_SESSION['numero_usuarios'] + 1;
 
-				echo "Cadastro realizado com sucesso!";
+				$_SESSION['status'] = 1;
 				header('Location: ../login.php');
 				exit();
 			} else {
-				echo 'Senha errada';	
+				$_SESSION['status'] = 3;	
+				header('Location: ../cadastro.php');
+ 				exit();	
 			}
 		} else {
-			echo 'Email errado';
+			$_SESSION['status'] = 4;
+			header('Location: ../cadastro.php');
+ 			exit();	
 		}
 	}
 

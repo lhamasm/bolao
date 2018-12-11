@@ -9,37 +9,41 @@
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$cpf = p_respostas($_REQUEST['cpf']);
 		$email = p_respostas($_REQUEST['email']);
-		$ddn = p_respostas($_REQUEST['ddn']);
 
-		$arquivo = fopen('cadastros_usuarios.txt', 'r');
-		while(!feof($aquivo)){
+		$arquivo = fopen('../bd/usuarios.txt', 'r');
+		while(!feof($arquivo)){
 			$usuario = fgets($arquivo);
 
 			$dados = explode(";", $usuario);
 
-			if($cpf == $_SESSION['login'] && $dados[0] == $cpf){
-				if($email == $_SESSION['email'] && $dados[3] == $email){
-					if($ddn == $_SESSION['ddn'] && $dados[6] == '16/03/1996'){
-						exit;
-					} else {
-						header('Location: ../esqueci-senha.html');
-					  	echo 'Data de Nascimento incorreta';
-						exit;
-					}
+			if($dados[8] == $cpf){
+				if($dados[3] == $email){
+					fclose($arquivo);
+					$_SESSION['login'] = $cpf;
+					$_SESSION['email'] = $email;
+					$_SESSION['status'] = -1;
+					header('Location: ../esqueci-senha-2.php');
+					exit();
 				} else {
-					header('Location: ../esqueci-senha.html');
-				  	echo 'E-mail incorreto';
-					exit;
+					fclose($arquivo);
+					$_SESSION['status'] = 1;
+					header('Location: ../esqueci-senha.php');
+					exit();
 				}
 			} else {
-				header('Location: ../esqueci-senha.html');
-			  	echo 'CPF incorreto';
+				fclose($arquivo);
+				$_SESSION['status'] = 2;
+				echo $cpf;
+				echo $dados[8];
+				header('Location: ../esqueci-senha.php');
 				exit;
 			}
 		}
 
-		header('Location: ../esqueci-senha.html');
-	  	echo 'Usuário não cadastrado no sistema';
+		fclose($arquivo);
+
+		$_SESSION['status'] = 3;
+		header('Location: ../esqueci-senha.php');
 		exit;
 	}
 

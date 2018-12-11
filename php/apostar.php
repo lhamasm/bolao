@@ -18,36 +18,47 @@
 		$boloes = $sistema->getBoloes();
 		$usuarios = $sistema->getUsuarios();
 
-		if ($boloes[intval($_SESSION['bolao'])]->getLimiteDeParticipantes() > count($boloes[intval($_SESSION['bolao'])]->getParticipantes())) {
-			$aposta = new Aposta($_SESSION['login'], $_SESSION['bolao'], $valor, $opcaoAposta);
+		if((isset($_REQUEST['senha-bolao']) && $_REQUEST['senha-bolao'] == $boloes[intval($_REQUEST['bolao-id'])]->getSenha()) || !isset($_REQUEST['senha-bolao'])){
+			if ($boloes[intval($_REQUEST['bolao-id'])]->getLimiteDeParticipantes() > count($boloes[intval($_REQUEST['bolao-id'])]->getParticipantes())) {
+				$aposta = new Aposta($_SESSION['login'], intval($_REQUEST['bolao-id']), $valor, $opcaoAposta);
 
-			$p = $boloes[intval($_SESSION['bolao'])]->getParticipantes();
-			for ($i=0; $i < count($p); $i++) { 
-				if ($p[$i] == $_SESSION['login']) {
-					for($j=0; $j < count($usuarios); $j++){
-						if($usuarios[$j]->getCpf() == $p[$i]){
-							$usuarios[$i]->setApostas($aposta);
-							break;
+				$p = $boloes[intval($_REQUEST['bolao-id'])]->getParticipantes();
+				for ($i=0; $i < count($p); $i++) { 
+					if ($p[$i] == $_SESSION['login']) {
+						for($j=0; $j < count($usuarios); $j++){
+							if($usuarios[$j]->getCpf() == $p[$i]){
+								$usuarios[$i]->setApostas($aposta);
+								break;
+							}
 						}
+						break;
 					}
-					break;
 				}
+
+				if ($i ==  count($boloes[intval($_REQUEST['bolao-id'])]->getParticipantes())) {
+					$boloes[intval($_REQUEST['bolao-id'])]->setParticipantes($_SESSION['login']);
+				}
+				
+				$boloes[intval($_REQUEST['bolao-id'])]->setApostas($aposta);
+				$boloes[intval($_REQUEST['bolao-id'])]->setDinheiros(doubleval($valor));
+
+				$s = new Sistema($usuarios, $sistema->getJogos(), $boloes, $sistema->getBugs());
+
+				$_SESSION['sistema'] = $s;
+
+
 			}
-
-			if ($i ==  count($boloes[intval($_SESSION['bolao'])]->getParticipantes())) {
-				$boloes[intval($_SESSION['bolao'])]->setParticipantes($_SESSION['login']);
+			else {
+				$_SESSION['status'] = 2;
+				exit();
+				header('Location: ../index-pagina-pessoal.php');
+				//echo 'Limite de Participantes atingido';
 			}
-			
-			$boloes[intval($_SESSION['bolao'])]->setApostas($aposta);
-			$boloes[intval($_SESSION['bolao'])]->setDinheiros(doubleval($valor));
-
-			$s = new Sistema($usuarios, $sistema->getJogos(), $boloes, $sistema->getBugs());
-
-			$_SESSION['sistema'] = $s;
-
-		}
-		else {
-			echo 'Limite de Participantes atingido';
+		} else {
+			$_SESSION['status'] = 1;
+			header('Location: ../index-pagina-pessoal.php');
+			exit();
+			//senha incorreta
 		}
 
 		//$aposta = new Aposta($_SESSION['login'], $_SESSION['bolao'], $valor, $opcaoAposta);
@@ -62,7 +73,7 @@
 
 				$participantes = $boloes[$i]->getParticipantes();
 				for($j = 0; $j < count($participantes); $j++){
-					$bolao = $bolao . $participantes[$j] . '-';
+					$bolao = $bolao . $participantes[$j] . '~';
 				}
 
 				$bolao = $bolao . ';';
@@ -88,21 +99,26 @@
 
 				$ganhadores = $boloes[$i]->determinarVencedor($sistema->getJogos(), $usuarios);
 				for($j = 0; $j < count($ganhadores); $j++){
-					$bolao = $bolao . $ganhadores[$j] . '-';
+					$bolao = $bolao . $ganhadores[$j] . '~';
 				}
 
 				$bolao = $bolao . ';' . $boloes[$i]->getDinheiros() . ';' . $boloes[$i]->getTempoLimite() . ';';
 
 				$apostas = $boloes[$i]->getApostas();
 				for($j = 0; $j < count($apostas); $j++){
-					$bolao = $bolao . $apostas[$j]->getUsuario() . ':' . $apostas[$j]->getValor() . ':' .$apostas[$j]->getOpcaoDeAposta() . '-';
+					$bolao = $bolao . $apostas[$j]->getUsuario() . ':' . $apostas[$j]->getValor() . ':' .$apostas[$j]->getOpcaoDeAposta() . '~';
 				}
 
-				$bolao = $bolao . ';\n'; 
+				if(count($apostas) == 0){
+					$bolao = $bolao . '~';
+				}
+
+				$bolao = $bolao . PHP_EOL; 
 				fwrite($arquivo, $bolao);
 			}
 
 			fclose($arquivo);
+			$_SESSION['status'] = 3;
 			header('Location: ../index-pagina-pessoal.php');
 			exit();
 		}

@@ -1,9 +1,8 @@
 <?php
 
-	use SplSubject;
-	use SplObserver;
+	//require_once 'splSubjectInterface.php';
 
-	abstract class Subject implements SplSubject {
+	class Subject implements SplSubject {
 
 		protected $linkedList = array();
 		protected $observers = array();
@@ -24,7 +23,7 @@
 
 		public function notify(){
 			foreach ($this->linkedList as $key => $value) {
-				$this->observer[$key]->update($this);
+				$this->observers[$key]->update($this);
 			}
 		}
 

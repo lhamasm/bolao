@@ -19,6 +19,7 @@
 		for($i = 0; $i < count($usuarios); $i++){
 			if(p_respostas($usuarios[$i]->getCpf()) == $login){
 				if($usuarios[$i]->getSenha() == $senha){
+					$_SESSION["tipo"] = $usuarios[$i]->getTipo();
 					$_SESSION["login"] = $login;
 			  		$_SESSION["nome"] = $usuarios[$i]->getNome();
 			  		$_SESSION["username"] = $usuarios[$i]->getUsername();
@@ -32,16 +33,30 @@
 			  		$_SESSION["agencia"] = $usuarios[$i]->getAgencia();
 			  		$_SESSION["conta"] = $usuarios[$i]->getConta();
 			  		$_SESSION["genero"] = $usuarios[$i]->getGenero(); 
+			  		$_SESSION["ranking"] = $usuarios[$i]->getPosicao();
+			  		$_SESSION["pontuacao"] = $usuarios[$i]->getPontuacao();
+
+			  		$mensagens = array();
+			  		if(file_exists('../bd/mensagens-' . $_SESSION['login'] . '.txt')){
+			  			$arquivo = fopen('../bd/mensagens-' . $_SESSION['login'] . '.txt', 'r+');
+			  			while(!feof($arquivo)){
+			  				$mensagem = fgets($arquivo);
+			  				array_push($mensagens, $mensagem);
+			  			}
+			  			fclose($arquivo);
+			  		}
+
+			  		$_SESSION['msg'] = $mensagens;
 
 			  		header('Location: ../pos-login.php');
-					 exit();
+					exit();
 				} 
 			} 
 		}
 
 		echo "Usuário não cadastrado no sistema";
 		header('Location: ../login.php');
-    exit();
+    	exit();
 	}
 
 ?>

@@ -107,10 +107,12 @@
 		$_SESSION['sistema'] = $sistema;
 
 		$arquivo = fopen('../bd/jogos.txt', 'w+');
-		for($i = 0; $i < count($jogos); $i++){
+		for($i = 0; $i < count($jogos)-1; $i++){
 			$cadastro = $jogos[$i]->getId() . ';' . $jogos[$i]->getResultado() . ';' . $jogos[$i]->getData() . PHP_EOL;
 			fwrite($arquivo, $cadastro);
 		}
+		$cadastro = $jogos[count($jogos)-1]->getId() . ';' . $jogos[count($jogos)-1]->getResultado() . ';' . $jogos[count($jogos)-1]->getData();
+			fwrite($arquivo, $cadastro);
 		fclose($arquivo);
 
 		echo 'Jogo cadastrado com sucesso';

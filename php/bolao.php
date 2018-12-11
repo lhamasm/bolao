@@ -7,9 +7,10 @@
 	require_once 'apostador.php';
 	require_once 'subject.php';
 	require_once 'observer.php';
+	require_once 'aposta.php';
 	
 
-	class Bolao extends subject {
+	class Bolao extends Subject {
 
 		protected $id;
 		protected $criador;
@@ -87,7 +88,7 @@
 			}
 
 			$this->attach($observer);
-			$this->setEvent("Bem-vindo ao Bolão" . $this->titulo());
+			$this->setEvent("Bem-vindo ao Bolão " . $this->getTitulo());
 		}
 
 		function setTipoJogo($tipoJogo){
@@ -120,6 +121,14 @@
 
 		function setApostas($aposta){
 			array_push($this->apostas, $aposta);
+			if($this->criador == $aposta->getUsuario()){
+				$observer = new Observer($this->criador, 10);
+			} else {
+				$observer = new Observer($this->criador, 0);
+			}
+
+			$this->attach($observer);
+			$this->setEvent("O usuário " . $aposta->getUsuario() . " realizou uma aposta de R$ " . $aposta->getValor() . " no bolão " . $this->titulo);
 		}
 
 		function getId(){

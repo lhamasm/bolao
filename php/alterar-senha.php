@@ -1,41 +1,51 @@
 <?php
 
+	require_once 'sistema.php';
+	require_once 'usuario.php';
+	require_once 'bolao.php';
+	require_once 'jogo.php';
+
+	session_start();
+	
 	$senha = '';
 	$confirmarSenha = '';
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+		$sistema = $_SESSION['sistema'];
+		$usuarios = $sistema->getUsuarios();
+
 		$senha = p_respostas($_REQUEST['pwd']);
 		$confirmarSenha = p_respostas($_REQUEST['pwd-2']);
 
-		$arquivo = fopen('cadastros_usuarios.txt', 'r');
-		while(!feof($aquivo)){
-			$usuario = fgets($arquivo);
-
-			$dados = explode(";", $usuario);
-
-			if($dados[0] == $_SESSION['login'] && $dados[3] == $_SESSION['email'] && $dados[6] == $_SESSION['ddn']){
+		for($i=0; $i<count($usuarios); $i++){
+			if($usuarios[$i]->getCpf() == $_SESSION['login'] && $usuarios[$i]->getEmail() == $_SESSION['email']){
 				if($senha == $confirmarSenha){
-					$dados[4] = $senha;
+					$usuarios[$i]->setSenha($senha);
+					
+					$s = new Sistema($usuarios, $sistema->getJogos(), $sistema->getBoloes(), $sistema->getBugs());
+					$_SESSION['sistema'] = $s;
 
-					$alteracao = '';
-					for($i = 0; $i < count($dados); $i++){
-						$alteracao += $dados[$i] . ';';
+					$arquivo = fopen('../bd/usuarios.txt', 'w+');
+					for($i=0; $i<count($usuarios); $i++){
+						$alteracao = $usuarios[$j]->getTipo() . ';' . $usuarios[$j]->getNome() . ';' . $usuarios[$j]->getUsername() . ';' . $usuarios[$j]->getEmail() . ';' . $usuarios[$j]->getSenha() . ';' . $usuarios[$j]->getDataNascimento() . ';' . $usuarios[$j]->getGenero() . ';' . $usuarios[$j]->getRg() . ';' . $usuarios[$j]->getCpf() . ';' . $usuarios[$j]->getTelefone() . ';' . $usuarios[$j]->getCelular() . ';' . $usuarios[$j]->getBanco() . ';' . $usuarios[$j]->getAgencia() . ';' . $usuarios[$j]->getConta() . PHP_EOL;
+							fwrite($arquivo, $alteracao);
 					}
 
-					fwrite($arquivo, $alteracao);
 					fclose($arquivo);
-					header('Location: ../esqueci-senha.php');
-					echo 'Senha alterada com sucesso!';
-					exit;
+					$_SESSION['status'] = 1;
+					header("Location: ../esqueci-senha-2.php");
+					exit();
 				} else {
-					header('Location: ../esqueci-senha.php');
-					echo 'Senha errada!';
-					exit;
+					$_SESSION['status'] = 2;
+					header("Location: ../esqueci-senha-2.php");
+					exit();
 				}
 			}
 		}
-
-		exit;
+		$_SESSION['status'] = 3;
+		header("Location: ../esqueci-senha-2.php");
+		exit();
 	}
 
 
