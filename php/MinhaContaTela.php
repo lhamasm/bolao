@@ -22,11 +22,10 @@
 
 		protected $posicao;
 		protected $pontuacao;
-		protected $nome;
 		protected $campeonato;
 
 
-		function CadastroTela($nome, $username, $email, $senha, $cmfsenha, $dataDeNascimento, $genero, $rg, $telefone, $celular, $banco, $agencia, $conta, $reportarBugs, $posicao, $pontuacao, $nome, $campeonato, $termosCondicoes){
+		function CadastroTela($nome, $username, $email, $senha, $cmfsenha, $dataDeNascimento, $genero, $rg, $telefone, $celular, $banco, $agencia, $conta, $reportarBugs, $posicao, $pontuacao, $campeonato, $termosCondicoes){
 			
 			$this->nome = $nome;
 			$this->username = $username;
@@ -44,7 +43,6 @@
 			$this->reportarBugs = $reportarBugs;
 			$this->posicao = $posicao;
 			$this->pontuacao = $pontuacao;
-			$this->nome = $nome;
 			$this->campeonato = $campeonato;
 			$this->termosCondicoes = $termosCondicoes;
 		}
@@ -175,14 +173,6 @@
 
 		function setPontuacao($pontuacao){
 			$this->pontuacao = $pontuacao;
-		}
-
-		function getNome(){
-			return $this->nome;
-		}
-
-		function setNome($nome){
-			$this->nome = $nome;
 		}
 
 		function getCampeonato(){

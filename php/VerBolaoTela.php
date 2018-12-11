@@ -11,9 +11,10 @@
 		protected $tipoaposta;
 		protected $escolhaaposta;
 		protected $noparticipantes;
+		protected $noparticipanteslimite;
 		protected $datatermino;
 		
-		function VerBolaoTela($titulobolao, $campeonato, $tipojogo, $tipo, $criador, $descricao, $tipoaposta, $escolhaaposta, $noparticipantes, $datatermino)
+		function VerBolaoTela($titulobolao, $campeonato, $tipojogo, $tipo, $criador, $descricao, $tipoaposta, $escolhaaposta, $noparticipantes,$criador, $descricao, $tipoaposta, $escolhaaposta, $noparticipanteslimite, $datatermino)
 		{
 		$this->titulobolao = $titulobolao;
 		$this->campeonato = $campeonato;
@@ -24,6 +25,7 @@
 		$this->tipoaposta = $tipoaposta;
 		$this->escolhaaposta = $escolhaaposta;
 		$this->noparticipantes = $noparticipantes;
+		$this->noparticipanteslimite = $noparticipanteslimite;
 		$this->datatermino = $datatermino;
 		}
 
@@ -97,6 +99,14 @@
 
 		function setNoParticipantes($noparticipantes){
 			$this->noparticipantes = $noparticipantes;
+		}
+
+		function getNoParticipantesLimte(){
+			return $this->noparticipanteslimte;
+		}
+
+		function setNoParticipantesLimte($noparticipanteslimte){
+			$this->noparticipanteslimte = $noparticipanteslimte;
 		}
 
 		function getDataTermino(){
