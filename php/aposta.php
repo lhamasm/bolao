@@ -29,12 +29,20 @@
 			$this->opcaoDeAposta = $opcaoDeAposta;
 		}
 
+		function getUsuario(){
+			return $this->usuario;
+		}
+
 		function getBolao(){
 			return $this->bolao;
 		}
 
 		function getOpcaoDeAposta(){
 			return $this->opcaoDeAposta;
+		}
+
+		function getValor(){
+			return $this->valor;
 		}
 
 	}

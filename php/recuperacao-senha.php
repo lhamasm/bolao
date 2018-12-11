@@ -19,7 +19,7 @@
 
 			if($cpf == $_SESSION['login'] && $dados[0] == $cpf){
 				if($email == $_SESSION['email'] && $dados[3] == $email){
-					if($ddn == $_SESSION['ddn'] && $dados[6] == $ddn){
+					if($ddn == $_SESSION['ddn'] && $dados[6] == '16/03/1996'){
 						exit;
 					} else {
 						header('Location: ../esqueci-senha.html');

@@ -25,7 +25,17 @@
 			}
 		}
 
-
-		
+		function excluirApostador($bolao, $apostador){
+			for($i = 0; $i < count($boloes); $i++){
+				if($boloes[$i]->getTitulo() == $bolao){
+					$p = $boloes[$i]->getParticipantes();
+					for($j = 0; $j < count($p); $j++){
+						if($p[$j]->getCpf() == $apostador){
+							array_splice($p, $j, 1);
+						}
+					}
+				}
+			}
+		}
 	}
 ?>

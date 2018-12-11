@@ -1,5 +1,8 @@
 <?php
 
+	require_once 'sistema.php';
+	require_once 'usuario.php';
+
 	session_start();
 
 	$username = '';
@@ -17,20 +20,25 @@
 	$conta = '';
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+		$sistema = $_SESSION["sistema"];
+		$usuarios = $sistema->getUsuarios();
+
 		if(isset($_REQUEST['username'])){
 			$username = p_respostas($_REQUEST['username']);
 		} else {
 			$username = $_SESSION['username'];
 		}
 
-		if(isset($_REQUEST['nova-senha'])){
+		if(isset($_REQUEST['nova-senha']) && $_REQUEST['nova-senha'] != ''){
 			$senha = p_respostas($_REQUEST['nova-senha']);
 		} else {
 			$senha = $_SESSION['senha'];
 		}
 
-		if(isset($_REQUEST['confirmar-nova-senha'])){
+		if(isset($_REQUEST['confirmar-nova-senha']) && $_REQUEST['confirmar-nova-senha'] != ''){
 			$confirmarSenha = p_respostas($_REQUEST['confirmar-nova-senha']);
+		} else {
+			$confirmarSenha = $_SESSION['senha'];
 		}
 
 		if(isset($_REQUEST['email'])){
@@ -42,6 +50,7 @@
 		if(isset($_REQUEST['nome'])){
 			$nome = p_respostas($_REQUEST['nome']);
 		} else {
+			
 			$nome = $_SESSION['nome'];
 		}
 
@@ -94,42 +103,52 @@
 		}
 
 		if($senha == $confirmarSenha){
-			if(file_exists('cadastros_usuarios.txt')){
-				$arquivo = fopen('cadastros_usuarios.txt', 'r+');
-				while(!feof($arquivo)){
-					$usuario = fgets($arquivo);
+			for($i=0; $i < count($usuarios); $i++){
+				if($usuarios[$i]->getCpf() == $_SESSION['login']){
+					$usuarios[$i]->setNome($nome); 
+					$usuarios[$i]->setUsername($username);
+					$usuarios[$i]->setEmail($email);
+					$usuarios[$i]->setSenha($senha);
+					$usuarios[$i]->setDataNascimento($ddn);
+					$usuarios[$i]->setGenero($genero);
+					$usuarios[$i]->setRg($rg);
+					$usuarios[$i]->setTelefone($telefone);
+					$usuarios[$i]->setCelular($celular);
+					$usuarios[$i]->setBanco($banco);
+					$usuarios[$i]->setAgencia($agencia);
+					$usuarios[$i]->setConta($conta);
 
-					$dados = explode(";", $usuario);
-					if($dados[0] == $_SESSION['login']){
-						$dados[1] = $nome; 
-						$dados[2] = $username;
-						$dados[3] = $email;
-						$dados[4] = $senha;
-						$dados[5] = $rg;
-						$dados[6] = $ddn;
-						$dados[7] = $telefone;
-						$dados[8] = $celular;
-						$dados[9] = $banco;
-						$dados[10] = $agencia;
-						$dados[11] = $conta;
+					$_SESSION["nome"] = $nome; 
+					$_SESSION["username"] = $username;
+					$_SESSION["email"] = $email;
+					$_SESSION["senha"] = $senha;
+					$_SESSION["rg"] = $rg;
+					$_SESSION["ddn"] = $ddn;
+					$_SESSION["telefone"] = $telefone;
+					$_SESSION["celular"] = $celular;
+					$_SESSION["banco"] = $banco;
+					$_SESSION["agencia"] = $agencia;
+					$_SESSION["conta"] = $conta;
 
-						$alteracao = '';
-						for($i = 0; $i < count($dados); $i++){
-							$alteracao += $dados[$i] . ';';
-						}
+					$arquivo = fopen('../bd/usuarios.txt', 'w+');
+					for($j=0; $j<count($usuarios); $j++){
+						$alteracao = $usuarios[$j]->getTipo() . ';' . $usuarios[$j]->getNome() . ';' . $usuarios[$j]->getUsername() . ';' . $usuarios[$j]->getEmail() . ';' . $usuarios[$j]->getSenha() . ';' . $usuarios[$j]->getDataNascimento() . ';' . $usuarios[$j]->getGenero() . ';' . $usuarios[$j]->getRg() . ';' . $usuarios[$j]->getCpf() . ';' . $usuarios[$j]->getTelefone() . ';' . $usuarios[$j]->getCelular() . ';' . $usuarios[$j]->getBanco() . ';' . $usuarios[$j]->getAgencia() . ';' . $usuarios[$j]->getConta();
 						fwrite($arquivo, $alteracao);
-						fclose($arquivo);
-						header('Location: ../minha-conta.php');
-						echo 'Dados alterados com sucesso!';
-						exit;
 					}
+					fclose($arquivo);
+					echo 'Alteração realizada com sucesso!';
+					header('Location: ../minha-conta.php');
+					exit();
 				}
-				header('Location: ../minha-conta.php');
-				echo 'Error';
-			} else {
-				header('Location: ../minha-conta.php');
-				echo 'Error';
-			}
+			} 
+
+			echo 'Erro';
+			header('Location: ../minha-conta.php');
+			exit();
+		} else {
+			echo 'Senha incorreta';
+			header('Location: ../minha-conta.php');
+			exit();
 		}
 	}
 

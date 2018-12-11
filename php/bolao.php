@@ -1,12 +1,15 @@
 <?php
 
 	require_once 'sistema.php';
+	require_once 'apostador.php';
+	require_once 'jogo.php';
+	require_once 'usuario.php';
+	require_once 'apostador.php';
+	require_once 'subject.php';
+	require_once 'observer.php';
+	
 
-	interface BolaoInterface{
-		function notificarApostadores(){}
-	}
-
-	class Bolao {
+	class Bolao extends subject {
 
 		protected $id;
 		protected $criador;
@@ -26,8 +29,8 @@
 		protected $tempoLimite;
 		protected $apostas;
 
-		function Bolao($criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha){
-			$this->id = $id; // pôr um random aqui
+		function Bolao($id, $criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha, $dinheiros){
+			$this->id = $id;
 			$this->criador = $criador;
 			$this->tipo = $tipo;
 			$this->campeonato = $campeonato;
@@ -39,7 +42,7 @@
 			$this->tipoAposta = $tipoAposta;
 			$this->opcoesAposta = $opcoesAposta;
 			$this->senha = $senha;
-			$this->dinheiros = 0;
+			$this->dinheiros = $dinheiros;
 			$this->ganhadores = array();
 			$this->resultado = array();
 			$this->tempoLimite = 0;
@@ -74,8 +77,17 @@
 			$this->limiteDeParticipantes = $limiteDeParticipantes;
 		}
 
-		function setParticipantes($participantes){
-			$this->participantes = $participantes;
+		function setParticipantes($participante){
+			array_push($this->participantes, $participante);
+
+			if($this->criador == $participante){
+				$observer = new Observer($participante, 10);
+			} else {
+				$observer = new Observer($participante, 0);
+			}
+
+			$this->attach($observer);
+			$this->setEvent("Bem-vindo ao Bolão" . $this->titulo());
 		}
 
 		function setTipoJogo($tipoJogo){
@@ -86,8 +98,8 @@
 			$this->tipoAposta = $tipoAposta;
 		}
 
-		function setOpcoesAposta($opcoesAposta){
-			$this->opcoesAposta = $opcoesAposta;
+		function setOpcoesAposta($opcao){
+			array_push($this->opcoesAposta, $opcao);
 		}
 
 		function setSenha($senha){
@@ -106,12 +118,16 @@
 			$this->tempoLimite = $tempoLimite;
 		}
 
-		function setApostas($apostas){
-			array_push($this->apostas, $apostas);
+		function setApostas($aposta){
+			array_push($this->apostas, $aposta);
 		}
 
 		function getId(){
 			return $this->id;
+		}
+
+		function getTipo(){
+			return $this->tipo;
 		}
 
 		function getCriador(){
@@ -162,63 +178,38 @@
 			return $this->tempoLimite;
 		}
 
-		function getApostas($apostas){
+		function getApostas(){
 			return $this->apostas;
 		}
 
-		function excluirApostador($bolao, $apostador){
-			for($i = 0; $i < count($boloes); $i++){
-				if($boloes[$i]->getTitulo() == $bolao){
-					$p = $boloes[$i]->getParticipantes();
-					for($j = 0; $j < count($p); $j++){
-						if($p[$j]->getCpf() == $apostador){
-							array_splice($p, $j, 1);
+		function getDinheiros(){
+			return $this->dinheiros;
+		}
+
+
+		function determinarVencedor($jogos, $usuarios){
+
+			for($i = 0; $i < count($this->tipoJogo); $i++){
+				for($j = 0; $j < count($jogos); $j++){
+					if($this->tipoJogo[$i] == $jogos[$j]->getId()){
+						if($jogos[$j]->getResultado() == ''){
+							echo "O(s) resultado(s) do bolão ainda não estão disponíveis";
 						}
 					}
 				}
 			}
-		}
 
-		function apostar($usuario, $bolao, $valor, $opcaoDeAposta){
-			if ($bolao->getLimiteDeParticipantes() > count($bolao->getParticipantes()) ) {
-				$aposta = new Aposta($usuario, $bolao, $valor,$opcaoDeAposta);
-				array_push($this->apostas, $aposta);
-
-				for ($i=0; $i < count($bolao->getParticipantes()); $i++) { 
-					if (($bolao->getParticipantes())[$i] == $usuario) {
+			for($i = 0; $i < count($this->participantes); $i++){
+				for($j=0; $j < count($usuarios); $j++){
+					if($usuarios[$j]->getCpf() == $participantes[$i]){
+						$a = $usuarios[$j]->getApostas();
 						break;
 					}
 				}
-				if (i ==  count($bolao->getParticipantes())) {
-					$bolao->setParticipantes($usuario);
-				}
-				
-				$bolao->setApostas($aposta);
-
-			}
-			else{
-				return -1;
-			}
-		}
-
-		function determinarVencedor(){
-
-			for($i = 0; $i < count($tipoJogo); $i++){
-				for($j = 0; $j < count($jogos); $j++){
-					if($tipoJogo[$i]->getId() == $jogos[$j]->getId()){
-						if($jogos[$j]->getResultado == ''){
-							return -1;
-						}
-					}
-				}
-			}
-
-			for($i = 0; $i < count($participantes); $i++){
-				$a = $participantes[$i]->getApostas();
 				for($j = 0; $j < count($a); $j++){
-					if($a[$j]->getBolao() == $this->titulo) {
+					if($a[$j]->getId() == $this->id) {
 						if($a[$j]->getOpcaoDeAposta() == $this->resultado){
-							array_push($this->ganhadores, $participantes[$i]);
+							array_push($this->ganhadores, $this->participantes[$i]);
 						}
 					}
 				}
@@ -233,26 +224,5 @@
 
 			return $this->dinheiros/count($g);
 		}
-
-		function participarBolao(){
-			// tem a ver com o observer pattern
-		}
-
-		function sairBolao(){
-			// tem a ver com o observer pattern
-		}
-
-		function notificarApostadores(){
-			// tem a ver com o observer pattern
-		}
-
-		function getParticipantesLength(){
-
-		}
-
-		function excluirAposta(){
-			//retorna booleano
-		}
 	}
-
 ?>

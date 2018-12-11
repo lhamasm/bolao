@@ -1,6 +1,13 @@
 <?php
+
+	require_once 'sistema.php';
+	require_once 'bolao.php';
+	require_once 'jogo.php';
+	require_once 'observer.php';
+	require_once 'subject.php';
 	
-	class Usuario {
+	class Usuario extends Observer {
+		protected $tipo; //apostador ou adm
 		protected $nome;
 		protected $username;
 		protected $email;
@@ -14,11 +21,12 @@
 		protected $banco;
 		protected $agencia;
 		protected $conta;
-		protected $mensagens;
+		//protected $mensagens;
 
 		# Construtor
-		function Usuario($nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta){
+		function Usuario($tipo, $nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta){
 
+			$this->tipo = $tipo;
 			$this->nome = $nome;
 			$this->username = $username;
 			$this->email = $email;
@@ -26,17 +34,21 @@
 			$this->dataNascimento = $dataNascimento;
 			$this->genero = $genero;
 			$this->rg = $rg;
-			$this->cpg = $cpf;
+			$this->cpf = $cpf;
 			$this->telefone = $telefone;
 			$this->celular = $celular;
 			$this->banco = $banco;
 			$this->agencia = $agencia;
 			$this->conta = $conta;
-			$this->mensagens = array();
+			//$this->mensagens = array();
 
 		}
 
 		# Getters e Setters
+
+		function getTipo(){
+			return $this->tipo;
+		}
 
 		function getNome(){
 			return $this->nome;
@@ -94,6 +106,10 @@
 			return $this->mensagens;
 		}
 
+		function setTipo($tipo){
+			$this->tipo = $tipo;
+		}
+
 		function setNome($nome){
 			$this->nome = $nome;
 		}
@@ -146,10 +162,48 @@
 			$this->conta = $conta;
 		}
 
-		function setMensagem($mensagem){
+		/*function setMensagem($mensagem){
 			array_push($this->mensagens , $mensagem);
+		}*/
+
+		# Métodos
+		function criarBolao($criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha){
+
+			$bolao = new Bolao($criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha);
+
 		}
 
+		function verificarResultado($bolao){
+			for($i = 0; $i < count($boloes); $i++){
+				if($boloes[$i]->getTitulo() == $bolao){
+					return $boloes[$i]->getResultado();
+				}
+			}
+		}
+
+		function consultarBolao($bolao){
+			for($i = 0; $i < count($boloes); $i++){
+				if($boloes[$i]->getTitulo() == $bolao){
+					return $boloes[$i];
+				}
+			}
+		}
+
+		function consultarHistoricoAposta($usuario){
+			for($i = 0; $i < count($usuarios); $i++){
+				if($usuarios[$i]->getCpf() == $usuario){
+					return $usuarios[$i]->getApostas();
+				}
+			}
+		}
+
+		function verificarResultadoJogo($jogo) {
+			for($i = 0; $i < count($jogos); $i++){
+				if($jogos[$i]->getId() == $jogo){
+					return $jogos[$i];
+				}
+			}
+		}
 	}
 
 ?>

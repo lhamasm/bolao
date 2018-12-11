@@ -28,8 +28,47 @@ header {
 	background-color: #B22222;
 }
 
+.pagination button{
+	border: 0.05em solid white;
+	background-color: #b2d1d0;
+	padding: 0.5em;
+	color: white;
+}
+
+#ingredientes {
+	height: 5em;
+	width: 15em;
+	overflow-y: auto;
+	overflow-x: auto;
+	background-color: #eee; 
+}
+
+select, #dataProva {
+	border-radius: 8px;
+	border-color: #4c9593;
+	color: #4c9593;
+}
+
+.pagination button:hover{
+	background-color: #4c9593;
+}
+
+.pagination li:nth-child(1) button{
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+}
+
+.pagination li:nth-child(6) button{
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
+}
+
 td {
 	padding: 1em;
+}
+
+table#myt tr:nth-child(even){
+	background-color: #eee;
 }
 
 #verCampeonato p{
