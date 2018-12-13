@@ -1,14 +1,18 @@
 <?php
+
+	require_once 'sistema.php';
+	require_once 'usuario.php';
+	
+	session_start();
+
 	class EsqueciSenhaTela {
 		protected $cpf;
 		protected $email;
-		protected $dataDeNascimento;
 
-		function EsqueciSenhaTela($cpf, $email, $dataDeNascimento)
+		function EsqueciSenhaTela($cpf, $email)
 		{
 			$this->cpf = $cpf;
 			$this->email = $email;
-			$this->dataDeNascimento = $dataDeNascimento;
 		}
 
 		function getCpf(){
@@ -19,10 +23,6 @@
 			return $this->email;
 		}
 
-		function getDataDeNascimento(){
-			return $this->dataDeNascimento;
-		}
-
 		function setCpf($cpf){
 			$this->cpf = $cpf;
 		}
@@ -31,8 +31,33 @@
 			$this->email = $email;
 		}
 
-		function setDataDeNascimento($dataDeNascimento){
-			$this->dataDeNascimento = $dataDeNascimento;
+		function prosseguir(){
+			$sistema = $_SESSION['sistema'];
+			$usuarios = $sistema->getUsuarios();
+
+			for($i=0; $i<count($usuarios); $i++){
+				if($usuarios[$i]->getCpf() == $this->cpf){
+					if($usuarios[$i]->getEmail() == $this->email){
+						$_SESSION['login'] = $this->cpf;
+						$_SESSION['email'] = $this->email;
+						$_SESSION['status'] = -1;
+						header('Location: ../esqueci-senha-2.php');
+						exit();
+					} else {
+						$_SESSION['status'] = 1;
+						header('Location: ../esqueci-senha.php');
+						exit();
+					}
+				} else {
+					$_SESSION['status'] = 2;
+					header('Location: ../esqueci-senha.php');
+					exit();
+				}
+			}
+
+			$_SESSION['status'] = 3;
+			header('Location: ../esqueci-senha.php');
+			exit();
 		}
 	}
 ?>

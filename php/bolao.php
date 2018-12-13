@@ -108,7 +108,7 @@
 		}
 
 		function setResultado($resultado){
-			$this->resultado = $resultado;
+			array_push($this->resultado, $resultado);
 		}
 
 		function setDinheiros($valor){
@@ -210,13 +210,13 @@
 
 			for($i = 0; $i < count($this->participantes); $i++){
 				for($j=0; $j < count($usuarios); $j++){
-					if($usuarios[$j]->getCpf() == $participantes[$i]){
+					if($usuarios[$j]->getCpf() == $this->participantes[$i]){
 						$a = $usuarios[$j]->getApostas();
 						break;
 					}
 				}
 				for($j = 0; $j < count($a); $j++){
-					if($a[$j]->getId() == $this->id) {
+					if($a[$j]->getBolao() == $this->id) {
 						if($a[$j]->getOpcaoDeAposta() == $this->resultado){
 							array_push($this->ganhadores, $this->participantes[$i]);
 						}
@@ -232,6 +232,10 @@
 			$g = determinarVencedor();
 
 			return $this->dinheiros/count($g);
+		}
+
+		function removerAposta($apostas, $aposta){
+			array_splice($apostas, $aposta);
 		}
 	}
 ?>

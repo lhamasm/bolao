@@ -86,6 +86,10 @@
 		function aceitarConvite() {
 			
 		}
+
+		function logar(){
+			
+		}
 	}
 
 

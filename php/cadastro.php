@@ -1,8 +1,4 @@
 <?php
-	require_once 'apostador.php';
-	require_once 'usuario.php';
-	require_once 'sistema.php';
-	require_once 'index.php';
 	require_once 'funcoes.php';
 
 	$tipo = 0;
@@ -26,8 +22,6 @@
 	$celular = "";
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
-		$sistema = $_SESSION["sistema"];
-		$usuarios = $sistema->getUsuarios();
 
 		$nome = p_respostas($_REQUEST['nome']);
 		$username = p_respostas($_REQUEST['username']);
@@ -54,51 +48,8 @@
 			$celular = p_respostas($_REQUEST['celular']);
 		}
 
-		if(confirmation($email, $confirmarEmail)){
-			if(confirmation($senha, $confirmarSenha)){
-
-				$dataNascimento = $dia . '/' . $mes . '/' . $ano;
-				$usuario = new Apostador($tipo, $nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta, $_SESSION['numero_usuarios']+1, 0);
-
-				//$apostador = new Apostador($_SESSION['numero_usuarios']+1, 0);
-				//$apostador = $usuario;	
-
-				$cadastro = $tipo . ';' . $nome . ';' . $username . ';' . $email . ';' . $senha . ';' . $dataNascimento . ';' . $genero . ';' . $rg . ';' . $cpf . ';' . $telefone . ';' . $celular . ';' . $banco . ';' . $agencia . ';' . $conta . ';'. count($usuarios) . ';0' . PHP_EOL;
-
-				for($i = 0; $i < count($usuarios); $i++){
-					if($usuarios[$i]->getCpf() == $cpf){
-						$_SESSION['status'] = 2;
-						header('Location: ../cadastro.php');
- 						exit();	
-					}
-				}
-
-				$arquivo = fopen('../bd/usuarios.txt', 'a+') or die("Não foi possível abrir o arquivo");
-				fwrite($arquivo, $cadastro);
-				fclose($arquivo);
-
-				$sistema->setUsuarios($apostador);
-				$_SESSION['sistema'] = $sistema;
-				$_SESSION['numero_usuarios'] = $_SESSION['numero_usuarios'] + 1;
-
-				$_SESSION['status'] = 1;
-				header('Location: ../login.php');
-				exit();
-			} else {
-				$_SESSION['status'] = 3;	
-				header('Location: ../cadastro.php');
- 				exit();	
-			}
-		} else {
-			$_SESSION['status'] = 4;
-			header('Location: ../cadastro.php');
- 			exit();	
-		}
-	}
-
-	function confirmation($dado1, $dado2){
-		if($dado1 == $dado2) return true;
-		else return false;
+		$telaCadastro = new CadastroTela($nome, $username, $email, $confirmarEmail, $senha, $confirmarSenha, $dia, $mes, $ano, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta);
+		$telaCadastro->cadastrar();
 	}
 
 	function conversao_mes($mes){

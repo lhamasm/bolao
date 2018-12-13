@@ -1,9 +1,9 @@
 <?php
 
-	require_once 'sistema.php';
-	require_once 'usuario.php';
+	require_once 'MinhaContaTela.php';
+	require_once 'funcoes.php';
 
-	session_start();
+	//session_start();
 
 	$username = '';
 	$senha = '';
@@ -20,8 +20,6 @@
 	$conta = '';
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
-		$sistema = $_SESSION["sistema"];
-		$usuarios = $sistema->getUsuarios();
 
 		if(isset($_REQUEST['username'])){
 			$username = p_respostas($_REQUEST['username']);
@@ -102,61 +100,8 @@
 			$conta = $_SESSION['conta'];
 		}
 
-		if($senha == $confirmarSenha){
-			for($i=0; $i < count($usuarios); $i++){
-				if($usuarios[$i]->getCpf() == $_SESSION['login']){
-					$usuarios[$i]->setNome($nome); 
-					$usuarios[$i]->setUsername($username);
-					$usuarios[$i]->setEmail($email);
-					$usuarios[$i]->setSenha($senha);
-					$usuarios[$i]->setDataNascimento($ddn);
-					$usuarios[$i]->setGenero($genero);
-					$usuarios[$i]->setRg($rg);
-					$usuarios[$i]->setTelefone($telefone);
-					$usuarios[$i]->setCelular($celular);
-					$usuarios[$i]->setBanco($banco);
-					$usuarios[$i]->setAgencia($agencia);
-					$usuarios[$i]->setConta($conta);
-
-					$_SESSION["nome"] = $nome; 
-					$_SESSION["username"] = $username;
-					$_SESSION["email"] = $email;
-					$_SESSION["senha"] = $senha;
-					$_SESSION["rg"] = $rg;
-					$_SESSION["ddn"] = $ddn;
-					$_SESSION["telefone"] = $telefone;
-					$_SESSION["celular"] = $celular;
-					$_SESSION["banco"] = $banco;
-					$_SESSION["agencia"] = $agencia;
-					$_SESSION["conta"] = $conta;
-
-					$arquivo = fopen('../bd/usuarios.txt', 'w+');
-					for($j=0; $j<count($usuarios); $j++){
-						$alteracao = $usuarios[$j]->getTipo() . ';' . $usuarios[$j]->getNome() . ';' . $usuarios[$j]->getUsername() . ';' . $usuarios[$j]->getEmail() . ';' . $usuarios[$j]->getSenha() . ';' . $usuarios[$j]->getDataNascimento() . ';' . $usuarios[$j]->getGenero() . ';' . $usuarios[$j]->getRg() . ';' . $usuarios[$j]->getCpf() . ';' . $usuarios[$j]->getTelefone() . ';' . $usuarios[$j]->getCelular() . ';' . $usuarios[$j]->getBanco() . ';' . $usuarios[$j]->getAgencia() . ';' . $usuarios[$j]->getConta() . PHP_EOL;
-						fwrite($arquivo, $alteracao);
-					}
-					fclose($arquivo);
-					$_SESSION['status'] = 1;
-					header('Location: ../minha-conta.php');
-					exit();
-				}
-			} 
-
-			$_SESSION['status'] = 0;
-			header('Location: ../minha-conta.php');
-			exit();
-		} else {
-			$_SESSION['status'] = 2;
-			header('Location: ../minha-conta.php');
-			exit();
-		}
+		$telaMinhaConta = new MinhaContaTela($nome, $username, $email, $senha, $confirmarSenha, $ddn, $genero, $rg, $telefone, $celular, $banco, $agencia, $conta);
+		$telaMinhaConta->alterarDados();
 	}
 
-	function p_respostas($dado) {
-		$dado = trim($dado); // retirar espaços extras, tabs, enter 
-		$dado = stripslashes($dado); // retirar barra invertida
-		$dado = htmlspecialchars($dado);
-
-		return $dado;
-	}
 ?>

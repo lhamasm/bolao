@@ -1,4 +1,11 @@
 <?php
+
+	require_once 'apostador.php';
+	require_once 'usuario.php';
+	require_once 'sistema.php';
+	require_once 'index.php';
+
+	session_start();
 	
 	Class CadastroTela {
 		protected $nome;
@@ -175,6 +182,57 @@
 
 		function setConta($conta){
 			$this->conta = $conta;
+		}
+
+		function confirmation($dado1, $dado2){
+			if($dado1 == $dado2) return true;
+			else return false;
+		}
+
+		function cadastrar() {
+			$sistema = $_SESSION["sistema"];
+			$usuarios = $sistema->getUsuarios();
+
+			if(confirmation($this->email, $this->cmfemail)){
+				if(confirmation($this->senha, $this->cmfsenha)){
+
+					$dataNascimento = $this->dia . '/' . $this->mes . '/' . $this->ano;
+					$usuario = new Apostador(0, $this->nome, $this->username, $this->email, $this->senha, $dataNascimento, $this->genero, $this->rg, $this->cpf, $this->telefone, $this->celular, $this->banco, $this->agencia, $this->conta, $_SESSION['numero_usuarios']+1, 0);
+
+					//$apostador = new Apostador($_SESSION['numero_usuarios']+1, 0);
+					//$apostador = $usuario;	
+
+					$cadastro = 0 . ';' . $this->nome . ';' . $this->username . ';' . $this->email . ';' . $this->senha . ';' . $dataNascimento . ';' . $this->genero . ';' . $this->rg . ';' . $this->cpf . ';' . $this->telefone . ';' . $this->celular . ';' . $this->banco . ';' . $this->agencia . ';' . $this->conta . ';'. count($usuarios) . ';0' . PHP_EOL;
+
+					for($i = 0; $i < count($usuarios)-1; $i++){
+						if($usuarios[$i]->getCpf() == $this->cpf){
+							$_SESSION['status'] = 2;
+							header('Location: ../cadastro.php');
+	 						exit();	
+						}
+					}
+
+					$arquivo = fopen('../bd/usuarios.txt', 'a+') or die("Não foi possível abrir o arquivo");
+					fwrite($arquivo, $cadastro);
+					fclose($arquivo);
+
+					$sistema->setUsuarios($apostador);
+					$_SESSION['sistema'] = $sistema;
+					$_SESSION['numero_usuarios'] = $_SESSION['numero_usuarios'] + 1;
+
+					$_SESSION['status'] = 1;
+					header('Location: ../login.php');
+					exit();
+				} else {
+					$_SESSION['status'] = 3;	
+					header('Location: ../cadastro.php');
+	 				exit();	
+				}
+			} else {
+				$_SESSION['status'] = 4;
+				header('Location: ../cadastro.php');
+	 			exit();	
+			}
 		}
 		
 	}

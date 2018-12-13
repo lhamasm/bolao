@@ -71,18 +71,10 @@
         $b->setResultado($dados[12]);
         $b->setTempoLimite($dados[14]);
 
-        for($i=0; $i < count($apostas)-1; $i++){
+        for($i=0; $i < count($apostas); $i++){
           $ap = explode(':', $apostas[$i]);
           $a = new Aposta($ap[0], $count, $ap[1], $ap[2]);
           $b->setApostas($a);
-
-          //$usuarios = $sistema->getUsuarios();
-          for($j=0; $j<count($sistema->getUsuarios()); $j++){
-            if($sistema->getUsuarios()[$j]->getCpf() == $ap[0]){
-              $sistema->getUsuarios()[$j]->setApostas($a);
-              break;
-            }
-          }
         }
 
         $sistema->setBoloes($b);
@@ -91,6 +83,20 @@
 
       fclose($arquivo);
     } 
+
+    for($i=0; $i<count($sistema->getUsuarios()); $i++){
+      if(file_exists('../bd/apostas-' . $sistema->getUsuarios()[$i]->getCpf() . '.txt')){
+        $arquivo = fopen('../bd/apostas-' . $sistema->getUsuarios()[$i]->getCpf() . '.txt', 'r');
+        while(!feof($arquivo)){
+          // bolao, valor, opcaoAposta
+          $aposta = fgets($arquivo);
+          $dados = explode(';', $aposta);
+
+          $a = new Aposta($sistema->getUsuarios()[$i]->getCpf(), $dados[0], $dados[1], $dados[2]);
+          $sistema->getUsuarios()[$i]->setApostas($a);
+        }
+      }
+    }
 
     $_SESSION["sistema"] = $sistema;
     $_SESSION["numero_usuarios"] = count($sistema->getUsuarios());

@@ -1,6 +1,11 @@
 <?php
+
+	require_once 'sistema.php';
+	require_once 'usuario.php';
+
+	session_start();
 	
-	Class CadastroTela {
+	Class MinhaContaTela {
 		protected $username;
 		protected $email;
 		protected $senha;
@@ -17,15 +22,15 @@
 		protected $agencia;
 		protected $conta;
 
-		protected $reportarBugs;
-		protected $termosCondicoes
+		//protected $reportarBugs;
+		//protected $termosCondicoes
 
-		protected $posicao;
-		protected $pontuacao;
-		protected $campeonato;
+		//protected $posicao;
+		//protected $pontuacao;
+		//protected $campeonato;
 
 
-		function CadastroTela($nome, $username, $email, $senha, $cmfsenha, $dataDeNascimento, $genero, $rg, $telefone, $celular, $banco, $agencia, $conta, $reportarBugs, $posicao, $pontuacao, $campeonato, $termosCondicoes){
+		function MinhaContaTela($nome, $username, $email, $senha, $cmfsenha, $dataDeNascimento, $genero, $rg, $telefone, $celular, $banco, $agencia, $conta/*, $reportarBugs, $posicao, $pontuacao, $campeonato, $termosCondicoes*/){
 			
 			$this->nome = $nome;
 			$this->username = $username;
@@ -40,11 +45,11 @@
 			$this->banco = $banco;
 			$this->agencia = $agencia;
 			$this->conta = $conta;
-			$this->reportarBugs = $reportarBugs;
+			/*$this->reportarBugs = $reportarBugs;
 			$this->posicao = $posicao;
 			$this->pontuacao = $pontuacao;
 			$this->campeonato = $campeonato;
-			$this->termosCondicoes = $termosCondicoes;
+			$this->termosCondicoes = $termosCondicoes;*/
 		}
 
 		function getNome(){
@@ -127,9 +132,9 @@
 			$this->dataDeNascimento = $dataDeNascimento;
 		}
 
-		function setReportarBugs($reportarBugs){
+		/*function setReportarBugs($reportarBugs){
 			$this->reportarBugs = $reportarBugs;
-		}
+		}*/
 
 		function setGenero($genero){
 			$this->genero = $genero;
@@ -159,7 +164,7 @@
 			$this->conta = $conta;
 		}
 
-		function getPosicao(){
+		/*function getPosicao(){
 			return $this->posicao;
 		}
 
@@ -189,6 +194,60 @@
 
 		function setTermosCondicoes($termosCondicoes){
 			$this->termosCondicoes = $termosCondicoes;
+		}*/
+
+		function alterarDados() {
+			if($this->senha == $this->cmfsenha){
+				$sistema = $_SESSION["sistema"];
+				$usuarios = $sistema->getUsuarios();
+
+				for($i=0; $i < count($usuarios); $i++){
+					if($usuarios[$i]->getCpf() == $_SESSION['login']){
+						$usuarios[$i]->setNome($this->nome); 
+						$usuarios[$i]->setUsername($this->username);
+						$usuarios[$i]->setEmail($this->email);
+						$usuarios[$i]->setSenha($this->senha);
+						$usuarios[$i]->setDataNascimento($this->dataDeNascimento);
+						$usuarios[$i]->setGenero($this->genero);
+						$usuarios[$i]->setRg($this->rg);
+						$usuarios[$i]->setTelefone($this->telefone);
+						$usuarios[$i]->setCelular($this->celular);
+						$usuarios[$i]->setBanco($this->banco);
+						$usuarios[$i]->setAgencia($this->agencia);
+						$usuarios[$i]->setConta($this->conta);
+
+						$_SESSION["nome"] = $this->nome; 
+						$_SESSION["username"] = $this->username;
+						$_SESSION["email"] = $this->email;
+						$_SESSION["senha"] = $this->senha;
+						$_SESSION["rg"] = $this->rg;
+						$_SESSION["ddn"] = $this->dataDeNascimento;
+						$_SESSION["telefone"] = $this->telefone;
+						$_SESSION["celular"] = $this->celular;
+						$_SESSION["banco"] = $this->banco;
+						$_SESSION["agencia"] = $this->agencia;
+						$_SESSION["conta"] = $this->conta;
+
+						$arquivo = fopen('../bd/usuarios.txt', 'w+');
+						for($j=0; $j<count($usuarios); $j++){
+							$alteracao = $usuarios[$j]->getTipo() . ';' . $usuarios[$j]->getNome() . ';' . $usuarios[$j]->getUsername() . ';' . $usuarios[$j]->getEmail() . ';' . $usuarios[$j]->getSenha() . ';' . $usuarios[$j]->getDataNascimento() . ';' . $usuarios[$j]->getGenero() . ';' . $usuarios[$j]->getRg() . ';' . $usuarios[$j]->getCpf() . ';' . $usuarios[$j]->getTelefone() . ';' . $usuarios[$j]->getCelular() . ';' . $usuarios[$j]->getBanco() . ';' . $usuarios[$j]->getAgencia() . ';' . $usuarios[$j]->getConta() . PHP_EOL;
+							fwrite($arquivo, $alteracao);
+						}
+						fclose($arquivo);
+						$_SESSION['status'] = 1;
+						header('Location: ../minha-conta.php');
+						exit();
+					}
+				} 
+
+				$_SESSION['status'] = 0;
+				header('Location: ../minha-conta.php');
+				exit();
+			} else {
+				$_SESSION['status'] = 2;
+				header('Location: ../minha-conta.php');
+				exit();
+			}
 		}
 	}
 ?>
