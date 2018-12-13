@@ -373,11 +373,13 @@
 									</div>
 									<div class="form-group">
 										<h6 style="display: inline; margin-right: 0.5em;">Equipes</h6>
-										<input type="number" min="2" max="4" onchange="infoequipes();" id="numeroequipes" value="2" disabled>
+										<input type="number" min="2" max="4" onchange="infoequipes();" id="numeroequipes" value="2">
 										<label style="display: block; margin-top: 1.5em; margin-bottom: 0em;">Selecione a cor do time e os membros:</label>
 										<div>
-											<button class="btn bg-danger ml-1 mb-1" onclick="changeColorSelect('#d9534f');"></button>
-											<button class="btn bg-warning ml-1 mb-1" onclick="changeColorSelect('#f0ad4e');"></button>
+											<button type="button" class="btn bg-danger ml-1 mb-1" onclick="changeColorSelect('#d9534f');"></button>
+											<button type="button" class="btn bg-warning ml-1 mb-1" onclick="changeColorSelect('#f0ad4e');"></button>
+											<button type="button" class="btn bg-success ml-1 mb-1" style="display:none;" onclick="changeColorSelect('#5cb85c');"></button>
+											<button type="button" class="btn bg-info ml-1 mb-1" style="display:none;" onclick="changeColorSelect('#17a2b8');"></button>
 										</div>
 										<select  id="membrosequipes" multiple style="width: 12em;">
 											<option>Fulano</option>
@@ -387,6 +389,9 @@
 											<option>Robson</option>
 											<option>Jéssica</option>
 											<option>Creide</option>
+											<option>Meh</option>
+											<option>Mah</option>
+											<option>Mula</option>
 										</select>
 									</div>
 								</div>
@@ -396,10 +401,186 @@
 							</div>
 						</form>
 					</div>
-					<div id="eliminacao" style="display: none;"  class="col-8"></div>
-					<div id="repescagem" style="display: none;"  class="col-8"></div>
-					<div id="semifinal" style="display: none;"  class="col-8"></div>
-					<div id="final" style="display: none;"  class="col-8"></div>
+					<div id="eliminacao" style="display: none;"  class="col-8">
+						<form>
+							<div class="row">
+								<div class="col-6">
+									<div class="form-group">
+										<h6 class="mt-2" >Data da Prova</h6>
+										<input type="date" id="dataProva" value="2018-12-11">
+									</div>
+
+									<div class="form-group">
+										<h6 class="mt-2">Tema</h6>
+										<input type="text" name="tema">
+									</div>
+
+									<div class="form-group">
+										<h6>Descrição</h6>
+										<textarea class="mt-2" style="display: block; width: 17em; min-height: 5em;"></textarea>
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="form-group">
+										<h6 class="mt-2">Prêmio</h6>
+										<input type="text" name="premio" placeholder="R$">
+									</div>
+									<div class="form-group">
+										<h6>Tempo de Prova</h6>
+										<input type="text" name="tempoProva" placeholder="minutos">
+									</div>
+									<div class="form-group">
+										<select class="mt-2" style="border-width: 0.15em; border-left-color: #234342; border-top-color: #234342;">
+											<option value="nonselected"><b>Eliminado</b></option>
+											<option value="Fulano">Fulano</option>
+											<option value="Beltrano">Beltrano</option>
+											<option value="Sicrano">Sicrano</option>
+										</select>
+
+										<textarea class="mt-2" style="display: block; width: 17em; min-height: 5em;" placeholder="Descreva o prato do Eliminado"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row text-center justify-content-center">
+								<input class="btn bg-white mb-2" style="border-color: #ff3333; color: #ff3333;" type="submit" name="Salvar">
+							</div>
+						</form>
+					</div>
+					<div id="repescagem" style="display: none;"  class="col-8">
+						<form>
+							<div class="row">
+								<div class="col-6">
+									<div class="form-group">
+										<h6 class="mt-2" >Data da Prova</h6>
+										<input type="date" id="dataProva" value="2018-12-11">
+									</div>
+
+									<div class="form-group">
+										<h6 class="mt-2">Tema</h6>
+										<input type="text" name="tema">
+									</div>
+
+									<div class="form-group">
+										<h6>Descrição</h6>
+										<textarea class="mt-2" style="display: block; width: 17em; min-height: 5em;"></textarea>
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="form-group">
+										<h6 class="mt-2">Prêmio</h6>
+										<input type="text" name="premio" placeholder="R$">
+									</div>
+									<div class="form-group">
+										<h6>Tempo de Prova</h6>
+										<input type="text" name="tempoProva" placeholder="minutos">
+									</div>
+									<div class="form-group">
+										<select class="mt-2" style="border-width: 0.15em; border-left-color: #234342; border-top-color: #234342;">
+											<option value="nonselected"><b>Ganhador</b></option>
+											<option value="Fulano">Fulano</option>
+											<option value="Beltrano">Beltrano</option>
+											<option value="Sicrano">Sicrano</option>
+										</select>
+
+										<textarea class="mt-2" style="display: block; width: 17em; min-height: 5em;" placeholder="Descreva o prato do Ganhador"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row text-center justify-content-center">
+								<input class="btn bg-white mb-2" style="border-color: #ff3333; color: #ff3333;" type="submit" name="Salvar">
+							</div>
+						</form>
+					</div>
+					<div id="semifinal" style="display: none;"  class="col-8">
+						<form>
+							<div class="row">
+								<div class="col-6">
+									<div class="form-group">
+										<h6 class="mt-2" >Data da Prova</h6>
+										<input type="date" id="dataProva" value="2018-12-11">
+									</div>
+
+									<div class="form-group">
+										<h6 class="mt-2">Tema</h6>
+										<input type="text" name="tema">
+									</div>
+
+									<div class="form-group">
+										<h6>Descrição</h6>
+										<textarea class="mt-2" style="display: block; width: 17em; min-height: 5em;"></textarea>
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="form-group">
+										<h6 class="mt-2">Prêmio</h6>
+										<input type="text" name="premio" placeholder="R$">
+									</div>
+									<div class="form-group">
+										<h6>Tempo de Prova</h6>
+										<input type="text" name="tempoProva" placeholder="minutos">
+									</div>
+									<div class="form-group">
+										<select class="mt-2" style="border-width: 0.15em; border-left-color: #234342; border-top-color: #234342;">
+											<option value="nonselected"><b>Ganhador</b></option>
+											<option value="Fulano">Fulano</option>
+											<option value="Beltrano">Beltrano</option>
+											<option value="Sicrano">Sicrano</option>
+										</select>
+
+										<textarea class="mt-2" style="display: block; width: 17em; min-height: 5em;" placeholder="Descreva o prato do Ganhador"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row text-center justify-content-center">
+								<input class="btn bg-white mb-2" style="border-color: #ff3333; color: #ff3333;" type="submit" name="Salvar">
+							</div>
+						</form>
+					</div>
+					<div id="final" style="display: none;"  class="col-8">
+						<form>
+							<div class="row">
+								<div class="col-6">
+									<div class="form-group">
+										<h6 class="mt-2" >Data da Prova</h6>
+										<input type="date" id="dataProva" value="2018-12-11">
+									</div>
+
+									<div class="form-group">
+										<h6 class="mt-2">Tema</h6>
+										<input type="text" name="tema">
+									</div>
+
+									<div class="form-group">
+										<h6>Descrição</h6>
+										<textarea class="mt-2" style="display: block; width: 17em; min-height: 5em;"></textarea>
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="form-group">
+										<h6 class="mt-2">Prêmio</h6>
+										<input type="text" name="premio" placeholder="R$">
+									</div>
+									<div class="form-group">
+										<h6>Tempo de Prova</h6>
+										<input type="text" name="tempoProva" placeholder="minutos">
+									</div>
+									<div class="form-group">
+										<select class="mt-2" style="border-width: 0.15em; border-left-color: #234342; border-top-color: #234342;">
+											<option value="nonselected"><b>Ganhador</b></option>
+											<option value="Fulano">Fulano</option>
+											<option value="Beltrano">Beltrano</option>
+											<option value="Sicrano">Sicrano</option>
+										</select>
+
+										<textarea class="mt-2" style="display: block; width: 17em; min-height: 5em;" placeholder="Descreva o prato do Ganhador"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row text-center justify-content-center">
+								<input class="btn bg-white mb-2" style="border-color: #ff3333; color: #ff3333;" type="submit" name="Salvar">
+							</div>
+						</form>
+					</div>
 					<div class="col-2"></div>
 				</div>
 			</div>
@@ -932,11 +1113,8 @@
     		}
 
     		function infoequipes(){
-    			document.getElementById('membrosequipes').innerHTML = '';
-    			var limite = document.getElementById('numeroequipes').value;
-    			for (var i = 0; i < limite; i++) {
-    				document.getElementById('membrosequipes').innerHTML += '';
-    			}
+    			// fazer um botão pra cada equipe aparecer
+    			// deselecionar os options do select de membros da equipe
     		}
 
     		function changeColorSelect(color){
