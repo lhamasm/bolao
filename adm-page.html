@@ -728,11 +728,14 @@
 						<div class="card-header" style="background-color: #B0E0E6;">
 							<div class="row">
 								<div class="col-2">
-									<i class="fas fa-user-cog py-2 botaotipouser" data-toggle="tooltip" title="ADM" data-placement="bottom"></i>
+									<i class="fas fa-user-cog py-2 botaotipouser"></i>
 								</div>
-								<div class="col-10">
+								<div class="col-8">
 									<h4 class="card-title text-info">@fulano</h4>
 								</div>
+								<div class="col-2">
+									<i style="color: #696969;" class="fas fa-times" onclick="mensagemsure('este usuário')" data-toggle="modal" data-target="#sure"></i>
+								</div>
 							</div>
 						</div>
 						<div style="font-size: 0.8em; background-color: #F0FFFF; padding: 0;" class="card-body">
@@ -763,11 +766,14 @@
 						<div class="card-header" style="background-color: #B0E0E6;">
 							<div class="row">
 								<div class="col-2">
-									<i class="fas fa-user-cog py-2 botaotipouser" data-toggle="tooltip" title="ADM" data-placement="bottom"></i>
+									<i class="fas fa-user-cog py-2 botaotipouser"></i>
 								</div>
-								<div class="col-10">
+								<div class="col-8">
 									<h4 class="card-title text-info">@beltrano</h4>
 								</div>
+								<div class="col-2">
+									<i style="color: #696969;" class="fas fa-times" onclick="mensagemsure('este usuário')" data-toggle="modal" data-target="#sure"></i>
+								</div>
 							</div>
 						</div>
 						<div style="font-size: 0.8em; background-color: #F0FFFF; padding: 0;" class="card-body">
@@ -798,10 +804,13 @@
 						<div class="card-header" style="background-color: #B0E0E6;">
 							<div class="row">
 								<div class="col-2">
-									<i class="fas fa-user-cog py-2 botaotipouser" data-toggle="tooltip" title="ADM" data-placement="bottom"></i>
+									<i class="fas fa-user-cog py-2 botaotipouser"></i>
 								</div>
-								<div class="col-10">
+								<div class="col-8">
 									<h4 class="card-title text-info">@sicrano</h4>
+								</div>
+								<div class="col-2">
+									<i style="color: #696969;" class="fas fa-times" onclick="mensagemsure('este usuário')" data-toggle="modal" data-target="#sure"></i>
 								</div>
 							</div>
 						</div>
@@ -833,11 +842,14 @@
 						<div class="card-header" style="background-color: #B0E0E6;">
 							<div class="row">
 								<div class="col-2">
-									<i class="fas fa-user-cog py-2 botaotipouser" data-toggle="tooltip" title="ADM" data-placement="bottom"></i>
+									<i class="fas fa-user-cog py-2 botaotipouser"></i>
 								</div>
-								<div class="col-10">
+								<div class="col-8">
 									<h4 class="card-title text-info">@jessica</h4>
 								</div>
+								<div class="col-2">
+									<i style="color: #696969;" class="fas fa-times" onclick="mensagemsure('este usuário')" data-toggle="modal" data-target="#sure"></i>
+								</div>
 							</div>
 						</div>
 						<div style="font-size: 0.8em; background-color: #F0FFFF; padding: 0;" class="card-body">
@@ -868,11 +880,14 @@
 						<div class="card-header" style="background-color: #B0E0E6;">
 							<div class="row">
 								<div class="col-2">
-									<i class="fas fa-user-cog py-2 botaotipouser" data-toggle="tooltip" title="ADM" data-placement="bottom"></i>
+									<i class="fas fa-user-cog py-2 botaotipouser"></i>
 								</div>
-								<div class="col-10">
+								<div class="col-8">
 									<h4 class="card-title text-info">@Steven</h4>
 								</div>
+								<div class="col-2">
+									<i style="color: #696969;" class="fas fa-times" onclick="mensagemsure('este usuário')" data-toggle="modal" data-target="#sure"></i>
+								</div>
 							</div>
 						</div>
 						<div style="font-size: 0.8em; background-color: #F0FFFF; padding: 0;" class="card-body">
@@ -903,10 +918,13 @@
 						<div class="card-header" style="background-color: #B0E0E6;">
 							<div class="row">
 								<div class="col-2">
-									<i class="fas fa-user-cog py-2 botaotipouser" data-toggle="tooltip" title="ADM" data-placement="bottom"></i>
+									<i class="fas fa-user-cog py-2 botaotipouser"></i>
 								</div>
-								<div class="col-10">
+								<div class="col-8">
 									<h4 class="card-title text-info">@Paola</h4>
+								</div>
+								<div class="col-2">
+									<i style="color: #696969;" class="fas fa-times" onclick="mensagemsure('este usuário')" data-toggle="modal" data-target="#sure"></i>
 								</div>
 							</div>
 						</div>
@@ -1473,7 +1491,7 @@
 				if ($(this).hasClass('fa-user')) {
 					$(this).addClass('fa-user-cog').removeClass('fa-user');
 				}
-				else {	
+				else if ($(this).hasClass('fa-user-cog')) {
    					$(this).addClass('fa-user').removeClass('fa-user-cog');
 				}
 			});
