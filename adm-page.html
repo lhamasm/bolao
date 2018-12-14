@@ -310,7 +310,7 @@
 										</ul>
 
 										<input type="text" id="entradaIngrediente">
-										<button onclick="addIngrediente();">+</button>
+										<button type="button" onclick="addIngrediente();">+</button>
 									</div>
 								</div>
 								<div class="col-6">
@@ -591,7 +591,7 @@
 			<div class="container">
 				<div class="row mt-4">
 					<div class="col-3"></div>
-					<div class="col-6 text-center justify-content-center">
+					<div class="col-6">
 						<form>
 							<div class="row">
 								<div class="col-md-6">
@@ -643,12 +643,12 @@
 
 								<div class="row">
 									<div class="col-md-5">
-										<input class="form-control" type="number" name="participantes" id="participantes">
-										<input class="mt-1" type="checkbox" name="unlimited" id="unlimited">
+										<input class="form-control" type="number" name="participantes">
+										<input class="mt-1" type="checkbox" name="unlimited">
 										<label for="unlimited">Sem limite</label>
 									</div>
 									<div class="offset-2 col-md-5">
-										<input class="form-control" type="date" name="data" id="data">
+										<input class="form-control" type="date" name="data">
 									</div>
 								</div>
 							</div>
@@ -672,20 +672,20 @@
 								<label class="titulo" for="tipo-jogo">Tipo de Jogo <span class="text-danger">*</span></label>
 								<div class="row checkbox-group required">
 									<div class="col-md-6">
-										<input type="checkbox" name="caixa-misteriosa" id="caixa-misteriosa">
+										<input type="checkbox" name="caixa-misteriosa">
 										<label for="caixa-misteriosa">Prova da Caixa Misteriosa</label><br>
-										<input type="checkbox" name="equipes" id="equipes">
+										<input type="checkbox" name="equipes">
 										<label for="equipes">Prova em Equipes</label><br>
-										<input type="checkbox" name="eliminacao" id="eliminacao">
+										<input type="checkbox" name="eliminacao">
 										<label for="eliminacao">Prova de Eliminação</label>
 									</div>
 
 									<div class="col-md-6">
-										<input type="checkbox" name="repescagem" id="repescagem">
+										<input type="checkbox" name="repescagem">
 										<label for="repescagem">Prova de Repescagem</label><br>
-										<input type="checkbox" name="semifinal" id="semifinal">
+										<input type="checkbox" name="semifinal">
 										<label for="semifinal">Semifinal</label><br>
-										<input type="checkbox" name="final" id="final">
+										<input type="checkbox" name="final">
 										<label for="final">Final</label>
 									</div>
 								</div>
@@ -693,16 +693,16 @@
 
 							<div class="form-group">
 								<label class="titulo">Tipo de Aposta <span class="text-danger">*</span></label><br>
-								<input type="radio" name="tipo-aposta" id="tema" value="tema" required>
+								<input type="radio" name="tipo-aposta" value="tema" required>
 								<label for="tema">Qual será o tema da prova?</label><br>
-								<input type="radio" name="tipo-aposta" id="ingredientes" value="ingredientes">
+								<input type="radio" name="tipo-aposta" value="ingredientes">
 								<label for="ingredientes">Quais serão os ingredientes utilizados na prova?</label><br>
-								<input type="radio" name="tipo-aposta" id="ganhador" value="ganhador">
+								<input type="radio" name="tipo-aposta" value="ganhador">
 								<label for="ganhador">Quem será que vai ganhar?</label><br>
-								<input type="radio" name="tipo-aposta" id="perdedor" value="perdedor">
+								<input type="radio" name="tipo-aposta" value="perdedor">
 								<label for="perdedor">Quem será que vai perder/eliminado?</label><br>
-								<input type="radio" name="tipo-aposta" id="outro" value="outro">
-								<input type="text" id="outra-opcao" name="outra-opcao" placeholder="Outro">
+								<input type="radio" name="tipo-aposta" value="outro">
+								<input type="text" name="outra-opcao" placeholder="Outro">
 							</div>				
 
 							<button class="btn btn-info btn-block my-2 py-2" type="submit">Criar Bolão</button>		
@@ -713,8 +713,230 @@
 			</div>
 		</section>
 
-		<section id="usuarios" style="display: none;">
-			
+		<section class="container" id="usuarios" style="display: none;">
+			<div class="row mt-2">
+				<div class="col-7"></div>
+					<div class="col-4 ml-2">
+						<input class="filterBolao" type="text" placeholder="Digite CPF, username ou nome do usuário" id="filterBolao" name="filterBolao">
+					</div>
+				<div class="col-1"></div>
+			</div>
+			<div class="row">
+				<div class="col-1"></div>
+				<div class="card-columns col-10">
+					<div class="card">
+						<div class="card-header" style="background-color: #B0E0E6;">
+							<div class="row">
+								<div class="col-2">
+									<i class="fas fa-user-cog py-2 botaotipouser" data-toggle="tooltip" title="ADM" data-placement="bottom"></i>
+								</div>
+								<div class="col-10">
+									<h4 class="card-title text-info">@fulano</h4>
+								</div>
+							</div>
+						</div>
+						<div style="font-size: 0.8em; background-color: #F0FFFF; padding: 0;" class="card-body">
+							<div class="px-3 pt-3">
+								<div>
+									<label for="nomeusuario">Nome: </label><p name="nomeusuario">Fulano de Tal da Silva</p>
+									<label for="emailusuario">Email: </label><p name="emailusuario">fulanodetal999@masterchef.com.br</p>
+									<label for="ddnusuario">Data de Nascimento: </label><p name="ddnusuario">31/21/88</p>
+									<label for="generosuario">Gênero: </label><p name="generousuario">Feminino</p>
+								</div>
+								<div id="cardfulano"  style="display: none;">
+									<label for="rgusuario">RG: </label><p name="rgusuario">52-478-147-22</p>
+									<label for="cpfusuario">CPF: </label><p name="cpfusuario">014-458-257-28</p>
+									<label for="telefoneusuario">Telefone: </label><p name="telefoneusuario">(45)47896-5231</p>
+									<label for="celularusuario">Celular: </label><p name="celularusuario">(45)47896-5231</p>
+									<label for="bancousuario">Banco: </label><p name="bancousuario">014</p>
+									<label for="agenciausuario">Agência: </label><p name="agenciausuario">5231</p>
+									<label for="contausuario">Conta: </label><p name="contausuario">47896</p>
+									<label for="boloesusuario">Bolões administrados: </label><p name="boloesusuario">"Bolão da Galera" "Quem quer ser um Chef?" "Metendo a colher" "A tampa da minha panela"</p>
+								</div>
+							</div>
+							<div class="text-center justify-content-center" style="padding: 0;">
+								<button type="button" class="VerMais btn" onclick="infousuario('cardfulano');">Ver mais</button>	
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" style="background-color: #B0E0E6;">
+							<div class="row">
+								<div class="col-2">
+									<i class="fas fa-user-cog py-2 botaotipouser" data-toggle="tooltip" title="ADM" data-placement="bottom"></i>
+								</div>
+								<div class="col-10">
+									<h4 class="card-title text-info">@beltrano</h4>
+								</div>
+							</div>
+						</div>
+						<div style="font-size: 0.8em; background-color: #F0FFFF; padding: 0;" class="card-body">
+							<div class="px-3 pt-3">
+								<div>
+									<label for="nomeusuario">Nome: </label><p name="nomeusuario">Fulano de Tal da Silva</p>
+									<label for="emailusuario">Email: </label><p name="emailusuario">fulanodetal999@masterchef.com.br</p>
+									<label for="ddnusuario">Data de Nascimento: </label><p name="ddnusuario">31/21/88</p>
+									<label for="generosuario">Gênero: </label><p name="generousuario">Feminino</p>
+								</div>
+								<div id="cardbeltrano"  style="display: none;">
+									<label for="rgusuario">RG: </label><p name="rgusuario">52-478-147-22</p>
+									<label for="cpfusuario">CPF: </label><p name="cpfusuario">014-458-257-28</p>
+									<label for="telefoneusuario">Telefone: </label><p name="telefoneusuario">(45)47896-5231</p>
+									<label for="celularusuario">Celular: </label><p name="celularusuario">(45)47896-5231</p>
+									<label for="bancousuario">Banco: </label><p name="bancousuario">014</p>
+									<label for="agenciausuario">Agência: </label><p name="agenciausuario">5231</p>
+									<label for="contausuario">Conta: </label><p name="contausuario">47896</p>
+									<label for="boloesusuario">Bolões administrados: </label><p name="boloesusuario">"Bolão da Galera" "Quem quer ser um Chef?" "Metendo a colher" "A tampa da minha panela"</p>
+								</div>
+							</div>
+							<div class="text-center justify-content-center" style="padding: 0;">
+								<button type="button" class="VerMais btn" onclick="infousuario('cardbeltrano');">Ver mais</button>	
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" style="background-color: #B0E0E6;">
+							<div class="row">
+								<div class="col-2">
+									<i class="fas fa-user-cog py-2 botaotipouser" data-toggle="tooltip" title="ADM" data-placement="bottom"></i>
+								</div>
+								<div class="col-10">
+									<h4 class="card-title text-info">@sicrano</h4>
+								</div>
+							</div>
+						</div>
+						<div style="font-size: 0.8em; background-color: #F0FFFF; padding: 0;" class="card-body">
+							<div class="px-3 pt-3">
+								<div>
+									<label for="nomeusuario">Nome: </label><p name="nomeusuario">Sicrano de Tal da Silva</p>
+									<label for="emailusuario">Email: </label><p name="emailusuario">fulanodetal999@masterchef.com.br</p>
+									<label for="ddnusuario">Data de Nascimento: </label><p name="ddnusuario">31/21/88</p>
+									<label for="generosuario">Gênero: </label><p name="generousuario">Feminino</p>
+								</div>
+								<div id="cardsicrano"  style="display: none;">
+									<label for="rgusuario">RG: </label><p name="rgusuario">52-478-147-22</p>
+									<label for="cpfusuario">CPF: </label><p name="cpfusuario">014-458-257-28</p>
+									<label for="telefoneusuario">Telefone: </label><p name="telefoneusuario">(45)47896-5231</p>
+									<label for="celularusuario">Celular: </label><p name="celularusuario">(45)47896-5231</p>
+									<label for="bancousuario">Banco: </label><p name="bancousuario">014</p>
+									<label for="agenciausuario">Agência: </label><p name="agenciausuario">5231</p>
+									<label for="contausuario">Conta: </label><p name="contausuario">47896</p>
+									<label for="boloesusuario">Bolões administrados: </label><p name="boloesusuario">"Bolão da Galera" "Quem quer ser um Chef?" "Metendo a colher" "A tampa da minha panela"</p>
+								</div>
+							</div>
+							<div class="text-center justify-content-center" style="padding: 0;">
+								<button type="button" class="VerMais btn" onclick="infousuario('cardsicrano');">Ver mais</button>	
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" style="background-color: #B0E0E6;">
+							<div class="row">
+								<div class="col-2">
+									<i class="fas fa-user-cog py-2 botaotipouser" data-toggle="tooltip" title="ADM" data-placement="bottom"></i>
+								</div>
+								<div class="col-10">
+									<h4 class="card-title text-info">@jessica</h4>
+								</div>
+							</div>
+						</div>
+						<div style="font-size: 0.8em; background-color: #F0FFFF; padding: 0;" class="card-body">
+							<div class="px-3 pt-3">
+								<div>
+									<label for="nomeusuario">Nome: </label><p name="nomeusuario">Fulano de Tal da Silva</p>
+									<label for="emailusuario">Email: </label><p name="emailusuario">fulanodetal999@masterchef.com.br</p>
+									<label for="ddnusuario">Data de Nascimento: </label><p name="ddnusuario">31/21/88</p>
+									<label for="generosuario">Gênero: </label><p name="generousuario">Feminino</p>
+								</div>
+								<div id="cardjessica"  style="display: none;">
+									<label for="rgusuario">RG: </label><p name="rgusuario">52-478-147-22</p>
+									<label for="cpfusuario">CPF: </label><p name="cpfusuario">014-458-257-28</p>
+									<label for="telefoneusuario">Telefone: </label><p name="telefoneusuario">(45)47896-5231</p>
+									<label for="celularusuario">Celular: </label><p name="celularusuario">(45)47896-5231</p>
+									<label for="bancousuario">Banco: </label><p name="bancousuario">014</p>
+									<label for="agenciausuario">Agência: </label><p name="agenciausuario">5231</p>
+									<label for="contausuario">Conta: </label><p name="contausuario">47896</p>
+									<label for="boloesusuario">Bolões administrados: </label><p name="boloesusuario">"Bolão da Galera" "Quem quer ser um Chef?" "Metendo a colher" "A tampa da minha panela"</p>
+								</div>
+							</div>
+							<div class="text-center justify-content-center" style="padding: 0;">
+								<button type="button" class="VerMais btn" onclick="infousuario('cardjessica');">Ver mais</button>	
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" style="background-color: #B0E0E6;">
+							<div class="row">
+								<div class="col-2">
+									<i class="fas fa-user-cog py-2 botaotipouser" data-toggle="tooltip" title="ADM" data-placement="bottom"></i>
+								</div>
+								<div class="col-10">
+									<h4 class="card-title text-info">@Steven</h4>
+								</div>
+							</div>
+						</div>
+						<div style="font-size: 0.8em; background-color: #F0FFFF; padding: 0;" class="card-body">
+							<div class="px-3 pt-3">
+								<div>
+									<label for="nomeusuario">Nome: </label><p name="nomeusuario">Fulano de Tal da Silva</p>
+									<label for="emailusuario">Email: </label><p name="emailusuario">fulanodetal999@masterchef.com.br</p>
+									<label for="ddnusuario">Data de Nascimento: </label><p name="ddnusuario">31/21/88</p>
+									<label for="generosuario">Gênero: </label><p name="generousuario">Feminino</p>
+								</div>
+								<div id="cardsteven"  style="display: none;">
+									<label for="rgusuario">RG: </label><p name="rgusuario">52-478-147-22</p>
+									<label for="cpfusuario">CPF: </label><p name="cpfusuario">014-458-257-28</p>
+									<label for="telefoneusuario">Telefone: </label><p name="telefoneusuario">(45)47896-5231</p>
+									<label for="celularusuario">Celular: </label><p name="celularusuario">(45)47896-5231</p>
+									<label for="bancousuario">Banco: </label><p name="bancousuario">014</p>
+									<label for="agenciausuario">Agência: </label><p name="agenciausuario">5231</p>
+									<label for="contausuario">Conta: </label><p name="contausuario">47896</p>
+									<label for="boloesusuario">Bolões administrados: </label><p name="boloesusuario">"Bolão da Galera" "Quem quer ser um Chef?" "Metendo a colher" "A tampa da minha panela"</p>
+								</div>
+							</div>
+							<div class="text-center justify-content-center" style="padding: 0;">
+								<button type="button" class="VerMais btn" onclick="infousuario('cardsteven');">Ver mais</button>	
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" style="background-color: #B0E0E6;">
+							<div class="row">
+								<div class="col-2">
+									<i class="fas fa-user-cog py-2 botaotipouser" data-toggle="tooltip" title="ADM" data-placement="bottom"></i>
+								</div>
+								<div class="col-10">
+									<h4 class="card-title text-info">@Paola</h4>
+								</div>
+							</div>
+						</div>
+						<div style="font-size: 0.8em; background-color: #F0FFFF; padding: 0;" class="card-body">
+							<div class="px-3 pt-3">
+								<div>
+									<label for="nomeusuario">Nome: </label><p name="nomeusuario">Fulano de Tal da Silva</p>
+									<label for="emailusuario">Email: </label><p name="emailusuario">fulanodetal999@masterchef.com.br</p>
+									<label for="ddnusuario">Data de Nascimento: </label><p name="ddnusuario">31/21/88</p>
+									<label for="generosuario">Gênero: </label><p name="generousuario">Feminino</p>
+								</div>
+								<div id="cardpaola"  style="display: none;">
+									<label for="rgusuario">RG: </label><p name="rgusuario">52-478-147-22</p>
+									<label for="cpfusuario">CPF: </label><p name="cpfusuario">014-458-257-28</p>
+									<label for="telefoneusuario">Telefone: </label><p name="telefoneusuario">(45)47896-5231</p>
+									<label for="celularusuario">Celular: </label><p name="celularusuario">(45)47896-5231</p>
+									<label for="bancousuario">Banco: </label><p name="bancousuario">014</p>
+									<label for="agenciausuario">Agência: </label><p name="agenciausuario">5231</p>
+									<label for="contausuario">Conta: </label><p name="contausuario">47896</p>
+									<label for="boloesusuario">Bolões administrados: </label><p name="boloesusuario">"Bolão da Galera" "Quem quer ser um Chef?" "Metendo a colher" "A tampa da minha panela"</p>
+								</div>
+							</div>
+							<div class="text-center justify-content-center" style="padding: 0;">
+								<button type="button" class="VerMais btn" onclick="infousuario('cardpaola');">Ver mais</button>	
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-1"></div>
+			</div>
 		</section>
 
 		<section id="boloes" style="display: none;">
@@ -1230,7 +1452,7 @@
     			
 
     		function addIngrediente(){
-    			document.getElementById('ingredientes').innerHTML += '<li contenteditable="true" style="font-size: 0.8em;">' + document.getElementById('entradaIngrediente').value + '</li>';
+    			document.getElementById('ingredientesm').innerHTML += '<li contenteditable="true" style="font-size: 0.8em;">' + document.getElementById('entradaIngrediente').value + '</li>';
     			document.getElementById('entradaIngrediente').value = '';
     		}
 
@@ -1247,6 +1469,24 @@
    				$(this).css("background-color", cor);
 			});
 
+			$('#usuarios i').click(function(event) {
+				if ($(this).hasClass('fa-user')) {
+					$(this).addClass('fa-user-cog').removeClass('fa-user');
+				}
+				else {	
+   					$(this).addClass('fa-user').removeClass('fa-user-cog');
+				}
+			});
+
+			$('#usuarios button').click(function(event) {
+				if ($(this).hasClass('fa-user')) {
+					$(this).addClass('fa-user-cog').removeClass('fa-user');
+				}
+				else {	
+   					$(this).addClass('fa-user').removeClass('fa-user-cog');
+				}
+			});
+
 			function liberar_senha() {
 	    		if(document.getElementById('tipo-bolao').value == "privado"){
 	    			document.getElementById('senha').style.display = "block";
@@ -1254,6 +1494,25 @@
 	    			document.getElementById('senha').style.display = "none";
 	    		}
 	    	}
+
+	    	function create_alert(message){
+				document.getElementById('escolhas').innerHTML += '<div class="alert alert-info alert-dismissible w-100"><a class="close" data-dismiss="alert">&times;</a><span>'+ message +'</span></div>';
+			}
+
+	    	function carrega_escolha() {
+	    		create_alert(document.getElementById('opcao').value); 
+	    	}
+
+	    	function infousuario(id) {
+	    		if(document.getElementById('botaoVerMais').innerHTML == "Ver mais"){
+	    			document.getElementById('botaoVerMais').innerHTML = "Esconder";
+	    			document.getElementById(id).style.display = "block";
+	    		} else {
+	    			document.getElementById('botaoVerMais').innerHTML = "Ver mais";
+	    			document.getElementById(id).style.display = "none";
+	    		}
+	    	}
+
 		</script>
 	</body>
 </html>
