@@ -743,7 +743,7 @@
 									<label for="ddnusuario">Data de Nascimento: </label><p name="ddnusuario">31/21/88</p>
 									<label for="generosuario">Gênero: </label><p name="generousuario">Feminino</p>
 								</div>
-								<div id="cardfulano"  style="display: none;">
+								<div class="divescondida"  style="display: none;">
 									<label for="rgusuario">RG: </label><p name="rgusuario">52-478-147-22</p>
 									<label for="cpfusuario">CPF: </label><p name="cpfusuario">014-458-257-28</p>
 									<label for="telefoneusuario">Telefone: </label><p name="telefoneusuario">(45)47896-5231</p>
@@ -778,7 +778,7 @@
 									<label for="ddnusuario">Data de Nascimento: </label><p name="ddnusuario">31/21/88</p>
 									<label for="generosuario">Gênero: </label><p name="generousuario">Feminino</p>
 								</div>
-								<div id="cardbeltrano"  style="display: none;">
+								<div class="divescondida"  style="display: none;">
 									<label for="rgusuario">RG: </label><p name="rgusuario">52-478-147-22</p>
 									<label for="cpfusuario">CPF: </label><p name="cpfusuario">014-458-257-28</p>
 									<label for="telefoneusuario">Telefone: </label><p name="telefoneusuario">(45)47896-5231</p>
@@ -813,7 +813,7 @@
 									<label for="ddnusuario">Data de Nascimento: </label><p name="ddnusuario">31/21/88</p>
 									<label for="generosuario">Gênero: </label><p name="generousuario">Feminino</p>
 								</div>
-								<div id="cardsicrano"  style="display: none;">
+								<div class="divescondida"  style="display: none;">
 									<label for="rgusuario">RG: </label><p name="rgusuario">52-478-147-22</p>
 									<label for="cpfusuario">CPF: </label><p name="cpfusuario">014-458-257-28</p>
 									<label for="telefoneusuario">Telefone: </label><p name="telefoneusuario">(45)47896-5231</p>
@@ -848,7 +848,7 @@
 									<label for="ddnusuario">Data de Nascimento: </label><p name="ddnusuario">31/21/88</p>
 									<label for="generosuario">Gênero: </label><p name="generousuario">Feminino</p>
 								</div>
-								<div id="cardjessica"  style="display: none;">
+								<div class="divescondida"  style="display: none;">
 									<label for="rgusuario">RG: </label><p name="rgusuario">52-478-147-22</p>
 									<label for="cpfusuario">CPF: </label><p name="cpfusuario">014-458-257-28</p>
 									<label for="telefoneusuario">Telefone: </label><p name="telefoneusuario">(45)47896-5231</p>
@@ -883,7 +883,7 @@
 									<label for="ddnusuario">Data de Nascimento: </label><p name="ddnusuario">31/21/88</p>
 									<label for="generosuario">Gênero: </label><p name="generousuario">Feminino</p>
 								</div>
-								<div id="cardsteven"  style="display: none;">
+								<div class="divescondida"  style="display: none;">
 									<label for="rgusuario">RG: </label><p name="rgusuario">52-478-147-22</p>
 									<label for="cpfusuario">CPF: </label><p name="cpfusuario">014-458-257-28</p>
 									<label for="telefoneusuario">Telefone: </label><p name="telefoneusuario">(45)47896-5231</p>
@@ -918,7 +918,7 @@
 									<label for="ddnusuario">Data de Nascimento: </label><p name="ddnusuario">31/21/88</p>
 									<label for="generosuario">Gênero: </label><p name="generousuario">Feminino</p>
 								</div>
-								<div id="cardpaola"  style="display: none;">
+								<div class="divescondida"  style="display: none;">
 									<label for="rgusuario">RG: </label><p name="rgusuario">52-478-147-22</p>
 									<label for="cpfusuario">CPF: </label><p name="cpfusuario">014-458-257-28</p>
 									<label for="telefoneusuario">Telefone: </label><p name="telefoneusuario">(45)47896-5231</p>
@@ -1479,11 +1479,13 @@
 			});
 
 			$('#usuarios button').click(function(event) {
-				if ($(this).hasClass('fa-user')) {
-					$(this).addClass('fa-user-cog').removeClass('fa-user');
+				if ($(this).html() == "Ver mais") {
+					$(this).parent().parent().find('.divescondida').css("display", "block");
+					$(this).html("Esconder");
 				}
 				else {	
-   					$(this).addClass('fa-user').removeClass('fa-user-cog');
+					$(this).parent().parent().find('.divescondida').css("display", "none");
+					$(this).html("Ver mais");
 				}
 			});
 
@@ -1503,7 +1505,7 @@
 	    		create_alert(document.getElementById('opcao').value); 
 	    	}
 
-	    	function infousuario(id) {
+	    	/*function infousuario(id) {
 	    		if(document.getElementById('botaoVerMais').innerHTML == "Ver mais"){
 	    			document.getElementById('botaoVerMais').innerHTML = "Esconder";
 	    			document.getElementById(id).style.display = "block";
@@ -1511,7 +1513,7 @@
 	    			document.getElementById('botaoVerMais').innerHTML = "Ver mais";
 	    			document.getElementById(id).style.display = "none";
 	    		}
-	    	}
+	    	}*/
 
 		</script>
 	</body>
