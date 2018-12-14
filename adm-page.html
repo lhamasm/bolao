@@ -958,7 +958,91 @@
 		</section>
 
 		<section id="boloes" style="display: none;">
-			
+			<div class="row mt-2">
+				<div class="col-7"></div>
+					<div class="col-4 ml-2">
+						<input class="filterBolao" type="text" placeholder="Digite Campeonato, Criador ou nome do usuário" id="filtrob" name="filtrob">
+					</div>
+				<div class="col-1"></div>
+			</div>
+			<div class="row">
+				<div class="col-1"></div>
+				<div class="card-columns col-10">
+					<!-- padrão bolão de administrador -->
+					<div class="card">
+						<div class="card-header" style="background-color: #DB7093;">
+							<div class="row">
+								<div class="col-2">
+									<i class="fas fa-user-cog py-2"></i>
+								</div>
+								<div class="col-8">
+									<h4 class="card-title text-white">Bolão da Galera</h4>
+								</div>
+								<div class="col-2">
+									<i style="color: #696969;" class="fas fa-times" onclick="mensagemsure('este bolão')" data-toggle="modal" data-target="#sure"></i>
+								</div>
+							</div>
+						</div>
+						<div style="font-size: 0.8em; background-color: #FFF0F5; padding: 0;" class="card-body">
+							<div class="px-3 pt-3">
+								<div>
+									<label for="campeonatobolao">Campeonato: </label><p name="campeonatobolao">Profissional</p>
+									<label for="tipobolao">Tipo: </label><p name="tipobolao">Público</p>
+									<label for="criadorbolao">Criador: </label><p name="criadorbolao">Sistema</p>
+									<label for="descricaobolao">Descrição: </label><p name="descricaobolao">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet purus eget volutpat ultricies. Aliquam vitae nibh in nisi semper aliquet.</p>
+									<label for="tipojogo">Tipos de Jogo: </label><p name="tipojogo">"Caixa Misteriosa" "Eliminação"</p>
+								</div>
+								<div class="divescondida"  style="display: none;">
+									<label for="tipoaposta">Tipos de Aposta: </label><p name="tipoaposta">"Quais os ingredientes...?"</p>
+									<label for="escolhasaposta">Escolhas de Aposta: </label><p name="escolhasaposta">"blá blá blá" "meh meh meh meh" "tuc tuc tuc"</p>
+									<label for="numeroparticipantes">Número de participantes: </label><p name="numeroparticipantes">5/10</p>
+									<label for="datatermino">Data de Término: </label><p name="datatermino">12/78/5698</p>
+								</div>
+							</div>
+							<div class="text-center justify-content-center" style="padding: 0;">
+								<button type="button" class="VerMais btn">Ver mais</button>	
+							</div>
+						</div>
+					</div>
+					<!-- padrão bolão de usuário -->
+					<div class="card"> 
+						<div class="card-header" style="background-color: #DB7093;">
+							<div class="row">
+								<div class="col-2">
+									<i class="fas fa-user py-2"></i>
+								</div>
+								<div class="col-8">
+									<h4 class="card-title text-white">Metendo a Colher</h4>
+								</div>
+								<div class="col-2">
+									<i style="color: #696969;" class="fas fa-times" onclick="mensagemsure('este bolão')" data-toggle="modal" data-target="#sure"></i>
+								</div>
+							</div>
+						</div>
+						<div style="font-size: 0.8em; background-color: #FFF0F5; padding: 0;" class="card-body">
+							<div class="px-3 pt-3">
+								<div>
+									<label for="campeonatobolao">Campeonato: </label><p name="campeonatobolao">Amadores</p>
+									<label for="tipobolao">Tipo: </label><p name="tipobolao">Privado</p>
+									<label for="criadorbolao">Criador: </label><p name="criadorbolao">@Jorel</p>
+									<label for="descricaobolao">Descrição: </label><p name="descricaobolao">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet purus eget volutpat ultricies. Aliquam vitae nibh in nisi semper aliquet.</p>
+									<label for="tipojogo">Tipos de Jogo: </label><p name="tipojogo">"Caixa Misteriosa" "Eliminação" "Final"</p>
+								</div>
+								<div class="divescondida"  style="display: none;">
+									<label for="tipoaposta">Tipos de Aposta: </label><p name="tipoaposta">"Quem será que vai ganhar..?"</p>
+									<label for="escolhasaposta">Escolhas de Aposta: </label><p name="escolhasaposta">"blá blá blá" "meh meh meh meh" "tuc tuc tuc" "hey mamacita"</p>
+									<label for="numeroparticipantes">Número de participantes: </label><p name="numeroparticipantes">7/10</p>
+									<label for="datatermino">Data de Término: </label><p name="datatermino">12/78/1875</p>
+								</div>
+							</div>
+							<div class="text-center justify-content-center" style="padding: 0;">
+								<button type="button" class="VerMais btn">Ver mais</button>	
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-1"></div>
+			</div>
 		</section>
 
 		<!-- modal excluir alguma coisa -->
@@ -1496,7 +1580,7 @@
 				}
 			});
 
-			$('#usuarios button').click(function(event) {
+			$('#usuarios button, #boloes button').click(function(event) {
 				if ($(this).html() == "Ver mais") {
 					$(this).parent().parent().find('.divescondida').css("display", "block");
 					$(this).html("Esconder");
@@ -1527,6 +1611,13 @@
   				$("#filtro").on("keyup", function() {
     				var value = $(this).val().toLowerCase();
     				$("#usuarios .card").filter(function() {
+      					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    				});
+  				});
+
+  				$("#filtrob").on("keyup", function() {
+    				var value = $(this).val().toLowerCase();
+    				$("#boloes .card").filter(function() {
       					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     				});
   				});
