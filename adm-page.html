@@ -717,7 +717,7 @@
 			<div class="row mt-2">
 				<div class="col-7"></div>
 					<div class="col-4 ml-2">
-						<input class="filterBolao" type="text" placeholder="Digite CPF, username ou nome do usuário" id="filterBolao" name="filterBolao">
+						<input class="filterBolao" type="text" placeholder="Digite CPF, username ou nome do usuário" id="filtro" name="filtro">
 					</div>
 				<div class="col-1"></div>
 			</div>
@@ -755,7 +755,7 @@
 								</div>
 							</div>
 							<div class="text-center justify-content-center" style="padding: 0;">
-								<button type="button" class="VerMais btn" onclick="infousuario('cardfulano');">Ver mais</button>	
+								<button type="button" class="VerMais btn">Ver mais</button>	
 							</div>
 						</div>
 					</div>
@@ -790,7 +790,7 @@
 								</div>
 							</div>
 							<div class="text-center justify-content-center" style="padding: 0;">
-								<button type="button" class="VerMais btn" onclick="infousuario('cardbeltrano');">Ver mais</button>	
+								<button type="button" class="VerMais btn">Ver mais</button>	
 							</div>
 						</div>
 					</div>
@@ -825,7 +825,7 @@
 								</div>
 							</div>
 							<div class="text-center justify-content-center" style="padding: 0;">
-								<button type="button" class="VerMais btn" onclick="infousuario('cardsicrano');">Ver mais</button>	
+								<button type="button" class="VerMais btn">Ver mais</button>	
 							</div>
 						</div>
 					</div>
@@ -860,7 +860,7 @@
 								</div>
 							</div>
 							<div class="text-center justify-content-center" style="padding: 0;">
-								<button type="button" class="VerMais btn" onclick="infousuario('cardjessica');">Ver mais</button>	
+								<button type="button" class="VerMais btn">Ver mais</button>	
 							</div>
 						</div>
 					</div>
@@ -895,7 +895,7 @@
 								</div>
 							</div>
 							<div class="text-center justify-content-center" style="padding: 0;">
-								<button type="button" class="VerMais btn" onclick="infousuario('cardsteven');">Ver mais</button>	
+								<button type="button" class="VerMais btn">Ver mais</button>	
 							</div>
 						</div>
 					</div>
@@ -930,7 +930,7 @@
 								</div>
 							</div>
 							<div class="text-center justify-content-center" style="padding: 0;">
-								<button type="button" class="VerMais btn" onclick="infousuario('cardpaola');">Ver mais</button>	
+								<button type="button" class="VerMais btn">Ver mais</button>	
 							</div>
 						</div>
 					</div>
@@ -1505,15 +1505,14 @@
 	    		create_alert(document.getElementById('opcao').value); 
 	    	}
 
-	    	/*function infousuario(id) {
-	    		if(document.getElementById('botaoVerMais').innerHTML == "Ver mais"){
-	    			document.getElementById('botaoVerMais').innerHTML = "Esconder";
-	    			document.getElementById(id).style.display = "block";
-	    		} else {
-	    			document.getElementById('botaoVerMais').innerHTML = "Ver mais";
-	    			document.getElementById(id).style.display = "none";
-	    		}
-	    	}*/
+	    	$(document).ready(function(){
+  				$("#filtro").on("keyup", function() {
+    				var value = $(this).val().toLowerCase();
+    				$("#usuarios .card").filter(function() {
+      					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    				});
+  				});
+			});
 
 		</script>
 	</body>
