@@ -592,121 +592,153 @@
 				<div class="row mt-4">
 					<div class="col-3"></div>
 					<div class="col-6">
-						<form>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label class="titulo" for="campeonato">Campeonato <span class="text-danger">*</span></label>
-										<select class="form-control custom-select" name="campeonato">
-											<option value="profissionais" selected>MasterChef Profissionais</option>
-											<option value="amadores">MasterChef Amadores</option>
-										</select>
-									</div>
-								</div>
-
-								<div class="col-md-6">
-									<div class="form-group">
-										<label class="titulo" for="tipo-bolao">Tipo do Bolão <span class="text-danger">*</span></label>
-										<select class="form-control custom-select" name="tipo-bolao" id="tipo-bolao" onchange="liberar_senha()">
-											<option value="publico" selected>Público</option>
-											<option value="privado">Privado</option>
-										</select>
-									</div>
-
-									<div style="display: none;" id="senha" class="form-group">
-										<label class="titulo" for="pwd">Senha <span class="text-danger">*</span></label>
-										<input class="form-control" type="password" name="pwd">
-									</div>
-								</div>
-
-							</div>
-
-							<div class="form-group">
-								<label class="titulo" for="nome">Nome <span class="text-danger">*</span></label>
-								<input class="form-control" type="text" name="nome" placeholder="Digite o nome para o bolão" required>
-							</div>
-
-							<div class="form-group">
-								<label class="titulo" for="descricao">Descrição</label>
-								<textarea class="form-control" style="resize: none;" name="descricao"></textarea>
-							</div>
-
-							<div class="form-group">
+						<div id="criar-bolao">
+							<form>
 								<div class="row">
 									<div class="col-md-6">
-										<label class="titulo" for="participantes">Número de Participantes</label>
+										<div class="form-group">
+											<label class="titulo" for="campeonato">Campeonato <span class="text-danger">*</span></label>
+											<select class="form-control custom-select" name="campeonato">
+												<option value="profissionais" selected>MasterChef Profissionais</option>
+												<option value="amadores">MasterChef Amadores</option>
+											</select>
+										</div>
 									</div>
-									<div class="offset-1 col-md-5">
-										<label class="titulo" for="data">Data de Término</label>
-									</div>
-								</div>
 
-								<div class="row">
-									<div class="col-md-5">
-										<input class="form-control" type="number" name="participantes">
-										<input class="mt-1" type="checkbox" name="unlimited">
-										<label for="unlimited">Sem limite</label>
-									</div>
-									<div class="offset-2 col-md-5">
-										<input class="form-control" type="date" name="data">
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="titulo" for="escolhas">Escolhas de Aposta <span class="text-danger">*</span></label>
-								<textarea class="form-control mb-2" style="resize: none; display: none;" id="escolhas2" name="escolhas2"></textarea>
-								<div class="mb-2" id="escolhas" style="background-color: #DCDCDC; padding: 0.2em;"></div>
-								<div class="row">
-									<div class="col-md-6 input-group">
-										<input class="form-control" id="opcao" name="opcao" type="text">
-										<div class="input-group-append">
-											<button class="btn btn-info" type="button" onclick="carrega_escolha();"><i class="fas fa-plus"></i></button>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="titulo" for="tipo-bolao">Tipo do Bolão <span class="text-danger">*</span></label>
+											<select class="form-control custom-select" name="tipo-bolao" id="tipo-bolao" disabled>
+												<option value="publico" selected>Público</option>
+											</select>
 										</div>
 									</div>
 
 								</div>
-							</div>
 
-							<div class="form-group">
-								<label class="titulo" for="tipo-jogo">Tipo de Jogo <span class="text-danger">*</span></label>
-								<div class="row checkbox-group required">
-									<div class="col-md-6">
-										<input type="checkbox" name="caixa-misteriosa">
-										<label for="caixa-misteriosa">Prova da Caixa Misteriosa</label><br>
-										<input type="checkbox" name="equipes">
-										<label for="equipes">Prova em Equipes</label><br>
-										<input type="checkbox" name="eliminacao">
-										<label for="eliminacao">Prova de Eliminação</label>
+								<div class="form-group">
+									<label class="titulo" for="nome">Nome <span class="text-danger">*</span></label>
+									<input class="form-control" type="text" name="nome" placeholder="Digite o nome para o bolão" required>
+								</div>
+
+								<div class="form-group">
+									<label class="titulo" for="descricao">Descrição</label>
+									<textarea class="form-control" style="resize: none;" name="descricao"></textarea>
+								</div>
+
+								<div class="form-group">
+									<div class="row">
+										<div class="col-md-6">
+											<label class="titulo" for="participantes">Número de Participantes</label>
+										</div>
+										<div class="offset-1 col-md-5">
+											<label class="titulo" for="data">Data de Término</label>
+										</div>
 									</div>
 
-									<div class="col-md-6">
-										<input type="checkbox" name="repescagem">
-										<label for="repescagem">Prova de Repescagem</label><br>
-										<input type="checkbox" name="semifinal">
-										<label for="semifinal">Semifinal</label><br>
-										<input type="checkbox" name="final">
-										<label for="final">Final</label>
+									<div class="row">
+										<div class="col-md-5">
+											<input class="form-control" type="number" name="participantes">
+											<input class="mt-1" type="checkbox" name="unlimited">
+											<label for="unlimited">Sem limite</label>
+										</div>
+										<div class="offset-2 col-md-5">
+											<input class="form-control" type="date" name="data">
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="titulo" for="escolhas">Escolhas de Aposta <span class="text-danger">*</span></label>
+									<textarea class="form-control mb-2" style="resize: none; display: none;" id="escolhas2" name="escolhas2"></textarea>
+									<div class="mb-2" id="escolhas" style="background-color: #DCDCDC; padding: 0.2em;"></div>
+									<div class="row">
+										<div class="col-md-6 input-group">
+											<input class="form-control" id="opcao" name="opcao" type="text">
+											<div class="input-group-append">
+												<button class="btn btn-info" type="button" onclick="carrega_escolha();"><i class="fas fa-plus"></i></button>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="titulo" for="tipo-jogo">Tipo de Jogo <span class="text-danger">*</span></label>
+									<div class="row checkbox-group required">
+										<div class="col-md-6">
+											<input type="checkbox" name="caixa-misteriosa">
+											<label for="caixa-misteriosa">Prova da Caixa Misteriosa</label><br>
+											<input type="checkbox" name="equipes">
+											<label for="equipes">Prova em Equipes</label><br>
+											<input type="checkbox" name="eliminacao">
+											<label for="eliminacao">Prova de Eliminação</label>
+										</div>
+
+										<div class="col-md-6">
+											<input type="checkbox" name="repescagem">
+											<label for="repescagem">Prova de Repescagem</label><br>
+											<input type="checkbox" name="semifinal">
+											<label for="semifinal">Semifinal</label><br>
+											<input type="checkbox" name="final">
+											<label for="final">Final</label>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="titulo">Tipo de Aposta <span class="text-danger">*</span></label><br>
+									<input type="radio" name="tipo-aposta" value="tema" required>
+									<label for="tema">Qual será o tema da prova?</label><br>
+									<input type="radio" name="tipo-aposta" value="ingredientes">
+									<label for="ingredientes">Quais serão os ingredientes utilizados na prova?</label><br>
+									<input type="radio" name="tipo-aposta" value="ganhador">
+									<label for="ganhador">Quem será que vai ganhar?</label><br>
+									<input type="radio" name="tipo-aposta" value="perdedor">
+									<label for="perdedor">Quem será que vai perder/eliminado?</label><br>
+									<input type="radio" name="tipo-aposta" value="outro">
+									<input type="text" name="outra-opcao" placeholder="Outro">
+								</div>				
+
+								<button class="btn btn-info btn-block my-2 py-2" type="submit" onclick="convidar_apostadores()">Criar Bolão</button>		
+							</form>
+						</div>
+						<div id="convidar-apostadores" style="display: none;">
+							<div class="container mb-3">
+								<div class="row text-center justify-content-center">
+									<div class="align-self-center">
+										<h1 class="titulo text-center py-3 text-info">Convidar Apostadores</h1> 
+										<form class="p-4 shadow">
+											<div class="form-group">
+												<label class="titulo" for="username">Nome de Usuário</label>
+												<div class="input-group">
+													<div class="input-group-prepend">
+														<span class="input-group-text"><i class="far fa-user"></i></span>
+													</div>
+													<input class="form-control" type="text" name="username" id="username">
+												</div>
+											</div>
+
+											<span style="font-family: robotok;">Ou</span>
+
+											<div class="form-group">
+												<label class="titulo" for="email">Email </label>
+												<div class="input-group">
+													<div class="input-group-prepend">
+														<span class="titulo input-group-text">@</span>
+													</div>
+													<input class="form-control" type="text" name="email" id="email">
+												</div>
+
+												<div class="form-group">
+													<button class="btn btn-info my-3 btn-block" type="submit">Convidar</button>
+												</div>
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>
-
-							<div class="form-group">
-								<label class="titulo">Tipo de Aposta <span class="text-danger">*</span></label><br>
-								<input type="radio" name="tipo-aposta" value="tema" required>
-								<label for="tema">Qual será o tema da prova?</label><br>
-								<input type="radio" name="tipo-aposta" value="ingredientes">
-								<label for="ingredientes">Quais serão os ingredientes utilizados na prova?</label><br>
-								<input type="radio" name="tipo-aposta" value="ganhador">
-								<label for="ganhador">Quem será que vai ganhar?</label><br>
-								<input type="radio" name="tipo-aposta" value="perdedor">
-								<label for="perdedor">Quem será que vai perder/eliminado?</label><br>
-								<input type="radio" name="tipo-aposta" value="outro">
-								<input type="text" name="outra-opcao" placeholder="Outro">
-							</div>				
-
-							<button class="btn btn-info btn-block my-2 py-2" type="submit">Criar Bolão</button>		
-						</form>
+						</div>
 					</div>
 					<div class="col-3"></div>
 				</div>
@@ -1343,10 +1375,6 @@
 			var cor = "#d9534f";
 			var contents = $('.changeable').html();
 
-			$(document).ready(function(){
-    			$('[data-toggle="tooltip"]').tooltip();
-			});
-
 			// função que faz as divs campeonato, noticias, ranking e participantes sumirem e aparecerem ao click do menu
 			function show_plz(ash){
 				if(document.getElementById(ash).style.display == "none"){
@@ -1591,14 +1619,6 @@
 				}
 			});
 
-			function liberar_senha() {
-	    		if(document.getElementById('tipo-bolao').value == "privado"){
-	    			document.getElementById('senha').style.display = "block";
-	    		} else {
-	    			document.getElementById('senha').style.display = "none";
-	    		}
-	    	}
-
 	    	function create_alert(message){
 				document.getElementById('escolhas').innerHTML += '<div class="alert alert-info alert-dismissible w-100"><a class="close" data-dismiss="alert">&times;</a><span>'+ message +'</span></div>';
 			}
@@ -1608,6 +1628,8 @@
 	    	}
 
 	    	$(document).ready(function(){
+    			$('[data-toggle="tooltip"]').tooltip();
+
   				$("#filtro").on("keyup", function() {
     				var value = $(this).val().toLowerCase();
     				$("#usuarios .card").filter(function() {
@@ -1622,6 +1644,11 @@
     				});
   				});
 			});
+
+			function convidar_apostadores(){
+	    		document.getElementById('criar-bolao').style.display = "none";
+	    		document.getElementById('convidar-apostadores').style.display = "block";
+	    	}
 
 		</script>
 	</body>
