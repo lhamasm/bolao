@@ -1,5 +1,7 @@
 ﻿<?php
 	session_start();
+
+	$_SESSION['status'];
 ?>
 
 <!doctype html>
@@ -70,6 +72,24 @@
 					<div class="col-auto offset-1 offset-sm-3 col-md-6 offset-md-0 d-flex">
 						<div class="align-self-center">
 							<img class="col-md-auto logo" style="width:7.9em;" src="images/logo-vermelho.png">
+
+							<?php
+								if($_SESSION['status'] == 2) {
+									echo '<div class="alert alert-danger" style="width: 30em; margin-left: 10.9em;">
+									  Já existe um usuário cadastrado com esse CPF.
+									</div>';
+								} elseif($_SESSION['status'] == 3){
+									echo '<div class="alert alert-danger" style="width: 30em; margin-left: 10.9em;">
+									  Senhas incompatíveis.
+									</div>';
+								} elseif($_SESSION['status'] == 4){
+									echo '<div class="alert alert-danger" style="width: 30em; margin-left: 10.9em;">
+									  Emails imcompatíveis.
+									</div>';
+								}
+
+								$_SESSION['status'] = -1;
+							?>
 						
 							<form class="form shadow" method="post" action="php/cadastro.php">
 								<div class="phrase pb-1">

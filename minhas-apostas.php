@@ -5,14 +5,15 @@
 	require_once 'php/usuario.php';
 	require_once 'php/jogo.php';
 	require_once 'php/aposta.php';
-	require_once 'php/apostar.php';
+	//require_once 'php/apostar.php';
 
-	//session_start();
+	session_start();
 
 	$sistema = $_SESSION['sistema'];
 	$boloes = $sistema->getBoloes();
 	$usuarios = $sistema->getUsuarios();
 	$jogos = $sistema->getJogos();
+
 ?>
 
 <!doctype html>
@@ -41,21 +42,21 @@
 			<nav class="navbar navbar-expand-lg text-white navbar-light" style="font-size: 0.9em;">
 				<div class="container">
 					<ul class="navbar-nav">
-						<li class="nav-item"><strong>MASTERCHEF BRASIL 2018 - PROFISSIONAIS</strong> | </li>
-						<li class="nav-item ml-2">POSIÇÃO: posição | </li>
-						<li class="nav-item ml-2">PONTUAÇÃO: pontuação</li>
+						<li class="nav-item"><strong>MASTERCHEF BRASIL 2018 - <?php echo $_SESSION['modalidade'] == 'amadores' ? 'AMADORES' : 'PROFISSIONAIS';?></strong> | </li>
+						<li class="nav-item ml-2">POSIÇÃO: <?php echo $_SESSION["ranking"]; ?> | </li>
+						<li class="nav-item ml-2">PONTUAÇÃO: <?php echo $_SESSION["pontuacao"]; ?></li>
 					</ul>
 
 					<ul class="navbar-nav">
-						<li class="nav-item ml-auto">BEM-VINDO(A) <strong> <?php echo $_SESSION['nome']; ?></strong></li>
+						<li class="nav-item ml-auto">BEM-VINDO(A) <strong> <?php echo $_SESSION["nome"]; ?></strong></li>
 						<!-- trocar de modalidade -->
-						<li class="nav-item ml-4"><a href="#"><i class="fas fa-exchange-alt text-white"></i></a></li>
+						<li class="nav-item ml-4"><a href="pos-login.php"><i class="fas fa-exchange-alt text-white"></i></a></li>
 						<!-- convites -->
 						<li class="nav-item ml-3"><a href="convites.php"><i class="far fa-envelope text-white"></i></a></li>
 						<!-- minha conta -->
-						<li class="nav-item ml-3"><a href="minha-conta.php"><i class="far fa-user text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="minha-conta.php" title="Minha Conta"><i class="far fa-user text-white"></i></a></li>
 						<!-- sair -->
-						<li class="nav-item ml-3"><a href="index.php"><i class="fas fa-sign-out-alt text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="index.php?a=sair"><i class="fas fa-sign-out-alt text-white"></i></a></li>
 					</ul>
 				</div>
 			</nav>
@@ -97,88 +98,140 @@
 			</nav>
 		</section>
 
+		<?php
+			if($_SESSION['status'] == 1){
+				echo '<section style="margin-left: 10em; margin-right: 10em; margin-top: 2em;">';
+				echo '<div class="alert alert-success" style="width: 20em;">
+			            Aposta alterada com sucesso!
+			          </div>'; 
+			    echo '</section>';
+
+	          $_SESSION['status'] = -1;
+			} elseif($_SESSION['status'] == 2){
+				echo '<section style="margin-left: 10em; margin-right: 10em; margin-top: 2em;">';
+				echo '<div class="alert alert-success" style="width: 20em;">
+			            Aposta cancelada com sucesso!
+			          </div>'; 
+			    echo '</section>';
+			}
+		?>
+
 		<section id="apostas">
-			<div class="container">
+			<div class="container scroll">
 
-				<?php
-
+				<?php		
 					for($i = 0; $i < count($usuarios); $i++){
 						if($usuarios[$i]->getCpf() == $_SESSION['login']){
 							$apostas = $usuarios[$i]->getApostas();
-
-
 							if(count($apostas) > 0){
-								for($j=0; $j<count($apostas); $j++){
-									echo '<div id="aposta' . $j+1 . '" class="row">
-											<h5 class="col-md-4">' . ($apostas[$j]->getBolao())->getTitulo() . '</h5>
-											<h5 class="col-md-3"><i class="fas fa-dollar-sign col-md-1"></i>' .  $apostas[$j]->getValor() . '</h5>
-											<h5 class="col-md-4">' . $apostas[$j]->getOpcaoDeAposta() . '</h5>
-											<div class="col-md-1">
-												<button style="padding: 0; background: none; border: none;" data-toggle="modal" data-target="#editAposta"><i class="fas fa-edit mr-3"></i></button>
-												<button style="padding: 0; border: none; background: none;" data-toggle="modal" data-target="#sure"><i class="fas fa-times"></i></button>
-											</div>
+								for($j=1; $j<=count($apostas); $j++){
+									echo '<div id="aposta' . $j . '" class="row">
+											<h5 class="col-md-3">' . $boloes[intval($apostas[$j-1]->getBolao())]->getTitulo() . '</h5>
+											<h5 class="col-md-3"><i class="fas fa-dollar-sign col-md-1"></i>' .  $apostas[$j-1]->getValor() . '</h5>
+											<h5 class="col-md-3">' . $apostas[$j-1]->getOpcaoDeAposta() . '</h5>
+											<h5 class="col-md-2">';
+											echo $apostas[$j-1]->getStatus() == 1 ? 'Ativa' : 'Cancelada'; 
+											echo '</h5>';
+											if($apostas[$j-1]->getStatus() == 1){
+												echo'
+												<div class="col-md-1">
+													<button style="padding: 0; background: none; border: none;" data-toggle="modal" data-target="#editAposta'. $j . '"><i class="fas fa-edit mr-3"></i></button>
+													<button style="padding: 0; border: none; background: none;" data-toggle="modal" data-target="#sure' . $j . '"><i class="fas fa-times"></i></button>
+												</div>';
+											}
+										echo'
 										</div>
 
 										<hr>';
 								}
-							}else {
+
+								$_SESSION['apostas'] = $apostas;
+
+							} else {
 								echo '<h3 class="text-center">Não há apostas cadastradas</h3>';
 							}
-						} 
+						}
 					}
-
 				?>
 				
 			</div>
 
-			<div class="modal" id="sure">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-						<div class="modal-header text-center justify-content-center">
-							<i class="fas fa-exclamation-triangle" style="font-size: 2em; color: #FF002F"></i>
-						</div>
-						<div class="modal-body">
-							<p class="text-center" style="margin: 2em;"><strong>Tem certeza que quer remover sua aposta neste bolão?</strong></p>
-							<div>
-								<button type="button" class="col-6 close" style="padding: 0.5em; background-color: #C0C0C0;" data-dismiss="modal">Cancelar</button>
-								<button type="button" class="col-6 close" style="padding: 0.5em; background-color: #FF0000;" data-dismiss="modal">Sim</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<?php 
+				for($i = 0; $i < count($usuarios); $i++){
+					if($usuarios[$i]->getCpf() == $_SESSION['login']){
+						$apostas = $usuarios[$i]->getApostas();
+						if(count($apostas) > 0){
+							for($j=1; $j<=count($apostas); $j++){
+								echo '<div class="modal" id="sure' . $j . '">
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header text-center justify-content-center">
+												<i class="fas fa-exclamation-triangle" style="font-size: 2em; color: #FF002F"></i>
+											</div>
+											<div class="modal-body">
+												<p class="text-center" style="margin: 2em;"><strong>Tem certeza que quer remover sua aposta neste bolão?</strong></p>
+												<div>
+													<form method="post" action="php/excluirAposta.php">
+														<input type="hidden" id="apostaex-id" name="apostaex-id" value="' . $j .'">
+														<button type="button" class="col-5 btn btn-danger" data-dismiss="modal">Cancelar</button>
+														<button type="submit" class="col-5 btn btn-success">Remover</button>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>';
+							}
+						}
+					}
+				}
+			?>
 
-			<div class="modal" id="editAposta">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-						<div class="modal-header text-center justify-content-center">
-							<h5>Editar Aposta</h5>
-						</div>
-						<div class="modal-body">
-							<form>
-								<div class="form-group">
-									<label style="font-size: 1.2em;"><strong>Nome do Bolão</strong></label>
-								</div>
-								<div class="form-group">
-									<label style="margin-right: 1em;">Valor da Aposta:</label>
-									<input id="valoraposta" name="valoraposta" type="texts">
-								</div>
-								<div class="form-group">
-									<label style="margin-right: 1em;">Opção de Aposta:</label>
-									<select>
-										<option>Opção 1</option>
-										<option>Opção 2</option>
-										<option>Opção 3</option>
-									</select>
-								</div>
-								<div class="text-center justify-content-center">
-									<button class="btn btn-info">Salvar</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
+			<?php
+				for($i = 0; $i < count($usuarios); $i++){
+					if($usuarios[$i]->getCpf() == $_SESSION['login']){
+						$apostas = $usuarios[$i]->getApostas();
+						if(count($apostas) > 0){
+							for($j=1; $j<=count($apostas); $j++){
+								echo '<div class="modal" id="editAposta' . $j . '">
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title">Editar Aposta</h5>
+												<button class="close" data-dismiss="modal">&times</button>
+											</div>
+											<div class="modal-body">
+												<form method="post" action="php/alterar-aposta.php">
+													<div class="form-group">
+														<label style="font-size: 1.2em;"><strong>' . $boloes[intval($apostas[$j-1]->getBolao())]->getTitulo() . '</strong></label>
+													</div>
+													<div class="form-group">
+														<label style="margin-right: 1em;">Valor da Aposta:</label>
+														<input class="valoraposta" id="valoraposta" name="valoraposta" type="texts">
+													</div>
+													<div class="form-group">
+														<label style="margin-right: 1em;">Opção de Aposta:</label>
+														<select id="opcaoAposta" name="opcaoAposta">';
+															$opcoesAposta = $boloes[intval($apostas[$j-1]->getBolao())]->getOpcoesAposta();
+															for($k=0; $k<count($opcoesAposta); $k++){
+																echo '<option>' . $opcoesAposta[$k] . '</option>';
+															}												
+														echo '</select>
+													</div>
+													<input type="hidden" id="aposta-id" name="aposta-id" value="' . $j .'">
+													<div class="text-center justify-content-center">
+														<button class="btn btn-info" type="submit">Salvar</button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>';
+							}
+						}
+					}
+				}
+			?>
 		</section>
 
 		<div class="modal" id="termos">
@@ -281,6 +334,7 @@
 			$('#celular').mask('+00 00 0 0000-0000');
 			$('#agencia').mask('0000-0');
 			$('#conta').mask('00000-0');
+			$('.valoraposta').mask('#.#00,00', {reverse : true});
 
 			function alterar_dados() {
 				document.getElementById('senha').style.display = 'block';

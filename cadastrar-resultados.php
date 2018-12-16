@@ -29,13 +29,13 @@
 					<ul class="navbar-nav">
 						<li class="nav-item ml-auto">BEM-VINDO(A) <strong>ADM</strong></li>
 						<!-- página de usuário -->
-						<li class="nav-item ml-4"><a href="index-pagina-pessoal.html" data-toggle="tooltip" data-placement="bottom" title="Página de usuário"><i class="fas fa-exchange-alt text-white"></i></a></li>
+						<li class="nav-item ml-4"><a href="index-pagina-pessoal.php" data-toggle="tooltip" data-placement="bottom" title="Página de usuário"><i class="fas fa-exchange-alt text-white"></i></a></li>
 						<!-- bugs && convites -->
 						<li class="nav-item ml-3"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Caixa de mensagens"><i class="far fa-envelope text-white"></i></a></li>
 						<!-- minha conta -->
 						<li class="nav-item ml-3"><a href="#"><i class="far fa-user text-white"></i></a></li>
 						<!-- sair -->
-						<li class="nav-item ml-3"><a href="index-principal.html"><i class="fas fa-sign-out-alt text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="index.php"><i class="fas fa-sign-out-alt text-white"></i></a></li>
 					</ul>
 				</div>
 			</nav>

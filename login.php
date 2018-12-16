@@ -19,12 +19,16 @@
     <title>Entrar</title>
   </head>
   <body>
+
+    <?php
+      session_start();
+    ?>
     
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
 
-          <a class="navbar-brand" href="../index.html">
+          <a class="navbar-brand" href="../index.php">
             <img style="width: 2.5em" src="../images/logo-vermelho.png">
           </a>
 
@@ -35,25 +39,25 @@
           <div class="collapse navbar-collapse" id="nav-collapse">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="../index.html#programa">O programa</a>
+                <a class="nav-link" href="../index.php#programa">O programa</a>
               </li>
 
               <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../index.html#participantes">Os participantes</a>
+                <a class="nav-link" href="../index.php#participantes">Os participantes</a>
               </li>
 
               <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../index.html#aux-section">Como jogar</a>
+                <a class="nav-link" href="../index.php#aux-section">Como jogar</a>
               </li>
 
               <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
 
               <li class="nav-item">
-                <a class="nav-link" href="../index.html#noticias">Noticias</a>
+                <a class="nav-link" href="../index.php#noticias">Noticias</a>
               </li>
             </ul>
           </div>
@@ -61,16 +65,34 @@
       </nav>
     </header>
 
-    <section>
+    <section class="mb-3">
       <div class="container">
         <div class="row">
           <div class="col-md-3">
-            <img class="sticky d-none d-md-block" src="images/fundo.jpg">
+            <img class="d-none d-md-block" src="images/fundo.jpg">
           </div>
 
-          <div class="col-md-3"></div>
+          <div class="col-md-3">
+          </div>
           <div id="login" class="col-auto offset-1 offset-sm-3 col-md-6 offset-md-0 d-flex">
             <div>
+              <?php
+                if(isset($_SESSION['status']) && $_SESSION['status'] == 1){
+                  echo '<div class="alert alert-success" style="width: 20em;">
+                    Cadastro realizado com sucesso!
+                  </div>'; 
+                } elseif(isset($_SESSION['status']) && $_SESSION['status'] == 2){
+                  echo '<div class="alert alert-danger" style="width: 20em;">
+                    Usuário não cadastrado no sistema!
+                  </div>'; 
+                } elseif(isset($_SESSION['status']) && $_SESSION['status'] == 3){
+                  echo '<div class="alert alert-danger" style="width: 20em;">
+                    Senha incorreta!
+                  </div>'; 
+                }
+
+                $_SESSION['status'] = -1;
+              ?>
               <div class="col-md-auto offset-3">
                 <img style="width:6.5em;" src="../images/logo-vermelho.png">
               </div>
@@ -98,7 +120,7 @@
 
                 <div class="form-group">
                   <label>
-                    <input type="checkbox"> Lembre-se de mim
+                    <input type="checkbox" id="lembra" name="lembra"> Lembre-se de mim
                   </label>
                 </div>
 
@@ -106,7 +128,7 @@
                   <button class="mb-1 col-sm-5 mb-sm-0 ml-sm-3 mr-sm-2 btn btn-danger" tye="button" name="entrar">Entrar</button>
                   <a class="col-sm-5 btn btn-info text-white" name="cadastrar" href="cadastro.php">Cadastrar</a>
                 </div>
-                <a href="esqueci-senha.html" class="text-info">Esqueceu a senha?</a>
+                <a href="esqueci-senha.php" class="text-info">Esqueceu a senha?</a>
               </form>
             </div>
           </div>

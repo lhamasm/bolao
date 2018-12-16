@@ -84,17 +84,16 @@
 	    <section style="height: 87.3vh;">
 	    	<div class="container">
 	    		<div class="row">
-	    			<div id="tela-1" class="col-4 offset-1 align-self-center">
-	    				<h3 class="text-info" style="font-family: robotoBold;">Recuperar Senha</h3>
+	    			<div id="tela-2" class="col-4 offset-1 align-self-center">
 	    				<?php
 							if($_SESSION['status'] == 1){
-								echo '<div class="alert alert-danger" style="width: 20em;">
-								  E-mail incorreto.
+								echo '<div class="alert alert-success" style="width: 20em;">
+								  Senha recuperada com sucesso!
 								</div>';
 								
 							} elseif($_SESSION['status'] == 2) {
 								echo '<div class="alert alert-danger" style="width: 20em;">
-								  CPF incorreto.
+								  Senhas incompatíveis.
 								</div>';
 							} elseif($_SESSION['status'] == 3){
 								echo '<div class="alert alert-danger" style="width: 20em;">
@@ -104,15 +103,28 @@
 
 							$_SESSION['status'] = -1;
 						?>
-	    				<form class="form shadow p-3" method="post" action="php/recuperacao-senha.php">
+	    				<h3 class="text-info" style="font-family: robotoBold;">Recuperar Senha</h3>
+	    				<form class="form shadow p-3" method="post" action="php/alterar-senha.php">
 	    					<div class="form-group">
-	    						<label style="font-family: robotoBold;" for="cpf">CPF</label>
-	    						<input class="form-control" type="text" id="cpf" name="cpf" placeholder="Apenas números" style="width:60%;">
+	    						<label style="font-family: robotoBold;" for="pwd">Nova Senha</label>
+	    						<div class="input-group">
+	    							<input class="form-control" type="password" name="pwd" id="pwd">
+	    							<div class="input-group-append">
+	    								<button id="visualizar" class="input-group-text btn" type="button"><i class="far fa-eye"></i></button>
+	    							</div>
+	    						</div>
 	    					</div>
+
 	    					<div class="form-group">
-	    						<label style="font-family: robotoBold;" for="email">Email</label>
-	    						<input class="form-control" type="email" id="email" name="email">
+	    						<label style="font-family: robotoBold;" for="pwd-2">Confirme Nova Senha</label>
+	    						<div class="input-group">
+	    							<input class="form-control" type="password" name="pwd-2" id="pwd-2">
+	    							<div class="input-group-append">
+	    								<button id="visualizar-2" class="input-group-text btn" type="button"><i class="far fa-eye"></i></button>
+	    							</div>
+	    						</div>
 	    					</div>
+	    					
 	    					<div class="form-group">
 	    						<button class="btn btn-danger btn-block" type="submit">Recuperar</button>
 	    					</div>

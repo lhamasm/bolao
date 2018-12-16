@@ -31,7 +31,7 @@
 
 ?>
 
-<!doctype hmtl>
+<!doctype html>
 
 <html lang="pt-br">
 
@@ -58,21 +58,21 @@
 			<nav class="navbar navbar-expand-lg text-white navbar-light" style="font-size: 0.9em;">
 				<div class="container">
 					<ul class="navbar-nav">
-						<li class="nav-item"><strong>MASTERCHEF BRASIL 2018 - PROFISSIONAIS</strong> | </li>
-						<li class="nav-item ml-2">POSIÇÃO: posição | </li>
-						<li class="nav-item ml-2">PONTUAÇÃO: pontuação</li>
+						<li class="nav-item"><strong>MASTERCHEF BRASIL 2018 - <?php echo $_SESSION['modalidade'] == 'amadores' ? 'AMADORES' : 'PROFISSIONAIS';?></strong> | </li>
+						<li class="nav-item ml-2">POSIÇÃO: <?php echo $_SESSION["ranking"]; ?> | </li>
+						<li class="nav-item ml-2">PONTUAÇÃO: <?php echo $_SESSION["pontuacao"]; ?></li>
 					</ul>
 
 					<ul class="navbar-nav">
-						<li class="nav-item ml-auto">BEM-VINDO(A) <strong><?php echo $_SESSION['nome']; ?></strong></li>
+						<li class="nav-item ml-auto">BEM-VINDO(A) <strong> <?php echo $_SESSION["nome"]; ?></strong></li>
 						<!-- trocar de modalidade -->
-						<li class="nav-item ml-4"><a href="#"><i class="fas fa-exchange-alt text-white"></i></a></li>
+						<li class="nav-item ml-4"><a href="pos-login.php"><i class="fas fa-exchange-alt text-white"></i></a></li>
 						<!-- convites -->
 						<li class="nav-item ml-3"><a href="convites.php"><i class="far fa-envelope text-white"></i></a></li>
 						<!-- minha conta -->
 						<li class="nav-item ml-3"><a href="minha-conta.php" title="Minha Conta"><i class="far fa-user text-white"></i></a></li>
 						<!-- sair -->
-						<li class="nav-item ml-3"><a href="index-principal.php"><i class="fas fa-sign-out-alt text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="index.php?a=sair"><i class="fas fa-sign-out-alt text-white"></i></a></li>
 					</ul>
 				</div>
 			</nav>
@@ -118,146 +118,174 @@
 			<div class="container">
 				<h3 style="margin-left: 6.3em; font-family: robotok;">Em Aberto</h3>
 				<?php
-					if(count($boloes) > 0){
-						for($i=0; $i < count($boloes); $i++){
-							if($boloes[$i]->getCriador() == $_SESSION['login']){
-								echo '<div class="row">
-									<div class="col-md-2"></div>					
-								<div class="col-md-8 bg-info" style="margin: 1em 0; padding: 1em;">
-									<div class="row text-white">
-										<div class="col-md-3">
-											<h5 class="titulo"><i class="fas fa-user"></i> ' . count($boloes[$i]->getParticipantes()) . '/' . $boloes[$i]->getLimiteDeParticipantes() .'</h5>
-										</div>
-										<div class="col-md-3">
-											<i></i>
-											<h5 class="titulo">' . $boloes[$i]->getTitulo() . '</h5>
-										</div>
-										<div class="col-md-5">
-											<i></i>
-											<h5 class="titulo"><i class="far fa-calendar-alt"></i> ' . $boloes[$i]->getTempoLimite() . ' | <i class="far fa-clock"></i> 20h00</h5>
-										</div>
-										<div class="col-md-1">
-											<a href="#;" onclick="dados_boloes(\'dados-boloes\')">
-												<i id="change" style="font-size: 1.5em; color: white;" class="fas fa-angle-down"></i>
-											</a>
-										</div>
-									</div>
-									<div class="row" style="background-color:white;">
-										<div class="container" id="dados-boloes" style="display: none;">
-											<div class="row p-3">
-												<div class="col-md-6">
-													<h5 class="titulo">Descrição</h5>
-													<p>' . $boloes[$i]->getDescricao() . '</p>
-													<h5 class="titulo">Escolhas de Aposta</h5>
-													<div class="px-3">
-														<div class="row">';
+					if($_SESSION['status'] == 1){
+						echo '<div class="offset-2 alert alert-success" style="width: 20em;">
+			                    Participante excluído com sucesso!
+			                  </div>';
+					}
 
-														$escolha = $boloes[$i]->getOpcoesAposta();
-														for($j=0; $j<count($escolha)-1; $j++){
-															echo '<div class="col-4 alert alert-info text-center">
-																<button type="button" class="close" data-dismiss="alert">&times;</button>' . $escolha[$j] .'</div>';
+					$_SESSION['status'] = -1;
+					echo '<div id="meus-boloes" class="scroll-meus-boloes">';
+					if(count($boloes) > 0){
+						$contador = 0;
+						for($i=0; $i < count($boloes); $i++){
+							if($boloes[$i]->getCampeonato() == $_SESSION['modalidade']){
+								$contador += 1;
+								if($boloes[$i]->getCriador() == $_SESSION['login']){
+									echo '<div class="row">
+										<div class="col-md-2"></div>					
+									<div class="col-md-8 bg-info" style="margin: 1em 0; padding: 1em;">
+										<div class="row text-white">
+											<div class="col-md-3">
+												<h5 class="titulo"><i class="fas fa-user"></i> ' . count($boloes[$i]->getParticipantes()) . '/' . $boloes[$i]->getLimiteDeParticipantes() .'</h5>
+											</div>
+											<div class="col-md-3">
+												<i></i>
+												<h5 class="titulo">' . $boloes[$i]->getTitulo() . '</h5>
+											</div>
+											<div class="col-md-5">
+												<i></i>
+												<h5 class="titulo"><i class="far fa-calendar-alt"></i> ' . $boloes[$i]->getTempoLimite() . ' | <i class="far fa-clock"></i> 20h00</h5>
+											</div>
+											<div class="col-md-1">
+												<a data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse" onclick="dados_boloes()">
+													<i id="change" style="font-size: 1.5em; color: white;" class="fas fa-angle-down"></i>
+												</a>
+											</div>
+										</div>
+										<div class="row" style="background-color:white;">
+											<div class="container collapse" id="collapse" >
+												<div class="row p-3">
+													<div class="col-md-6">
+														<h5 class="titulo">Descrição</h5>
+														<p>' . $boloes[$i]->getDescricao() . '</p>
+														<h5 class="titulo">Escolhas de Aposta</h5>
+														<div class="px-3">
+															<div class="row">
+																<ul style="font-family: robotok;">';
+
+															$escolha = $boloes[$i]->getOpcoesAposta();
+															for($j=0; $j<count($escolha); $j++){
+																echo '<li>' . $escolha[$j] .'</li>';
+															}
+
+															echo '</ul></div>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<h5 class="titulo">Tipo de Jogo</h5>
+														<ol style="font-family: robotok;">';
+
+														$tipoJogo = $boloes[$i]->getTipoJogo();
+														//$tipoJogo = explode('-', $tipoJogo);
+														if($tipoJogo[0] == '1'){
+															echo '<li>Prova da Caixa Misteriosa</li>';
+														} 
+														if($tipoJogo[1] == '1'){
+															echo '<li>Prova em Equipes</li>';
+														} 
+														if($tipoJogo[2] == '1'){
+															echo '<li>Prova de Eliminação</li>';
+														} 
+														if($tipoJogo[3] == '1'){
+															echo '<li>Prova de Repescagem</li>';
+														} 
+														if($tipoJogo[4] == '1'){
+															echo '<li>Semifinal</li>';
+														} 
+														if($tipoJogo[5] == '1'){
+															echo '<li>Final</li>';
+														} 
+
+														echo '</ol>
+
+														<h5 class="titulo">Tipo de Aposta</h5>
+														<p>';
+														
+														if($boloes[$i]->getTipoAposta() == 'ganhar'){
+															echo 'Quem será que vai ganhar?';
+														} elseif ($boloes[$i]->getTipoAposta() == 'perder') {
+															echo 'Quem será que vai perder/eliminado?';
+														} elseif ($boloes[$i]->getTipoAposta() == 'tema') {
+															echo 'Qual será o tema da prova?';
+														} else {
+															echo 'Quais serão os ingredientes utilizados na prova?';
 														}
 
-														echo '</div>
+														echo '</p>
 													</div>
 												</div>
-												<div class="col-md-6">
-													<h5 class="titulo">Tipo de Jogo</h5>
-													<ol style="font-family: robotok;">';
 
-													$tipoJogo = $boloes[$i]->getTipoJogo();
-													//$tipoJogo = explode('-', $tipoJogo);
-													if($tipoJogo[0] == '1'){
-														echo '<li>Prova da Caixa Misteriosa</li>';
-													} 
-													if($tipoJogo[1] == '1'){
-														echo '<li>Prova em Equipes</li>';
-													} 
-													if($tipoJogo[2] == '1'){
-														echo '<li>Prova de Eliminação</li>';
-													} 
-													if($tipoJogo[3] == '1'){
-														echo '<li>Prova de Repescagem</li>';
-													} 
-													if($tipoJogo[4] == '1'){
-														echo '<li>Semifinal</li>';
-													} 
-													if($tipoJogo[5] == '1'){
-														echo '<li>Final</li>';
-													} 
+												<div class="row px-3">
+													<div class="col-12">
+														<h5 class="titulo">Participantes</h5>
+														<div class="px-3">
+															<div class="row">';
 
-													echo '</ol>
+															$participantes = $boloes[$i]->getParticipantes();
+															if(count($participantes) == 0){
+																echo '<p>Não há participantes</p>';
+															}
+															for($j=0; $j < count($participantes); $j++){
 
-													<h5 class="titulo">Tipo de Aposta</h5>
-													<p>';
-													
-													if($boloes[$i]->getTipoAposta() == 'ganhar'){
-														echo 'Quem será que vai ganhar?';
-													} elseif ($boloes[$i]->getTipoAposta() == 'perder') {
-														echo 'Quem será que vai perder/eliminado?';
-													} elseif ($boloes[$i]->getTipoAposta() == 'tema') {
-														echo 'Qual será o tema da prova?';
-													} else {
-														echo 'Quais serão os ingredientes utilizados na prova?';
-													}
-
-													echo '</p>
-												</div>
-											</div>
-
-											<div class="row px-3">
-												<div class="col-12">
-													<h5 class="titulo">Participantes</h5>
-													<div class="px-3">
-														<div class="row">';
-
-														$participantes = $boloes[$i]->getParticipantes();
-														if(count($participantes) == 0){
-															echo '<p>Não há participantes</p>';
-														}
-														for($j=0; $j < count($participantes); $j++){
-
-															echo '<div class="col-3 alert alert-info text-center">
-																<button type="button" class="close" data-toggle="modal" data-target="#confirmar"><i class="fas fa-user-times text-danger"></i></button><p><a href="#">@';
-									
-																for($k=0; $k<count($usuarios); $k++){
-																	if($usuarios[$k]->getCpf() == $boloes[$i]->getCriador()){
-																		echo $usuarios[$k]->getUsername();
-																		break;
+																echo '<div class="col-3 alert alert-info text-center">
+																	<button type="button" class="close" data-toggle="modal" data-target="#confirmar"><i class="fas fa-user-times text-danger"></i></button><p><a href="#">@';
+										
+																	for($k=0; $k<count($usuarios); $k++){
+																		if($usuarios[$k]->getCpf() == $boloes[$i]->getCriador()){
+																			echo $usuarios[$k]->getUsername();
+																			break;
+																		}
 																	}
-																}
 
-																echo '</a></p>
-																<div id="confirmar" class="modal fade">
-																	<div class="modal-dialog modal-dialog-centered">
-																		<div class="modal-content text-center">
-																			<div class="modal-header">
-																				<h4 class="modal-title titulo">Deseja remover o usuário o bolão?</h4>
-																				<button type="button" class="close" data-dismiss="modal">&times</button>
-																			</div>
-																			<div class="modal-body">
-																				<button class="btn btn-success" type="button" class="close" data-dismiss="modal" onclick="$(".alert").hide()"><i class="fas fa-check"></i> Confirmar</button>
-																				<button class="btn btn-danger" type="button" class="close" data-dismiss="modal"><i class="far fa-times"></i> Cancelar</button>
+																	echo '</a></p>
+																	<div id="confirmar" class="modal fade">
+																		<div class="modal-dialog modal-dialog-centered">
+																			<div class="modal-content text-center">
+																				<div class="modal-header">
+																					<h4 class="modal-title titulo">Deseja remover o usuário o bolão?</h4>
+																					<button type="button" class="close" data-dismiss="modal">&times</button>
+																				</div>
+																				<div class="modal-body">
+																					<form method="post" action="php/excluirApostador.php">
+																						<input type="hidden" id="meu-bolao" name="meu-bolao" value="' . $i . '">
+																						<input type="hidden" id="apostador" name="apostador" value="';
+
+																						for($k=0; $k<count($usuarios); $k++){
+																							if($usuarios[$k]->getCpf() == $boloes[$i]->getCriador()){
+																								echo $usuarios[$k]->getCpf();
+																								break;
+																							}
+																						}
+
+																						echo  '">
+																						<button class="btn btn-success" type="submit"><i class="fas fa-check"></i> Confirmar</button>
+																						<button class="btn btn-danger" type="button" class="close" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>
+																					</form>
+																				</div>
 																			</div>
 																		</div>
 																	</div>
-																</div>
-															</div>';
-														}
-														echo '
+																</div>';
+															}
+															echo '
+															</div>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							</div>';
+								</div>';
+								}
 							}
 						}
-					} else {
+					} 
+
+					if(count($boloes) == 0 || $contador == 0){
 						echo '<h3 class="text-center">Não há bolões disponíveis</h3>';
 					}
+					echo '</div>';
 				?>
 		</section>
 		<div class="container">
@@ -386,7 +414,7 @@
 																					<button type="button" class="close" data-dismiss="modal">&times</button>
 																				</div>
 																				<div class="modal-body">
-																					<button class="btn btn-success" type="button" class="close" data-dismiss="modal" onclick="$(".alert").hide()"><i class="fas fa-check"></i> Confirmar</button>
+																					<button class="btn btn-success" type="button" class="close" data-dismiss="modal"><i class="fas fa-check"></i> Confirmar</button>
 																					<button class="btn btn-danger" type="button" class="close" data-dismiss="modal"><i class="far fa-times"></i> Cancelar</button>
 																				</div>
 																			</div>
@@ -437,12 +465,16 @@
 		</footer>
 
 		<script type="text/javascript">
-			function dados_boloes(bolao){
-				if(document.getElementById(bolao).style.display == "none"){
-					document.getElementById(bolao).style.display = "block";
+			function dados_boloes(){
+				if(document.getElementById('meus-boloes').style.height == "22em"){
+					document.getElementById('meus-boloes').style.height = "13em";
 				} else {
-					document.getElementById(bolao).style.display = "none";
+					document.getElementById('meus-boloes').style.height = "22em";
 				}
+			}
+
+			function excluirApostador(){
+				document.getElementById('confirmar').style.display = 'none';
 			}
 		</script>
 

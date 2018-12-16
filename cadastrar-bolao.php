@@ -33,21 +33,21 @@
 			<nav class="navbar navbar-expand-lg text-white" style="font-size: 0.9em;">
 				<div class="container">
 					<ul class="navbar-nav">
-						<li class="nav-item"><strong>MASTERCHEF BRASIL 2018 - <?php echo $_GET['a'] == 'amadores' ? 'AMADORES' : 'PROFISSIONAIS';?></strong> | </li>
-						<li class="nav-item ml-2">POSIÇÃO: posição | </li>
-						<li class="nav-item ml-2">PONTUAÇÃO: pontuação</li>
+						<li class="nav-item"><strong>MASTERCHEF BRASIL 2018 - <?php echo $_SESSION['modalidade'] == 'amadores' ? 'AMADORES' : 'PROFISSIONAIS';?></strong> | </li>
+						<li class="nav-item ml-2">POSIÇÃO: <?php echo $_SESSION["ranking"]; ?> | </li>
+						<li class="nav-item ml-2">PONTUAÇÃO: <?php echo $_SESSION["pontuacao"]; ?></li>
 					</ul>
 
 					<ul class="navbar-nav">
 						<li class="nav-item ml-auto">BEM-VINDO(A) <strong> <?php echo $_SESSION["nome"]; ?></strong></li>
 						<!-- trocar de modalidade -->
-						<li class="nav-item ml-4"><a href="#"><i class="fas fa-exchange-alt text-white"></i></a></li>
+						<li class="nav-item ml-4"><a href="pos-login.php"><i class="fas fa-exchange-alt text-white"></i></a></li>
 						<!-- convites -->
 						<li class="nav-item ml-3"><a href="convites.php"><i class="far fa-envelope text-white"></i></a></li>
 						<!-- minha conta -->
 						<li class="nav-item ml-3"><a href="minha-conta.php" title="Minha Conta"><i class="far fa-user text-white"></i></a></li>
 						<!-- sair -->
-						<li class="nav-item ml-3"><a href="index-principal.php"><i class="fas fa-sign-out-alt text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="index.php?a=sair"><i class="fas fa-sign-out-alt text-white"></i></a></li>
 					</ul>
 				</div>
 			</nav>
@@ -94,14 +94,30 @@
 				<div class="row">
 					<div class="col-md-6">
 						<h1 class="titulo text-center py-3 text-info">Cadastrar Bolão</h1>
+						<?php
+			                if($_SESSION['status'] == 2){
+			                  echo '<div class="alert alert-danger" style="width: 20em;">
+			                    Já existe um bolão com o mesmo nome, administrador e campeonato!
+			                  </div>'; 
+
+			                  $_SESSION['status'] = -1;
+			                }
+			            ?>
 						<form class="p-4 shadow" method="post" action="php/cadastrar_bolao.php">
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
 										<label class="titulo" for="campeonato">Campeonato <span class="text-danger">*</span></label>
-										<select class="form-control custom-select" name="campeonato" id="campeonato">
-											<option value="profissionais" selected>MasterChef Profissionais</option>
-											<option value="amadores">MasterChef Amadores</option>
+										<select class="form-control custom-select" name="campeonato" id="campeonato" disabled>
+											<?php
+												if($_SESSION['modalidade'] == 'profissionais'){
+													echo '<option value="profissionais" selected>MasterChef Profissionais</option>
+													<option value="amadores">MasterChef Amadores</option>';
+												} else {
+													echo '<option value="profissionais">MasterChef Profissionais</option>
+														<option value="amadores" selected>MasterChef Amadores</option>';
+												}
+											?>
 										</select>
 									</div>
 								</div>
@@ -139,25 +155,27 @@
 										<label class="titulo" for="participantes">Número de Participantes</label>
 									</div>
 									<div class="offset-1 col-md-5">
-										<label class="titulo" for="data">Data de Término</label>
+										<label class="titulo" for="data">Data de Término<span class="text-danger">*</span></label>
 									</div>
 								</div>
 
 								<div class="row">
 									<div class="col-md-5">
-										<input class="form-control" type="number" name="participantes" id="participantes">
+										<input class="form-control" type="number" min="2" name="participantes" id="participantes">
 										<input class="mt-1" type="checkbox" name="unlimited" id="unlimited">
 										<label for="unlimited">Sem limite</label>
 									</div>
 									<div class="offset-2 col-md-5">
-										<input class="form-control" type="date" name="data" id="data">
+										<input class="form-control" type="date" name="data" id="data" min="<?php echo date('Y-m-d')?>" required>
+										<span class="validity"></span>
 									</div>
 								</div>
 							</div>
 
+							<!--
 							<div class="form-group">
 								<label class="titulo" for="escolhas">Escolhas de Aposta <span class="text-danger">*</span></label>
-								<textarea class="form-control mb-2" style="resize: none; display: none;" id="escolhas2" name="escolhas2"></textarea>
+								<textarea class="form-control mb-2" style="resize: none; display: none;" id="escolhas2" name="escolhas2"required></textarea>
 								<div class="mb-2" id="escolhas" style="background-color: #DCDCDC; padding: 0.2em;"></div>
 								<div class="row">
 									<div class="col-md-6 input-group">
@@ -169,6 +187,7 @@
 
 								</div>
 							</div>
+							-->
 
 							<div class="form-group">
 								<label class="titulo" for="tipo-jogo">Tipo de Jogo <span class="text-danger">*</span></label>
@@ -217,47 +236,6 @@
 			</div>
 		</section>
 
-		<section id="convidar-amigos" style="display: none;">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-						<img class="sticky" src="images/chef-ouvindo.jpg">
-					</div>	
-
-					<div class="col-md-6 align-self-center">
-						<h1 class="titulo text-center py-3 text-info">Convidar Amigos</h1> 
-						<form class="p-4 shadow" method="post" action="php/convidar-amigos.php">
-							<div class="form-group">
-								<label class="titulo" for="username">Nome de Usuário</label>
-								<div class="input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><i class="far fa-user"></i></span>
-									</div>
-									<input class="form-control" type="text" name="username" id="username">
-								</div>
-							</div>
-
-							<hr class="mt-4">
-
-							<div class="form-group">
-								<label class="titulo" for="email">Email <span style="font-family: robotok;">(caso não esteja cadastrado no sistema)</span></label>
-								<div class="input-group">
-									<div class="input-group-prepend">
-										<span class="titulo input-group-text">@</span>
-									</div>
-									<input class="form-control" type="text" name="email" id="email">
-								</div>
-
-								<div class="form-group">
-									<button class="btn btn-info my-3 btn-block" type="submit" onclick="convidar_amigos()">Convidar</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</section>
-
 		<footer style="background-color: #B22222">
 			<nav class="navbar navbar-expand-lg text-white navbar-dark">
 				<div class="container">
@@ -298,8 +276,10 @@
 	    	function liberar_senha() {
 	    		if(document.getElementById('tipo-bolao').value == "privado"){
 	    			document.getElementById('senha').style.display = "block";
+	    			document.getElementById('senha').required = true;
 	    		} else {
 	    			document.getElementById('senha').style.display = "none";
+	    			document.getElementById('senha').required = false;
 	    		}
 	    	}
 

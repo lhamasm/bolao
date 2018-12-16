@@ -31,8 +31,8 @@
 				<div class="container">
 					<ul class="navbar-nav">
 						<li class="nav-item"><strong>MASTERCHEF BRASIL 2018</strong> | </li>
-						<li class="nav-item ml-2">POSIÇÃO: posição | </li>
-						<li class="nav-item ml-2">PONTUAÇÃO: pontuação</li>
+						<li class="nav-item ml-2">POSIÇÃO: <?php echo $_SESSION["ranking"]; ?> | </li>
+						<li class="nav-item ml-2">PONTUAÇÃO: <?php echo $_SESSION["pontuacao"]; ?></li>
 					</ul>
 
 					<ul class="navbar-nav">
@@ -42,7 +42,7 @@
 						<!-- minha conta -->
 						<li class="nav-item ml-3"><a href="minha-conta.php"><i class="far fa-user text-white"></i></a></li>
 						<!-- sair -->
-						<li class="nav-item ml-3"><a href="index-principal.php"><i class="fas fa-sign-out-alt text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="index.php?a=sair"><i class="fas fa-sign-out-alt text-white"></i></a></li>
 					</ul>
 				</div>
 			</nav>

@@ -1,7 +1,3 @@
-<?php
-	require_once 'php/index.php';
-?>
-
 <!doctype html>
 
 <html lang="pt-br">
@@ -24,6 +20,21 @@
 	</head>
 
 	<body data-spy="scroll" data-target=".navbar">
+
+		<?php
+			require_once 'php/index.php';
+
+			//session_start();
+			
+			if(isset($_GET['a']) && $_GET['a'] == 'sair'){
+				// remove all session variables
+				session_unset();
+
+				// destroy the session
+				session_destroy(); 
+			}
+		?>
+
 
 		<header>
 	      <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgba(248,249,250,0.7);">
@@ -90,6 +101,7 @@
 	    </section>
 
 	    <section id="programa">
+	    	<section class="mt-5 bg-danger"></section>
 	    	<div class="container">
 	    		<h1 class="nome" style="font-family: biysk">O Programa</h1>
 	    		<div class="row">

@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	$_SESSION['status'];
 ?>
 
 <!doctype html>
@@ -29,21 +30,21 @@
 			<nav class="navbar navbar-expand-lg text-white navbar-light" style="font-size: 0.9em;">
 				<div class="container">
 					<ul class="navbar-nav">
-						<li class="nav-item"><strong>MASTERCHEF BRASIL 2018 - <?php echo $_GET['a'] == 'amadores' ? 'AMADORES' : 'PROFISSIONAIS';?></strong> | </li>
-						<li class="nav-item ml-2">POSIÇÃO: posição | </li>
-						<li class="nav-item ml-2">PONTUAÇÃO: pontuação</li>
+						<li class="nav-item"><strong>MASTERCHEF BRASIL 2018 - <?php echo $_SESSION['modalidade'] == 'amadores' ? 'AMADORES' : 'PROFISSIONAIS';?></strong> | </li>
+						<li class="nav-item ml-2">POSIÇÃO: <?php echo $_SESSION["ranking"]; ?> | </li>
+						<li class="nav-item ml-2">PONTUAÇÃO: <?php echo $_SESSION["pontuacao"]; ?></li>
 					</ul>
 
 					<ul class="navbar-nav">
 						<li class="nav-item ml-auto">BEM-VINDO(A) <strong> <?php echo $_SESSION["nome"]; ?></strong></li>
 						<!-- trocar de modalidade -->
-						<li class="nav-item ml-4"><a href="#"><i class="fas fa-exchange-alt text-white"></i></a></li>
+						<li class="nav-item ml-4"><a href="pos-login.php"><i class="fas fa-exchange-alt text-white"></i></a></li>
 						<!-- convites -->
 						<li class="nav-item ml-3"><a href="convites.php"><i class="far fa-envelope text-white"></i></a></li>
 						<!-- minha conta -->
 						<li class="nav-item ml-3"><a href="minha-conta.php" title="Minha Conta"><i class="far fa-user text-white"></i></a></li>
 						<!-- sair -->
-						<li class="nav-item ml-3"><a href="index-principal.php"><i class="fas fa-sign-out-alt text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="index.php?a=sair"><i class="fas fa-sign-out-alt text-white"></i></a></li>
 					</ul>
 				</div>
 			</nav>
@@ -91,6 +92,25 @@
 				<hr>
 				<div class="row text-dark">
 					<div class="col-8 offset-2">
+
+						<?php
+							if($_SESSION['status'] == 1){
+								echo '<div class="alert alert-success" style="width: 30em; margin-left: 10.9em;">
+								  Alterações realizadas com sucesso!
+								</div>';
+								
+							} elseif($_SESSION['status'] == 2) {
+								echo '<div class="alert alert-danger" style="width: 30em; margin-left: 10.9em;">
+								  Senhas incompatíveis.
+								</div>';
+							} elseif($_SESSION['status'] == 0){
+								echo '<div class="alert alert-danger" style="width: 30em; margin-left: 10.9em;">
+								  Ops... Algo deu errado.
+								</div>';
+							} 
+
+							$_SESSION['status'] = -1;
+						?>
 						
 						<form method="post" action="php/alterar-dados.php">
 							<div class="row">
@@ -249,6 +269,7 @@
 			$('#conta').mask('00000-0');
 
 			function alterar_dados() {
+
 				document.getElementById('senha').style.display = 'block';
 				document.getElementById('confirmar').style.display = 'block';
 				document.getElementById('alterar-dados').style.display = 'none';
