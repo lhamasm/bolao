@@ -4,8 +4,10 @@
 	require_once 'usuario.php';
 	require_once 'sistema.php';
 	require_once 'index.php';
+	require_once 'facade.php';
+	require_once 'ArquivoUsuario.php';
 
-	session_start();
+	//session_start();
 	
 	Class CadastroTela {
 		protected $nome;
@@ -193,16 +195,8 @@
 			$sistema = $_SESSION["sistema"];
 			$usuarios = $sistema->getUsuarios();
 
-			if(confirmation($this->email, $this->cmfemail)){
-				if(confirmation($this->senha, $this->cmfsenha)){
-
-					$dataNascimento = $this->dia . '/' . $this->mes . '/' . $this->ano;
-					$usuario = new Apostador(0, $this->nome, $this->username, $this->email, $this->senha, $dataNascimento, $this->genero, $this->rg, $this->cpf, $this->telefone, $this->celular, $this->banco, $this->agencia, $this->conta, $_SESSION['numero_usuarios']+1, 0);
-
-					//$apostador = new Apostador($_SESSION['numero_usuarios']+1, 0);
-					//$apostador = $usuario;	
-
-					$cadastro = 0 . ';' . $this->nome . ';' . $this->username . ';' . $this->email . ';' . $this->senha . ';' . $dataNascimento . ';' . $this->genero . ';' . $this->rg . ';' . $this->cpf . ';' . $this->telefone . ';' . $this->celular . ';' . $this->banco . ';' . $this->agencia . ';' . $this->conta . ';'. count($usuarios) . ';0' . PHP_EOL;
+			if($this->confirmation($this->email, $this->cmfemail)){
+				if($this->confirmation($this->senha, $this->cmfsenha)){
 
 					for($i = 0; $i < count($usuarios)-1; $i++){
 						if($usuarios[$i]->getCpf() == $this->cpf){
@@ -212,13 +206,13 @@
 						}
 					}
 
-					$arquivo = fopen('../bd/usuarios.txt', 'a+') or die("Não foi possível abrir o arquivo");
-					fwrite($arquivo, $cadastro);
-					fclose($arquivo);
+					$dataNascimento = $this->dia . '/' . $this->mes . '/' . $this->ano;
+					$usuario = new Apostador(0, $this->nome, $this->username, $this->email, $this->senha, $dataNascimento, $this->genero, $this->rg, $this->cpf, $this->telefone, $this->celular, $this->banco, $this->agencia, $this->conta, $_SESSION['numero_usuarios']+1, 0);	
 
-					$sistema->setUsuarios($apostador);
-					$_SESSION['sistema'] = $sistema;
-					$_SESSION['numero_usuarios'] = $_SESSION['numero_usuarios'] + 1;
+					$u = new ArquivoUsuario();
+    				$facade = new Facade($u);
+    				$facade->escreverEm('../bd/usuarios.txt', $usuario);
+					$_SESSION['numero_usuarios'] = $_SESSION['numero_usuarios'];
 
 					$_SESSION['status'] = 1;
 					header('Location: ../login.php');

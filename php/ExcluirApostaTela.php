@@ -2,8 +2,11 @@
 	require_once 'sistema.php';
 	require_once 'bolao.php';
 	require_once 'apostador.php';
-	require_once 'usuarios.php';
+	require_once 'usuario.php';
 	require_once 'aposta.php';
+	require_once 'facade.php';
+	require_once 'ArquivoBolao.php';
+	require_once 'ArquivoAposta.php';
 
 	session_start();
 
@@ -27,36 +30,77 @@
 			$sistema = $_SESSION['sistema'];
 			$usuarios = $sistema->getUsuarios();
 			$boloes = $sistema->getBoloes();
-			$apostas = array();
+			$contador = 0;
 
-			for($i=0; $i<count($usuarios); $i++){
+			for($i=0; $i<count($usuarios)-1; $i++){
 				if($usuarios[$i]->getCpf() == $_SESSION['login']){
 					$apostas = $usuarios[$i]->getApostas();
 					$a = $apostas[intval($this->aposta)-1];
-					array_splice($apostas, intval($this->aposta)-1);
+					$usuarios[$i]->getApostas()[intval($this->aposta)-1]->setStatus(0);
+					//array_splice($apostas, intval($this->aposta)-1);
 					break;
 				}
 			}
 
-			$bolao = $boloes[intval($apostas[intval($this->aposta)-1]->getBolao())];
+			/*for($i=0; $i<count($apostas); $i++){
+				if($apostas[$i]->getUsuario() == $_SESSION['login']){
+					$contador += 1;
+				}
+			}
+
+			$participantes = $boloes[intval($a->getBolao())]->getParticipantes();
+			if($contador == 0){			
+
+				for($i=0; $i<count($participantes); $i++){
+					if($participantes[$i] == $_SESSION['login']) {
+						array_splice($participantes, $i);
+						break;
+					}
+				}
+			} */
+
+			$bolao = $boloes[intval($a->getBolao())];
 			$b = new Bolao($bolao->getId(), $bolao->getCriador(), $bolao->getTipo(), $bolao->getCampeonato(), $bolao->getTitulo(), $bolao->getDescricao(), $bolao->getLimiteDeParticipantes(), $bolao->getTipoJogo(), $bolao->getTipoAposta(), $bolao->getOpcoesAposta(), $bolao->getSenha(), $bolao->getDinheiros());
 			$b->setTempoLimite($bolao->getTempoLimite());
 
 			for($i=0; $i<count($apostas); $i++){
-				$b->setApostas($aposta[$i]);
+				if($i != intval($this->aposta)-1) {
+					$b->setApostas($apostas[$i]);
+				}
 			}
 
-			$participantes = $bolao->getParticipantes();
-			for($i=0; $i<count($participantes); $i++){
+			//$participantes = $bolao->getParticipantes();
+			/*for($i=0; $i<count($participantes); $i++){
 				$b->setParticipantes($participantes[$i]);
-			}
+			}*/
 
-			$boloes[intval($apostas[intval($this->aposta)-1]->getBolao())] = $b;
+			$boloes[intval($a->getBolao())] = $b;
 
-			$s = new Sistema($sistema->getUsuarios(), $sistema->getJogos(), $boloes, $sistema->getBugs());
+			$s = new Sistema($usuarios, $sistema->getJogos(), $boloes, $sistema->getBugs());
 			$_SESSION['sistema'] = $s;
 
-			if(file_exists('../bd/boloes.txt')){
+			unlink('../bd/boloes.txt');
+			$bolao = new ArquivoBolao();
+		    $facade = new Facade($bolao);
+		    for($i=0; $i<count($boloes); $i++){
+		    	$facade->escreverEm('../bd/boloes.txt', $boloes[$i]);
+		    }
+
+		    $sistema = $_SESSION['sistema'];
+		    $usuarios = $sistema->getUsuarios();
+		    $aposta = new ArquivoAposta();
+		    $facade = new Facade($aposta);
+		    for($i=0; $i<count($usuarios)-1; $i++){
+		    	unlink('../bd/apostas-' . $usuarios[$i]->getCpf());
+		      	$facade->escreverEm('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt', $usuarios[$i]->getApostas());
+		    }
+
+
+			$_SESSION['status'] = 2;
+			header('Location: ../minhas-apostas.php');
+			exit();
+
+			/*if(file_exists('../bd/boloes.txt')){
 				$arquivo = fopen('../bd/boloes.txt', 'w+');
 				for($i = 0; $i < count($boloes); $i++){
 					$bolao = $boloes[$i]->getId() . ';' . $boloes[$i]->getCriador() . ';' . $boloes[$i]->getTipo() . ';' . $boloes[$i]->getCampeonato() . ';' . $boloes[$i]->getTitulo() . ';' . $boloes[$i]->getDescricao() . ';' . $boloes[$i]->getLimiteDeParticipantes() . ';';
@@ -119,21 +163,18 @@
 
 					$bolao = $bolao . PHP_EOL; 
 					fwrite($arquivo, $bolao);
-				} else {
-					exit();
-				}
-
-				$arquivo = fopen('../bd/apostas-' . $_SESSION['login'] . '.txt', 'w+');
-				$apostas = $usuarios[$u]->getApostas();
-				for($i=0; $i<count($apostas); $i++){
-					fwrite($arquivo, $apostas[$i]->getBolao() . ';' . $apostas[$i]->getValor() . ';' . $apostas[$i]->getOpcaoDeAposta() . PHP_EOL);
-				}
-				
-				fclose($arquivo);
-				$_SESSION['status'] = 1;
-				header('Location: ../minhas-apostas.php');
+				} 
+			} else {
 				exit();
 			}
+
+			$arquivo = fopen('../bd/apostas-' . $_SESSION['login'] . '.txt', 'w+');
+			//$apostas = $usuarios[$j]->getApostas();
+			for($i=0; $i<count($apostas); $i++){
+				fwrite($arquivo, $apostas[$i]->getBolao() . ';' . $apostas[$i]->getValor() . ';' . $apostas[$i]->getOpcaoDeAposta() . PHP_EOL);
+			}
+			
+			fclose($arquivo);*/
 		}
 	}
 

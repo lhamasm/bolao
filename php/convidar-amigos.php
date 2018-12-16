@@ -6,22 +6,23 @@
 	require_once 'administrador-bolao.php';
 	require_once 'bolao.php';
 	require_once 'funcoes.php';
+	require_once 'ConvitesTela.php';
 
-	session_start();
+	//session_start();
 
 	$username = '';
 	$email = '';
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-		$sistema = $_SESSION['sistema'];
-		$boloes = $sistema->getBoloes();
-		$usuarios = $sistema->getUsuarios();
-
 		if(isset($_REQUEST['username']) && $_REQUEST['username'] != ''){
+
 			$username = p_respostas($_REQUEST['username']);
 
-			$adm = new AdministradorBolao($_SESSION['tipo'], $_SESSION['nome'], $_SESSION['username'], $_SESSION['email'], $_SESSION['senha'], $_SESSION['ddn'], $_SESSION['genero'], $_SESSION['rg'], $_SESSION['login'], $_SESSION['telefone'], $_SESSION['celular'], $_SESSION['banco'], $_SESSION['agencia'], $_SESSION['conta']);
+			$telaConvites = new ConvitesTela($username, 'u');
+			$telaConvites->convidar();
+
+			/*$adm = new AdministradorBolao($_SESSION['tipo'], $_SESSION['nome'], $_SESSION['username'], $_SESSION['email'], $_SESSION['senha'], $_SESSION['ddn'], $_SESSION['genero'], $_SESSION['rg'], $_SESSION['login'], $_SESSION['telefone'], $_SESSION['celular'], $_SESSION['banco'], $_SESSION['agencia'], $_SESSION['conta']);
 			$adm->setBolao($boloes[count($boloes)-1]);
 			$adm->setUsername($_SESSION['username']);
 			$adm->convidarApostadorUsername($usuarios, $username, date('d/m/Y'), $boloes[count($boloes)-1]);
@@ -44,12 +45,18 @@
 
 			$_SESSION['status'] = 1;
 			header("Location: ../convidar-amigos.php");
-			exit();
+			exit();*/
 		} else {
 			if(isset($_REQUEST['email']) && $_REQUEST['email'] != ''){
+
 				$email = p_respostas($_REQUEST['email']);
 
-				$adm = new AdministradorBolao($_SESSION['tipo'], $_SESSION['nome'], $_SESSION['username'], $_SESSION['email'], $_SESSION['senha'], $_SESSION['ddn'], $_SESSION['genero'], $_SESSION['rg'], $_SESSION['login'], $_SESSION['telefone'], $_SESSION['celular'], $_SESSION['banco'], $_SESSION['agencia'], $_SESSION['conta']);
+				$username = p_respostas($_REQUEST['username']);
+
+				$telaConvites = new ConvitesTela($email, 'e');
+				$telaConvites->convidar();
+
+				/*$adm = new AdministradorBolao($_SESSION['tipo'], $_SESSION['nome'], $_SESSION['username'], $_SESSION['email'], $_SESSION['senha'], $_SESSION['ddn'], $_SESSION['genero'], $_SESSION['rg'], $_SESSION['login'], $_SESSION['telefone'], $_SESSION['celular'], $_SESSION['banco'], $_SESSION['agencia'], $_SESSION['conta']);
 				$adm->setBolao($boloes[count($boloes)-1]);
 				$adm->setUsername($_SESSION['username']);
 				$adm->convidarApostadorEmail($usuarios, $email, date('d/m/Y'), $boloes[count($boloes)-1]);
@@ -77,6 +84,7 @@
 				$_SESSION['status'] = 0;
 				header("Location: ../convidar-amigos.php");
 				exit();
+			}*/
 			}
 		}
 	}

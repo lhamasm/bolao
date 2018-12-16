@@ -1,20 +1,50 @@
 <?php
 
-		session_start();
-
 	  require_once 'sistema.php';
-	  require_once 'usuario.php';
+	  require_once 'administrador-sistema.php';
+	  require_once 'apostador.php';
 	  require_once 'funcoes.php';
+	  require_once 'facade.php';
+	  require_once 'ArquivoMensagem.php';
+
+	//session_start();
 
 	class LoginTela{
 		protected $cpf;
 		protected $senha;
 		protected $lembreDeMim;
+		private $strategy;
 
 		function loginTela($cpf, $senha, $lembreDeMim){
 			$this->cpf = $cpf;
 			$this->senha = $senha;
 			$this->lembreDeMim = $lembreDeMim;
+
+			$usuarios = array();
+
+			for($i=0; $i<count($_SESSION['sistema']->getUsuarios()); $i++){
+				if($_SESSION['sistema']->getUsuarios()[$i]->getCpf() == $this->cpf){
+					if($_SESSION['sistema']->getUsuarios()[$i]->getSenha() == $this->senha){
+						if($_SESSION['sistema']->getUsuarios()[$i]->getTipo() == '0') {
+							$this->strategy = new Apostador($_SESSION['sistema']->getUsuarios()[$i]->getTipo(), $_SESSION['sistema']->getUsuarios()[$i]->getNome(), $_SESSION['sistema']->getUsuarios()[$i]->getUsername(), $_SESSION['sistema']->getUsuarios()[$i]->getEmail(), $_SESSION['sistema']->getUsuarios()[$i]->getSenha(), $_SESSION['sistema']->getUsuarios()[$i]->getDataNascimento(), $_SESSION['sistema']->getUsuarios()[$i]->getGenero(), $_SESSION['sistema']->getUsuarios()[$i]->getRg(), $_SESSION['sistema']->getUsuarios()[$i]->getCpf(),$_SESSION['sistema']->getUsuarios()[$i]->getTelefone(), $_SESSION['sistema']->getUsuarios()[$i]->getCelular(), $_SESSION['sistema']->getUsuarios()[$i]->getBanco(), $_SESSION['sistema']->getUsuarios()[$i]->getAgencia(), $_SESSION['sistema']->getUsuarios()[$i]->getConta(), $_SESSION['sistema']->getUsuarios()[$i]->getPosicao(), $_SESSION['sistema']->getUsuarios()[$i]->getPontuacao());
+
+							array_push($usuarios, $this->strategy);
+						} else {
+							$this->strategy = new AdministradorSistema($_SESSION['sistema']->getUsuarios()[$i]->getTipo(), $_SESSION['sistema']->getUsuarios()[$i]->getNome(), $_SESSION['sistema']->getUsuarios()[$i]->getUsername(), $_SESSION['sistema']->getUsuarios()[$i]->getEmail(), $_SESSION['sistema']->getUsuarios()[$i]->getSenha(), $_SESSION['sistema']->getUsuarios()[$i]->getDataNascimento(), $_SESSION['sistema']->getUsuarios()[$i]->getGenero(), $_SESSION['sistema']->getUsuarios()[$i]->getRg(), $_SESSION['sistema']->getUsuarios()[$i]->getCpf(),$_SESSION['sistema']->getUsuarios()[$i]->getTelefone(), $_SESSION['sistema']->getUsuarios()[$i]->getCelular(), $_SESSION['sistema']->getUsuarios()[$i]->getBanco(), $_SESSION['sistema']->getUsuarios()[$i]->getAgencia(), $_SESSION['sistema']->getUsuarios()[$i]->getConta());
+
+							array_push($usuarios, $this->strategy);
+						}
+					} else {
+						$this->strategy = null;
+						$_SESSION['status'] = 3;
+					}
+				} else {
+					array_push($usuarios, $_SESSION['sistema']->getUsuarios()[$i]);
+				}
+			}
+
+			$s = new Sistema($usuarios, $_SESSION['sistema']->getJogos(), $_SESSION['sistema']->getBoloes(), $_SESSION['sistema']->getBugs());
+			$_SESSION['sistema'] = $s;
 		}
 
 		function getCPF(){
@@ -42,62 +72,17 @@
 		}
 
 		function login() {
-			$sistema = $_SESSION["sistema"];
-			$usuarios = $sistema->getUsuarios();
-			for($i = 0; $i < count($usuarios); $i++){
-				if(p_respostas($usuarios[$i]->getCpf()) == $this->cpf){
-					if($usuarios[$i]->getSenha() == $this->senha){
-						$_SESSION["tipo"] = $usuarios[$i]->getTipo();
-						$_SESSION["login"] = $this->cpf;
-				  		$_SESSION["nome"] = $usuarios[$i]->getNome();
-				  		$_SESSION["username"] = $usuarios[$i]->getUsername();
-				  		$_SESSION["email"] = $usuarios[$i]->getEmail();
-				  		$_SESSION["senha"] = $this->senha;
-				  		$_SESSION["rg"] = $usuarios[$i]->getRg();
-				  		$_SESSION["ddn"] = $usuarios[$i]->getDataNascimento();
-				  		$_SESSION["telefone"] = $usuarios[$i]->getTelefone();
-				  		$_SESSION["celular"] = $usuarios[$i]->getCelular();
-				  		$_SESSION["banco"] = $usuarios[$i]->getBanco();
-				  		$_SESSION["agencia"] = $usuarios[$i]->getAgencia();
-				  		$_SESSION["conta"] = $usuarios[$i]->getConta();
-				  		$_SESSION["genero"] = $usuarios[$i]->getGenero(); 
-				  		$_SESSION["ranking"] = $usuarios[$i]->getPosicao();
-				  		$_SESSION["pontuacao"] = $usuarios[$i]->getPontuacao();
-
-				  		$mensagens = array();
-				  		if(file_exists('../bd/mensagens-' . $_SESSION['login'] . '.txt')){
-				  			$arquivo = fopen('../bd/mensagens-' . $_SESSION['login'] . '.txt', 'r+');
-				  			while(!feof($arquivo)){
-				  				$mensagem = fgets($arquivo);
-				  				array_push($mensagens, $mensagem);
-				  			}
-				  			fclose($arquivo);
-				  		}
-
-				  		$_SESSION['msg'] = $mensagens;
-
-				  		if($_SESSION["tipo"] == '0'){
-				  			header('Location: ../pos-login.php');
-				  		} else {
-				  			header('Location: ../adm-page.php');
-				  		}
-						exit();
-					} else {
-						$_SESSION['status'] = 3;
-						header('Location: ../login.php');
-	    				exit();
-					}
-				} else {
-					$_SESSION['status'] = 4;
-					header('Location: ../login.php');
-    				exit();
-				}
+			if($this->strategy == null){
+				
+				if($_SESSION['status'] != 3){
+					$_SESSION['status'] = 2;
+				}				
+				//$_SESSION['tamanho'] = count($sistema->getUsuarios());
+				//echo "Usuário não cadastrado no sistema";
+				header('Location: ../login.php');
+		    	exit();
 			}
-
-			$_SESSION['status'] = 2;
-			//echo "Usuário não cadastrado no sistema";
-			header('Location: ../login.php');
-	    	exit();
+			$this->strategy->logar();
 		}
 
 	}

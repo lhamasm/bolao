@@ -26,7 +26,7 @@
 		function convidarApostadorUsername($usuarios, $username, $data, $bolao) {
 			for($i = 0; $i < count($usuarios); $i++){
 				if($usuarios[$i]->getUsername() == $username){
-					$convite = new Convite($this->username, $username, $bolao->getTitulo(), $data);
+					$convite = new Convite($this->username, $username, 'Participe do bolão' . $bolao->getTitulo(), $bolao->getTitulo(), $data);
 					$usuarios[$i]->setMensagem($convite);
 				}
 			}

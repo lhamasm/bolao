@@ -3,10 +3,16 @@
 	require_once 'ApostarTela.php';
 	require_once 'funcoes.php';
 
+	session_start();
+
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 		$valor = p_respostas($_REQUEST['valoraposta']);
 		$opcaoAposta = $_REQUEST['opcaoaposta'];
+
+		if($opcaoAposta == 'outro'){
+			$opcaoAposta = $_REQUEST['outro'];
+		}
 
 		if(isset($_REQUEST['senha-bolao'])){
 			$senha = $_REQUEST['senha-bolao'];

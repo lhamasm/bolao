@@ -1,14 +1,15 @@
 <?php
 
 	require_once 'CadastrarBolaoTela.php';
-
+	require_once 'funcoes.php';
+	
 	$campeonato = '';
 	$tipo = '';
 	$senha = '';
 	$nome = '';
 	$descricao = '';
 	$participantes = '';
-	$escolhasAposta = array();
+	//$escolhasAposta = array();
 	$tipoJogo = array();
 	$tipoAposta = '';
 	$opcoesAposta = array();
@@ -84,9 +85,10 @@
 		$data = explode('-', $dataTermino);
 		$dataTermino = $data[2] . '/' . $data[1] . '/' . $data[0];
 
-		$opcoesAposta = explode('-', $_REQUEST['escolhas2']);
+		/*$opcoesAposta = explode('-', $_REQUEST['escolhas2']);
+		array_splice($opcoesAposta, count($opcoesAposta)-1);*/
 
-		$telaCadastrarBolao = new CadastrarBolaoTela($campeonato, $tipo, $senha, $nome, $descricao, $participantes, $opcoesAposta, $tipoJogo, $tipoAposta, $dataTermino);
+		$telaCadastrarBolao = new CadastrarBolaoTela($campeonato, $tipo, $senha, $nome, $descricao, $participantes, /*$opcoesAposta,*/ $tipoJogo, $tipoAposta, $dataTermino);
 		$telaCadastrarBolao->cadastrarBolao();
 	}
 

@@ -1,5 +1,6 @@
 <?php
 	require_once 'funcoes.php';
+	require_once 'CadastroTela.php';
 
 	$tipo = 0;
 	$nome = "";

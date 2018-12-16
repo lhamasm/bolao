@@ -1,28 +1,21 @@
 <?php
-	class ConvitesTela{
-		protected $campeonato;
-		protected $posicao;
-		protected $pontuacao;
-		protected $nome;
-		protected $convites;
-		protected $username
-		protected $email;
-		protected $reportarbugs;
-		protected $termosCondicoes;
 
-		function ConvitesTela($campeonato, $posicao, $pontuacao, $nome, $convites, $username, $email, $provasresultados, $resultadosboloes, $reportarbugs, $termosCondicoes)
+	require_once 'convidarPorEmail.php';
+	require_once 'convidarPorUsername.php';
+
+	class ConvitesTela{
+		protected $usuario;
+		protected $strategy;
+
+		function ConvitesTela($usuario, $tipo)
 		{
-			$this->campeonato = $campeonato;
-			$this->posicao = $posicao;
-			$this->pontuacao = $pontuacao;
-			$this->nome = $nome;
-			$this->convites = $convites;
-			$this->username = $username;
-			$this->email = $email;
-			$this->provasresultados = $provasresultados;
-			$this->resultadosboloes = $resultadosboloes;
-			$this->reportarbugs = $reportarbugs;
-			$this->termosCondicoes = $termosCondicoes;
+			$this->usuario = $usuario;
+
+			if($tipo == 'u') {
+				$this->strategy = new ConvidarPorUsername();
+			} else {
+				$this->strategy = new ConvidarPorEmail();
+			}
 		}
 
 		function getPosicao(){
@@ -111,6 +104,10 @@
 
 		function setTermosCondicoes($termosCondicoes){
 			$this->termosCondicoes = $termosCondicoes;
+		}
+
+		function convidar() {
+			$this->strategy->convidar($this->usuario);
 		}
 	}
 

@@ -5,12 +5,16 @@
 		protected $bolao;
 		protected $valor;
 		protected $opcaoDeAposta;
+		protected $data;
+		protected $status;
 
-		function Aposta($usuario, $bolao, $valor,$opcaoDeAposta){
+		function Aposta($usuario, $bolao, $valor,$opcaoDeAposta, $data, $status){
 			$this->usuario = $usuario;
 			$this->bolao = $bolao;
 			$this->valor = $valor;
 			$this->opcaoDeAposta = $opcaoDeAposta;
+			$this->data = $data;
+			$this->status = $status;
 		}
 
 		function setUsuario($usuario){
@@ -29,6 +33,14 @@
 			$this->opcaoDeAposta = $opcaoDeAposta;
 		}
 
+		function setData($data){
+			$this->data = $data;
+		}
+
+		function setStatus($status){
+			$this->status = $status;
+		}
+
 		function getUsuario(){
 			return $this->usuario;
 		}
@@ -43,6 +55,14 @@
 
 		function getValor(){
 			return $this->valor;
+		}
+
+		function getData(){
+			return $this->data;
+		}
+
+		function getStatus(){
+			return $this->status;
 		}
 
 	}

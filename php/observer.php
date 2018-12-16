@@ -1,6 +1,8 @@
 <?php
 
-	//require_once 'splObserverInterface.php';
+	require_once 'ArquivoMensagem.php';
+	require_once 'facade.php';
+	require_once 'mensagem.php';
 
 	class Observer implements SplObserver {
 
@@ -15,21 +17,13 @@
 		}
 
 		public function update(SplSubject $subject){
-			array_push($this->mensagens , $subject->getEvent());
+			$m = new Mensagem('SisBolao', $this->apostador, $subject->getEvent(), date('d/m/Y'));
+			array_push($this->mensagens , $m);
 
-			if(file_exists('../bd/mensagens-' . $this->apostador . '.txt')){
-				$arquivo = fopen('../bd/mensagens-' . $this->apostador . '.txt', 'a+');
-				for($i = 0; $i < count($this->mensagens); $i++){
-					fwrite($arquivo, 'SisBolao;' . $this->mensagens[$i] . ';' . date('d/m/Y') . ';-' . PHP_EOL);
-				}
-				fclose($arquivo);
-			} else {
-				$arquivo = fopen('../bd/mensagens-' . $this->apostador . '.txt', 'w+');
-				for($i = 0; $i < count($this->mensagens); $i++){
-					fwrite($arquivo,  'SisBolao;' . $this->mensagens[$i] . ';' . date('d/m/Y') . ';-' . PHP_EOL);
-				}
-				fclose($arquivo);
-			}
+			//unlink('../bd/mensagens-' . $this->apostador . '.txt');
+			$mensagem = new ArquivoMensagem();
+    		$facade = new Facade($mensagem);
+   			$facade->escreverEm('../bd/mensagens-' . $this->apostador . '.txt', $this->mensagens);
 		}
 
 		public function getPriority() {

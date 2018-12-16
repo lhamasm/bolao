@@ -1,12 +1,19 @@
 <?php
+
+  session_start();
+
   require_once 'sistema.php';
   require_once 'usuario.php';
   require_once 'apostador.php';
   require_once 'jogo.php';
   require_once 'bolao.php';
   require_once 'aposta.php';
+  require_once 'facade.php';
+  require_once 'ArquivoBolao.php';
+  require_once 'ArquivoJogos.php';
+  require_once 'ArquivoUsuario.php';
+  require_once 'ArquivoAposta.php';
 
-  session_start();
 
     $usuarios = array();
     $jogos = array();
@@ -14,8 +21,33 @@
     $bugs = array();
 
     $sistema = new Sistema($usuarios, $jogos, $boloes, $bugs);
+    $_SESSION['sistema'] = $sistema;
 
-    if(file_exists('../bd/usuarios.txt')){
+    $usuario = new ArquivoUsuario();
+    $facade = new Facade($usuario);
+    $facade->lerDe('../bd/usuarios.txt');
+
+    $jogo = new ArquivoJogo();
+    $facade = new Facade($jogo);
+    $facade->lerDe('../bd/jogos.txt');
+
+    $bolao = new ArquivoBolao();
+    $facade = new Facade($bolao);
+    $facade->lerDe('../bd/boloes.txt');
+
+    //echo count($_SESSION['sistema']->getBoloes());
+    $sistema = $_SESSION['sistema'];
+    $usuarios = $sistema->getUsuarios();
+    $aposta = new ArquivoAposta();
+    $facade = new Facade($aposta);
+    for($i=0; $i<count($usuarios)-1; $i++){
+      $facade->lerDe('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt');
+    }
+
+    $_SESSION["numero_usuarios"] = count($sistema->getUsuarios());
+    $_SESSION['status'] = -1;
+
+    /*if(file_exists('../bd/usuarios.txt')){
       $arquivo = fopen('../bd/usuarios.txt', 'r');
 
       while(!feof($arquivo)){
@@ -28,7 +60,7 @@
       }
 
       fclose($arquivo);
-    } 
+    }
 
     if(file_exists('../bd/jogos.txt')){ 
       $arquivo = fopen('../bd/jogos.txt', 'r');
@@ -64,7 +96,7 @@
 
         $b = new Bolao($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $dados[5], $dados[6], $tipoJogo, $dados[9], $opcoesAposta, $dados[11], $dados[13]);
 
-        for($i=0; $i < count($participantes)-1; $i++){
+        for($i=0; $i < count($participantes); $i++){
           $b->setParticipantes($participantes[$i]);
         }
 
@@ -98,7 +130,5 @@
       }
     }
 
-    $_SESSION["sistema"] = $sistema;
-    $_SESSION["numero_usuarios"] = count($sistema->getUsuarios());
-    $_SESSION['status'] = -1;
+    $_SESSION["sistema"] = $sistema;*/
 ?>

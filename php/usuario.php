@@ -6,7 +6,7 @@
 	require_once 'observer.php';
 	require_once 'subject.php';
 	
-	class Usuario {
+	abstract class Usuario {
 		protected $tipo; //apostador ou adm
 		protected $nome;
 		protected $username;
@@ -21,7 +21,7 @@
 		protected $banco;
 		protected $agencia;
 		protected $conta;
-		//protected $mensagens;
+		protected $mensagens;
 
 		# Construtor
 		function Usuario($tipo, $nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta){
@@ -40,7 +40,7 @@
 			$this->banco = $banco;
 			$this->agencia = $agencia;
 			$this->conta = $conta;
-			//$this->mensagens = array();
+			$this->mensagens = array();
 
 		}
 
@@ -204,6 +204,8 @@
 				}
 			}
 		}
+
+		abstract protected function logar();
 	}
 
 ?>

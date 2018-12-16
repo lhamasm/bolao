@@ -2,6 +2,8 @@
 
 	require_once 'sistema.php';
 	require_once 'bolao.php';
+	require_once 'facade.php';
+	require_once 'ArquivoBolao.php';
 	require_once 'funcoes.php';
 
 	session_start();
@@ -24,7 +26,7 @@
 		protected $senha;
 		protected $dataTermino;
 
-		function CadastrarBolaoTela($campeonato, $tipo, $senha, $nome, $descricao, $participantes, $opcoesAposta, $tipoJogo, $tipoAposta, $dataTermino)
+		function CadastrarBolaoTela($campeonato, $tipo, $senha, $nome, $descricao, $participantes/*, $opcoesAposta*/, $tipoJogo, $tipoAposta, $dataTermino)
 		{
 			/*$this->campeonato = $campeonato;
 			$this->posicao = $posicao;
@@ -37,7 +39,7 @@
 			$this->noparticipantesbolao = $participantes;
 			/*$this->reportarbugs = $reportarbugs;
 			$this->termosCondicoes = $termosCondicoes;*/
-			$this->escolhasapostabolao = $opcoesAposta;
+			//$this->escolhasapostabolao = $opcoesAposta;
 			$this->tipojogobolao = $tipoJogo;
 			$this->tipoapostabolao = $tipoAposta;
 			$this->senha = $senha;
@@ -177,43 +179,25 @@
 			$sistema = $_SESSION['sistema'];
 			$boloes = $sistema->getBoloes();
 
-			$this->id = count($boloes) + 1;
-
-			$cadastro = $this->id . ';' . $_SESSION['login'] . ';' . $this->tipobolao . ';' . $this->campeonatobolao . ';' . $this->nomebolao . ';' . $this->descricaobolao . ';' . $this->noparticipantesbolao . ';;' . $this->tipojogobolao[0] . '-' . $this->tipojogobolao[1] . '-' . $this->tipojogobolao[2] . '-' . $this->tipojogobolao[3] . '-' . $this->tipojogobolao[4] . '-' . $this->tipojogobolao[5] . ';' . $this->tipoapostabolao . ';';
-
-
-			for($i = 0; $i < count($this->escolhasapostabolao)-1; $i++){
-				if($i == count($this->escolhasapostabolao)-2){
-					$cadastro = $cadastro . $this->escolhasapostabolao[$i];
-				} else {
-					$cadastro = $cadastro . $this->escolhasapostabolao[$i] . '-';
-				}
-			}
-
-			$cadastro = $cadastro . ';' . $this->senha . ';;0;' . $this->dataTermino . PHP_EOL;
-
-			$bolao = new Bolao($this->id, $_SESSION['login'], $this->tipobolao, $this->campeonatobolao, $this->nomebolao, $this->descricaobolao, $this->noparticipantesbolao, $this->tipojogobolao, $this->tipoapostabolao, $this->escolhasapostabolao, $this->senha, 0);
-			$bolao->setTempoLimite($this->dataTermino);
-
 			for($i = 0; $i < count($boloes); $i++){
 				if($boloes[$i]->getCriador() == $_SESSION['login'] && $boloes[$i]->getTitulo() == $this->nomebolao && $boloes[$i]->getCampeonato() == $this->campeonatobolao){
 					$_SESSION['status'] = 2;
-					header('Location: ../cadastro-bolao.php');
+					header('Location: ../cadastrar-bolao.php');
 			  		//echo 'Já existe um bolão com o mesmo nome, administrador e campeonato';
 					exit();	
 				}
 			}
 
-			if(file_exists('../bd/boloes.txt')){
-				$arquivo = fopen('../bd/boloes.txt', 'a+') or die("Não foi possível abrir o arquivo");
-			} else {
-				$arquivo = fopen('../bd/boloes.txt', 'w+') or die("Não foi possível abrir o arquivo");
-			}
+			$this->id = count($boloes) + 1;
 
-			fwrite($arquivo, $cadastro);
-			fclose($arquivo);
+			$bolao = new Bolao($this->id, $_SESSION['login'], $this->tipobolao, $this->campeonatobolao, $this->nomebolao, $this->descricaobolao, $this->noparticipantesbolao, $this->tipojogobolao, $this->tipoapostabolao,/* $this->escolhasapostabolao,*/ $this->senha, 0);
+			$bolao->setTempoLimite($this->dataTermino);
 
-			$sistema->setBoloes($bolao);
+			$b = new ArquivoBolao();
+    		$facade = new Facade($b);
+    		$facade->escreverEm('../bd/boloes.txt', $bolao);
+
+    		$sistema->setBoloes($bolao);
 			$_SESSION['sistema'] = $sistema;
 
 			$_SESSION['status'] = 3;
