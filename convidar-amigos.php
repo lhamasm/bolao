@@ -1,8 +1,15 @@
 <?php
+
+	require_once 'php/sistema.php';
+
 	session_start();
 
 	$opcao = array();
 	$_SESSION['opcao'] = $opcao;
+
+	$boloes = $_SESSION['sistema']->getBoloes();
+	$bolao = count($boloes)-1;
+	$_SESSION['b'] = $bolao;
 ?>
 
 <!doctype html>
@@ -99,6 +106,19 @@
 					<div class="col-md-6 align-self-center">
 						<h1 class="titulo text-center py-3 text-info">Convidar Amigos</h1> 
 						<?php
+							if($_SESSION['status'] == 2){
+								 echo '<div class="alert alert-danger">
+					                   Não existe um usuário com esse username
+					                  </div>'; 
+							} elseif($_SESSION['status'] == 1){
+								echo '<div class="alert alert-success">
+					                    Convite enviado com sucesso!
+					                  </div>'; 
+							} elseif($_SESSION['status'] == 3){
+								echo '<div class="alert alert-danger">
+					                   O username/email inserido é o seu
+					                  </div>'; 
+							}
 							$_SESSION['status'] = -1;
 						?>
 						<form class="p-4 shadow" method="post" action="php/convidar-amigos.php">
@@ -122,6 +142,8 @@
 									</div>
 									<input class="form-control" type="text" name="email" id="email">
 								</div>
+
+								<input type="hidden" id="bolao-identificador" name="bolao-identificador" value="<?php echo $_SESSION['b']; ?>">
 
 								<div class="form-group">
 									<button class="btn btn-info my-3 btn-block" type="submit">Convidar</button>

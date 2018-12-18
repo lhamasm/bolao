@@ -103,27 +103,31 @@
 					<div class="col-6" >
 						<h4 class="titulo">Convites Recebidos</h4>
 						<?php 
-							var_dump($mensagens);
+
+							$contador = 0;
+							//var_dump($mensagens);
 							if(count($mensagens) > 0){
 							echo '<div style="height: 18em; overflow-y: auto; overflow-x: hidden;">
 								<div class="bg-info" style="margin: 1em 0; padding: 1em;">';
-								for($i=0; $i<count($mensagens)-1; $i++){
+								for($i=0; $i<count($mensagens); $i++){
 
-									$m = explode(';', $mensagens[$i]);
+									if($mensagens[$i]->getRecebedor() == $_SESSION['login']){
+									//$m = explode(';', $mensagens[$i]);
+										$contador += 1;
 
 									echo '<div class="row text-white" style="font-size: 0.9em;">
 										<div class="col-md-3">
-											<h5 class="titulo"><i class="fas fa-user"></i><p><a> @' . $m[0] . '</a></p></h5>
+											<h5 class="titulo"><i class="fas fa-user"></i><p><a> @' . $mensagens[$i]->getEnviador() . '</a></p></h5>
 										</div>
 										<div class="col-md-4">
 											<i></i>
-											<h5 class="titulo">' . $m[1] . '</h5>
+											<h5 class="titulo">' . $mensagens[$i]->getMensagem() . '</h5>
 										</div>
 										<div class="col-md-4">
 											<i></i>
-											<h5 class="titulo"><i class="far fa-calendar-alt"></i>' . $m[2] . '</h5>
+											<h5 class="titulo"><i class="far fa-calendar-alt"></i>' . $mensagens[$i]->getData() . '</h5>
 										</div>';
-										if($m[3] != ''){
+										if(get_class($mensagens[$i]) == 'Convites'){
 											echo '<div class="col-md-1">
 												<a href="#" onclick="dados_convite(\' dados-convite \')">
 													<i id="change" style="font-size: 1.5em; color: white;" class="fas fa-angle-down"></i>
@@ -133,22 +137,22 @@
 
 										echo '</div>';
 
-									if($m[3] != ''){
+									if(get_class($mensagens[$i]) == 'Convites'){
 										echo '<div class="row" style="background-color:white;">
 										<div id="dados-convite" style="display: none;">
 											<div class="row p-3">
 												<div class="col-md-6">
 													<h5 class="titulo">Descrição</h5>
-													<p>' . $boloes[intval($m[3])]->getDescricao() . '</p>
+													<p>' . $boloes[intval($mensagens[$i]->getBolao())]->getDescricao() . '</p>
 
 													<h5 class="titulo">Tipo de Aposta</h5>
 													<p>'; 
 
-													if($boloes[intval($m[3])]->getTipoAposta() == 'ganhar'){
+													if($boloes[intval($mensagens[$i]->getBolao())]->getTipoAposta() == 'ganhar'){
 														echo 'Quem será que vai ganhar?';
-													} elseif ($boloes[intval($m[3])]->getTipoAposta() == 'perder') {
+													} elseif ($boloes[intval($mensagens[$i]->getBolao())]->getTipoAposta() == 'perder') {
 														echo 'Quem será que vai perder/eliminado?';
-													} elseif ($boloes[intval($m[3])]->getTipoAposta() == 'tema') {
+													} elseif ($boloes[intval($mensagens[$i]->getBolao())]->getTipoAposta() == 'tema') {
 														echo 'Qual será o tema da prova?';
 													} else {
 														echo 'Quais serão os ingredientes utilizados na prova?';
@@ -160,7 +164,7 @@
 												<div class="col-md-6">
 													<h5 class="titulo">Tipo de Jogo</h5>
 													<ol style="font-family: robotok;">';
-														$tipoJogo = $boloes[intval($m[3])]->getTipoJogo();
+														$tipoJogo = $boloes[intval($mensagens[$i]->getBolao())]->getTipoJogo();
 														//$tipoJogo = explode('-', $tipoJogo);
 														if($tipoJogo[0] == '1'){
 															echo '<li>Prova da Caixa Misteriosa</li>';
@@ -186,7 +190,7 @@
 													<div class="px-3">
 														<div class="row">
 															<ul>';
-																$escolha = $boloes[intval($m[3])]->getTipoJogo();
+																$escolha = $boloes[intval($mensagens[$i]->getBolao())]->getTipoJogo();
 																for($j=0; $j<count($escolha)-1; $j++){
 																	echo '<li>' . $escolha[$j] .'</li>';
 																}
@@ -206,8 +210,11 @@
 									</div>';
 									}
 								}
+								}
 								echo '</div></div>';
-							} else {
+							} 
+
+							if(count($mensagens) == 0 || $contador == 0){
 								echo '<h3>Não há mensagens disponíveis</h3>';
 							}
 						?>

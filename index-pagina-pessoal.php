@@ -3,6 +3,8 @@
 	require_once 'php/sistema.php';
 	require_once 'php/bolao.php';
 	require_once 'php/usuario.php';
+	require_once 'php/administrador-sistema.php';
+	require_once 'php/apostador.php';
 	require_once 'php/jogo.php';
 	//require_once 'php/index.php';
 
@@ -232,7 +234,14 @@
 											    						<span data-target="#apostarB' . $boloes[$j]->getId() . '" data-toggle="modal">
 											    							<button class="btn btn-danger" data-placement="bottom" data-toggle="tooltip" title="Apostar"><i class="fas fa-user-plus"></i></button>
 											    						</span>
-											    						<button data-target="#B'. $boloes[$j]->getId() . '" data-toggle="modal" class="btn btn-info"><i class="far fa-eye"></i></button>
+											    						<button data-target="#B'. $boloes[$j]->getId() . '" data-toggle="modal" class="btn btn-info"><i class="far fa-eye"></i></button>';
+
+											    						if(in_array($_SESSION['login'], $boloes[$j]->getParticipantes())){
+											    							echo '<span data-target="#convidarB' . $boloes[$j]->getId() . '" data-toggle="modal">
+											    							<button class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="Convidar Amigos"><i class="fas fa-envelope"></i></button>
+											    						</span>';
+											    						}
+											    						echo '
 											    					</div>
 											    				</div>			    				
 										    				</div>';
@@ -826,6 +835,54 @@
 							</div>
 							<div class="modal-footer">
 								
+							</div>
+						</div>
+					</div>
+				</div>';
+			}
+		?>
+
+		<?php 
+			for($i = 0; $i < count($boloes); $i++){
+				echo '<div id="convidarB' . $boloes[$i]->getId() . '" class="modal">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header text-center justify-content-center">
+								<div class="col-2"></div>
+								<h4 class="modal-title col-8 titulo"><stronger>Convidar Amigos</stronger></h4>
+								<button class="close col-2" data-dismiss="modal">&times</button>
+							</div>
+							<div class="modal-body p-4" style="background-color: #F8F8FF; overflow-y: auto;">
+								<form class="p-4" method="post" action="php/convidar-amigos.php">
+									<div class="form-group">
+										<label class="titulo" for="username">Nome de Usuário</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text"><i class="far fa-user"></i></span>
+											</div>
+											<input class="form-control" type="text" name="username" id="username">
+										</div>
+									</div>
+
+									<hr class="mt-4">
+
+									<div class="form-group">
+										<label class="titulo" for="email">Email <span style="font-family: robotok;">(caso não esteja cadastrado no sistema)</span></label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="titulo input-group-text">@</span>
+											</div>
+											<input class="form-control" type="text" name="email" id="email">
+										</div>
+										<input type="hidden" id="bolao-identificador" name="bolao-identificador" value="' . $i . '">
+									</div>
+
+									<div class="modal-footer">
+										<div class="form-group">
+											<button class="btn btn-info my-3 btn-block" type="submit">Convidar</button>
+										</div>
+									</div>	
+								</form>
 							</div>
 						</div>
 					</div>
