@@ -1,35 +1,35 @@
 <?php
 
 	require_once 'convidar.php';
-	require_once 'administrador-bolao.php';
+	require_once 'usuario.php';
 
 	session_start();
 
 	class ConvidarPorEmail implements Convidar {
 
-		public function convidar($email) {
+		public function convidar($email, $bolao) {
 
 			$sistema = $_SESSION['sistema'];
 			$boloes = $sistema->getBoloes();
 			$usuarios = $sistema->getUsuarios();
 
-			$adm = new AdministradorBolao($_SESSION['tipo'], $_SESSION['nome'], $_SESSION['username'], $_SESSION['email'], $_SESSION['senha'], $_SESSION['ddn'], $_SESSION['genero'], $_SESSION['rg'], $_SESSION['login'], $_SESSION['telefone'], $_SESSION['celular'], $_SESSION['banco'], $_SESSION['agencia'], $_SESSION['conta']);
-				$adm->setBolao($boloes[count($boloes)-1]);
-				$adm->setUsername($_SESSION['username']);
-				$adm->convidarApostadorEmail($usuarios, $email, date('d/m/Y'), $boloes[count($boloes)-1]);
+			$usuario = $_SESSION['usuario'];
 
 			for($i=0; $i<count($usuarios); $i++){
-				if($usuarios[$i]->getEmail() == $email){
-					$c = new Convite($_SESSION['login'], $usuarios[$i]->getCpf(), 'Convite', date('d/m/Y'), count($boloes));
-
-					$convite = new ArquivoConvite();
-				    $facade = new Facade($convite);
-				    $facade->escreverEm('mensagens-' . $usuarios[$i]->getCpf() . '.txt', $c);
-				    break;
+				if($username != $_SESSION['email']){
+					if($usuarios[$i]->getEmail() == $email){
+						$usuario->convidarApostador($usuarios[$i], $i, $data, $boloes[intval($bolao)]);
+						exit();
+					}
+				} else {
+					$_SESSION['status'] = 3;
+					header("Location: ../convidar-amigos.php");
+					exit();
 				}
 			}
 
-			$_SESSION['status'] = 1;
+			// Não foi possível convidar, pois não existe usuário com esse email
+			$_SESSION['status'] = 2;
 			header("Location: ../convidar-amigos.php");
 			exit();
 

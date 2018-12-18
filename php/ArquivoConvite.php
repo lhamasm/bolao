@@ -4,6 +4,8 @@
 	require_once 'sistema.php';
 	require_once 'usuario.php';
 	require_once 'convite.php';
+	require_once 'bolao.php';
+	require_once 'mensagem.php';
 
 	//session_start();
 
@@ -21,7 +23,11 @@
 
 					$dados = explode(':', $convite);
 					// remetente, mensagem, data, bolao
-					$m = new Convite($dados[0], $_SESSION['login'], $dados[1], $dados[2], $dados[3]);
+					if($dados[3] == ''){
+						$m = new Mensagem($dados[0], $_SESSION['login'], $dados[1], $dados[2]);
+					} else {
+						$m = new Convite($dados[0], $_SESSION['login'], $dados[1], $dados[2], $dados[3]);
+					}
 					
 					for($i=0; $i<count($sistema->getUsuarios()); $i++){
 						if($sistema->getUsuarios()[$i]->getCpf() == $_SESSION['login']){
@@ -36,13 +42,11 @@
 
 		}
 
-		public function escrever($nome, $convites) {
+		public function escrever($nome, $convite) {
 
 			$arquivo = fopen($nome, 'a+') or die("Não foi possível abrir o arquivo");
 
-			for($i=0; $i<count($convites); $i++){
-				fwrite($arquivo, $convites[$i]->getEnviador() . ':' . $convites[$i]->getMensagem() . ':' . $convites[$i]->getData() . ':' . $convites[$i]->getBolao() . PHP_EOL);
-			}
+			fwrite($arquivo, $convite->getEnviador() . ':' . $convite->getMensagem() . ':' . $convite->getData() . ':' . ($convite->getBolao())->getId() . PHP_EOL);
 
 			fclose($arquivo);
 		}

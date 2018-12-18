@@ -18,7 +18,7 @@
 					$jogo = fgets($arquivo);
 
 					$dados = explode(':', $jogo);
-					$j = new Jogo($dados[0], $dados[1], $dados[2]);
+					$j = new Jogo($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $ganhador, $ingredientes);
 
 	        		$sistema->setJogos($j);
 				}
@@ -34,7 +34,36 @@
 
 			$sistema = $_SESSION['sistema'];
 
-			$cadastro = $jogo->getId() . $jogo->getResultado() . $jogo->getData() . PHP_EOL;
+			$cadastro = $jogo->getCampeonato() . ':' . $jogo->getAno() . ':' . $jogo->getTipo() . ':' . $jogo->getData() . ':' . $jogo->getTema() . ':' . $jogo->getGanhador() . ':';
+
+			for($i=0; $i<count($jogo->getIngredientes())-1; $i++){
+				$cadastro = $cadastro . $jogo->getIngredientes()[$i] . '*';
+			}
+			if(count($jogo->getIngredientes())){
+				$cadastro = $cadastro . $jogo->getIngredientes()[count($jogo->getIngredientes())-1] . ':';
+			}
+
+			$equipe = $jogo->getEquipes();
+			for($i=0; $i<count($equipe); $i++){
+				if(count($equipe[$i]) > 0){
+					if($i == 0){
+						$cadastro = $cadastro . "Equipe Vermelha" . '-';
+					} elseif($i == 1){
+						$cadastro = $cadastro . "Equipe Amarela" . '-';
+					} elseif($i == 2){
+						$cadastro = $cadastro . "Equipe Azul" . '-';
+					} else {
+						$cadastro = $cadastro . "Equipe Verde" . '-';
+					}
+				}
+
+				for($j=0; $j<count($equipe[$i])-1; $j++){
+					$cadastro = $cadastro . $equipe[$i][$j] . ';';
+				}
+				if(count($equipe[$i]) > 0){
+					$cadastro = $cadastro . $equipe[$i][count($equipe[$i])-1] . PHP_EOL;
+				}
+			}
 
 			$arquivo = fopen($nome, 'a+') or die("Não foi possível abrir o arquivo");
 			fwrite($arquivo, $cadastro);

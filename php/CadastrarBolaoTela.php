@@ -5,6 +5,7 @@
 	require_once 'facade.php';
 	require_once 'ArquivoBolao.php';
 	require_once 'funcoes.php';
+	require_once 'administrador-bolao.php';
 
 	session_start();
 
@@ -192,6 +193,16 @@
 
 			$bolao = new Bolao($this->id, $_SESSION['login'], $this->tipobolao, $this->campeonatobolao, $this->nomebolao, $this->descricaobolao, $this->noparticipantesbolao, $this->tipojogobolao, $this->tipoapostabolao,/* $this->escolhasapostabolao,*/ $this->senha, 0);
 			$bolao->setTempoLimite($this->dataTermino);
+
+			$user = $_SESSION['usuario'];
+			if(get_class($user) == 'Apostador'){
+				$user = new AdministradorBolao($_SESSION['tipo'], $_SESSION['nome'], $_SESSION['username'], $_SESSION['email'], $_SESSION['senha'], $_SESSION['ddn'], $_SESSION['genero'], $_SESSION['rg'], $_SESSION['login'], $_SESSION['telefone'], $_SESSION['celular'], $_SESSION['banco'], $_SESSION['agencia'], $_SESSION['conta']);
+			}
+
+			$user->setBolao($bolao);
+			$_SESSION['usuario'] = $user;
+
+			// CRIAR UM ARQUIVO DE MEUS BOLÕES
 
 			$b = new ArquivoBolao();
     		$facade = new Facade($b);

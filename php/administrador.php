@@ -11,34 +11,36 @@
 			parent::Usuario($tipo, $nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta);
 		}
 
-		/*function public convidaUsername(){
-			$this->convidarApostadorUsername($username, $data, $bolao);
-		}
-
-		function public convidaEmail(){
-			$this->convidarApostadorEmail($email, $data, $bolao);
-		}
-
-		function public Excluir(){
-			$this->excluirApostador($apostador, $bolao);
-		}*/
-
 		function convidarApostadorUsername($usuarios, $username, $data, $bolao) {
 			for($i = 0; $i < count($usuarios); $i++){
 				if($usuarios[$i]->getUsername() == $username){
-					$convite = new Convite($this->username, $username, 'Participe do bolão' . $bolao->getTitulo(), $bolao->getTitulo(), $data);
+					$convite = new Convite($this->username, $username, 'Participe do bolão' . $bolao->getTitulo(), $bolao, $data);
 					$usuarios[$i]->setMensagem($convite);
+					$_SESSION['status'] = 1;
+					header('Location: ../convidar-amigos.php');
+					exit();
 				}
 			}
+
+			$_SESSION['status'] = 0;
+			header('Location: ../convidar-amigos.php');
+			exit();
 		}
 
 		function convidarApostadorEmail($usuarios, $email, $data, $bolao) {
 			for($i = 0; $i < count($usuarios); $i++){
 				if($usuarios[$i]->getEmail() == $email){
-					$convite = new Convite($this->username, $email, $bolao->getTitulo(), $data);
+					$convite = new Convite($this->username, $email, 'Participe do bolão' . $bolao->getTitulo(), $bolao, $data);
 					$usuarios[$i]->setMensagem($convite);
+					$_SESSION['status'] = 1;
+					header('Location: ../convidar-amigos.php');
+					exit();
 				}
 			}
+
+			$_SESSION['status'] = 0;
+			header('Location: ../convidar-amigos.php');
+			exit();
 		}
 
 		function excluirApostador($boloes, $apostador, $bolao){

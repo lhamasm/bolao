@@ -1,6 +1,13 @@
 <?php
 
-	class Jogo {
+	require_once 'sistema.php';
+	require_once 'jogo.php';
+	require_once 'facade.php';
+	require_once 'ArquivoJogos.php';
+	require_once 'administrador-sistema.php';
+
+	class CadastrarResultadoTela {
+
 		protected $campeonato;
 		protected $ano;
 		protected $tipo;
@@ -10,7 +17,8 @@
 		protected $ingredientes;
 		protected $equipes;
 
-		function Jogo($campeonato, $ano, $tipo, $dataProva, $tema, $ganhador, $ingredientes){
+
+		function CadastrarResultadoTela($campeonato, $ano, $tipo, $dataProva, $tema, $ganhador, $ingredientes){
 			$this->campeonato = $campeonato;
 			$this->ano = $ano;
 			$this->tipo = $tipo;
@@ -84,5 +92,11 @@
 		function setEquipes($equipes){
 			$this->equipes = $equipes;
 		}
+
+		function cadastrar() {
+			$adm = $_SESSION['usuario'];
+			$adm->cadastrarResultado($this->campeonato, $this->ano, $this->tipo, $this->dataProva, $this->tema, $this->ganhador, $this->ingredientes, $this->equipes);
+		}
 	}
+
 ?>

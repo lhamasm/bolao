@@ -2,7 +2,7 @@
 
 	interface Convidar {
 
-		function convidar($usuario);
+		function convidar($usuario, $bolao);
 
 	}
 

@@ -1,123 +1,132 @@
 <?php
 
 	require_once 'sistema.php';
-	require_once 'jogo.php';
+	require_once 'CadastrarResultadoTela.php';
 	require_once 'funcoes.php';
 
 	session_start();
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-		$sistema = $_SESSION['sistema'];
+		$campeonato = $_REQUEST['campeonato'];
 
-		$tipo = $_REQUEST['tipo'];
-		if($tipo == "caixa-misteriosa"){
-			$tipo = 1;
-		} elseif($tipo == "equipes"){
-			$tipo = 2;
-		} elseif($tipo == "eliminacao"){
-			$tipo = 3;
-		} elseif($tipo == "repescagem"){
-			$tipo = 4;
-		} elseif($tipo == "semifinal"){
-			$tipo = 5;
-		} else {
-			$tipo = 6;
-		}
+		$ano = $_REQUEST['ano'];
 
-		$data = $_REQUEST['data'];
-		$date = DateTime::createFromFormat('Y-m-d', $data);
-		$data = $date->format('d/m/Y');
+		$tipo = $_REQUEST['tipoJogo'];
 
-		$resultado = array();
+		$membros = array();
 
-		if($tipo == 'equipes'){
-			$cor = $_REQUEST['cor'];
-			if($cor == 'outra'){
-				$cor = $_REQUEST['corr'];
+		if($tipo == '1') {
+			$dataProva = $_REQUEST['dataProvaCaixaMisteriosa'];
+
+			$tema = $_REQUEST['temaCaixaMisteriosa'];
+			if($tema == 'outro'){
+				$tema = $_REQUEST['outroTemaCaixaMisteriosa'];
 			}
-			array_push($resultado, 'Equipe ' . $cor);			
+
+			$ganhador = $_REQUEST['ganhadorCaixaMisteriosa'];
+
+			$ingredientes = $_REQUEST['iCaixaMisteriosa'];
+		} elseif($tipo == '2'){
+			$dataProva = $_REQUEST['dataProvaEquipes'];
+
+			$tema = $_REQUEST['temaEquipes'];
+			if($tema == 'outro'){
+				$tema = $_REQUEST['outroTemaEquipes'];
+			}
+
+			$ganhador = $_REQUEST['ganhadorEquipes'];
+
+			$ingredientes = $_REQUEST['iEquipes'];
+
+			$vermelha = array();
+			$amarela = array();
+			$azul = array();
+			$verde = array();
+
+			$membros = $_POST['membrosequipes'];
+
+			for($i=0; $i<count($membros); $i++){
+
+				$m = explode('-', $membros[$i]);
+				//echo $m[0];
+				//echo $m[1];
+				if($m[1] == 'Vermelha'){
+					array_push($vermelha, $m[0]);
+				} elseif ($m[1] == 'Amarela'){
+					array_push($amarela, $m[0]);
+				} elseif ($m[1] == 'Azul'){
+					array_push($azul, $m[0]);
+				} else {
+					array_push($verde, $m[0]);
+				}
+
+			}
+
+			$help = array();
+
+			array_push($help, $vermelha);
+			array_push($help, $amarela);
+			array_push($help, $azul);
+			array_push($help, $verde);
+
+		} elseif($tipo == '3'){
+			$dataProva = $_REQUEST['dataProvaEliminacao'];
+
+			$tema = $_REQUEST['temaEliminacao'];
+			if($tema == 'outro'){
+				$tema = $_REQUEST['outroTemaEliminacao'];
+			}
+
+			$ganhador = $_REQUEST['ganhadorEliminacao'];
+
+			$ingredientes = $_REQUEST['iEliminacao'];
+		} elseif($tipo == '4'){
+			$dataProva = $_REQUEST['dataProvaRepescagem'];
+
+			$tema = $_REQUEST['temaRepescagem'];
+			if($tema == 'outro'){
+				$tema = $_REQUEST['outroTemaRepescagem'];
+			}
+
+			$ganhador = $_REQUEST['ganhadorRepescagem'];
+
+			$ingredientes = $_REQUEST['iRepescagem'];
+		} elseif($tipo == '5'){
+			$dataProva = $_REQUEST['dataProvaSemifinal'];
+
+			$tema = $_REQUEST['temaSemifinal'];
+			if($tema == 'outro'){
+				$tema = $_REQUEST['outroTemaSemifinal'];
+			}
+
+			$ganhador = $_REQUEST['ganhadorSemifinal'];
+
+			$ingredientes = $_REQUEST['iSemifinal'];
+		} else {
+			$dataProva = $_REQUEST['dataProvaFinal'];
+
+			$tema = $_REQUEST['temaFinal'];
+			
+			if($tema == 'outro'){
+				$tema = $_REQUEST['outroTemaFinal'];
+			}
+
+			$ganhador = $_REQUEST['ganhadorFinal'];
+
+			$ingredientes = $_REQUEST['iFinal'];
 		}
 
-		if(isset($_REQUEST['adriana'])){
-			array_push($resultado, 'Adriana');
+		$ingredientes = explode('-', $ingredientes);
+		array_splice($ingredientes, count($ingredientes)-1);
+
+
+		$tela = new CadastrarResultadoTela($campeonato, $ano, $tipo, $dataProva, $tema, $ganhador, $ingredientes);
+		if(isset($_POST['membrosequipes'])){
+			$tela->setEquipes($help);
 		}
 
-		if(isset($_REQUEST['alex'])){
-			array_push($resultado, 'Alex');
-		}
-
-		if(isset($_REQUEST['andre'])){
-			array_push($resultado, 'André');
-		}
-
-		if(isset($_REQUEST['andreR'])){
-			array_push($resultado, 'André R');
-		}
-
-		if(isset($_REQUEST['daniel'])){
-			array_push($resultado, 'Daniel');
-		}
-
-		if(isset($_REQUEST['heaven'])){
-			array_push($resultado, 'Heaven');
-		}
-
-		if(isset($_REQUEST['manuela'])){
-			array_push($resultado, 'Manuela');
-		}
-
-		if(isset($_REQUEST['marcela'])){
-			array_push($resultado, 'Marcela');
-		}
-
-		if(isset($_REQUEST['paulo'])){
-			array_push($resultado, 'Paulo');
-		}
-
-		if(isset($_REQUEST['rafael'])){
-			array_push($resultado, 'Rafael');
-		}
-
-		if(isset($_REQUEST['roberta'])){
-			array_push($resultado, 'Roberta');
-		}
-
-		if(isset($_REQUEST['simone'])){
-			array_push($resultado, 'Simone');
-		}
-
-		if(isset($_REQUEST['thalles'])){
-			array_push($resultado, 'Thales');
-		}
-
-		if(isset($_REQUEST['will'])){
-			array_push($resultado, 'William');
-		}
-
-		$res = '';
-		for($i=0; $i<count($resultado)-1; $i++){
-			$res = $res . $resultado[$i] . '-';
-		}
-		$res = $res . $resultado[count($resultado)-1];
-
-		$jogo = new Jogo($tipo, $res, $data);
-		$sistema->setJogos($jogo);
-		$jogos = $sistema->getJogos();
-		$_SESSION['sistema'] = $sistema;
-
-		$arquivo = fopen('../bd/jogos.txt', 'w+');
-		for($i = 0; $i < count($jogos)-1; $i++){
-			$cadastro = $jogos[$i]->getId() . ';' . $jogos[$i]->getResultado() . ';' . $jogos[$i]->getData() . PHP_EOL;
-			fwrite($arquivo, $cadastro);
-		}
-		$cadastro = $jogos[count($jogos)-1]->getId() . ';' . $jogos[count($jogos)-1]->getResultado() . ';' . $jogos[count($jogos)-1]->getData();
-			fwrite($arquivo, $cadastro);
-		fclose($arquivo);
-
-		echo 'Jogo cadastrado com sucesso';
-		header("Location: ../cadastrar-resultados.php");
-		exit()
+		$tela->cadastrar();
 	}
 
 

@@ -44,7 +44,7 @@
 			$this->participantes = array();
 			$this->tipoJogo = $tipoJogo;
 			$this->tipoAposta = $tipoAposta;
-			$this->opcoesAposta = $opcoesAposta;
+			//$this->opcoesAposta = $opcoesAposta;
 			$this->senha = $senha;
 			$this->dinheiros = $dinheiros;
 			$this->ganhadores = array();

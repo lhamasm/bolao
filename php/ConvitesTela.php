@@ -5,11 +5,13 @@
 
 	class ConvitesTela{
 		protected $usuario;
+		protected $bolao;
 		protected $strategy;
 
-		function ConvitesTela($usuario, $tipo)
+		function ConvitesTela($usuario, $tipo, $bolao)
 		{
 			$this->usuario = $usuario;
+			$this->bolao = $bolao;
 
 			if($tipo == 'u') {
 				$this->strategy = new ConvidarPorUsername();
@@ -107,7 +109,7 @@
 		}
 
 		function convidar() {
-			$this->strategy->convidar($this->usuario);
+			$this->strategy->convidar($this->usuario, $this->bolao);
 		}
 	}
 

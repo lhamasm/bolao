@@ -13,6 +13,7 @@
   require_once 'ArquivoJogos.php';
   require_once 'ArquivoUsuario.php';
   require_once 'ArquivoAposta.php';
+  require_once 'ArquivoMensagem.php';
 
 
     $usuarios = array();
@@ -41,7 +42,17 @@
     $aposta = new ArquivoAposta();
     $facade = new Facade($aposta);
     for($i=0; $i<count($usuarios)-1; $i++){
-      $facade->lerDe('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt');
+      if(get_class($usuarios[$i]) == 'Apostador'){
+        $facade->lerDe('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt');
+      }
+    }
+
+    $sistema = $_SESSION['sistema'];
+    $usuarios = $sistema->getUsuarios();
+    $mensagem = new ArquivoMensagem();
+    $facade = new Facade($mensagem);
+    for($i=0; $i<count($usuarios)-1; $i++){
+      $facade->lerDe('../bd/mensagens-' . $usuarios[$i]->getCpf() . '.txt');
     }
 
     $_SESSION["numero_usuarios"] = count($sistema->getUsuarios());

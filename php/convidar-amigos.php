@@ -12,14 +12,18 @@
 
 	$username = '';
 	$email = '';
+	$bolao = '';
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+		$bolao = $_REQUEST['bolao-identificador'];
 
 		if(isset($_REQUEST['username']) && $_REQUEST['username'] != ''){
 
 			$username = p_respostas($_REQUEST['username']);
 
-			$telaConvites = new ConvitesTela($username, 'u');
+
+			$telaConvites = new ConvitesTela($username, 'u', $bolao);
 			$telaConvites->convidar();
 
 			/*$adm = new AdministradorBolao($_SESSION['tipo'], $_SESSION['nome'], $_SESSION['username'], $_SESSION['email'], $_SESSION['senha'], $_SESSION['ddn'], $_SESSION['genero'], $_SESSION['rg'], $_SESSION['login'], $_SESSION['telefone'], $_SESSION['celular'], $_SESSION['banco'], $_SESSION['agencia'], $_SESSION['conta']);
@@ -53,7 +57,7 @@
 
 				$username = p_respostas($_REQUEST['username']);
 
-				$telaConvites = new ConvitesTela($email, 'e');
+				$telaConvites = new ConvitesTela($email, 'e', $bolao);
 				$telaConvites->convidar();
 
 				/*$adm = new AdministradorBolao($_SESSION['tipo'], $_SESSION['nome'], $_SESSION['username'], $_SESSION['email'], $_SESSION['senha'], $_SESSION['ddn'], $_SESSION['genero'], $_SESSION['rg'], $_SESSION['login'], $_SESSION['telefone'], $_SESSION['celular'], $_SESSION['banco'], $_SESSION['agencia'], $_SESSION['conta']);

@@ -28,7 +28,7 @@
 			        }
 			        //$opcoesAposta = explode('*', $dados[10]);
 			        if($dados[14] != ''){
-			       		$apostas = explode(';', $dados[15]);
+			       		$apostas = explode(';', $dados[14]);
 			       	}else {
 			        	$apostas = array();
 			        }
@@ -45,7 +45,7 @@
 
 			        for($i=0; $i < count($apostas); $i++){
 			        	$ap = explode('*', $apostas[$i]);
-			         	$a = new Aposta($ap[0], $contador, $ap[1], $ap[2], $ap[3], $ap[4]);
+			         	$a = new Aposta($ap[0], $contador, $ap[1], $ap[2], $ap[3], 1);
 			          	$b->setApostas($a);
 			        }
 

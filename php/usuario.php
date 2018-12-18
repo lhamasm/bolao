@@ -5,6 +5,7 @@
 	require_once 'jogo.php';
 	require_once 'observer.php';
 	require_once 'subject.php';
+	require_once 'convite.php';
 	
 	abstract class Usuario {
 		protected $tipo; //apostador ou adm
@@ -205,7 +206,27 @@
 			}
 		}
 
-		abstract protected function logar();
+		function convidarApostador($usuario, $indice, $data, $bolao){
+			$c = new Convite($_SESSION['username'], $usuario->getUsername(), 'Convite', date('d/m/Y'), $bolao);
+
+			$convite = new ArquivoConvite();
+		    $facade = new Facade($convite);
+		    $facade->escreverEm('../bd/mensagens-' . $usuario->getCpf() . '.txt', $c);
+
+		    $usuario->setMensagem($c);
+
+		    $sistema = $_SESSION['sistema'];
+		    $usuarios = $sistema->getUsuarios();
+		    array_splice($usuarios, $indice);
+		    array_push($usuarios, $usuario);
+
+		    $s = new Sistema($usuarios, $sistema->getJogos(), $sistema->getBoloes(), $sistema->getBugs());
+		    $_SESSION['sistema'] = $s;
+
+			$_SESSION['status'] = 1;
+			header("Location: ../convidar-amigos.php");
+			exit();
+		}
 	}
 
 ?>
