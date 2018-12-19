@@ -1,10 +1,8 @@
 <?php
 
-	require_once 'sistema.php';
-	require_once 'apostador.php';
-	require_once 'usuario.php';
-	require_once 'login.php';
-	//require_once 'funcoes.php';
+	require_once 'php/sistema.php';
+	require_once 'php/apostador.php';
+	require_once 'php/usuario.php';
 
 	session_start();
 	//require_once 'index.php';
@@ -56,12 +54,13 @@
 			if(confirmation($senha, $confirmarSenha)){
 
 				$dataNascimento = $dia . '/' . $mes . '/' . $ano;
-				$usuario = new Usuario($tipo, $nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta);
+				$usuario = new Usuario($nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta);
+				$usuario->setTipo($tipo);
 
 				$apostador = new Apostador($_SESSION['numero_usuarios']+1, 0);
 				$apostador = $usuario;	
 
-				$cadastro = $tipo . ';' . $nome . ';' . $username . ';' . $email . ';' . $senha . ';' . $dataNascimento . ';' . $genero . ';' . $rg . ';' . $cpf . ';' . $telefone . ';' . $celular . ';' . $banco . ';' . $agencia . ';' . $conta  . '\n';
+				$cadastro = $tipo . ';' . $nome . ';' . $username . ';' . $email . ';' . $senha . ';' . $dataNascimento . ';' . $genero . ';' . $rg . ';' . $cpf . ';' . $telefone . ';' . $celular . ';' . $banco . ';' . $agencia . ';' . $conta;
 
 				for($i = 0; $i < count($usuarios); $i++){
 					if($usuarios[$i]->getCpf() == $cpf){
@@ -78,10 +77,6 @@
 				$sistema->setUsuarios($apostador);
 				$_SESSION['sistema'] = $sistema;
 				$_SESSION["numero_usuarios"] = $_SESSION['numero_usuarios'] + 1;
-
-				echo "Cadastro realizado com sucesso!";
-				header('Location: ../index.php');
-				exit();
 				
 			} else {
 				echo 'Senha errada';	
@@ -89,6 +84,14 @@
 		} else {
 			echo 'Email errado';
 		}
+	}
+
+	function p_respostas($dado) {
+		$dado = trim($dado); // retirar espaços extras, tabs, enter 
+		$dado = stripslashes($dado); // retirar barra invertida
+		$dado = htmlspecialchars($dado);
+
+		return $dado;
 	}
 
 	function confirmation($dado1, $dado2){

@@ -1548,7 +1548,7 @@
 					document.getElementById('item').value = document.getElementById('item-b').value;
 					document.excluir.action = 'php/excluirBolao.php';
 					//document.excluir.submit();
-					console.log(document.getElementById('item').value);
+					//console.log(document.getElementById('item').value);
 				}
 			}
 

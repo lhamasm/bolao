@@ -200,9 +200,10 @@
 												</div>
 											</div>
 
-											<div class="row">
+											<div id="botoes" class="row">
 												<div class="col-auto ml-3 mb-3">
-													<button class="btn btn-success" type="button" onclick = "participar()">Aceitar Convite</button>
+													<form action="php/aceitarConvite.php"></form>
+													<button class="btn btn-success" type="submit" onclick="aceitar()">Aceitar Convite</button>
 													<button class="btn btn-danger" type="button">Recusar Convite</button>
 												</div>
 											</div>
