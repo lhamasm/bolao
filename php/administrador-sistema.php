@@ -86,6 +86,29 @@
     		}
 		}
 
+		function alterarPermissao($tipo, $usuario){
+			$sistema = $_SESSION['sistema'];
+			$usuarios = $sistema->getUsuarios();
+
+			for($i=0; $i<count($usuarios); $i++){
+				if($usuarios[$i]->getUsername() == $usuario){
+					$usuarios[$i]->setTipo($tipo);
+
+					unlink('../bd/usuarios.txt');
+					$u = new ArquivoUsuario();
+		    		$facade = new Facade($u);
+		    		for($j=0; $j<count($usuarios)-1; $j++){
+		    			$facade->escreverEm('../bd/usuarios.txt', $usuarios[$j]);
+		    		}
+
+		    		break;
+				}
+			}
+
+			header('Location: ../adm-page.php');
+			exit();
+		}
+
 		/*function consultarUsuario($usuario) {
 			for($i = 0; $i < count($usuarios); $i++){
 				if($usuarios[$i]->getCpf() == $usuario){

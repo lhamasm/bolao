@@ -3,6 +3,8 @@
 	require_once 'sistema.php';
 	require_once 'bolao.php';
 	require_once 'usuario.php';
+	require_once 'apostador.php';
+	require_once 'administrador-sistema.php';
 	require_once 'aposta.php';
 	require_once 'jogo.php';
 	require_once 'facade.php';

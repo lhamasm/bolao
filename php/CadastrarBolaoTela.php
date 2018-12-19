@@ -213,7 +213,7 @@
     		$sistema->setBoloes($bolao);
 			$_SESSION['sistema'] = $sistema;
 
-			$_SESSION['status'] = 3;
+			$_SESSION['status'] = 4;
 			//echo "Bolão cadastrado com sucesso!";
 			header('Location: ../convidar-amigos.php');
 			exit();

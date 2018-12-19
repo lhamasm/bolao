@@ -55,7 +55,7 @@
 				array_push($this->apostas, $aposta);
 
 				for ($i=0; $i < count($bolao->getParticipantes()); $i++) { 
-					if (($bolao->getParticipantes())[$i] == $usuario) {
+					if ($bolao->getParticipantes()[$i] == $usuario) {
 						break;
 					}
 				}
@@ -73,7 +73,7 @@
 			}
 		}
 
-		function editarAposta($aposta, $data) {
+		/*function editarAposta($aposta, $data) {
 			if ($data < $bolao->getTempoLimite()) {
 				for ($i=0; $i < count(($aposta->getBolao())->getApostas()); $i++) { 
 					if ((($aposta->getBolao())->getApostas())[$i] == $aposta) {
@@ -88,7 +88,7 @@
 
 		function aceitarConvite() {
 			
-		}
+		}*/
 	}
 
 
