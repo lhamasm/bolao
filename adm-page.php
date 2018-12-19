@@ -903,7 +903,7 @@
 				<div class="row">
 					<div class="col-1"></div>
 					<div class="card-columns col-10">';
-					for($i=0; $i<count($usuarios)-1; $i++){
+					for($i=0; $i<count($usuarios); $i++){
 						echo '
 						<div class="card">
 							<div class="card-header" style="background-color: #B0E0E6;">
@@ -1068,9 +1068,9 @@
 									$tipoAposta = $boloes[$i]->getTipoAposta();
 									$t = '';
 
-									if($tipoAposta == 'ganhar'){
+									if($tipoAposta == 'ganhador'){
 										$t = "Quem será que vai ganhar?";
-									} elseif($tipoAposta == 'perder'){
+									} elseif($tipoAposta == 'perdedor'){
 										$t = "Quem será que vai perder/eliminado?";
 									} elseif($tipoAposta == 'tema'){
 										$t = "Qual vai ser o tema?";

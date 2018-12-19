@@ -119,7 +119,7 @@
 								//var_dump($sistema);
 								$usuarios = $sistema->getUsuarios();
 
-								for($i=0; $i<count($usuarios)-1; $i++){
+								for($i=0; $i<count($usuarios); $i++){
 									if($usuarios[$i]->getCpf() == $_SESSION['login']){
 										$apostas = $usuarios[$i]->getApostas();
 										$_SESSION['ap'] = $apostas;

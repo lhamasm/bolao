@@ -30,7 +30,7 @@
 			}*/
 
 
-	for($i=0; $i<count($boloes)-1; $i++){
+	for($i=0; $i<count($boloes); $i++){
 		$date = DateTime::createFromFormat('d/m/Y', $boloes[0]->getTempoLimite());
 		$data1 = $date->format('Y-m-d');
 
@@ -813,9 +813,9 @@
 									<h5 class="titulo"><stronger>Tipo de Apostas</stronger></h5>
 									<p>';
 
-									if($boloes[$i]->getTipoAposta() == 'ganhar'){
+									if($boloes[$i]->getTipoAposta() == 'ganhador'){
 										echo 'Quem será que vai ganhar?';
-									} elseif ($boloes[$i]->getTipoAposta() == 'perder') {
+									} elseif ($boloes[$i]->getTipoAposta() == 'perdedor') {
 										echo 'Quem será que vai perder/eliminado?';
 									} elseif ($boloes[$i]->getTipoAposta() == 'tema') {
 										echo 'Qual será o tema da prova?';
