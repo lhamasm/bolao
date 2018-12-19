@@ -127,7 +127,7 @@
 						    						<span data-target="#apostar" data-toggle="modal">
 						    							<button class="btn btn-danger" data-placement="bottom" data-toggle="tooltip" title="Apostar"><i class="fas fa-user-plus"></i></button>
 						    						</span>
-						    						<button data-target="#InfoBoloes" data-toggle="modal" class="btn btn-info"><i class="far fa-eye"></i></button>
+						    						<button class="btn btn-info"><i class="far fa-eye"></i></button>
 						    					</div>
 						    				</div>				    				
 						    			</div>				    			
@@ -156,7 +156,7 @@
 						    						<span data-target="#apostar" data-toggle="modal">
 						    							<button class="btn btn-danger" data-placement="bottom" data-toggle="tooltip" title="Apostar"><i class="fas fa-user-plus"></i></button>
 						    						</span>
-						    						<button data-target="#InfoBoloes" data-toggle="modal" class="btn btn-info"><i class="far fa-eye"></i></button>
+						    						<button class="btn btn-info"><i class="far fa-eye"></i></button>
 						    					</div>
 						    				</div>				    						
 						    			</div>
@@ -185,7 +185,7 @@
 						    						<span data-target="#apostar" data-toggle="modal">
 						    							<button class="btn btn-danger" data-placement="bottom" data-toggle="tooltip" title="Apostar"><i class="fas fa-user-plus"></i></button>
 						    						</span>
-						    						<button data-target="#InfoBoloes" data-toggle="modal" class="btn btn-info"><i class="far fa-eye"></i></button>
+						    						<button class="btn btn-info"><i class="far fa-eye"></i></button>
 						    					</div>
 						    				</div>					    						
 						    			</div>
@@ -219,7 +219,7 @@
 						    						<span data-target="#apostar" data-toggle="modal">
 						    							<button class="btn btn-danger" data-placement="bottom" data-toggle="tooltip" title="Apostar"><i class="fas fa-user-plus"></i></button>
 						    						</span>
-						    						<button data-target="#InfoBoloes" data-toggle="modal" class="btn btn-info"><i class="far fa-eye"></i></button>
+						    						<button class="btn btn-info"><i class="far fa-eye"></i></button>
 						    					</div>
 						    				</div>					    				
 						    			</div>				    			
@@ -248,7 +248,7 @@
 						    						<span data-target="#apostar" data-toggle="modal">
 						    							<button class="btn btn-danger" data-placement="bottom" data-toggle="tooltip" title="Apostar"><i class="fas fa-user-plus"></i></button>
 						    						</span>
-						    						<button data-target="#InfoBoloes" data-toggle="modal" class="btn btn-info"><i class="far fa-eye"></i></button>
+						    						<button class="btn btn-info"><i class="far fa-eye"></i></button>
 						    					</div>
 						    				</div>					    						
 						    			</div>
@@ -277,7 +277,7 @@
 						    						<span data-target="#apostar" data-toggle="modal">
 						    							<button class="btn btn-danger" data-placement="bottom" data-toggle="tooltip" title="Apostar"><i class="fas fa-user-plus"></i></button>
 						    						</span>
-						    						<button data-target="#InfoBoloes" data-toggle="modal" class="btn btn-info"><i class="far fa-eye"></i></button>
+						    						<button class="btn btn-info"><i class="far fa-eye"></i></button>
 						    					</div>
 						    				</div>					    						
 						    			</div>
@@ -311,7 +311,7 @@
 						    						<span data-target="#apostar" data-toggle="modal">
 						    							<button class="btn btn-danger" data-placement="bottom" data-toggle="tooltip" title="Apostar"><i class="fas fa-user-plus"></i></button>
 						    						</span>
-						    						<button data-target="#InfoBoloes" data-toggle="modal" class="btn btn-info"><i class="far fa-eye"></i></button>
+						    						<button class="btn btn-info"><i class="far fa-eye"></i></button>
 						    					</div>
 						    				</div>					    				
 						    			</div>				    			
@@ -340,7 +340,7 @@
 						    						<span data-target="#apostar" data-toggle="modal">
 						    							<button class="btn btn-danger" data-placement="bottom" data-toggle="tooltip" title="Apostar"><i class="fas fa-user-plus"></i></button>
 						    						</span>
-						    						<button data-target="#InfoBoloes" data-toggle="modal" class="btn btn-info"><i class="far fa-eye"></i></button>
+						    						<button class="btn btn-info"><i class="far fa-eye"></i></button>
 						    					</div>
 						    				</div>					    						
 						    			</div>
@@ -369,7 +369,7 @@
 						    						<span data-target="#apostar" data-toggle="modal">
 						    							<button class="btn btn-danger" data-placement="bottom" data-toggle="tooltip" title="Apostar"><i class="fas fa-user-plus"></i></button>
 						    						</span>
-						    						<button data-target="#InfoBoloes" data-toggle="modal" class="btn btn-info"><i class="far fa-eye"></i></button>
+						    						<button class="btn btn-info"><i class="far fa-eye"></i></button>
 						    					</div>
 						    				</div>					    						
 						    			</div>
@@ -781,7 +781,7 @@
 						<button type="button" class="col-2 close" data-dismiss="modal">&times</button>
 					</div>
 					<div class="modal-body" style="background-color: #F8F8FF">
-						<form id="formApostarAposta">
+						<form>
 							<div class="form-group">
 								<label for="valoraposta">Valor:</label>
 								<input class="ml-1" type="texts" id="valoraposta" name="valoraposta" required>
@@ -800,11 +800,11 @@
 										
 									</div>
 								</div>
-								<button type="submit" onclick="participantes('formApostarBanco'), participantes('formApostarAposta')" class="mt-2 btn btn-danger">Prosseguir</button>
+								<button type="submit" class="mt-2 btn btn-danger">Prosseguir</button>
 							</div>
 						</form>
 
-						<form id="formApostarBanco" style="display: none;">
+						<form>
 							<div class="form-group">
 								<label for="banco">Banco:</label><br>
 								<input type="text" id="banco" name="banco" disabled value="333">
@@ -822,7 +822,7 @@
 									<div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">
 									</div>
 								</div>
-								<button type="submit" onclick="participantes('formApostarBanco'), participantes('formApostarAposta')" class="mt-2 btn btn-danger" data-dismiss="modal">Confirmar</button>
+								<button type="submit" class="mt-2 btn btn-danger">Confirmar</button>
 								<a class="mt-2 btn-outline-danger btn" href="minha-conta.html#banco">Editar informações</a>
 							</div>
 						</form>
@@ -831,136 +831,10 @@
 			</div>
 		</div>
 
-		<!-- modal info bolões -->
-		<div id="InfoBoloes" class="modal">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header text-center justify-content-center">
-						<div class="col-2"></div>
-						<h5 class="modal-title col-8">Título bolão</h5>
-						<button class="close col-2" data-dismiss="modal">&times</button>
-					</div>
-					<div class="modal-body p-4" style="background-color: #F8F8FF; height: 30em; overflow-y: auto;">
-						<div>
-							<h6>Campeonato:</h6>
-							<p>Campeonato</p>
-						</div>
-						<div>
-							<h6>Tipo:</h6>
-							<p>Público/Privado</p>
-						</div>
-						<div>
-							<h6>Criador:</h6>
-							<p><a href="#">@usuário</a></p>
-						</div>
-						<div>
-							<h6>Descrição:</h6>
-							<p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet purus eget volutpat ultricies. Aliquam vitae nibh in nisi semper aliquet.</p>
-						</div>
-						<div>
-							<h6>Tipos de Jogo:</h6>
-							<ul>
-								<li>
-									<p>Tipo 1</p>
-								</li>
-								<li>
-									<p>Tipo 2</p>
-								</li>
-							</ul>
-						</div>
-						<div>
-							<h6>Tipos de Apostas:</h6>
-							<p>Quem será que...?</p>
-						</div>
-						<div>
-							<h6>Escolhas de Aposta:</h6>
-							<ul>
-								<li>
-									<p>Opção 1</p>
-								</li>
-								<li>
-									<p>Opção 2</p>
-								</li>
-							</ul>
-						</div>
-						<div>
-							<h6>Número de Participantes:</h6>
-							<p>90/100</p>
-						</div>
-						<div>
-							<h6>Data de Término:</h6>
-							<p>31/31/31</p>
-						</div>
-					</div>
-					<div class="modal-footer">
-						
-					</div>
-				</div>
-			</div>
+		<div id="sucessoAposta" class="alert">
+			<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  			Sua aposta foi realizada com sucesso!
 		</div>
-
-		<div class="modal" id="termos">
-    		<div class="modal-dialog modal-dialog-centered">
-    			<div class="modal-content">
-
-    				<div class="modal-header text-center">
-    					<div class="col-2"></div>
-    					<h4 class="col-8 modal-title w-100">Termos e Condições</h4>
-    					<button type="button" class="col-2 close" data-dismiss="modal">&times;</button>
-    				</div>
-    				
-    				<div class="altura modal-body">
-    						<p align="justify">Lorem ipsum semper libero justo porta aenean hendrerit dui, massa eleifend quisque cubilia auctor sagittis mauris placerat venenatis, augue lorem pellentesque porttitor mollis tempus pretium. mollis mi netus in torquent suspendisse mattis urna porttitor nostra, non vel venenatis elit eleifend adipiscing vulputate curabitur malesuada neque, molestie est habitasse ad fringilla sapien vehicula luctus. lectus vestibulum volutpat metus curae laoreet sollicitudin fames bibendum commodo, ultricies facilisis scelerisque cubilia bibendum per nisl lorem, vestibulum convallis aliquam turpis sapien rutrum non tortor. elit non id tempor duis ornare justo dui curabitur senectus, scelerisque feugiat commodo molestie vestibulum egestas rhoncus mi, maecenas senectus rhoncus quis suscipit nullam eros viverra. </p>
-
-							<p align="justify">Habitant aptent fames conubia bibendum in praesent bibendum dictum est, risus venenatis mi eget lacus sem rutrum ligula curabitur feugiat, congue risus massa a lorem ornare tellus potenti. dapibus pharetra potenti egestas vivamus sollicitudin euismod tincidunt sed volutpat est nostra viverra imperdiet, lobortis nam mauris porta metus donec venenatis varius etiam aliquam elementum. amet neque proin lacinia phasellus neque proin class cursus augue, aliquam aptent hendrerit pharetra imperdiet ac aliquam magna at, torquent molestie viverra rutrum donec turpis fringilla eget. taciti amet vitae lobortis nibh primis rutrum maecenas donec, massa enim feugiat hendrerit porta vehicula at cras, quisque nam ligula ad leo felis purus. </p>
-
-							<p align="justify">Senectus primis nostra turpis lorem fames ante class, ornare ante purus curabitur condimentum aenean eu lorem, sem morbi erat dapibus dictum imperdiet. nullam ad donec magna accumsan elit varius condimentum, pellentesque lectus nec feugiat conubia rutrum sociosqu non, est blandit eget tellus habitant condimentum. leo sit consequat aliquam phasellus facilisis mollis est nostra aenean tempor porta interdum, hendrerit faucibus morbi venenatis augue congue dolor feugiat malesuada sed. in pharetra cubilia cras ante nec tortor, ullamcorper fringilla fusce at eu laoreet quam, eu suspendisse tortor bibendum himenaeos. eu accumsan tristique ipsum lectus lobortis volutpat tellus habitasse lobortis egestas tempor a vitae justo augue velit, non accumsan porta ad felis pulvinar leo pretium cursus et proin eu vestibulum bibendum. </p> 
-
-							<p align="justify">Fermentum est nisl elit conubia platea amet mattis vitae curabitur facilisis quam, metus tempus a suscipit accumsan curabitur aptent ut orci. conubia vivamus interdum sodales ac erat quis, malesuada convallis posuere dictum urna quisque, cras aenean euismod lacinia etiam. amet rutrum inceptos pretium eu nullam blandit nisi condimentum, tempus quam justo metus cras fringilla nec feugiat, semper lectus eleifend varius cursus a etiam potenti, hendrerit rutrum urna habitant risus luctus sollicitudin. fusce id fringilla lobortis neque eget sem elementum, quis lacus euismod eros tempus dolor curabitur tempor, feugiat libero mauris leo sociosqu turpis. </p>
-
-							<p align="justify">Aliquet imperdiet luctus at arcu porta sodales lacinia, nullam hendrerit justo luctus iaculis egestas fermentum, venenatis vestibulum primis cursus sed et. pulvinar dolor fames nulla suscipit cras lacus bibendum, suscipit proin tortor aptent vel malesuada, consectetur netus nisl nec tellus volutpat. malesuada sociosqu aptent neque sagittis semper risus cubilia eros praesent taciti diam nostra in donec volutpat ac torquent auctor augue habitant, etiam elit molestie semper nunc nostra nulla phasellus aliquam habitasse mi vitae conubia cras mollis pellentesque ac libero feugiat .</p>
-    				</div>
-
-    				<div class="modal-footer">
-    					
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-
-    	<!-- modal reportar bugs -->
-    	<div class="modal" id="repbugs">
-    		<div class="modal-dialog modal-dialog-centered">
-    			<div class="modal-content">
-    				<div class="modal-header text-center">
-    					<div class="col-2"></div>
-    					<h5 class="col-8 modal-title">Reportar Bugs</h5>
-    					<button class="col-2 close" onclick="resetarform('formAddCamp')" data-dismiss="modal">&times;</button>
-    				</div>
-    				<div class="modal-body">
-    					<div>
-    						<form>
-    							<div class="form-group">
-    								<label for="localbug">Onde ocorreu o bug?</label>
-    								<input class="form-control" type="text" name="localbug" id="localbug" required>
-    							</div>
-    							<div class="form-group">
-    								<label for="descricaobug">Descreva o bug:</label>
-    								<textarea class="form-control" rows="3" id="descricaobug" name="descricaobug" required></textarea>
-    							</div>
-    							<div class="form-group">
-    								<label for="acrescinfobug">Algo a acrescentar?</label>
-    								<input class="form-control" type="text" name="acrescinfobug" id="acrescinfobug" required>
-    							</div>
-    							<div class="text-center justify-content-center">
-    								<input class="btn btn-danger" type="submit" title="Enviar" name="Enviar">
-    							</div>
-    						</form>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
 
 		<footer style="background-color: #B22222">
 			<nav class="navbar navbar-expand-lg text-white navbar-dark">
@@ -974,10 +848,10 @@
 							<a class="nav-link" href="#">FAQ</a>
 						</li>
 						<li class="nav-item ml-md-2">
-							<a class="nav-link" data-target="#termos" data-toggle="modal">TERMOS E CONDIÇÕES</a>
+							<a class="nav-link" href="cadastro.html#termos" data-toggle="modal">TERMOS E CONDIÇÕES</a>
 						</li>
 						<li class="nav-item ml-md-2">
-							<a class="nav-link" data-toggle="modal" data-target="#repbugs">REPORTAR BUGS</a>
+							<a class="nav-link" href="#">REPORTAR BUGS</a>
 						</li>
 					</ul>
 				</div>
@@ -1030,7 +904,7 @@
 				document.getElementById(ash).style.display = "";
 			}
 
-			$('#valoraposta').mask('#.000,00', {reverse : true});
+			$('#valoraposta').mask('#.#00,00', {reverse : true});
 
 			document.getElementByClassName("closebtn").onclick = function(){
 	        	var div = this.parentElement;

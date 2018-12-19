@@ -1,8 +1,9 @@
 <?php
 	session_start();
+	$_SESSION['status'];
 ?>
 
-<!doctype hmtl>
+<!doctype html>
 
 <html lang="pt-br">
 
@@ -29,21 +30,21 @@
 			<nav class="navbar navbar-expand-lg text-white navbar-light" style="font-size: 0.9em;">
 				<div class="container">
 					<ul class="navbar-nav">
-						<li class="nav-item"><strong>MASTERCHEF BRASIL 2018 - PROFISSIONAIS</strong> | </li>
-						<li class="nav-item ml-2">POSIÇÃO: posição | </li>
-						<li class="nav-item ml-2">PONTUAÇÃO: pontuação</li>
+						<li class="nav-item"><strong>MASTERCHEF BRASIL 2018 - <?php echo $_SESSION['modalidade'] == 'amadores' ? 'AMADORES' : 'PROFISSIONAIS';?></strong> | </li>
+						<li class="nav-item ml-2">POSIÇÃO: <?php echo $_SESSION["ranking"]; ?> | </li>
+						<li class="nav-item ml-2">PONTUAÇÃO: <?php echo $_SESSION["pontuacao"]; ?></li>
 					</ul>
 
 					<ul class="navbar-nav">
 						<li class="nav-item ml-auto">BEM-VINDO(A) <strong> <?php echo $_SESSION["nome"]; ?></strong></li>
 						<!-- trocar de modalidade -->
-						<li class="nav-item ml-4"><a href="#"><i class="fas fa-exchange-alt text-white"></i></a></li>
+						<li class="nav-item ml-4"><a href="pos-login.php"><i class="fas fa-exchange-alt text-white"></i></a></li>
 						<!-- convites -->
-						<li class="nav-item ml-3"><a href="convites.html"><i class="far fa-envelope text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="convites.php"><i class="far fa-envelope text-white"></i></a></li>
 						<!-- minha conta -->
-						<li class="nav-item ml-3"><a href="minha-conta.html" title="Minha Conta"><i class="far fa-user text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="minha-conta.php" title="Minha Conta"><i class="far fa-user text-white"></i></a></li>
 						<!-- sair -->
-						<li class="nav-item ml-3"><a href="index-principal.html"><i class="fas fa-sign-out-alt text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="index.php?a=sair"><i class="fas fa-sign-out-alt text-white"></i></a></li>
 					</ul>
 				</div>
 			</nav>
@@ -61,23 +62,23 @@
 			        <div class="collapse navbar-collapse" id="nav-collapse">
 			        	<ul class="navbar-nav">
 			            	<li class="nav-item">
-			                	<a class="nav-link" href="index-pagina-pessoal.html">PÁGINA INICIAL</a>
+			                	<a class="nav-link atual" href="index-pagina-pessoal.php">PÁGINA INICIAL</a>
 			              	</li>
 
 			              	<li class="nav-item ml-3">
-			                	<a class="nav-link" href="cadastrar-bolao.html">CRIAR BOLÃO</a>
+			                	<a class="nav-link" href="cadastrar-bolao.php">CRIAR BOLÃO</a>
 			              	</li>
 
 			              	<li class="nav-item ml-3">
-			                	<a class="nav-link" href="meus-boloes.html">MEUS BOLÕES</a>
+			                	<a class="nav-link" href="meus-boloes.php">MEUS BOLÕES</a>
 			              	</li>
 
 			              	<li class="nav-item ml-3">
-			                	<a class="nav-link" href="minhas-apostas.html">MINHAS APOSTAS</a>
+			                	<a class="nav-link" href="minhas-apostas.php">MINHAS APOSTAS</a>
 			              	</li>
 
 			              	<li class="nav-item ml-3">
-			                	<a class="nav-link" href="historico-apostas.html">MEU HISTÓRICO DE APOSTAS</a>
+			                	<a class="nav-link" href="historico-apostas.php">MEU HISTÓRICO DE APOSTAS</a>
 			              	</li>
 			            </ul>
 					</div>
@@ -91,12 +92,31 @@
 				<hr>
 				<div class="row text-dark">
 					<div class="col-8 offset-2">
+
+						<?php
+							if($_SESSION['status'] == 1){
+								echo '<div class="alert alert-success" style="width: 30em; margin-left: 10.9em;">
+								  Alterações realizadas com sucesso!
+								</div>';
+								
+							} elseif($_SESSION['status'] == 2) {
+								echo '<div class="alert alert-danger" style="width: 30em; margin-left: 10.9em;">
+								  Senhas incompatíveis.
+								</div>';
+							} elseif($_SESSION['status'] == 0){
+								echo '<div class="alert alert-danger" style="width: 30em; margin-left: 10.9em;">
+								  Ops... Algo deu errado.
+								</div>';
+							} 
+
+							$_SESSION['status'] = -1;
+						?>
 						
 						<form method="post" action="php/alterar-dados.php">
 							<div class="row">
 								<div class="col-4 form-group">
 									<label class="titulo" for="username">Nome de Usuário <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="username" id="username" value="<?php echo $_SESSION["username"]; ?>" disabled>
+									<input class="form-control" type="text" name="username" id="username" value="<?php echo $_SESSION["username"]; ?>" readonly>
 								</div>
 
 								<div id="senha" class="col-4 offset-4 form-group" style="display: none;">
@@ -108,7 +128,7 @@
 							<div class="row">
 								<div class="col-6 form-group">
 									<label class="titulo" for="email">Email <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="email" name="email" id="email" value="<?php echo $_SESSION["email"]; ?>" disabled>
+									<input class="form-control" type="email" name="email" id="email" value="<?php echo $_SESSION["email"]; ?>" readonly>
 								</div>
 
 								<div id="confirmar" class="col-4 offset-2 form-group" style="display: none;">
@@ -123,12 +143,12 @@
 							<div class="row">
 								<div class="col-7 form-group">
 									<label class="titulo" for="nome">Nome Completo <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="nome" id="nome" value="<?php echo $_SESSION["nome"]; ?>" disabled>
+									<input class="form-control" type="text" name="nome" id="nome" value="<?php echo $_SESSION["nome"]; ?>" readonly>
 								</div>
 
 								<div class="col-4 offset-1 form-group">
 									<label class="titulo" for="genero">Gênero <span class="text-danger">*</span></label><br>
-									<select id="genero" disabled>
+									<select id="genero" readonly>
 										<?php 
 											if($_SESSION["genero"] == 'feminino'){
 												echo '<option value="nonselected" style="color:lightgray;">[selecione]</option>
@@ -154,24 +174,24 @@
 							<div class="row">
 								<div class="col-4 form-group">
 									<label class="titulo" for="rg">RG <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="rg" id="rg" value="<?php echo $_SESSION["rg"]; ?>" disabled>
+									<input class="form-control" type="text" name="rg" id="rg" value="<?php echo $_SESSION["rg"]; ?>" readonly>
 								</div>
 
 								<div class="col-4 offset-4 form-group">
 									<label class="titulo" for="ddn">Data de Nascimento <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="ddn" id="ddn" value="<?php echo $_SESSION["ddn"]; ?>" disabled>
+									<input class="form-control" type="text" name="ddn" id="ddn" value="<?php echo $_SESSION["ddn"]; ?>" readonly>
 								</div>
 							</div>	
 							
 							<div class="row">
 								<div class="col-4 form-group">
 									<label class="titulo" for="telefone">Telefone <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="telefone" id="telefone" value="<?php echo $_SESSION["telefone"]; ?>" disabled>
+									<input class="form-control" type="text" name="telefone" id="telefone" value="<?php echo $_SESSION["telefone"]; ?>" readonly>
 								</div>
 
 								<div class="col-4 offset-4 form-group">
 									<label class="titulo" for="celular">Celular <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="celular" id="celular" value="<?php echo $_SESSION["celular"]; ?>" disabled>
+									<input class="form-control" type="text" name="celular" id="celular" value="<?php echo $_SESSION["celular"]; ?>" readonly>
 								</div>
 							</div>	
 
@@ -181,15 +201,15 @@
 							<div class="row">
 								<div class="col-4 form-group">
 									<label class="titulo" for="banco">Banco <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="banco" id="banco" value="<?php echo $_SESSION["banco"]; ?>" disabled>
+									<input class="form-control" type="text" name="banco" id="banco" value="<?php echo $_SESSION["banco"]; ?>" readonly>
 								</div>
 								<div class="col-4 form-group">
 									<label class="titulo" for="agencia">Agência <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="agencia" id="agencia" value="<?php echo $_SESSION["agencia"]; ?>" disabled>
+									<input class="form-control" type="text" name="agencia" id="agencia" value="<?php echo $_SESSION["agencia"]; ?>" readonly>
 								</div>
 								<div class="col-4 offset-4form-group">
 									<label class="titulo" for="conta">Conta <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="conta" id="conta" value="<?php echo $_SESSION["conta"]; ?>" disabled>
+									<input class="form-control" type="text" name="conta" id="conta" value="<?php echo $_SESSION["conta"]; ?>" readonly>
 								</div>
 							</div>
 
@@ -208,69 +228,7 @@
 			</div>
 		</section>
 
-		<div class="modal" id="termos">
-    		<div class="modal-dialog modal-dialog-centered">
-    			<div class="modal-content">
-
-    				<div class="modal-header text-center">
-    					<div class="col-2"></div>
-    					<h4 class="col-8 modal-title w-100">Termos e Condições</h4>
-    					<button type="button" class="col-2 close" data-dismiss="modal">&times;</button>
-    				</div>
-    				
-    				<div class="altura modal-body">
-    						<p align="justify">Lorem ipsum semper libero justo porta aenean hendrerit dui, massa eleifend quisque cubilia auctor sagittis mauris placerat venenatis, augue lorem pellentesque porttitor mollis tempus pretium. mollis mi netus in torquent suspendisse mattis urna porttitor nostra, non vel venenatis elit eleifend adipiscing vulputate curabitur malesuada neque, molestie est habitasse ad fringilla sapien vehicula luctus. lectus vestibulum volutpat metus curae laoreet sollicitudin fames bibendum commodo, ultricies facilisis scelerisque cubilia bibendum per nisl lorem, vestibulum convallis aliquam turpis sapien rutrum non tortor. elit non id tempor duis ornare justo dui curabitur senectus, scelerisque feugiat commodo molestie vestibulum egestas rhoncus mi, maecenas senectus rhoncus quis suscipit nullam eros viverra. </p>
-
-							<p align="justify">Habitant aptent fames conubia bibendum in praesent bibendum dictum est, risus venenatis mi eget lacus sem rutrum ligula curabitur feugiat, congue risus massa a lorem ornare tellus potenti. dapibus pharetra potenti egestas vivamus sollicitudin euismod tincidunt sed volutpat est nostra viverra imperdiet, lobortis nam mauris porta metus donec venenatis varius etiam aliquam elementum. amet neque proin lacinia phasellus neque proin class cursus augue, aliquam aptent hendrerit pharetra imperdiet ac aliquam magna at, torquent molestie viverra rutrum donec turpis fringilla eget. taciti amet vitae lobortis nibh primis rutrum maecenas donec, massa enim feugiat hendrerit porta vehicula at cras, quisque nam ligula ad leo felis purus. </p>
-
-							<p align="justify">Senectus primis nostra turpis lorem fames ante class, ornare ante purus curabitur condimentum aenean eu lorem, sem morbi erat dapibus dictum imperdiet. nullam ad donec magna accumsan elit varius condimentum, pellentesque lectus nec feugiat conubia rutrum sociosqu non, est blandit eget tellus habitant condimentum. leo sit consequat aliquam phasellus facilisis mollis est nostra aenean tempor porta interdum, hendrerit faucibus morbi venenatis augue congue dolor feugiat malesuada sed. in pharetra cubilia cras ante nec tortor, ullamcorper fringilla fusce at eu laoreet quam, eu suspendisse tortor bibendum himenaeos. eu accumsan tristique ipsum lectus lobortis volutpat tellus habitasse lobortis egestas tempor a vitae justo augue velit, non accumsan porta ad felis pulvinar leo pretium cursus et proin eu vestibulum bibendum. </p> 
-
-							<p align="justify">Fermentum est nisl elit conubia platea amet mattis vitae curabitur facilisis quam, metus tempus a suscipit accumsan curabitur aptent ut orci. conubia vivamus interdum sodales ac erat quis, malesuada convallis posuere dictum urna quisque, cras aenean euismod lacinia etiam. amet rutrum inceptos pretium eu nullam blandit nisi condimentum, tempus quam justo metus cras fringilla nec feugiat, semper lectus eleifend varius cursus a etiam potenti, hendrerit rutrum urna habitant risus luctus sollicitudin. fusce id fringilla lobortis neque eget sem elementum, quis lacus euismod eros tempus dolor curabitur tempor, feugiat libero mauris leo sociosqu turpis. </p>
-
-							<p align="justify">Aliquet imperdiet luctus at arcu porta sodales lacinia, nullam hendrerit justo luctus iaculis egestas fermentum, venenatis vestibulum primis cursus sed et. pulvinar dolor fames nulla suscipit cras lacus bibendum, suscipit proin tortor aptent vel malesuada, consectetur netus nisl nec tellus volutpat. malesuada sociosqu aptent neque sagittis semper risus cubilia eros praesent taciti diam nostra in donec volutpat ac torquent auctor augue habitant, etiam elit molestie semper nunc nostra nulla phasellus aliquam habitasse mi vitae conubia cras mollis pellentesque ac libero feugiat .</p>
-    				</div>
-
-    				<div class="modal-footer">
-    					
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-
-    	<!-- modal reportar bugs -->
-    	<div class="modal" id="repbugs">
-    		<div class="modal-dialog modal-dialog-centered">
-    			<div class="modal-content">
-    				<div class="modal-header text-center">
-    					<div class="col-2"></div>
-    					<h5 class="col-8 modal-title">Reportar Bugs</h5>
-    					<button class="col-2 close" onclick="resetarform('formAddCamp')" data-dismiss="modal">&times;</button>
-    				</div>
-    				<div class="modal-body">
-    					<div>
-    						<form>
-    							<div class="form-group">
-    								<label for="localbug">Onde ocorreu o bug?</label>
-    								<input class="form-control" type="text" name="localbug" id="localbug" required>
-    							</div>
-    							<div class="form-group">
-    								<label for="descricaobug">Descreva o bug:</label>
-    								<textarea class="form-control" rows="3" id="descricaobug" name="descricaobug" required></textarea>
-    							</div>
-    							<div class="form-group">
-    								<label for="acrescinfobug">Algo a acrescentar?</label>
-    								<input class="form-control" type="text" name="acrescinfobug" id="acrescinfobug" required>
-    							</div>
-    							<div class="text-center justify-content-center">
-    								<input class="btn btn-danger" type="submit" title="Enviar" name="Enviar">
-    							</div>
-    						</form>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-
+		
 
 		<footer style="background-color: #B22222">
 			<nav class="navbar navbar-expand-lg text-white navbar-dark">
@@ -284,10 +242,10 @@
 							<a class="nav-link" href="#">FAQ</a>
 						</li>
 						<li class="nav-item ml-md-2">
-							<a class="nav-link" data-target="#termos" data-toggle="modal">TERMOS E CONDIÇÕES</a>
+							<a class="nav-link" href="cadastro.php#termos" data-toggle="modal">TERMOS E CONDIÇÕES</a>
 						</li>
 						<li class="nav-item ml-md-2">
-							<a class="nav-link" data-toggle="modal" data-target="#repbugs">REPORTAR BUGS</a>
+							<a class="nav-link" href="#">REPORTAR BUGS</a>
 						</li>
 					</ul>
 				</div>
@@ -305,30 +263,30 @@
 			
 			$('#rg').mask('00.000.000-00');
 			$('#cpf').mask('000.000.000-00');
-			$('#telefone').mask('+00 00 0000-0000');
-			$('#celular').mask('+00 00 0 0000-0000');
+			$('#telefone').mask('00 0000-0000');
+			$('#celular').mask('00 0 0000-0000');
 			$('#agencia').mask('0000-0');
 			$('#conta').mask('00000-0');
 
 			function alterar_dados() {
+
 				document.getElementById('senha').style.display = 'block';
 				document.getElementById('confirmar').style.display = 'block';
 				document.getElementById('alterar-dados').style.display = 'none';
 				document.getElementById('salvar-alteracao').style.display = 'block';
 
-				document.getElementById('username').disabled = false;
-				document.getElementById('email').disabled = false;
-				document.getElementById('nome').disabled = false;
-				document.getElementById('genero').disabled = false;
-				document.getElementById('rg').disabled = false;
-				document.getElementById('cpf').disabled = false;
+				document.getElementById('username').readOnly = false;
+				document.getElementById('email').readOnly = false;
+				document.getElementById('nome').readOnly = false;
+				document.getElementById('genero').readOnly = false;
+				document.getElementById('rg').readOnly = false;
 				document.getElementById('ddn').type = 'date';
-				document.getElementById('ddn').disabled = false;
-				document.getElementById('telefone').disabled = false;
-				document.getElementById('celular').disabled = false;
-				document.getElementById('banco').disabled = false;
-				document.getElementById('agencia').disabled = false;
-				document.getElementById('conta').disabled = false;
+				document.getElementById('ddn').readOnly = false;
+				document.getElementById('telefone').readOnly = false;
+				document.getElementById('celular').readOnly = false;
+				document.getElementById('banco').readOnly = false;
+				document.getElementById('agencia').readOnly = false;
+				document.getElementById('conta').readOnly = false;
 			}
 
 			function salvar_alteracoes() {
@@ -337,19 +295,18 @@
 				document.getElementById('alterar-dados').style.display = 'block';
 				document.getElementById('salvar-alteracao').style.display = 'none';
 
-				document.getElementById('username').disabled = true;
-				document.getElementById('email').disabled = true;
-				document.getElementById('nome').disabled = true;
-				document.getElementById('genero').disabled = true;
-				document.getElementById('rg').disabled = true;
-				document.getElementById('cpf').disabled = true;
+				document.getElementById('username').readOnly = true;
+				document.getElementById('email').readOnly = true;
+				document.getElementById('nome').readOnly = true;
+				document.getElementById('genero').readOnly = true;
+				document.getElementById('rg').readOnly = true;
 				document.getElementById('ddn').type = 'text';
-				document.getElementById('ddn').disabled = true;
-				document.getElementById('telefone').disabled = true;
-				document.getElementById('celular').disabled = true;
-				document.getElementById('banco').disabled = true;
-				document.getElementById('agencia').disabled = true;
-				document.getElementById('conta').disabled = true;
+				document.getElementById('ddn').readOnly = true;
+				document.getElementById('telefone').readOnly = true;
+				document.getElementById('celular').readOnly = true;
+				document.getElementById('banco').readOnly = true;
+				document.getElementById('agencia').readOnly = true;
+				document.getElementById('conta').readOnly = true;
 			}
 
 		</script>

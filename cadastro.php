@@ -1,5 +1,7 @@
-﻿<? php
+﻿<?php
 	session_start();
+
+	$_SESSION['status'];
 ?>
 
 <!doctype html>
@@ -23,7 +25,7 @@
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	        <div class="container">
 
-	          <a class="navbar-brand col-1" href="index-principal.php">
+	          <a class="navbar-brand col-1" href="index.php">
 	            <img style="width: 2.5em" src="images/logo-vermelho.png">
 	          </a>
 
@@ -34,29 +36,29 @@
 	          <div class="collapse navbar-collapse" id="nav-collapse">
 	            <ul class="navbar-nav">
 	              <li class="nav-item">
-	                <a class="nav-link" href="index-principal.php#programa">O programa</a>
+	                <a class="nav-link" href="index.php#programa">O programa</a>
 	              </li>
 
 	              <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
 
 	              <li class="nav-item">
-	                <a class="nav-link" href="index-principal.php#participantes">Os participantes</a>
+	                <a class="nav-link" href="index.php#participantes">Os participantes</a>
 	              </li>
 
 	              <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
 
 	              <li class="nav-item">
-	                <a class="nav-link" href="index-principal.php#aux-section">Como jogar</a>
+	                <a class="nav-link" href="index.php#aux-section">Como jogar</a>
 	              </li>
 
 	              <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
 
 	              <li class="nav-item">
-	                <a class="nav-link" href="index-principal.php#noticias">Noticias</a>
+	                <a class="nav-link" href="index.php#noticias">Noticias</a>
 	              </li>
 	            </ul>
 	            <div class="col-3">
-					<a class="btn btn-outline-info botaoEntrar" href="index.php">Entrar</a>
+					<a class="btn btn-outline-info botaoEntrar" href="login.php">Entrar</a>
 	        	</div>
 	          </div>
 	        </div>
@@ -70,8 +72,26 @@
 					<div class="col-auto offset-1 offset-sm-3 col-md-6 offset-md-0 d-flex">
 						<div class="align-self-center">
 							<img class="col-md-auto logo" style="width:7.9em;" src="images/logo-vermelho.png">
+
+							<?php
+								if($_SESSION['status'] == 2) {
+									echo '<div class="alert alert-danger" style="width: 30em; margin-left: 10.9em;">
+									  Já existe um usuário cadastrado com esse CPF.
+									</div>';
+								} elseif($_SESSION['status'] == 3){
+									echo '<div class="alert alert-danger" style="width: 30em; margin-left: 10.9em;">
+									  Senhas incompatíveis.
+									</div>';
+								} elseif($_SESSION['status'] == 4){
+									echo '<div class="alert alert-danger" style="width: 30em; margin-left: 10.9em;">
+									  Emails imcompatíveis.
+									</div>';
+								}
+
+								$_SESSION['status'] = -1;
+							?>
 						
-							<form class="form shadow" method="post" action="/php/cadastro.php">
+							<form class="form shadow" method="post" action="php/cadastro.php">
 								<div class="phrase pb-1">
 									<h1 class="text-info" style="text-align:center; font-size: 0.45em; font-family: robotoBold;">Cadastre-se agora!</h1>
 								</div>
@@ -327,8 +347,8 @@
 		$('#banco').mask('000');
 		$('#rg').mask('00.000.000-00');
 		$('#cpf').mask('000.000.000-00');
-		$('#telefone').mask('(00) 0000-0000');
-		$('#celular').mask('(00) 0 0000-0000');			
+		$('#telefone').mask('(00)0000-0000');
+		$('#celular').mask('(00)0000-0000');			
 
 	</script>
   </body>
