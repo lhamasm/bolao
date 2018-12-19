@@ -1,7 +1,7 @@
 ﻿<?php
 	session_start();
 
-	$_SESSION['status'];
+	$_SESSION['status'] = -1;
 ?>
 
 <!doctype html>

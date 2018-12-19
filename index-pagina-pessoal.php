@@ -651,7 +651,7 @@
 											<label for="opcaoaposta">Aposta:</label><br>
 											<select class="form-control custom-select" name="opcaoaposta" id="opcaoaposta" onclick="opcao_aposta()" required>';
 											
-											if($boloes[$i]->getTipoAposta() == 'ganhar' || $boloes[$i]->getTipoAposta() == 'perder'){
+											if($boloes[$i]->getTipoAposta() == 'ganhador' || $boloes[$i]->getTipoAposta() == 'perdedor'){
 												echo'
 													<option value="adriana">Adriana</option>
 													<option value="alex">Alex</option>

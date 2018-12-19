@@ -41,13 +41,13 @@
 					<ul class="navbar-nav">
 						<li class="nav-item ml-auto">BEM-VINDO(A) <strong>ADM</strong></li>
 						<!-- página de usuário -->
-						<li class="nav-item ml-4"><a href="index-pagina-pessoal.html" data-toggle="tooltip" data-placement="bottom" title="Página de usuário"><i class="fas fa-exchange-alt text-white"></i></a></li>
+						<li class="nav-item ml-4"><a href="index-pagina-pessoal.php" data-toggle="tooltip" data-placement="bottom" title="Página de usuário"><i class="fas fa-exchange-alt text-white"></i></a></li>
 						<!-- bugs && convites -->
 						<li class="nav-item ml-3"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Caixa de mensagens"><i class="far fa-envelope text-white"></i></a></li>
 						<!-- minha conta -->
 						<li class="nav-item ml-3"><a href="#"><i class="far fa-user text-white"></i></a></li>
 						<!-- sair -->
-						<li class="nav-item ml-3"><a href="index-principal.html"><i class="fas fa-sign-out-alt text-white"></i></a></li>
+						<li class="nav-item ml-3"><a href="index.php?a=sair"><i class="fas fa-sign-out-alt text-white"></i></a></li>
 					</ul>
 				</div>
 			</nav>
@@ -274,8 +274,8 @@
 
 							<div class="row form-group">
 								<div class="col-6">
-									<label for="campeonato">Campeonato</label>
-									<select id="campeonato" name="campeonato" class="custom-select">
+									<label for="camp">Campeonato</label>
+									<select id="camp" name="camp" class="custom-select">
 										<option value="profissionais">Profissionais</option>
 										<option value="amadores">Amadores</option>
 									</select>
@@ -770,15 +770,8 @@
 									<div class="form-group">
 										<label for="campeonato">Campeonato <span class="text-danger">*</span></label>
 										<select class="form-control custom-select" name="campeonato" id="campeonato" disabled>
-											<?php
-												if($_SESSION['modalidade'] == 'profissionais'){
-													echo '<option value="profissionais" selected>MasterChef Profissionais</option>
-													<option value="amadores">MasterChef Amadores</option>';
-												} else {
-													echo '<option value="profissionais">MasterChef Profissionais</option>
-														<option value="amadores" selected>MasterChef Amadores</option>';
-												}
-											?>
+												<option value="profissionais" selected>MasterChef Profissionais</option>
+												<option value="amadores">MasterChef Amadores</option>												
 										</select>
 									</div>
 								</div>
@@ -910,18 +903,31 @@
 				<div class="row">
 					<div class="col-1"></div>
 					<div class="card-columns col-10">';
-					for($i=0; $i<count($usuarios); $i++){
+					for($i=0; $i<count($usuarios)-1; $i++){
 						echo '
 						<div class="card">
 							<div class="card-header" style="background-color: #B0E0E6;">
 								<div class="row">';
 
+								echo '<form method="post" action="php/alterarPermissao.php">';
+
 									if($usuarios[$i]->getTipo() == '1'){
 										echo '
+										<input type="hidden" id="permissao" name="permissao" value="0">
+										<input type="hidden" id="quem" name="quem" value="'. $usuarios[$i]->getUsername() . '">
 										<div class="col-2">
-											<i class="fas fa-user-cog py-2 botaotipouser"></i>
+											<button class="alterar" type="submit" style="border: none; background: none;"><i class="fas fa-user-cog py-2 botaotipouser"></i></button>
+										</div>';
+									} else {
+										echo '
+										<input type="hidden" id="permissao" name="permissao" value="1">
+										<input type="hidden" id="quem" name="quem" value="'. $usuarios[$i]->getUsername() . '">
+										<div class="col-2">
+											<button class="alterar" type="submit" style="border: none; background: none;"><i class="fas fa-user py-2 botaotipouser"></i></button>
 										</div>';
 									}
+
+								echo '</form>';
 									echo '
 									<div class="col-8">
 										<h4 class="card-title text-info">@' . $usuarios[$i]->getUsername() . '</h4>
@@ -978,6 +984,8 @@
 					</div>
 					<div class="col-1"></div>
 				</div>';
+			} else {
+				echo '<h3> Não há usuários cadastrados no sistema</h3>';
 			}
 		?>
 		</section>
@@ -1086,6 +1094,8 @@
 					</div>
 					<div class="col-1"></div>
 				</div>';
+			} else {
+				echo '<div class="row"><div class="offset-3 col-6"><h3>Não há bolões cadastrados no sistema</h3></div></div>';
 			}
 		?>
 		</section>
@@ -1359,7 +1369,7 @@
     	</div>
 
     	<!-- foooooooooter -->
-		<footer class="mt-2 navbar-fixed-bottom" style="background-color: #B22222;">
+		<footer class="mt-2 fixed-bottom" style="background-color: #B22222;">
 			<nav class="navbar navbar-expand-lg text-white navbar-dark">
 				<div class="container">
 					<ul class="navbar-nav">
@@ -1455,13 +1465,6 @@
 					document.getElementById('semifinal').style.display = "none";
 					document.getElementById('final').style.display = "none";
 
-					/*document.getElementById('an').style.backgroundColor = "#4c9593";
-					document.getElementById('b').style.backgroundColor = "#b2d1d0";
-					document.getElementById('c').style.backgroundColor = "#b2d1d0";
-					document.getElementById('d').style.backgroundColor = "#b2d1d0";
-					document.getElementById('en').style.backgroundColor = "#b2d1d0";
-					document.getElementById('f').style.backgroundColor = "#b2d1d0";*/
-
 				} else if (ash == 'equipes') {
 					document.getElementById('caixaMisteriosa').style.display = "none";
 					document.getElementById('eliminacao').style.display = "none";
@@ -1469,13 +1472,6 @@
 					document.getElementById('semifinal').style.display = "none";
 					document.getElementById('final').style.display = "none";
 					document.getElementById('tipoJogo').value = '2';
-
-					/*document.getElementById('b').style.backgroundColor = "#4c9593";
-					document.getElementById('an').style.backgroundColor = "#b2d1d0";
-					document.getElementById('c').style.backgroundColor = "#b2d1d0";
-					document.getElementById('d').style.backgroundColor = "#b2d1d0";
-					document.getElementById('en').style.backgroundColor = "#b2d1d0";
-					document.getElementById('f').style.backgroundColor = "#b2d1d0";*/
 				} else if (ash == 'eliminacao') {
 					document.getElementById('caixaMisteriosa').style.display = "none";
 					document.getElementById('equipes').style.display = "none";
@@ -1483,13 +1479,6 @@
 					document.getElementById('semifinal').style.display = "none";
 					document.getElementById('final').style.display = "none";
 					document.getElementById('tipoJogo').value = '3';
-
-					/*document.getElementById('c').style.backgroundColor = "#4c9593";
-					document.getElementById('an').style.backgroundColor = "#b2d1d0";
-					document.getElementById('b').style.backgroundColor = "#b2d1d0";
-					document.getElementById('d').style.backgroundColor = "#b2d1d0";
-					document.getElementById('en').style.backgroundColor = "#b2d1d0";
-					document.getElementById('f').style.backgroundColor = "#b2d1d0";*/
 				} else if (ash == 'repescagem') {
 					document.getElementById('caixaMisteriosa').style.display = "none";
 					document.getElementById('eliminacao').style.display = "none";
@@ -1497,13 +1486,6 @@
 					document.getElementById('semifinal').style.display = "none";
 					document.getElementById('final').style.display = "none";
 					document.getElementById('tipoJogo').value = '4';
-
-					/*document.getElementById('d').style.backgroundColor = "#4c9593";
-					document.getElementById('an').style.backgroundColor = "#b2d1d0";
-					document.getElementById('c').style.backgroundColor = "#b2d1d0";
-					document.getElementById('b').style.backgroundColor = "#b2d1d0";
-					document.getElementById('en').style.backgroundColor = "#b2d1d0";
-					document.getElementById('f').style.backgroundColor = "#b2d1d0";*/
 				} else if (ash == 'semifinal') {
 					document.getElementById('caixaMisteriosa').style.display = "none";
 					document.getElementById('eliminacao').style.display = "none";
@@ -1512,12 +1494,6 @@
 					document.getElementById('final').style.display = "none";
 					document.getElementById('tipoJogo').value = '5';
 
-					/*document.getElementById('en').style.backgroundColor = "#4c9593";
-					document.getElementById('an').style.backgroundColor = "#b2d1d0";
-					document.getElementById('c').style.backgroundColor = "#b2d1d0";
-					document.getElementById('d').style.backgroundColor = "#b2d1d0";
-					document.getElementById('b').style.backgroundColor = "#b2d1d0";
-					document.getElementById('f').style.backgroundColor = "#b2d1d0";*/
 				} else if (ash == 'final') {
 					document.getElementById('caixaMisteriosa').style.display = "none";
 					document.getElementById('eliminacao').style.display = "none";
@@ -1525,14 +1501,6 @@
 					document.getElementById('semifinal').style.display = "none";
 					document.getElementById('equipes').style.display = "none";
 					document.getElementById('tipoJogo').value = '6';
-
-					/*
-					document.getElementById('f').style.backgroundColor = "#4c9593";
-					document.getElementById('an').style.backgroundColor = "#b2d1d0";
-					document.getElementById('c').style.backgroundColor = "#b2d1d0";
-					document.getElementById('d').style.backgroundColor = "#b2d1d0";
-					document.getElementById('en').style.backgroundColor = "#b2d1d0";
-					document.getElementById('b').style.backgroundColor = "#b2d1d0";*/
 				}
 			}
 
@@ -1544,7 +1512,7 @@
 					document.excluir.action = 'php/excluirUsuario.php';
 					//document.excluir.submit();
 					console.log(document.getElementById('item').value);
-				} elseif(message == 'este bolão'){
+				} else if(message == 'este bolão'){
 					document.getElementById('item').value = document.getElementById('item-b').value;
 					document.excluir.action = 'php/excluirBolao.php';
 					//document.excluir.submit();
@@ -1648,7 +1616,7 @@
    				}
 			});
 
-			$('#usuarios i').click(function(event) {
+			$('#usuarios .alterar i').click(function(event) {
 				if ($(this).hasClass('fa-user')) {
 					$(this).addClass('fa-user-cog').removeClass('fa-user');
 				}
@@ -1657,7 +1625,7 @@
 				}
 			});
 
-			$('#usuarios button, #boloes button').click(function(event) {
+			$('#usuarios .VerMais, #boloes button').click(function(event) {
 				if ($(this).html() == "Ver mais") {
 					$(this).parent().parent().find('.divescondida').css("display", "block");
 					$(this).html("Esconder");

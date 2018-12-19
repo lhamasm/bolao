@@ -118,6 +118,10 @@
 								echo '<div class="alert alert-danger">
 					                   O username/email inserido é o seu
 					                  </div>'; 
+							} elseif($_SESSION['status'] == 4){
+								echo '<div class="alert alert-success">
+					                    Bolão cadastrado com sucesso!
+					                  </div>'; 
 							}
 							$_SESSION['status'] = -1;
 						?>
