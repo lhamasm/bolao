@@ -48,7 +48,7 @@ header {
 @media (max-width: 575.98px) {
 
 	#login {
-		margin: 28vw auto;
+		margin: 22vw auto;
 	}
 	
 }
@@ -57,14 +57,14 @@ header {
 @media (min-width: 576px) and (max-width: 767.98px) {
 
 	#login {
-		margin: 28vw auto;
+		margin: 22vw auto;
 	}
 }
 
 /*Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) and (max-width: 991.98px) {
 	#login {
-		margin: 20vw auto;
+		margin: 14vw auto;
 	}
 }
 
@@ -75,7 +75,7 @@ header {
 	}
 
 	#login {
-		margin: 10vw auto;
+		margin: 1vw auto;
 	}
 }
 
@@ -83,7 +83,7 @@ header {
 @media (min-width: 1200px) {
 
 	#login {
-		margin: 10vw auto;
+		margin: 1vw auto;
 	}
 }
 

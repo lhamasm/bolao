@@ -28,14 +28,37 @@ header {
 	background-color: #B22222;
 }
 
-.pagination button{
-	border: 0.05em solid white;
+.VerMais {
+	border: none;
+	height: 3em;
+	width: 100%;
+	color: #C0C0C0;
+}
+
+#usuarios .VerMais {
+	background-image: linear-gradient(to bottom, #F0FFFF, white);
+}
+
+#boloes .VerMais {
+	background-image: linear-gradient(to bottom, #FFF0F5, white);
+}
+
+.VerMais:hover {
+	color: #696969;
+}
+
+.botaotipouser:hover {
+	color: #696969;
+}
+
+/*.pagination button{
+	/*border: 0.05em solid white;
 	background-color: #b2d1d0;
 	padding: 0.5em;
 	color: white;
-}
+}*/
 
-#ingredientes {
+#ingredientesCaixaMisteriosa, #ingredientesEquipes, #ingredientesEliminacao, #ingredientesRepescagem, #ingredientesSemifinal, #ingredientesFinal {
 	height: 5em;
 	width: 15em;
 	overflow-y: auto;
@@ -106,11 +129,9 @@ img.sticky {
 }
 
 #boloes-disponiveis h2, #ultimos-resultados h2, #resultados-boloes h2,
-#boloes-disponiveis p, #resultados-boloes p, #ultimos-resultados a{
+#boloes-disponiveis p, #resultados-boloes p, #ultimos-resultados a, #usuarios p,  #boloes p{
 	font-family: robotok;
 }
-
-
 
 #ultimos-resultados a:hover {
 	text-decoration: none;
@@ -211,7 +232,6 @@ img.sticky {
     cursor: pointer;
 }
 
-<<<<<<< HEAD
 .not-active {
   pointer-events: none;
   cursor: default;
@@ -222,8 +242,12 @@ img.sticky {
 	color: #c0c0c0;
 }
 
-=======
->>>>>>> bb236707b95364b3f4ea6712f42520d1cd403c0e
+.scroll-meus-boloes {
+	height: 13em;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
 @media (max-width: 575.98px) {
 
 }
