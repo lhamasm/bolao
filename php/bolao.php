@@ -1,8 +1,19 @@
 <?php
 
 	require_once 'sistema.php';
+	require_once 'apostador.php';
+	require_once 'jogo.php';
+	require_once 'usuario.php';
+	require_once 'apostador.php';
+	require_once 'subject.php';
+	require_once 'observer.php';
+	require_once 'aposta.php';
+	require_once 'mensagem.php';
+	require_once 'ArquivoMensagem.php';
+	require_once 'facade.php';
+	
 
-	class Bolao {
+	class Bolao extends Subject {
 
 		protected $id;
 		protected $criador;
@@ -22,7 +33,7 @@
 		protected $tempoLimite;
 		protected $apostas;
 
-		function Bolao($id, $criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $tipoJogo, $tipoAposta, $opcoesAposta, $senha){
+		function Bolao($id, $criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $tipoJogo, $tipoAposta,/* $opcoesAposta,*/ $senha, $dinheiros){
 			$this->id = $id;
 			$this->criador = $criador;
 			$this->tipo = $tipo;
@@ -33,9 +44,9 @@
 			$this->participantes = array();
 			$this->tipoJogo = $tipoJogo;
 			$this->tipoAposta = $tipoAposta;
-			$this->opcoesAposta = $opcoesAposta;
+			//$this->opcoesAposta = $opcoesAposta;
 			$this->senha = $senha;
-			$this->dinheiros = 0;
+			$this->dinheiros = $dinheiros;
 			$this->ganhadores = array();
 			$this->resultado = array();
 			$this->tempoLimite = 0;
@@ -70,8 +81,8 @@
 			$this->limiteDeParticipantes = $limiteDeParticipantes;
 		}
 
-		function setParticipantes($participantes){
-			$this->participantes = $participantes;
+		function setParticipantes($participante){
+			array_push($this->participantes, $participante);
 		}
 
 		function setTipoJogo($tipoJogo){
@@ -82,8 +93,8 @@
 			$this->tipoAposta = $tipoAposta;
 		}
 
-		function setOpcoesAposta($opcoesAposta){
-			$this->opcoesAposta = $opcoesAposta;
+		function setOpcoesAposta($opcao){
+			array_push($this->opcoesAposta, $opcao);
 		}
 
 		function setSenha($senha){
@@ -91,7 +102,7 @@
 		}
 
 		function setResultado($resultado){
-			$this->resultado = $resultado;
+			array_push($this->resultado, $resultado);
 		}
 
 		function setDinheiros($valor){
@@ -102,12 +113,36 @@
 			$this->tempoLimite = $tempoLimite;
 		}
 
-		function setApostas($apostas){
-			array_push($this->apostas, $apostas);
+		function setApostas($aposta){
+			array_push($this->apostas, $aposta);
+			
+			if(!in_array($aposta->getUsuario(), $this->participantes)) {
+				if($this->criador == $aposta->getUsuario()){
+					$observer = new Observer($this->criador, 10);
+				} else {
+					$observer = new Observer($this->criador, 0);
+				}
+
+				$this->attach($observer);
+
+				$m = new Mensagem('SisBolao', $aposta->getUsuario(), "Bem-vindo ao Bolão " . $this->getTitulo(), date('d/m/Y'));
+				$msg = array();
+				array_push($msg, $m);
+				
+				$mensagem = new ArquivoMensagem();
+	    		$facade = new Facade($mensagem);
+	   			$facade->escreverEm('../bd/mensagens-' . $aposta->getUsuario() . '.txt', $msg);
+			}
+			
+			$this->setEvent("O usuário " . $aposta->getUsuario() . " realizou uma aposta de R$ " . $aposta->getValor() . " no bolão " . $this->titulo);
 		}
 
 		function getId(){
 			return $this->id;
+		}
+
+		function getTipo(){
+			return $this->tipo;
 		}
 
 		function getCriador(){
@@ -158,42 +193,73 @@
 			return $this->tempoLimite;
 		}
 
-		function getApostas($apostas){
+		function getApostas(){
 			return $this->apostas;
 		}
 
-		function determinarVencedor(){
+		function getDinheiros(){
+			return $this->dinheiros;
+		}
 
-			for($i = 0; $i < count($tipoJogo); $i++){
-				for($j = 0; $j < count($jogos); $j++){
-					if($tipoJogo[$i]->getId() == $jogos[$j]->getId()){
-						if($jogos[$j]->getResultado == ''){
-							return -1;
+
+		function determinarVencedor($jogos, $usuarios){
+
+			for($i = 0; $i < count($this->participantes); $i++){
+				for($j=0; $j < count($usuarios); $j++){
+					if($usuarios[$j]->getCpf() == $this->participantes[$i]){
+						$a = $usuarios[$j]->getApostas();
+						break;
+					}
+				}
+				for($k = 0; $k < count($a); $k++){
+					if($a[$k]->getBolao() == $this->id) {
+						for($l=0; $l<count($this->resutado); $l++){
+							if($a[$k]->getOpcaoDeAposta() == $this->resultado[$l]){
+								$usuarios[$j]->setPontuacao(10);
+							}
 						}
 					}
 				}
 			}
 
-			for($i = 0; $i < count($participantes); $i++){
-				$a = $participantes[$i]->getApostas();
-				for($j = 0; $j < count($a); $j++){
-					if($a[$j]->getBolao() == $this->titulo) {
-						if($a[$j]->getOpcaoDeAposta() == $this->resultado){
-							array_push($this->ganhadores, $participantes[$i]);
-						}
+			$g = array_map();
+			for($i = 0; $i < count($this->participantes); $i++){
+				for($j=0; $j < count($usuarios); $j++){
+					if($usuarios[$j]->getCpf() == $this->participantes[$i]){
+						$g[$usuarios[$j]->getCpf()] = $usuarios[$j]->getPontuacao();
 					}
 				}
+			}
+
+			$maior = 0;
+			arsort($g);
+			foreach($g as $x => $x_value) {
+			    $maior = $x_value;
+			    break;
+			}
+
+			foreach($g as $x => $x_value) {
+			    if($x_value == $maior){
+			    	array_push($this->ganhadores, $x);
+			    }
 			}
 
 			return $this->ganhadores;
 
 		}
 
-		function calcularValorVencedor(){
-			$g = determinarVencedor();
+		function calcularValorVencedor($jogos, $usuarios){
+			$g = $this->determinarVencedor($jogos, $usuarios);
 
-			return $this->dinheiros/count($g);
+			if(count($g) > 0){
+				return $this->dinheiros/count($g);
+			} else {
+				return -1;
+			}
+		}
+
+		function removerAposta($apostas, $aposta){
+			array_splice($apostas, $aposta);
 		}
 	}
-
 ?>

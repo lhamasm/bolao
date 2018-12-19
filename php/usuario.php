@@ -3,8 +3,12 @@
 	require_once 'sistema.php';
 	require_once 'bolao.php';
 	require_once 'jogo.php';
+	require_once 'observer.php';
+	require_once 'subject.php';
+	require_once 'convite.php';
 	
-	class Usuario {
+	abstract class Usuario {
+		protected $tipo; //apostador ou adm
 		protected $nome;
 		protected $username;
 		protected $email;
@@ -21,8 +25,9 @@
 		protected $mensagens;
 
 		# Construtor
-		function Usuario($nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta){
+		function Usuario($tipo, $nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta){
 
+			$this->tipo = $tipo;
 			$this->nome = $nome;
 			$this->username = $username;
 			$this->email = $email;
@@ -30,7 +35,7 @@
 			$this->dataNascimento = $dataNascimento;
 			$this->genero = $genero;
 			$this->rg = $rg;
-			$this->cpg = $cpf;
+			$this->cpf = $cpf;
 			$this->telefone = $telefone;
 			$this->celular = $celular;
 			$this->banco = $banco;
@@ -41,6 +46,10 @@
 		}
 
 		# Getters e Setters
+
+		function getTipo(){
+			return $this->tipo;
+		}
 
 		function getNome(){
 			return $this->nome;
@@ -96,6 +105,10 @@
 
 		function getMensagem(){
 			return $this->mensagens;
+		}
+
+		function setTipo($tipo){
+			$this->tipo = $tipo;
 		}
 
 		function setNome($nome){
@@ -185,7 +198,7 @@
 			}
 		}
 
-		function verificarResultado($jogo) {
+		function verificarResultadoJogo($jogo) {
 			for($i = 0; $i < count($jogos); $i++){
 				if($jogos[$i]->getId() == $jogo){
 					return $jogos[$i];
@@ -193,8 +206,26 @@
 			}
 		}
 
-		function recebermensagem($mensagem){
+		function convidarApostador($usuario, $indice, $data, $bolao){
+			$c = new Convite($_SESSION['username'], $usuario->getUsername(), 'Convite', date('d/m/Y'), $bolao);
 
+			$convite = new ArquivoConvite();
+		    $facade = new Facade($convite);
+		    $facade->escreverEm('../bd/mensagens-' . $usuario->getCpf() . '.txt', $c);
+
+		    $usuario->setMensagem($c);
+
+		    $sistema = $_SESSION['sistema'];
+		    $usuarios = $sistema->getUsuarios();
+		    array_splice($usuarios, $indice);
+		    array_push($usuarios, $usuario);
+
+		    $s = new Sistema($usuarios, $sistema->getJogos(), $sistema->getBoloes(), $sistema->getBugs());
+		    $_SESSION['sistema'] = $s;
+
+			$_SESSION['status'] = 1;
+			header("Location: ../convidar-amigos.php");
+			exit();
 		}
 	}
 

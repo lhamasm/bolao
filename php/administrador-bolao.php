@@ -5,8 +5,9 @@
 	class AdministradorBolao extends Administrador {
 		protected $bolao;
 
-		function AdministradorBolao($bolao){
-			$this->bolao = $bolao;
+		function AdministradorBolao($tipo, $nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta){
+			parent::Administrador($tipo, $nome, $username, $email, $senha, $dataNascimento, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta);
+			$this->bolao = array();
 		}
 
 		function getBolao(){
@@ -14,7 +15,7 @@
 		}
 
 		function setBolao($bolao) {
-			$this->bolao = $bolao;
+			array_push($this->bolao, $bolao);
 		}
 	}
 
