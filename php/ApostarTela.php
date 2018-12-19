@@ -173,7 +173,7 @@
 		    $usuarios = $sistema->getUsuarios();
 		    $aposta = new ArquivoAposta();
 		    $facade = new Facade($aposta);
-		    for($i=0; $i<count($usuarios)-1; $i++){
+		    for($i=0; $i<count($usuarios); $i++){
 		    	if($usuarios[$i]->getCpf() == $_SESSION['login']){
 		    		unlink('../bd/apostas-' . $usuarios[$i]->getCpf());
 		      		$facade->escreverEm('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt', $usuarios[$i]->getApostas());

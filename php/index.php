@@ -41,7 +41,7 @@
     $usuarios = $sistema->getUsuarios();
     $aposta = new ArquivoAposta();
     $facade = new Facade($aposta);
-    for($i=0; $i<count($usuarios)-1; $i++){
+    for($i=0; $i<count($usuarios); $i++){
       if(get_class($usuarios[$i]) == 'Apostador'){
         $facade->lerDe('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt');
       }
@@ -51,7 +51,7 @@
     $usuarios = $sistema->getUsuarios();
     $mensagem = new ArquivoMensagem();
     $facade = new Facade($mensagem);
-    for($i=0; $i<count($usuarios)-1; $i++){
+    for($i=0; $i<count($usuarios); $i++){
       $facade->lerDe('../bd/mensagens-' . $usuarios[$i]->getCpf() . '.txt');
     }
 

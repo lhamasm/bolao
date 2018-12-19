@@ -19,38 +19,40 @@
 				while(!feof($arquivo)){
 					$bolao = fgets($arquivo);
 
-					$dados = explode(':', $bolao);
+					if($bolao != ''){
+						$dados = explode(':', $bolao);
 
-					if($dados[7] != ''){
-			        	$participantes = explode('*', $dados[7]);
-			        } else {
-			        	$participantes = array();
-			        }
-			        //$opcoesAposta = explode('*', $dados[10]);
-			        if($dados[14] != ''){
-			       		$apostas = explode(';', $dados[14]);
-			       	}else {
-			        	$apostas = array();
-			        }
-			        $tipoJogo = explode('*', $dados[8]);
+						if($dados[7] != ''){
+				        	$participantes = explode('*', $dados[7]);
+				        } else {
+				        	$participantes = array();
+				        }
+				        //$opcoesAposta = explode('*', $dados[10]);
+				        if($dados[14] != ''){
+				       		$apostas = explode(';', $dados[14]);
+				       	}else {
+				        	$apostas = array();
+				        }
+				        $tipoJogo = explode('*', $dados[8]);
 
-			        $b = new Bolao($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $dados[5], $dados[6], $tipoJogo, $dados[9],/* $opcoesAposta,*/ $dados[10], $dados[12]);
+				        $b = new Bolao($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $dados[5], $dados[6], $tipoJogo, $dados[9],/* $opcoesAposta,*/ $dados[10], $dados[12]);
 
-			        for($i=0; $i < count($participantes); $i++){
-			        	$b->setParticipantes($participantes[$i]);
-			        }
+				        for($i=0; $i < count($participantes); $i++){
+				        	$b->setParticipantes($participantes[$i]);
+				        }
 
-			        $b->setResultado($dados[11]);
-			        $b->setTempoLimite($dados[13]);
+				        $b->setResultado($dados[11]);
+				        $b->setTempoLimite($dados[13]);
 
-			        for($i=0; $i < count($apostas); $i++){
-			        	$ap = explode('*', $apostas[$i]);
-			         	$a = new Aposta($ap[0], $contador, $ap[1], $ap[2], $ap[3], 1);
-			          	$b->setApostas($a);
-			        }
+				        for($i=0; $i < count($apostas); $i++){
+				        	$ap = explode('*', $apostas[$i]);
+				         	$a = new Aposta($ap[0], $contador, $ap[1], $ap[2], $ap[3], 1);
+				          	$b->setApostas($a);
+				        }
 
-	        		$sistema->setBoloes($b);
-	        		$contador += 1;
+		        		$sistema->setBoloes($b);
+		        		$contador += 1;
+					}
 				}
 
 				fclose($arquivo);

@@ -32,7 +32,7 @@
 			$boloes = $sistema->getBoloes();
 			$contador = 0;
 
-			for($i=0; $i<count($usuarios)-1; $i++){
+			for($i=0; $i<count($usuarios); $i++){
 				if($usuarios[$i]->getCpf() == $_SESSION['login']){
 					$apostas = $usuarios[$i]->getApostas();
 					$a = $apostas[intval($this->aposta)-1];
@@ -90,7 +90,7 @@
 		    $usuarios = $sistema->getUsuarios();
 		    $aposta = new ArquivoAposta();
 		    $facade = new Facade($aposta);
-		    for($i=0; $i<count($usuarios)-1; $i++){
+		    for($i=0; $i<count($usuarios); $i++){
 		    	unlink('../bd/apostas-' . $usuarios[$i]->getCpf());
 		      	$facade->escreverEm('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt', $usuarios[$i]->getApostas());
 		    }

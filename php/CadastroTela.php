@@ -198,7 +198,7 @@
 			if($this->confirmation($this->email, $this->cmfemail)){
 				if($this->confirmation($this->senha, $this->cmfsenha)){
 
-					for($i = 0; $i < count($usuarios)-1; $i++){
+					for($i = 0; $i < count($usuarios); $i++){
 						if($usuarios[$i]->getCpf() == $this->cpf){
 							$_SESSION['status'] = 2;
 							header('Location: ../cadastro.php');

@@ -21,14 +21,16 @@
 				while(!feof($arquivo)){
 					$usuario = fgets($arquivo);
 
-					$dados = explode(':', $usuario);
-					if($dados[0] == '0'){
-						$u = new Apostador($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $dados[5], $dados[6], $dados[7], $dados[8], $dados[9], $dados[10], $dados[11], $dados[12], $dados[13], intval($dados[14]), intval($dados[15]));
-					} else {
-						$u = new AdministradorSistema($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $dados[5], $dados[6], $dados[7], $dados[8], $dados[9], $dados[10], $dados[11], $dados[12], $dados[13]);
-					}
+					if($usuario != ''){
+						$dados = explode(':', $usuario);
+						if($dados[0] == '0'){
+							$u = new Apostador($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $dados[5], $dados[6], $dados[7], $dados[8], $dados[9], $dados[10], $dados[11], $dados[12], $dados[13], intval($dados[14]), intval($dados[15]));
+						} else {
+							$u = new AdministradorSistema($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $dados[5], $dados[6], $dados[7], $dados[8], $dados[9], $dados[10], $dados[11], $dados[12], $dados[13]);
+						}
 
-	        		$sistema->setUsuarios($u);
+		        		$sistema->setUsuarios($u);
+					}
 				}
 
 				fclose($arquivo);

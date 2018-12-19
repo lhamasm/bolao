@@ -17,10 +17,12 @@
 				while(!feof($arquivo)){
 					$jogo = fgets($arquivo);
 
-					$dados = explode(':', $jogo);
-					$j = new Jogo($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $ganhador, $ingredientes);
+					if($jogo != ''){
+						$dados = explode(':', $jogo);
+						$j = new Jogo($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $ganhador, $ingredientes);
 
-	        		$sistema->setJogos($j);
+		        		$sistema->setJogos($j);
+					}
 				}
 
 				fclose($arquivo);
@@ -39,7 +41,7 @@
 			for($i=0; $i<count($jogo->getIngredientes())-1; $i++){
 				$cadastro = $cadastro . $jogo->getIngredientes()[$i] . '*';
 			}
-			if(count($jogo->getIngredientes())){
+			if(count($jogo->getIngredientes()) > 0){
 				$cadastro = $cadastro . $jogo->getIngredientes()[count($jogo->getIngredientes())-1] . ':';
 			}
 

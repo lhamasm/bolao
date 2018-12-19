@@ -39,7 +39,7 @@
 			$sistema = $_SESSION['sistema'];
 			$usuarios = $sistema->getUsuarios();
 
-			for($i=0; $i<count($usuarios)-1; $i++){
+			for($i=0; $i<count($usuarios); $i++){
 				if($usuarios[$i]->getCpf() == $_SESSION['login'] && $usuarios[$i]->getEmail() == $_SESSION['email']){
 					if($this->senha == $this->confirmarSenha){
 						$usuarios[$i]->setSenha($this->senha);
@@ -47,9 +47,12 @@
 						$s = new Sistema($usuarios, $sistema->getJogos(), $sistema->getBoloes(), $sistema->getBugs());
 						$_SESSION['sistema'] = $s;
 
+						unlink('../bd/usuarios.txt');
 						$usuario = new ArquivoUsuario();
 					    $facade = new Facade($usuario);
-					    $facade->escreverEm('./bd/usuarios.txt', $usuarios[$j]);
+						for($j=0; $j<count($usuarios); $j++){
+							$facade->escreverEm('../bd/usuarios.txt', $usuarios[$j]);
+						}						    
 
 						$_SESSION['status'] = 1;
 						header("Location: ../esqueci-senha-2.php");

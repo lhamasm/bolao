@@ -43,15 +43,7 @@
 						$_SESSION['status'] = -1;
 						header('Location: ../esqueci-senha-2.php');
 						exit();
-					} else {
-						$_SESSION['status'] = 1;
-						header('Location: ../esqueci-senha.php');
-						exit();
-					}
-				} else {
-					$_SESSION['status'] = 2;
-					header('Location: ../esqueci-senha.php');
-					exit();
+					} 
 				}
 			}
 

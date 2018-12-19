@@ -7,7 +7,7 @@
 	session_start();
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
-		$bolao = $_REQUEST['item-b'];
+		$bolao = $_REQUEST['item'];
 
 		$adm = $_SESSION['usuario'];
 		$adm->excluirBolao($bolao);

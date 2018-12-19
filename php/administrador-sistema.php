@@ -49,9 +49,12 @@
 			$sistema = $_SESSION['sistema'];
 			$boloes = $sistema->getBoloes();
 
-			$boloes[intval($bolao)]->setEvent('O bolão '  . $boloes[intval($bolao)]->getTitulo() . ' foi excluído');
+			$b = $boloes[intval($bolao)];
+			//$criador = $b->getCriador();
 
-			array_splice($boloes, $bolao);
+			$b->setEvent('O bolão '  . $b->getTitulo() . ' foi excluído');
+
+			array_splice($boloes, intval($bolao));
 
 			$s = new Sistema($sistema->getUsuarios(), $sistema->getJogos(), array(), $sistema->getBugs());
 			$_SESSION['sistema'] = $s;
@@ -97,7 +100,7 @@
 					unlink('../bd/usuarios.txt');
 					$u = new ArquivoUsuario();
 		    		$facade = new Facade($u);
-		    		for($j=0; $j<count($usuarios)-1; $j++){
+		    		for($j=0; $j<count($usuarios); $j++){
 		    			$facade->escreverEm('../bd/usuarios.txt', $usuarios[$j]);
 		    		}
 
