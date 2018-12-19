@@ -1,355 +1,83 @@
-﻿<?php
-	session_start();
+<?php
+	require_once 'funcoes.php';
+	require_once 'CadastroTela.php';
 
-	$_SESSION['status'];
+	$tipo = 0;
+	$nome = "";
+	$username = "";
+	$email = "";
+	$confirmarEmail = "";
+	$senha = "";
+	$confirmarSenha = "";
+	$dia = "";
+	$mes = "";
+	$ano = "";
+	$banco = "";
+	$agencia = "";
+	$conta = "";
+	$termos = "";
+	$genero = "";
+	$rg = "";
+	$cpf = "";
+	$telefone = "";
+	$celular = "";
+
+	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+		$nome = p_respostas($_REQUEST['nome']);
+		$username = p_respostas($_REQUEST['username']);
+		$email = p_respostas($_REQUEST['email']);
+		$confirmarEmail = p_respostas($_REQUEST['cmfemail']);
+		$senha = p_respostas($_REQUEST['senha']);
+		$confirmarSenha = p_respostas($_REQUEST['cmfsenha']);
+		$dia = $_REQUEST['dia'];
+		$mes = conversao_mes($_REQUEST['mes']);
+		$ano = $_REQUEST['ano'];
+		$banco = p_respostas($_REQUEST['banco']);
+		$agencia = p_respostas($_REQUEST['agencia']);
+		$conta = p_respostas($_REQUEST['conta']);
+		$termos = $_REQUEST['termos'];
+		$genero = $_REQUEST['genero'];
+		$rg = p_respostas($_REQUEST['rg']);
+		$cpf = p_respostas($_REQUEST['cpf']);
+
+		if(isset($_REQUEST['telefone'])){
+			$telefone = p_respostas($_REQUEST['telefone']);
+		}
+
+		if(isset($_REQUEST['celular'])){
+			$celular = p_respostas($_REQUEST['celular']);
+		}
+
+		$telaCadastro = new CadastroTela($nome, $username, $email, $confirmarEmail, $senha, $confirmarSenha, $dia, $mes, $ano, $genero, $rg, $cpf, $telefone, $celular, $banco, $agencia, $conta);
+		$telaCadastro->cadastrar();
+	}
+
+	function conversao_mes($mes){
+		if($mes == 'janeiro'){
+			return '01';
+		} else if ($mes == 'fevereiro'){
+			return '02';
+		} else if ($mes == 'março'){
+			return '03';
+		} else if ($mes == 'abril'){
+			return '04';
+		} else if ($mes == 'maio'){
+			return '05';
+		} else if ($mes == 'junho'){
+			return '06';
+		} else if ($mes == 'julho'){
+			return '07';
+		} else if ($mes == 'agosto'){
+			return '08';
+		} else if ($mes == 'setembro'){
+			return '09';
+		} else if ($mes == 'outubro'){
+			return '10';
+		} else if ($mes == 'novembro'){
+			return '11';
+		} else if ($mes == 'dezembro'){
+			return '12';
+		}
+	}
 ?>
-
-<!doctype html>
-<html lang="pt-br">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="author" content="Larissa Machado & Sabrina Sales">
-		<title>Cadastro</title>
-
-		<link rel="icon" href="images/logo-vermelho.png">
-		<link rel="stylesheet" type="text/css" href="css/style-cadastro.css">
-		
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-
-    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	</head>
-
-	<body>
-		<header>
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	        <div class="container">
-
-	          <a class="navbar-brand col-1" href="index.php">
-	            <img style="width: 2.5em" src="images/logo-vermelho.png">
-	          </a>
-
-	          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-collapse">
-	            <span class="navbar-toggler-icon"></span>
-	          </button>
-
-	          <div class="collapse navbar-collapse" id="nav-collapse">
-	            <ul class="navbar-nav">
-	              <li class="nav-item">
-	                <a class="nav-link" href="index.php#programa">O programa</a>
-	              </li>
-
-	              <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
-
-	              <li class="nav-item">
-	                <a class="nav-link" href="index.php#participantes">Os participantes</a>
-	              </li>
-
-	              <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
-
-	              <li class="nav-item">
-	                <a class="nav-link" href="index.php#aux-section">Como jogar</a>
-	              </li>
-
-	              <li class="nav-item divisor bg-danger d-none d-lg-block"></li>
-
-	              <li class="nav-item">
-	                <a class="nav-link" href="index.php#noticias">Noticias</a>
-	              </li>
-	            </ul>
-	            <div class="col-3">
-					<a class="btn btn-outline-info botaoEntrar" href="login.php">Entrar</a>
-	        	</div>
-	          </div>
-	        </div>
-	      </nav>
-      	
-    	</header>
-
-    	<section class="pb-3 pb-sm-4 pb-md-0">
-    		<div class="container">
-				<div class="row">
-					<div class="col-auto offset-1 offset-sm-3 col-md-6 offset-md-0 d-flex">
-						<div class="align-self-center">
-							<img class="col-md-auto logo" style="width:7.9em;" src="images/logo-vermelho.png">
-
-							<?php
-								if($_SESSION['status'] == 2) {
-									echo '<div class="alert alert-danger" style="width: 30em; margin-left: 10.9em;">
-									  Já existe um usuário cadastrado com esse CPF.
-									</div>';
-								} elseif($_SESSION['status'] == 3){
-									echo '<div class="alert alert-danger" style="width: 30em; margin-left: 10.9em;">
-									  Senhas incompatíveis.
-									</div>';
-								} elseif($_SESSION['status'] == 4){
-									echo '<div class="alert alert-danger" style="width: 30em; margin-left: 10.9em;">
-									  Emails imcompatíveis.
-									</div>';
-								}
-
-								$_SESSION['status'] = -1;
-							?>
-						
-							<form class="form shadow" method="post" action="php/cadastro.php">
-								<div class="phrase pb-1">
-									<h1 class="text-info" style="text-align:center; font-size: 0.45em; font-family: robotoBold;">Cadastre-se agora!</h1>
-								</div>
-								<div class="form-group">
-									<label class="titulo" for="nome">Nome Completo <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="nome" id="nome" pattern="[A-Za-z ]*" required>
-								</div>
-
-								<div class="form-group">
-									<label class="titulo" for="username">Nome de Usuário <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="username" id="username" required>
-								</div>
-
-								<div class="form-group">
-									<label class="titulo" for="email">Email <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="email" name="email" id="email" required>
-								</div>
-						
-								<div class="form-group">
-									<label class="titulo" for="cmfemail">Confirmar Email <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="email" name="cmfemail" id="cmfemail" required>
-								</div>
-
-								<div class="form-group">
-									<label class="titulo" for="senha">Senha <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="password" name="senha" id="senha" placeholder="De 6-10 caracteres" required>
-								</div>
-					
-								<div class="form-group">
-									<label class="titulo" for="cmfsenha">Confirmar Senha <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="password" name="cmfsenha" id="cmfsenha" required>
-								</div>
-
-								<div class="form-group">
-									<label class="titulo" for="nascimento">Data de Nascimento <span class="text-danger">*</span>:</label><br>
-									<select class="select-1" name="dia" required>
-										<option value="nonselected" style="color:lightgray;">Dia</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-										<option value="11">11</option>
-										<option value="12">12</option>
-										<option value="13">13</option>
-										<option value="14">14</option>
-										<option value="15">15</option>
-										<option value="16">16</option>
-										<option value="17">17</option>
-										<option value="18">18</option>
-										<option value="19">19</option>
-										<option value="20">20</option>
-										<option value="21">21</option>
-										<option value="22">22</option>
-										<option value="23">23</option>
-										<option value="24">24</option>
-										<option value="25">25</option>
-										<option value="26">26</option>
-										<option value="27">27</option>
-										<option value="28">28</option>
-										<option value="29">29</option>
-										<option value="30">30</option>
-										<option value="31">31</option>
-
-									</select>
-									
-									<select class="select-1" name="mes" required>
-										<option value="nonselected" style="color:lightgray;">Mês</option>
-										<option value="janeiro">Janeiro</option>
-										<option value="fevereiro">Fevereiro</option>
-										<option value="março">Março</option>
-										<option value="abril">Abril</option>
-										<option value="maio">Maio</option>
-										<option value="junho">Junho</option>
-										<option value="julho">Julho</option>
-										<option value="agosto">Agosto</option>
-										<option value="setembro">Setembro</option>
-										<option value="outubro">Outubro</option>
-										<option value="novembro">Novembro</option>
-										<option value="dezembro">Dezembro</option>
-
-									</select>
-
-									<select name="ano" required>
-										<option value="nonselected" style="color:lightgray;">Ano</option>
-										<option value="2000">2000</option>
-										<option value="1999">1999</option>
-										<option value="1998">1998</option>
-										<option value="1997">1997</option>
-										<option value="1996">1996</option>
-										<option value="1995">1995</option>
-										<option value="1994">1994</option>
-										<option value="1993">1993</option>
-										<option value="1992">1992</option>
-										<option value="1991">1991</option>
-										<option value="1990">1990</option>
-										<option value="1989">1989</option>
-										<option value="1988">1988</option>
-										<option value="1987">1987</option>
-										<option value="1986">1986</option>
-										<option value="1985">1985</option>
-										<option value="1984">1984</option>
-										<option value="1983">1983</option>
-										<option value="1982">1982</option>
-										<option value="1981">1981</option>
-										<option value="1980">1980</option>
-										<option value="1979">1979</option>
-										<option value="1978">1978</option>
-										<option value="1977">1977</option>
-										<option value="1976">1976</option>
-										<option value="1975">1975</option>
-										<option value="1974">1974</option>
-										<option value="1973">1973</option>
-										<option value="1972">1972</option>
-										<option value="1971">1971</option>
-										<option value="1970">1970</option>
-										<option value="1969">1969</option>
-										<option value="1968">1968</option>
-										<option value="1967">1967</option>
-										<option value="1966">1966</option>
-										<option value="1965">1965</option>
-										<option value="1964">1964</option>
-										<option value="1963">1963</option>
-										<option value="1962">1962</option>
-										<option value="1961">1961</option>
-										<option value="1960">1960</option>
-
-									</select>
-								</div>
-
-								<div class="form-group">
-									<label class="titulo" for="genero">Gênero <span class="text-danger">*</span>:</label><br>
-									<select name="genero" required>
-										<option value="nonselected" style="color:lightgray;">[selecione]</option>
-										<option value="feminino">Feminino</option>
-										<option value="masculino">Masculino</option>
-										<option value="nodeclared">Prefiro não declarar</option>
-									</select>
-								</div>	
-
-								<div class="form-group">
-									<label class="titulo" for="rg">RG</label><span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" id="rg" name="rg" size="10" required>
-								</div>
-
-								<div class="form-group">
-									<label class="titulo" for="cpf">CPF</label><span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" id="cpf" name="cpf" size="11" required>
-								</div>
-
-								<div class="form-group">
-									<label class="titulo" for="telefone">Telefone</label>
-									<input class="form-control" id="telefone" type="tel" name="telefone" size="10">
-								</div>
-
-								<div class="form-group">
-									<label class="titulo" for="celular">Celular</label>
-									<input class="form-control" id="celular" type="tel" name="celular" size="10">
-								</div>
-
-								<div class="form-group">
-									<label class="titulo" for="banco">Banco <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="banco" id="banco" size="3" required>
-								</div>
-
-								<div class="form-group">
-									<label class="titulo" for="agencia">Agência <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="agencia" id="agencia" size="5" required>
-								</div>
-
-								<div class="form-group">
-									<label class="titulo" for="conta">Conta <span class="text-danger">*</span>:</label>
-									<input class="form-control" type="text" name="conta" id="conta" size="6" required>
-								</div>
-
-								<div class="form-group">
-									<label>
-                    					<input class="mt-2" type="checkbox" name="termos" required> Concordo com os <button type="button" style="padding: 0; border: none; background: none; color: #FF8C00" data-toggle="modal" data-target="#termos">Termos de Uso</button>
-                  					</label>
-								</div>
-
-								<div class="row form-group">
-									<button class="mb-1 col-sm-5 mb-sm-0 mr-sm-2 btn btn-danger" type="submit" name="confirmar">Confirmar</button>
-								</div>
-
-							</form>
-						</div>
-					</div>
-					<div class="col-md-6 d-none d-md-block">
-            			<img class="fundo" src="images/chef2.png">
-          			</div>
-				</div>
-			</div>
-    	</section>
-
-    	<div class="modal" id="termos">
-    		<div class="modal-dialog modal-dialog-centered">
-    			<div class="modal-content">
-
-    				<div class="modal-header text-center">
-    					<div class="col-2"></div>
-    					<h4 class="col-8 modal-title w-100">Termos e Condições</h4>
-    					<button type="button" class="col-2 close" data-dismiss="modal">&times;</button>
-    				</div>
-    				
-    				<div class="modal-body">
-    						<p align="justify">Lorem ipsum semper libero justo porta aenean hendrerit dui, massa eleifend quisque cubilia auctor sagittis mauris placerat venenatis, augue lorem pellentesque porttitor mollis tempus pretium. mollis mi netus in torquent suspendisse mattis urna porttitor nostra, non vel venenatis elit eleifend adipiscing vulputate curabitur malesuada neque, molestie est habitasse ad fringilla sapien vehicula luctus. lectus vestibulum volutpat metus curae laoreet sollicitudin fames bibendum commodo, ultricies facilisis scelerisque cubilia bibendum per nisl lorem, vestibulum convallis aliquam turpis sapien rutrum non tortor. elit non id tempor duis ornare justo dui curabitur senectus, scelerisque feugiat commodo molestie vestibulum egestas rhoncus mi, maecenas senectus rhoncus quis suscipit nullam eros viverra. </p>
-
-							<p align="justify">Habitant aptent fames conubia bibendum in praesent bibendum dictum est, risus venenatis mi eget lacus sem rutrum ligula curabitur feugiat, congue risus massa a lorem ornare tellus potenti. dapibus pharetra potenti egestas vivamus sollicitudin euismod tincidunt sed volutpat est nostra viverra imperdiet, lobortis nam mauris porta metus donec venenatis varius etiam aliquam elementum. amet neque proin lacinia phasellus neque proin class cursus augue, aliquam aptent hendrerit pharetra imperdiet ac aliquam magna at, torquent molestie viverra rutrum donec turpis fringilla eget. taciti amet vitae lobortis nibh primis rutrum maecenas donec, massa enim feugiat hendrerit porta vehicula at cras, quisque nam ligula ad leo felis purus. </p>
-
-							<p align="justify">Senectus primis nostra turpis lorem fames ante class, ornare ante purus curabitur condimentum aenean eu lorem, sem morbi erat dapibus dictum imperdiet. nullam ad donec magna accumsan elit varius condimentum, pellentesque lectus nec feugiat conubia rutrum sociosqu non, est blandit eget tellus habitant condimentum. leo sit consequat aliquam phasellus facilisis mollis est nostra aenean tempor porta interdum, hendrerit faucibus morbi venenatis augue congue dolor feugiat malesuada sed. in pharetra cubilia cras ante nec tortor, ullamcorper fringilla fusce at eu laoreet quam, eu suspendisse tortor bibendum himenaeos. eu accumsan tristique ipsum lectus lobortis volutpat tellus habitasse lobortis egestas tempor a vitae justo augue velit, non accumsan porta ad felis pulvinar leo pretium cursus et proin eu vestibulum bibendum. </p> 
-
-							<p align="justify">Fermentum est nisl elit conubia platea amet mattis vitae curabitur facilisis quam, metus tempus a suscipit accumsan curabitur aptent ut orci. conubia vivamus interdum sodales ac erat quis, malesuada convallis posuere dictum urna quisque, cras aenean euismod lacinia etiam. amet rutrum inceptos pretium eu nullam blandit nisi condimentum, tempus quam justo metus cras fringilla nec feugiat, semper lectus eleifend varius cursus a etiam potenti, hendrerit rutrum urna habitant risus luctus sollicitudin. fusce id fringilla lobortis neque eget sem elementum, quis lacus euismod eros tempus dolor curabitur tempor, feugiat libero mauris leo sociosqu turpis. </p>
-
-							<p align="justify">Aliquet imperdiet luctus at arcu porta sodales lacinia, nullam hendrerit justo luctus iaculis egestas fermentum, venenatis vestibulum primis cursus sed et. pulvinar dolor fames nulla suscipit cras lacus bibendum, suscipit proin tortor aptent vel malesuada, consectetur netus nisl nec tellus volutpat. malesuada sociosqu aptent neque sagittis semper risus cubilia eros praesent taciti diam nostra in donec volutpat ac torquent auctor augue habitant, etiam elit molestie semper nunc nostra nulla phasellus aliquam habitasse mi vitae conubia cras mollis pellentesque ac libero feugiat .</p>
-    				</div>
-
-    				<div class="modal-footer">
-    					
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-		
-		<footer class="footer py-3 mt-5 mt-md-0" style="background-color: #B22222">
-		    <div class="container">
-		        <div class="row">
-		          	<div class="col-md-12">
-		            	<div style="text-align: center;" class="text-white align-self-center">Este bolão é fictício</div>
-		          	</div>
-		        </div>
-		    </div>
-		</footer>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
-
-
-	<script type="text/javascript">
-			
-		$('#agencia').mask('0000-0');
-		$('#conta').mask('00000-0');
-		$('#banco').mask('000');
-		$('#rg').mask('00.000.000-00');
-		$('#cpf').mask('000.000.000-00');
-		$('#telefone').mask('(00)0000-0000');
-		$('#celular').mask('(00)0000-0000');			
-
-	</script>
-  </body>
-</html>
