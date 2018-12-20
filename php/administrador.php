@@ -3,6 +3,8 @@
 	require_once 'sistema.php';
 	require_once 'usuario.php';
 	require_once 'apostador.php';
+	require_once 'administrador-sistema.php';
+	require_once 'administrador-bolao.php';
 	require_once 'bolao.php';
 	require_once 'facade.php';
 	require_once 'ArquivoBolao.php';
@@ -49,20 +51,15 @@
 
 		function excluirApostador($participante, $bolao){
 			$sistema = $_SESSION['sistema'];
+			$usuarios = $sistema->getUsuarios();
 			$boloes = $sistema->getBoloes();
 			$valor = 0;
 
 			$participantes = $boloes[intval($bolao)]->getParticipantes();
-			for($i=0; $i<count($participantes); $i++){
-				if($participantes[$i] == $participante){
-					for($j=0; $j<count($usuarios); $j++){
-						if($usuarios[$j]->getCpf() == $participante){
-							$m = new Mensagem('SisBolao', $usuarios[$j]->getCpf(), 'Você foi excluído do bolão ' . $boloes[intval($bolao)]->getTitulo() . '. Todas as suas apostas foram ressarcidas.', date('d/m/Y'));
-							$usuarios[$j]->setMensagem($m);
-							break;
-						}
-					}
-					array_splice($participantes, $i);
+			for($j=0; $j<count($usuarios); $j++){
+				if($usuarios[$j]->getCpf() == $participante){
+					$m = new Mensagem('SisBolao', $usuarios[$j]->getCpf(), 'Você foi excluído do bolão ' . $boloes[intval($bolao)]->getTitulo() . '. Todas as suas apostas foram ressarcidas.', date('d/m/Y'));
+					$usuarios[$j]->setMensagem($m);
 					break;
 				}
 			}
@@ -71,20 +68,24 @@
 			for($i=0; $i<count($apostas); $i++){
 				if($apostas[$i]->getUsuario() == $participante){
 					$valor += (-1) * intval($apostas[$i]->getValor());
-					array_splice($apostas, $i);
+					//array_splice($apostas, $i);
 				}
 			}
 
-			$b = new Bolao($boloes[intval($bolao)]->getId(), $boloes[intval($bolao)]->getCriador(), $boloes[intval($bolao)]->getTipo(), $boloes[intval($bolao)]->getCampeonato(), $boloes[intval($bolao)]->getTitulo(), $boloes[intval($bolao)]->getDescricao(), $boloes[intval($bolao)]->getLimiteDeParticipantes(), $boloes[intval($bolao)]->getTipoJogo(), $boloes[intval($bolao)]->getTipoAposta(), $boloes[intval($bolao)]->getOpcoesAposta(), $boloes[intval($bolao)]->getSenha(), $boloes[intval($bolao)]->getDinheiros());
+			$b = new Bolao($boloes[intval($bolao)]->getId(), $boloes[intval($bolao)]->getCriador(), $boloes[intval($bolao)]->getTipo(), $boloes[intval($bolao)]->getCampeonato(), $boloes[intval($bolao)]->getTitulo(), $boloes[intval($bolao)]->getDescricao(), $boloes[intval($bolao)]->getLimiteDeParticipantes(), $boloes[intval($bolao)]->getTipoJogo(), $boloes[intval($bolao)]->getTipoAposta(), $boloes[intval($bolao)]->getSenha(), $boloes[intval($bolao)]->getDinheiros());
 			$b->setDinheiros($valor);
 			$b->setTempoLimite($boloes[intval($bolao)]->getTempoLimite());
 
 			for($i=0; $i<count($apostas); $i++){
-				$b->setApostas($aposta[$i]);
+				if($apostas[$i]->getUsuario() != $participante){
+					$b->setApostas($apostas[$i]);
+				}				
 			}
 
 			for($i=0; $i<count($participantes); $i++){
-				$b->setParticipantes($participantes[$i]);
+				if($participantes[$i] != $participante){
+					$b->setParticipantes($participantes[$i]);
+				}
 			}
 
 			array_splice($boloes, intval($bolao));
@@ -100,41 +101,10 @@
 		    	$facade->escreverEm('../bd/boloes.txt', $boloes[$i]);
 		    }
 			
-			fclose($arquivo);
+			//fclose($arquivo);
 			$_SESSION['status'] = 1;
 			header('Location: ../meus-boloes.php');
 			exit();
 		}
-
-		/*function convidarApostador($user, $data, $titulo){
-			for($i = 0; $i < count($usuarios); $i++){
-				if($usuarios[$i]->getUsername() == $username){
-					$convite = new Convite($this->username, $user, $titulo, $data);
-					$usuarios[$i]->setMensagem($convite);
-				}
-			}
-		}
-
-		function convidarApostador($email, $data, $titulo){
-			for($i = 0; $i < count($usuarios); $i++){
-				if($usuarios[$i]->getEmail() == $email){
-					$convite = new Convite($this->username, $usuarios[$i]->getUsername(), $titulo, $data);
-					$usuarios[$i]->setMensagem($convite);
-				}
-			}
-		}
-
-		function excluirApostador($bolao, $apostador){
-			for($i = 0; $i < count($boloes); $i++){
-				if($boloes[$i]->getTitulo() == $bolao){
-					$p = $boloes[$i]->getParticipantes();
-					for($j = 0; $j < count($p); $j++){
-						if($p[$j]->getCpf() == $apostador){
-							array_splice($p, $j, 1);
-						}
-					}
-				}
-			}
-		}*/
 	}
 ?>

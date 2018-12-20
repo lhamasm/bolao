@@ -42,9 +42,7 @@
     $aposta = new ArquivoAposta();
     $facade = new Facade($aposta);
     for($i=0; $i<count($usuarios); $i++){
-      if(get_class($usuarios[$i]) == 'Apostador' || get_class($usuarios[$i]) == 'AdministradorBolao'){
-        $facade->lerDe('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt');
-      }
+       $facade->lerDe('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt');
     }
 
     $sistema = $_SESSION['sistema'];

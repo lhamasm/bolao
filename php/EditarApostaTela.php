@@ -55,24 +55,29 @@
 
 			$apostas[intval($this->idAposta)-1]->setValor($this->valor);
 			$apostas[intval($this->idAposta)-1]->setOpcaoDeAposta($this->opcaoAposta);
+			$apostas[intval($this->idAposta)-1]->setUsuario($_SESSION['login']);
 
 			$bolao = $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())];
 			$ap = $bolao->getApostas();
 
+			$AP = array();
+
 			for($i=0; $i<count($ap); $i++){
-				if($ap[$i]->getUsuario() == $_SESSION['login'] && $ap[$i]->getValor() == $this->valor && $ap[$i]->getOpcaoDeAposta() == $this->opcaoAposta && $ap[$i]->getData() == $apostas[intval($this->idAposta)-1]->getData()){
-					array_splice($ap, $i);
-					break;
+				if($ap[$i]->getUsuario() != $_SESSION['login']){
+					array_push($AP, $ap[$i]);
 				}
 			}
-			array_push($ap, $apostas[intval($this->idAposta)-1]);
 
+			for($i=0; $i<count($apostas); $i++){
+				array_push($AP, $apostas[$i]);
+			}
+			
 			$b = new Bolao($boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getId(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getCriador(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getTipo(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getCampeonato(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getTitulo(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getDescricao(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getLimiteDeParticipantes(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getTipoJogo(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getTipoAposta(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getSenha(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getDinheiros());
 
 			$b->setTempoLimite($boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getTempoLimite());
 
-			for($i=0; $i<count($ap); $i++){
-				$b->setApostas($ap[$i]);
+			for($i=0; $i<count($AP); $i++){
+				$b->setApostas($AP[$i]);
 			}
 
 			$participantes = $bolao->getParticipantes();

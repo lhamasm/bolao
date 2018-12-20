@@ -48,7 +48,7 @@
 
 			$arquivo = fopen($nome, 'a+') or die("Não foi possível abrir o arquivo");
 
-			fwrite($arquivo, $convite->getEnviador() . ':' . $convite->getMensagem() . ':' . $convite->getData() . ':' . ($convite->getBolao())->getId() . PHP_EOL);
+			fwrite($arquivo, $convite->getEnviador() . ':' . $convite->getMensagem() . ':' . $convite->getData() . ':' . $convite->getBolao()->getId() . PHP_EOL);
 
 			fclose($arquivo);
 		}

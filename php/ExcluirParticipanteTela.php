@@ -38,7 +38,7 @@
 
 		function excluir(){
 
-			$adm = $_SESSION['usuario'];
+			$adm = new AdministradorBolao($_SESSION['tipo'], $_SESSION['nome'], $_SESSION['username'], $_SESSION['email'], $_SESSION['senha'], $_SESSION['ddn'], $_SESSION['genero'], $_SESSION['rg'], $_SESSION['login'], $_SESSION['telefone'], $_SESSION['celular'], $_SESSION['banco'], $_SESSION['agencia'], $_SESSION['conta']);
 			$adm->excluirApostador($this->participante, $this->bolao);
 
 		}

@@ -3,7 +3,7 @@
 	require_once 'apostador.php';
 	require_once 'usuario.php';
 	require_once 'sistema.php';
-	//require_once 'index.php';
+	require_once 'index.php';
 	require_once 'facade.php';
 	require_once 'ArquivoUsuario.php';
 

@@ -17,19 +17,27 @@
 
 				$arquivo = fopen($nome, 'r') or die("Não foi possível abrir o arquivo");
 
+				$user = explode('.', $nome);
+				$u = $user[2] .  $user[3] . $user[4];
+				$user = explode('-', $u);
+				$u = '';
+				$u = $user[1] . '-' . $user[2];
+				$U = $u[0] . $u[1] . $u[2] . '.' . $u[3] . $u[4] . $u[5] . '.' . $u[6] . $u[7] . $u[8] . $u[9] . $u[10] . $u[11];
+
+
 				while(!feof($arquivo)) {
 					$aposta = fgets($arquivo);
 
 					if($aposta != ''){
-						if(isset($_SESSION['login'])){
+						//if(isset($_SESSION['login'])){
 							$dados = explode(':', $aposta);
 							$a = new Aposta($_SESSION['login'], $dados[0], $dados[1], $dados[2], $dados[3], intval($dados[4]));
 							for($i=0; $i<count($sistema->getUsuarios()); $i++){
-								if(get_class($sistema->getUsuarios()[$i]) == 'Apostador' && $sistema->getUsuarios()[$i]->getCpf() == $_SESSION['login']){
+								if($sistema->getUsuarios()[$i]->getCpf() == $U){
 									$sistema->getUsuarios()[$i]->setApostas($a);
 								}
 							}
-						}
+						//}
 					}
 				}
 

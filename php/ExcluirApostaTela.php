@@ -29,6 +29,93 @@
 		}
 
 		function excluir(){
+
+			$sistema = $_SESSION['sistema'];
+			$usuarios = $sistema->getUsuarios();
+			$boloes = $sistema->getBoloes();
+
+			for($i=0; $i<count($usuarios); $i++){
+				if($usuarios[$i]->getCpf() == $_SESSION['login']){
+					$apostas = $usuarios[$i]->getApostas();
+					$a = $apostas[intval($this->aposta)-1];
+					$usuarios[$i]->getApostas()[intval($this->aposta)-1]->setStatus(0);
+					break;
+				}
+			}
+
+			$apostas_bolao = $boloes[intval($a->getBolao())]->getApostas();
+			$contador = 0;
+			for($i=0; $i<count($apostas_bolao); $i++){
+				if($apostas_bolao[$i]->getUsuario() == $_SESSION['login']){
+					$contador += 1;
+				}
+			}
+
+			$participantes = $boloes[intval($a->getBolao())]->getParticipantes();
+			if($contador == 0){
+				for($i=0; $i<count($participantes); $i++){
+					if($participantes[$i]->getUsuario() == $_SESSION['login']){
+						array_splice($participantes, $i);
+						break;
+					}
+				}
+			} 
+
+			$novas_apostas = array();
+			for($i=0; $i<count($apostas_bolao); $i++){
+				if($apostas_bolao[$i]->getUsuario() != $_SESSION['login']){
+					array_push($novas_apostas, $apostas_bolao[$i]);
+				}
+			}
+
+			for($i=0; $i<count($apostas); $i++){
+				if($apostas[$i]->getStatus() != 0){
+					array_push($novas_apostas, $apostas[$i]);
+				}
+			}
+
+			$bolao = $boloes[intval($a->getBolao())];
+			$b = new Bolao($bolao->getId(), $bolao->getCriador(), $bolao->getTipo(), $bolao->getCampeonato(), $bolao->getTitulo(), $bolao->getDescricao(), $bolao->getLimiteDeParticipantes(), $bolao->getTipoJogo(), $bolao->getTipoAposta(), $bolao->getSenha(), $bolao->getDinheiros());
+			$b->setTempoLimite($bolao->getTempoLimite());
+
+			for($i=0; $i<count($novas_apostas); $i++){
+				$b->setApostas($novas_apostas[$i]);
+			}
+
+			for($i=0; $i<count($participantes); $i++){
+				$b->setParticipantes($participantes[$i]);
+			}
+
+			$boloes[intval($a->getBolao())] = $b;
+
+			$s = new Sistema($usuarios, $sistema->getJogos(), $boloes, $sistema->getBugs());
+			$_SESSION['sistema'] = $s;
+
+			unlink('../bd/boloes.txt');
+			$bolao = new ArquivoBolao();
+		    $facade = new Facade($bolao);
+		    for($i=0; $i<count($boloes); $i++){
+		    	$facade->escreverEm('../bd/boloes.txt', $boloes[$i]);
+		    }
+
+		    $sistema = $_SESSION['sistema'];
+		    $usuarios = $sistema->getUsuarios();
+		    $aposta = new ArquivoAposta();
+		    $facade = new Facade($aposta);
+		    for($i=0; $i<count($usuarios); $i++){
+		    	if($usuarios[$i]->getCpf() == $_SESSION['login']){
+		    		unlink('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt');
+		      		$facade->escreverEm('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt', $usuarios[$i]->getApostas());
+		      		break;
+		    	}
+		    }
+
+
+			$_SESSION['status'] = 2;
+			header('Location: ../minhas-apostas.php');
+			exit();
+
+		/*
 			$sistema = $_SESSION['sistema'];
 			$usuarios = $sistema->getUsuarios();
 			$boloes = $sistema->getBoloes();
@@ -46,7 +133,7 @@
 				}
 			}
 
-			/*for($i=0; $i<count($apostas); $i++){
+			for($i=0; $i<count($apostas); $i++){
 				if($apostas[$i]->getUsuario() == $_SESSION['login']){
 					$contador += 1;
 				}
@@ -61,7 +148,7 @@
 						break;
 					}
 				}
-			} */
+			} 
 
 			$bolao = $boloes[intval($a->getBolao())];
 			$b = new Bolao($bolao->getId(), $bolao->getCriador(), $bolao->getTipo(), $bolao->getCampeonato(), $bolao->getTitulo(), $bolao->getDescricao(), $bolao->getLimiteDeParticipantes(), $bolao->getTipoJogo(), $bolao->getTipoAposta(), $bolao->getSenha(), $bolao->getDinheiros());
@@ -74,9 +161,17 @@
 			}
 
 			//$participantes = $bolao->getParticipantes();
-			/*for($i=0; $i<count($participantes); $i++){
+			for($i=0; $i<count($participantes); $i++){
 				$b->setParticipantes($participantes[$i]);
-			}*/
+				for($j=0; $j<count($usuarios); $j++){
+					if($participantes[$i] == $usuarios[$j]->getCpf()){
+						$ap = $usuarios[$j]->getApostas();
+						for($k=0; $k<count($apostas); $k++){
+							$b->setApostas($apostas[$k]);
+						}
+					}
+				}
+			}
 
 			$boloes[intval($a->getBolao())] = $b;
 
