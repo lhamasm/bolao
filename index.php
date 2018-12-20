@@ -22,6 +22,7 @@
 	<body data-spy="scroll" data-target=".navbar">
 
 		<?php
+
 			require_once 'php/index.php';
 
 			//session_start();
@@ -29,10 +30,11 @@
 			if(isset($_GET['a']) && $_GET['a'] == 'sair'){
 				// remove all session variables
 				session_unset();
-
 				// destroy the session
 				session_destroy(); 
+
 			}
+
 		?>
 
 

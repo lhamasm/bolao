@@ -264,7 +264,7 @@
 															for($j=0; $j < count($participantes); $j++){
 
 																echo '<div class="col-3 alert alert-info text-center mr-1">
-																	<button type="button" class="close" data-toggle="modal" data-target="#confirmar"><i class="fas fa-user-times text-danger"></i></button><p><a href="#">@';
+																	<button type="button" class="close" data-toggle="modal" data-target="#confirmar' . $j . '"><i class="fas fa-user-times text-danger"></i></button><p><a href="#">@';
 										
 																	for($k=0; $k<count($usuarios); $k++){
 																		if($usuarios[$k]->getCpf() == $participantes[$j]){
@@ -274,7 +274,7 @@
 																	}
 
 																	echo '</a></p>
-																	<div id="confirmar" class="modal fade">
+																	<div id="confirmar' . $j . '" class="modal fade">
 																		<div class="modal-dialog modal-dialog-centered">
 																			<div class="modal-content text-center">
 																				<div class="modal-header">
@@ -284,16 +284,7 @@
 																				<div class="modal-body">
 																					<form method="post" action="php/excluirApostador.php">
 																						<input type="hidden" id="meu-bolao" name="meu-bolao" value="' . $i . '">
-																						<input type="hidden" id="apostador" name="apostador" value="';
-
-																						for($k=0; $k<count($usuarios); $k++){
-																							if($usuarios[$k]->getCpf() == $boloes[$i]->getCriador()){
-																								echo $usuarios[$k]->getCpf();
-																								break;
-																							}
-																						}
-
-																						echo  '">
+																						<input type="hidden" id="apostador" name="apostador" value="' . $participantes[$j] . '">
 																						<button class="btn btn-success" type="submit"><i class="fas fa-check"></i> Confirmar</button>
 																						<button class="btn btn-danger" type="button" class="close" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>
 																					</form>
@@ -431,7 +422,7 @@
 															for($j=0; $j < count($participantes); $j++){
 
 																echo '<div class="col-3 alert alert-info text-center">
-																	<button type="button" class="close" data-toggle="modal" data-target="#confirmar"><i class="fas fa-user-times text-danger"></i></button><p><a href="#">@';
+																	<button type="button" class="close" data-toggle="modal" data-target="#confirmar' . $j .'"><i class="fas fa-user-times text-danger"></i></button><p><a href="#">@';
 										
 																	for($k=0; $k<count($usuarios); $k++){
 																		if($usuarios[$k]->getCpf() == $boloesEncerrados[$i]->getCriador()){
@@ -441,7 +432,7 @@
 																	}
 
 																	echo '</a></p>
-																	<div id="confirmar" class="modal fade">
+																	<div id="confirmar' . $j .'" class="modal fade">
 																		<div class="modal-dialog modal-dialog-centered">
 																			<div class="modal-content text-center">
 																				<div class="modal-header">

@@ -1,9 +1,10 @@
 <?php
 
 	require_once 'php/sistema.php';
+	//require_once 'php/administrador.php';
 	require_once 'php/administrador-sistema.php';
-	require_once 'php/apostador.php';
-	require_once 'php/administrador-bolao.php';
+	//require_once 'php/apostador.php';
+	//require_once 'php/administrador-bolao.php';
 
 	session_start();
 
