@@ -2,7 +2,7 @@
 
 	require_once 'sistema.php';
 	require_once 'usuario.php';
-	require_once 'administrador.php';
+	require_once 'administrador-bolao.php';
 	require_once 'apostador.php';
 	require_once 'bolao.php';
 	require_once 'facade.php';
@@ -38,7 +38,8 @@
 
 		function excluir(){
 
-			$adm = $_SESSION['usuario']->excluirApostador($this->participante, $this->bolao);
+			$adm = $_SESSION['usuario'];
+			$adm->excluirApostador($this->participante, $this->bolao);
 
 		}
 	}

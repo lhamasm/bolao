@@ -16,7 +16,11 @@
 	$dataTermino = '';
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
-		$campeonato = $_SESSION['modalidade'];
+		if(!isset($_SESSION['modalidade'])){
+			$campeonato = $_REQUEST['campeonato'];
+		} else {
+			$campeonato = $_SESSION['modalidade'];
+		}
 		
 		if($_REQUEST['tipo-bolao'] == 'publico'){
 			$tipo = 0;

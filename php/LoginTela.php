@@ -2,6 +2,7 @@
 
 	  require_once 'sistema.php';
 	  require_once 'administrador-sistema.php';
+	  require_once 'administrador-bolao.php';
 	  require_once 'apostador.php';
 	  require_once 'funcoes.php';
 	  require_once 'facade.php';
@@ -73,6 +74,9 @@
 				  		if(get_class($usuarios[$i]) == 'Apostador'){
 				  			$_SESSION["ranking"] = $usuarios[$i]->getPosicao();
 				  			$_SESSION["pontuacao"] = $usuarios[$i]->getPontuacao();
+				  			header('Location: ../pos-login.php');
+							exit();
+				  		} elseif(get_class($usuarios[$i]) == 'AdministradorBolao'){
 				  			header('Location: ../pos-login.php');
 							exit();
 				  		}

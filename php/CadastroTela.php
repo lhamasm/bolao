@@ -3,11 +3,11 @@
 	require_once 'apostador.php';
 	require_once 'usuario.php';
 	require_once 'sistema.php';
-	require_once 'index.php';
+	//require_once 'index.php';
 	require_once 'facade.php';
 	require_once 'ArquivoUsuario.php';
 
-	//session_start();
+	session_start();
 	
 	Class CadastroTela {
 		protected $nome;
@@ -201,6 +201,11 @@
 					for($i = 0; $i < count($usuarios); $i++){
 						if($usuarios[$i]->getCpf() == $this->cpf){
 							$_SESSION['status'] = 2;
+							header('Location: ../cadastro.php');
+	 						exit();	
+						}
+						if($usuarios[$i]->getUsername() == $this->username){
+							$_SESSION['status'] = 5;
 							header('Location: ../cadastro.php');
 	 						exit();	
 						}

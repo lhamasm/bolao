@@ -33,7 +33,7 @@
 		protected $tempoLimite;
 		protected $apostas;
 
-		function Bolao($id, $criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $tipoJogo, $tipoAposta,/* $opcoesAposta,*/ $senha, $dinheiros){
+		function Bolao($id, $criador, $tipo, $campeonato, $titulo, $descricao, $limiteDeParticipantes, $tipoJogo, $tipoAposta, $senha, $dinheiros){
 			$this->id = $id;
 			$this->criador = $criador;
 			$this->tipo = $tipo;
@@ -120,7 +120,7 @@
 				if($this->criador == $aposta->getUsuario()){
 					$observer = new Observer($this->criador, 10);
 				} else {
-					$observer = new Observer($this->criador, 0);
+					$observer = new Observer($aposta->getUsuario(), 0);
 				}
 
 				$this->attach($observer);

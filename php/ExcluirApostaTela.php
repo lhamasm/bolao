@@ -7,6 +7,8 @@
 	require_once 'facade.php';
 	require_once 'ArquivoBolao.php';
 	require_once 'ArquivoAposta.php';
+	require_once 'administrador-sistema.php';
+	require_once 'administrador-bolao.php';
 
 	session_start();
 
@@ -31,6 +33,8 @@
 			$usuarios = $sistema->getUsuarios();
 			$boloes = $sistema->getBoloes();
 			$contador = 0;
+
+			$apostas = array();
 
 			for($i=0; $i<count($usuarios); $i++){
 				if($usuarios[$i]->getCpf() == $_SESSION['login']){
@@ -60,7 +64,7 @@
 			} */
 
 			$bolao = $boloes[intval($a->getBolao())];
-			$b = new Bolao($bolao->getId(), $bolao->getCriador(), $bolao->getTipo(), $bolao->getCampeonato(), $bolao->getTitulo(), $bolao->getDescricao(), $bolao->getLimiteDeParticipantes(), $bolao->getTipoJogo(), $bolao->getTipoAposta(), $bolao->getOpcoesAposta(), $bolao->getSenha(), $bolao->getDinheiros());
+			$b = new Bolao($bolao->getId(), $bolao->getCriador(), $bolao->getTipo(), $bolao->getCampeonato(), $bolao->getTitulo(), $bolao->getDescricao(), $bolao->getLimiteDeParticipantes(), $bolao->getTipoJogo(), $bolao->getTipoAposta(), $bolao->getSenha(), $bolao->getDinheiros());
 			$b->setTempoLimite($bolao->getTempoLimite());
 
 			for($i=0; $i<count($apostas); $i++){
@@ -91,8 +95,11 @@
 		    $aposta = new ArquivoAposta();
 		    $facade = new Facade($aposta);
 		    for($i=0; $i<count($usuarios); $i++){
-		    	unlink('../bd/apostas-' . $usuarios[$i]->getCpf());
-		      	$facade->escreverEm('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt', $usuarios[$i]->getApostas());
+		    	if($usuarios[$i]->getCpf() == $_SESSION['login']){
+		    		unlink('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt');
+		      		$facade->escreverEm('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt', $usuarios[$i]->getApostas());
+		      		break;
+		    	}
 		    }
 
 

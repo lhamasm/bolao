@@ -100,19 +100,26 @@
 					$aposta = new Aposta($_SESSION['login'], intval($this->bolaoId), $this->valor, $this->opcao, date('d/m/Y'), 1);
 
 					$p = $boloes[intval($this->bolaoId)]->getParticipantes();
-					for ($i=0; $i < count($p); $i++) { 
+					/*for ($i=0; $i < count($p); $i++) { 
 						if ($p[$i] == $_SESSION['login']) {
 							for($j=0; $j < count($usuarios); $j++){
 								if($usuarios[$j]->getCpf() == $p[$i]){
-									$usuarios[$i]->setApostas($aposta);
+									$usuarios[$j]->setApostas($aposta);
 									break;
 								}
 							}
 							break;
 						}
-					}
+					}*/
 
-					if (count($p) == 0) {
+					if(in_array($_SESSION['login'], $p)){
+						for($j=0; $j < count($usuarios); $j++){
+							if($usuarios[$j]->getCpf() == $_SESSION['login']){
+								$usuarios[$j]->setApostas($aposta);
+								break;
+							}
+						}
+					} else {
 						$boloes[intval($this->bolaoId)]->setParticipantes($_SESSION['login']);
 						for($j=0; $j < count($usuarios); $j++){
 							if($usuarios[$j]->getCpf() == $_SESSION['login']){
@@ -122,10 +129,24 @@
 						}
 					}
 
-					$b = new Bolao($boloes[intval($this->bolaoId)]->getId(), $boloes[intval($this->bolaoId)]->getCriador(), $boloes[intval($this->bolaoId)]->getTipo(), $boloes[intval($this->bolaoId)]->getCampeonato(), $boloes[intval($this->bolaoId)]->getTitulo(), $boloes[intval($this->bolaoId)]->getDescricao(), $boloes[intval($this->bolaoId)]->getLimiteDeParticipantes(), $boloes[intval($this->bolaoId)]->getTipoJogo(), $boloes[intval($this->bolaoId)]->getTipoAposta(), $boloes[intval($this->bolaoId)]->getOpcoesAposta(), $boloes[intval($this->bolaoId)]->getSenha(), doubleval($this->valor));
+					/*if (count($p) == 0) {
+						$boloes[intval($this->bolaoId)]->setParticipantes($_SESSION['login']);
+						for($j=0; $j < count($usuarios); $j++){
+							if($usuarios[$j]->getCpf() == $_SESSION['login']){
+								$usuarios[$j]->setApostas($aposta);
+								break;
+							}
+						}
+					}*/
+
+					$b = new Bolao($boloes[intval($this->bolaoId)]->getId(), $boloes[intval($this->bolaoId)]->getCriador(), $boloes[intval($this->bolaoId)]->getTipo(), $boloes[intval($this->bolaoId)]->getCampeonato(), $boloes[intval($this->bolaoId)]->getTitulo(), $boloes[intval($this->bolaoId)]->getDescricao(), $boloes[intval($this->bolaoId)]->getLimiteDeParticipantes(), $boloes[intval($this->bolaoId)]->getTipoJogo(), $boloes[intval($this->bolaoId)]->getTipoAposta(), $boloes[intval($this->bolaoId)]->getSenha(), doubleval($this->valor));
 
 					$b->setTempoLimite($boloes[intval($this->bolaoId)]->getTempoLimite());
 
+					$apostass = $boloes[intval($this->bolaoId)]->getApostas();
+					for($i=0; $i<count($apostass); $i++){
+						$b->setApostas($apostass[$i]);
+					}
 					$b->setApostas($aposta);
 
 					$participantes = $boloes[intval($this->bolaoId)]->getParticipantes();
@@ -175,8 +196,9 @@
 		    $facade = new Facade($aposta);
 		    for($i=0; $i<count($usuarios); $i++){
 		    	if($usuarios[$i]->getCpf() == $_SESSION['login']){
-		    		unlink('../bd/apostas-' . $usuarios[$i]->getCpf());
+		    		unlink('../bd/apostas-' . $usuarios[$i]->getCpf() . 'txt');
 		      		$facade->escreverEm('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt', $usuarios[$i]->getApostas());
+		      		break;
 		    	}
 		    }
 

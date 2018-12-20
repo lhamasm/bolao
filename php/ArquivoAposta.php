@@ -21,11 +21,13 @@
 					$aposta = fgets($arquivo);
 
 					if($aposta != ''){
-						$dados = explode(':', $aposta);
-						$a = new Aposta($_SESSION['login'], $dados[0], $dados[1], $dados[2], $dados[3], intval($dados[4]));
-						for($i=0; $i<count($sistema->getUsuarios()); $i++){
-							if(get_class($sistema->getUsuarios()[$i]) == 'Apostador' && $sistema->getUsuarios()[$i]->getCpf() == $_SESSION['login']){
-								$sistema->getUsuarios()[$i]->setApostas($a);
+						if(isset($_SESSION['login'])){
+							$dados = explode(':', $aposta);
+							$a = new Aposta($_SESSION['login'], $dados[0], $dados[1], $dados[2], $dados[3], intval($dados[4]));
+							for($i=0; $i<count($sistema->getUsuarios()); $i++){
+								if(get_class($sistema->getUsuarios()[$i]) == 'Apostador' && $sistema->getUsuarios()[$i]->getCpf() == $_SESSION['login']){
+									$sistema->getUsuarios()[$i]->setApostas($a);
+								}
 							}
 						}
 					}

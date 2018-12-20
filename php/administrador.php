@@ -59,6 +59,7 @@
 						if($usuarios[$j]->getCpf() == $participante){
 							$m = new Mensagem('SisBolao', $usuarios[$j]->getCpf(), 'Você foi excluído do bolão ' . $boloes[intval($bolao)]->getTitulo() . '. Todas as suas apostas foram ressarcidas.', date('d/m/Y'));
 							$usuarios[$j]->setMensagem($m);
+							break;
 						}
 					}
 					array_splice($participantes, $i);

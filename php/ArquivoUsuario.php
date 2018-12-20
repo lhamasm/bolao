@@ -5,6 +5,7 @@
 	require_once 'usuario.php';
 	require_once 'apostador.php';
 	require_once 'administrador-sistema.php';
+	require_once 'administrador-bolao.php';
 
 	//session_start();
 
@@ -23,11 +24,11 @@
 
 					if($usuario != ''){
 						$dados = explode(':', $usuario);
-						if($dados[0] == '0'){
-							$u = new Apostador($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $dados[5], $dados[6], $dados[7], $dados[8], $dados[9], $dados[10], $dados[11], $dados[12], $dados[13], intval($dados[14]), intval($dados[15]));
-						} else {
+						if($dados[0] == '1'){
 							$u = new AdministradorSistema($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $dados[5], $dados[6], $dados[7], $dados[8], $dados[9], $dados[10], $dados[11], $dados[12], $dados[13]);
-						}
+						} elseif ($dados[0] == '0') {
+							$u = new Apostador($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $dados[5], $dados[6], $dados[7], $dados[8], $dados[9], $dados[10], $dados[11], $dados[12], $dados[13], intval($dados[14]), intval($dados[15]));
+						} 
 
 		        		$sistema->setUsuarios($u);
 					}

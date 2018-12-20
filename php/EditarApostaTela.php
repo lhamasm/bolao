@@ -2,6 +2,8 @@
 
 	require_once 'sistema.php';
 	require_once 'bolao.php';
+	require_once 'administrador-sistema.php';
+	require_once 'administrador-bolao.php';
 	require_once 'aposta.php';
 	require_once 'funcoes.php';
 	require_once 'facade.php';
@@ -56,10 +58,16 @@
 
 			$bolao = $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())];
 			$ap = $bolao->getApostas();
-			array_splice($ap, intval($this->idAposta)-1);
+
+			for($i=0; $i<count($ap); $i++){
+				if($ap[$i]->getUsuario() == $_SESSION['login'] && $ap[$i]->getValor() == $this->valor && $ap[$i]->getOpcaoDeAposta() == $this->opcaoAposta && $ap[$i]->getData() == $apostas[intval($this->idAposta)-1]->getData()){
+					array_splice($ap, $i);
+					break;
+				}
+			}
 			array_push($ap, $apostas[intval($this->idAposta)-1]);
 
-			$b = new Bolao($boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getId(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getCriador(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getTipo(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getCampeonato(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getTitulo(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getDescricao(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getLimiteDeParticipantes(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getTipoJogo(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getTipoAposta(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getOpcoesAposta(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getSenha(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getDinheiros());
+			$b = new Bolao($boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getId(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getCriador(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getTipo(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getCampeonato(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getTitulo(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getDescricao(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getLimiteDeParticipantes(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getTipoJogo(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getTipoAposta(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getSenha(), $boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getDinheiros());
 
 			$b->setTempoLimite($boloes[intval($apostas[intval($this->idAposta)-1]->getBolao())]->getTempoLimite());
 
@@ -89,8 +97,11 @@
 		    $aposta = new ArquivoAposta();
 		    $facade = new Facade($aposta);
 		    for($i=0; $i<count($usuarios); $i++){
-		    	unlink('../bd/apostas-' . $usuarios[$i]->getCpf());
-		      	$facade->escreverEm('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt', $usuarios[$i]->getApostas());
+		    	if(get_class($usuarios[$i]) != 'AdministradorSistema' && $usuarios[$i]->getCpf() == $_SESSION['login']){
+		    		unlink('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt');
+			      	$facade->escreverEm('../bd/apostas-' . $usuarios[$i]->getCpf() . '.txt', $apostas);
+			      	break;
+			    }
 		    }
 		    
 			$_SESSION['status'] = 1;

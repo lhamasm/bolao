@@ -6,6 +6,8 @@
 	require_once 'ArquivoBolao.php';
 	require_once 'funcoes.php';
 	require_once 'administrador-bolao.php';
+	require_once 'administrador-sistema.php';
+	require_once 'administrador-bolao.php';
 
 	session_start();
 
@@ -179,32 +181,41 @@
 		function cadastrarBolao() {
 			$sistema = $_SESSION['sistema'];
 			$boloes = $sistema->getBoloes();
+			$usuarios = $sistema->getUsuarios();
 
 			for($i = 0; $i < count($boloes); $i++){
-				if($boloes[$i]->getCriador() == $_SESSION['login'] && $boloes[$i]->getTitulo() == $this->nomebolao && $boloes[$i]->getCampeonato() == $this->campeonatobolao){
-					$_SESSION['status'] = 2;
+				if($boloes[$i]->getTitulo() == $this->nomebolao && $boloes[$i]->getCampeonato() == $this->campeonatobolao && $boloes[$i]->getTipo() == $this->tipobolao){
+					$_SESSION['status'] = 4;
 					header('Location: ../cadastrar-bolao.php');
 			  		//echo 'Já existe um bolão com o mesmo nome, administrador e campeonato';
 					exit();	
 				}
 			}
 
+			$user = $_SESSION['usuario'];
+
 			$this->id = count($boloes) + 1;
 
-			$bolao = new Bolao($this->id, $_SESSION['login'], $this->tipobolao, $this->campeonatobolao, $this->nomebolao, $this->descricaobolao, $this->noparticipantesbolao, $this->tipojogobolao, $this->tipoapostabolao,/* $this->escolhasapostabolao,*/ $this->senha, 0);
-			$bolao->setTempoLimite($this->dataTermino);
-
-			$user = $_SESSION['usuario'];
 			if(get_class($user) == 'Apostador'){
-				$user = new AdministradorBolao($_SESSION['tipo'], $_SESSION['nome'], $_SESSION['username'], $_SESSION['email'], $_SESSION['senha'], $_SESSION['ddn'], $_SESSION['genero'], $_SESSION['rg'], $_SESSION['login'], $_SESSION['telefone'], $_SESSION['celular'], $_SESSION['banco'], $_SESSION['agencia'], $_SESSION['conta']);
+				$criador = $_SESSION['login'];
+			} else {
+				$criador = 'SisBolao';
 			}
 
-			$user->setBolao($bolao);
-			$_SESSION['usuario'] = $user;
+			$bolao = new Bolao($this->id, $criador, $this->tipobolao, $this->campeonatobolao, $this->nomebolao, $this->descricaobolao, $this->noparticipantesbolao, $this->tipojogobolao, $this->tipoapostabolao,/* $this->escolhasapostabolao,*/ $this->senha, 0);
+			$bolao->setTempoLimite($this->dataTermino);
 
-			$mb = new ArquivoBolao();
-    		$facade = new Facade($mb);
-    		$facade->escreverEm('../bd/meus-boloes' . $_SESSION['login'] . '.txt', $bolao);
+			if(get_class($user) == 'Apostador'){
+				$user = new AdministradorBolao('2', $_SESSION['nome'], $_SESSION['username'], $_SESSION['email'], $_SESSION['senha'], $_SESSION['ddn'], $_SESSION['genero'], $_SESSION['rg'], $_SESSION['login'], $_SESSION['telefone'], $_SESSION['celular'], $_SESSION['banco'], $_SESSION['agencia'], $_SESSION['conta']);
+
+				$user->setBolao($bolao);
+				$_SESSION['usuario'] = $user;
+
+				$mb = new ArquivoBolao();
+	    		$facade = new Facade($mb);
+	    		$facade->escreverEm('../bd/meus-boloes' . $_SESSION['login'] . '.txt', $bolao);
+
+			}
 
 			$b = new ArquivoBolao();
     		$facade = new Facade($b);
@@ -215,7 +226,11 @@
 
 			$_SESSION['status'] = 4;
 			//echo "Bolão cadastrado com sucesso!";
-			header('Location: ../convidar-amigos.php');
+			if(get_class($user) == 'Apostador' || get_class($user) == 'AdministradorBolao'){
+				header('Location: ../convidar-amigos.php');
+			} else {
+				header('Location: ../adm-page.php');
+			}
 			exit();
 		}
 	}
