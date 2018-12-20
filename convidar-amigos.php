@@ -107,20 +107,20 @@
 						<h1 class="titulo text-center py-3 text-info">Convidar Amigos</h1> 
 						<?php
 							if($_SESSION['status'] == 2){
-								 echo '<div class="alert alert-danger">
+								 echo '<div class="alert alert-danger text-center">
 					                   Não existe um usuário com esse username
 					                  </div>'; 
 							} elseif($_SESSION['status'] == 1){
-								echo '<div class="alert alert-success">
-					                    Convite enviado com sucesso!
+								echo '<div class="alert alert-success text-center">
+					                    Convite enviado com sucesso
 					                  </div>'; 
 							} elseif($_SESSION['status'] == 3){
-								echo '<div class="alert alert-danger">
+								echo '<div class="alert alert-danger text-center">
 					                   O username/email inserido é o seu
 					                  </div>'; 
 							} elseif($_SESSION['status'] == 4){
-								echo '<div class="alert alert-success">
-					                    Bolão cadastrado com sucesso!
+								echo '<div class="alert alert-success text-center">
+					                    Bolão cadastrado com sucesso
 					                  </div>'; 
 							}
 							$_SESSION['status'] = -1;

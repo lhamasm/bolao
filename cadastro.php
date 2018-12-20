@@ -86,6 +86,10 @@
 									echo '<div class="alert alert-danger" style="width: 30em; margin-left: 10.9em;">
 									  Emails imcompatíveis.
 									</div>';
+								} elseif($_SESSION['status'] == 5){
+									echo '<div class="alert alert-danger" style="width: 30em; margin-left: 10.9em;">
+									  Já existe um usuário cadastrado com esse username.
+									</div>';
 								}
 
 								$_SESSION['status'] = -1;

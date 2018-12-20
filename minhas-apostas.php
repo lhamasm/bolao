@@ -5,7 +5,8 @@
 	require_once 'php/usuario.php';
 	require_once 'php/jogo.php';
 	require_once 'php/aposta.php';
-	//require_once 'php/apostar.php';
+	require_once 'php/administrador-sistema.php';
+	require_once 'php/administrador-bolao.php';
 
 	session_start();
 
@@ -101,19 +102,21 @@
 		<?php
 			if($_SESSION['status'] == 1){
 				echo '<section style="margin-left: 10em; margin-right: 10em; margin-top: 2em;">';
-				echo '<div class="alert alert-success" style="width: 20em;">
-			            Aposta alterada com sucesso!
+				echo '<div class="alert alert-success text-center">
+			            Aposta alterada com sucesso
 			          </div>'; 
 			    echo '</section>';
 
 	          $_SESSION['status'] = -1;
 			} elseif($_SESSION['status'] == 2){
 				echo '<section style="margin-left: 10em; margin-right: 10em; margin-top: 2em;">';
-				echo '<div class="alert alert-success" style="width: 20em;">
-			            Aposta cancelada com sucesso!
+				echo '<div class="alert alert-success text-center">
+			            Aposta cancelada com sucesso
 			          </div>'; 
 			    echo '</section>';
 			}
+
+			$_SESSION['status'] = -1;
 		?>
 
 		<section id="apostas">
@@ -135,7 +138,7 @@
 											if($apostas[$j-1]->getStatus() == 1){
 												echo'
 												<div class="col-md-1">
-													<button style="padding: 0; background: none; border: none;" data-toggle="modal" data-target="#editAposta'. $j . '"><i class="fas fa-edit mr-3"></i></button>
+													<button style="padding: 0; background: none; border: none;" data-toggle="modal" data-target="#editAposta'. $j . '" title="Editar Aposta"><i class="fas fa-edit mr-3"></i></button>
 													<button style="padding: 0; border: none; background: none;" data-toggle="modal" data-target="#sure' . $j . '"><i class="fas fa-times"></i></button>
 												</div>';
 											}
@@ -173,8 +176,10 @@
 												<div>
 													<form method="post" action="php/excluirAposta.php">
 														<input type="hidden" id="apostaex-id" name="apostaex-id" value="' . $j .'">
-														<button type="button" class="col-5 btn btn-danger" data-dismiss="modal">Cancelar</button>
-														<button type="submit" class="col-5 btn btn-success">Remover</button>
+														<div class="row form-group justify-content-center">
+															<button type="submit" class="btn btn-success mr-1">Remover</button>
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+														</div>
 													</form>
 												</div>
 											</div>
@@ -205,18 +210,53 @@
 													<div class="form-group">
 														<label style="font-size: 1.2em;"><strong>' . $boloes[intval($apostas[$j-1]->getBolao())]->getTitulo() . '</strong></label>
 													</div>
-													<div class="form-group">
+													<div class="row">
+													<div class="col-6 form-group">
 														<label style="margin-right: 1em;">Valor da Aposta:</label>
-														<input class="valoraposta" id="valoraposta" name="valoraposta" type="texts">
+														<input class="form-control valoraposta" id="valoraposta" name="valoraposta" type="texts">
 													</div>
-													<div class="form-group">
+													<div class="col-6 form-group">
 														<label style="margin-right: 1em;">Opção de Aposta:</label>
-														<select id="opcaoAposta" name="opcaoAposta">';
-															$opcoesAposta = $boloes[intval($apostas[$j-1]->getBolao())]->getOpcoesAposta();
-															for($k=0; $k<count($opcoesAposta); $k++){
-																echo '<option>' . $opcoesAposta[$k] . '</option>';
-															}												
+														<select class="custom-select" id="opcaoAposta" name="opcaoAposta">';
+															if($boloes[intval($apostas[$j-1]->getBolao())]->getTipoAposta() == 'ganhador' || $boloes[intval($apostas[$j-1]->getBolao())]->getTipoAposta() == 'perdedor'){
+																echo'
+																	<option value="adriana">Adriana</option>
+																	<option value="alex">Alex</option>
+																	<option value="andre">André</option>
+																	<option value"andrer">André R.</option>
+																	<option value="daniel">Daniel</option>
+																	<option value="heaven">Heaven</option>
+																	<option value="manuela">Manuela</option>
+																	<option value="marcela">Marcela</option>
+																	<option value="paulo">Paulo</option>
+																	<option value="rafael">Rafael</option>
+																	<option value="roberta">Roberta</option>
+																	<option value="simone">Simone</option>
+																	<option value="thalles">Thalles</option>
+																	<option value="william">William</option>
+																';
+															} elseif($boloes[intval($apostas[$j-1]->getBolao())]->getTipoAposta() == 'tema'){
+																echo '
+																	<option value="arabe">Árabe</option>
+																	<option value="confeitaria">Confeitaria</option>
+																	<option value="judaica">Judaica</option>
+																	<option value="nordestina">Nordestina</option>
+																	<option value="tailandesa">Tailandesa</option>
+																	<option value="outro">Outra</option>
+																';
+															} else {
+																echo'
+																	<option value="cebola">Cebola</option>
+																	<option value="chocolate">Chocolate</option>
+																	<option value="fermentados">Fermentados</option>
+																	<option value="ovo">Ovo</option>
+																	<option value="sal">Sal</option>
+																	<option value="outro">Outro</option>
+																';
+															}
+											
 														echo '</select>
+													</div>
 													</div>
 													<input type="hidden" id="aposta-id" name="aposta-id" value="' . $j .'">
 													<div class="text-center justify-content-center">

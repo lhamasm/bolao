@@ -11,6 +11,10 @@
 
 	session_start();
 
+	if(isset($_GET['a'])){
+		$_SESSION['modalidade'] = $_GET['a'];
+	}
+
 	$sistema = $_SESSION['sistema'];
 	$boloes = $sistema->getBoloes();
 	$usuarios = $sistema->getUsuarios();
@@ -54,10 +58,6 @@
 			array_push($boloesEncerrados, $boloes[$i]);
 		}
 	}*/
-
-	if(isset($_GET['a'])){
-		$_SESSION['modalidade'] = $_GET['a'];
-	}
 
 ?>
 
@@ -153,24 +153,31 @@
 					echo'<div class="container">
 							<div class="row">';
 								if($_SESSION['status'] == 1){
-									echo '<div class="col-4 offset-1 alert alert-danger">
+									echo '<div class="col-7 offset-1 alert alert-danger text-center">
 										  Senha incorreta.
 										</div>
-										<div class="col-4 offset-3">
+										<div class="col-4">
 									<input class="filterBolao" type="text" placeholder="Buscar Bolão por Nome..." id="filterBolao" name="filterBolao">
 								</div>';
 								} elseif($_SESSION['status'] == 2){
-									echo '<div class="col-4 offset-1 alert alert-danger">
-										  Limite de participantes atingido.
+									echo '<div class="col-7 offset-1 alert alert-danger text-center">
+										  Limite de participantes do bolão atingido
 										</div>
-										<div class="col-4 offset-3">
+										<div class="col-4">
 									<input class="filterBolao" type="text" placeholder="Buscar Bolão por Nome..." id="filterBolao" name="filterBolao">
 								</div>';
 								} elseif($_SESSION['status'] == 3){
-									echo '<div class="col-4 offset-1 alert alert-success">
-										  Aposta realizada com sucesso!
+									echo '<div class="col-7 offset-1 alert alert-success text-center">
+										  Aposta realizada com sucesso
 										</div>
-										<div class="col-4 offset-3">
+										<div class="col-4">
+									<input class="filterBolao" type="text" placeholder="Buscar Bolão por Nome..." id="filterBolao" name="filterBolao">
+								</div>';
+								} elseif($_SESSION['status'] == 4){
+									echo '<div class="col-7 offset-1 alert alert-success text-center">
+										  Bolão já cadastrado no sistema
+										</div>
+										<div class="col-4">
 									<input class="filterBolao" type="text" placeholder="Buscar Bolão por Nome..." id="filterBolao" name="filterBolao">
 								</div>';
 								} else {
@@ -204,7 +211,7 @@
 									    	}
 
 									    		for($j=$i; $j<$i+3; $j++){
-									    			if($j < count($boloes) && $boloes[$i]->getCampeonato() == $_SESSION['modalidade']){
+									    			if($j < count($boloes) && $boloes[$j]->getCampeonato() == $_SESSION['modalidade']){
 									    				$contador++;
 
 										    			echo '<div class="col-4">
@@ -224,7 +231,10 @@
 											    					</div>
 											    					<div class="card-body" style="background-color: #FFDAB9">
 											    						<h6><strong>Descrição</strong></h6>
-											    						<p>' . $boloes[$j]->getDescricao() . '</p>
+											    						<p>';
+
+											    						echo $boloes[$j]->getDescricao() == '' ? '-' : $boloes[$j]->getDescricao();
+											    						echo '</p>
 
 											    						<h6><strong>Participantes</strong></h6>
 											    						<p>' . count($boloes[$j]->getParticipantes()) . '/' . $boloes[$j]->getLimiteDeParticipantes() . '</p>
@@ -234,7 +244,7 @@
 											    						<span data-target="#apostarB' . $boloes[$j]->getId() . '" data-toggle="modal">
 											    							<button class="btn btn-danger" data-placement="bottom" data-toggle="tooltip" title="Apostar"><i class="fas fa-user-plus"></i></button>
 											    						</span>
-											    						<button data-target="#B'. $boloes[$j]->getId() . '" data-toggle="modal" class="btn btn-info"><i class="far fa-eye"></i></button>';
+											    						<button data-target="#B'. $boloes[$j]->getId() . '" data-toggle="modal" class="btn btn-info" title="Ver Informações do Bolão"><i class="far fa-eye"></i></button>';
 
 											    						if(in_array($_SESSION['login'], $boloes[$j]->getParticipantes())){
 											    							echo '<span data-target="#convidarB' . $boloes[$j]->getId() . '" data-toggle="modal">
@@ -633,7 +643,7 @@
 									if($boloes[$i]->getTipo() == '1'){
 									echo
 									'<div class="row">
-										<div class="form-group">
+										<div class="col-6 form-group">
 											<label for="senha-bolao">Senha do Bolão:</label>
 											<input class="form-control" type="password" id="senha-bolao" name="senha-bolao" required>
 										</div>
@@ -753,10 +763,14 @@
 									<h5 class="titulo"><stronger>Criador</stronger></h5>
 									<p><a href="#">@';
 									
-								for($j=0; $j<count($usuarios); $j++){
-									if($usuarios[$j]->getCpf() == $boloes[$i]->getCriador()){
-										echo $usuarios[$j]->getUsername();
-										break;
+								if($boloes[$i]->getCriador() == 'SisBolao'){
+									echo 'SisBolão';
+								} else {
+									for($j=0; $j<count($usuarios); $j++){
+										if($usuarios[$j]->getCpf() == $boloes[$i]->getCriador()){
+											echo $usuarios[$j]->getUsername();
+											break;
+										}
 									}
 								}
 

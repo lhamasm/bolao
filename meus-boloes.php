@@ -4,6 +4,9 @@
 	require_once 'php/bolao.php';
 	require_once 'php/usuario.php';
 	require_once 'php/jogo.php';
+	require_once 'php/administrador-sistema.php';
+	require_once 'php/administrador-bolao.php';
+	require_once 'php/apostador.php';
 
 
 	session_start();
@@ -119,8 +122,8 @@
 				<h3 style="margin-left: 6.3em; font-family: robotok;">Em Aberto</h3>
 				<?php
 					if($_SESSION['status'] == 1){
-						echo '<div class="offset-2 alert alert-success" style="width: 20em;">
-			                    Participante excluído com sucesso!
+						echo '<div class="offset-2 alert alert-success text-center" style="width: 20em;">
+			                    Participante excluído com sucesso
 			                  </div>';
 					}
 
@@ -130,8 +133,8 @@
 						$contador = 0;
 						for($i=0; $i < count($boloes); $i++){
 							if($boloes[$i]->getCampeonato() == $_SESSION['modalidade']){
-								$contador += 1;
 								if($boloes[$i]->getCriador() == $_SESSION['login']){
+									$contador += 1;
 									echo '<div class="row">
 										<div class="col-md-2"></div>					
 									<div class="col-md-8 bg-info" style="margin: 1em 0; padding: 1em;">
@@ -164,9 +167,41 @@
 															<div class="row">
 																<ul style="font-family: robotok;">';
 
-															$escolha = $boloes[$i]->getOpcoesAposta();
-															for($j=0; $j<count($escolha); $j++){
-																echo '<li>' . $escolha[$j] .'</li>';
+															if($boloes[$i]->getTipoAposta() == 'ganhador' || $boloes[$i]->getTipoAposta() == 'perdedor'){
+																echo'
+																	<li value="adriana">Adriana</li>
+																	<li value="alex">Alex</li>
+																	<li value="andre">André</li>
+																	<li value"andrer">André R.</li>
+																	<li value="daniel">Daniel</li>
+																	<li value="heaven">Heaven</li>
+																	<li value="manuela">Manuela</li>
+																	<li value="marcela">Marcela</li>
+																	<li value="paulo">Paulo</li>
+																	<li value="rafael">Rafael</li>
+																	<li value="roberta">Roberta</li>
+																	<li value="simone">Simone</li>
+																	<li value="thalles">Thalles</li>
+																	<li value="william">William</li>
+																';
+															} elseif($boloes[$i]->getTipoAposta() == 'tema'){
+																echo '
+																	<li value="arabe">Árabe</li>
+																	<li value="confeitaria">Confeitaria</li>
+																	<li value="judaica">Judaica</li>
+																	<li value="nordestina">Nordestina</li>
+																	<li value="tailandesa">Tailandesa</li>
+																	<li value="outro">Entre outras</li>
+																';
+															} else {
+																echo'
+																	<li value="cebola">Cebola</li>
+																	<li value="chocolate">Chocolate</li>
+																	<li value="fermentados">Fermentados</li>
+																	<li value="ovo">Ovo</li>
+																	<li value="sal">Sal</li>
+																	<li value="outro">Entre outros</li>
+																';
 															}
 
 															echo '</ul></div>
@@ -228,11 +263,11 @@
 															}
 															for($j=0; $j < count($participantes); $j++){
 
-																echo '<div class="col-3 alert alert-info text-center">
+																echo '<div class="col-3 alert alert-info text-center mr-1">
 																	<button type="button" class="close" data-toggle="modal" data-target="#confirmar"><i class="fas fa-user-times text-danger"></i></button><p><a href="#">@';
 										
 																	for($k=0; $k<count($usuarios); $k++){
-																		if($usuarios[$k]->getCpf() == $boloes[$i]->getCriador()){
+																		if($usuarios[$k]->getCpf() == $participantes[$j]){
 																			echo $usuarios[$k]->getUsername();
 																			break;
 																		}

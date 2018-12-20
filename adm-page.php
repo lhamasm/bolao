@@ -40,8 +40,6 @@
 
 					<ul class="navbar-nav">
 						<li class="nav-item ml-auto">BEM-VINDO(A) <strong>ADM</strong></li>
-						<!-- página de usuário -->
-						<li class="nav-item ml-4"><a href="index-pagina-pessoal.php" data-toggle="tooltip" data-placement="bottom" title="Página de usuário"><i class="fas fa-exchange-alt text-white"></i></a></li>
 						<!-- bugs && convites -->
 						<li class="nav-item ml-3"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Caixa de mensagens"><i class="far fa-envelope text-white"></i></a></li>
 						<!-- minha conta -->
@@ -100,6 +98,19 @@
 						<button class="botao" onclick="show_plz('divRanking')">Rankings</button><br>
 						<button class="botao" onclick="show_plz('divNoticias')">Notícias</button><br>
 					</div>
+
+					<?php
+
+						if(isset($_SESSION['status']) && $_SESSION['status'] == 4){
+		                  echo '
+		                  <div class="col-8 division">
+			                  <div class="alert alert-success text-center" style="width: 20em;">
+			                    Bolão cadastrado com sucesso
+			                  </div>
+			              <div>'; 
+		                }
+
+					?>
 
 					<!-- seção noticias -->
 					<div id="divNoticias" class="col-8 division" style="display: none;">
@@ -769,7 +780,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="campeonato">Campeonato <span class="text-danger">*</span></label>
-										<select class="form-control custom-select" name="campeonato" id="campeonato" disabled>
+										<select class="form-control custom-select" name="campeonato" id="campeonato">
 												<option value="profissionais" selected>MasterChef Profissionais</option>
 												<option value="amadores">MasterChef Amadores</option>												
 										</select>
@@ -879,7 +890,6 @@
 								<input type="radio" name="tipo-aposta" id="outro" value="outro">
 								<input type="text" id="outra-opcao" name="outra-opcao" placeholder="Outro">
 							</div>				
-
 							<button class="btn btn-info btn-block my-2 py-2" type="submit">Criar Bolão</button>		
 						</form>
 					</div>
@@ -1369,7 +1379,7 @@
     	</div>
 
     	<!-- foooooooooter -->
-		<footer class="mt-2 fixed-bottom" style="background-color: #B22222;">
+		<footer class="mt-2" style="background-color: #B22222;">
 			<nav class="navbar navbar-expand-lg text-white navbar-dark">
 				<div class="container">
 					<ul class="navbar-nav">

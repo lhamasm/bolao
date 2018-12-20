@@ -78,8 +78,8 @@
             <div>
               <?php
                 if(isset($_SESSION['status']) && $_SESSION['status'] == 1){
-                  echo '<div class="alert alert-success" style="width: 20em;">
-                    Cadastro realizado com sucesso!
+                  echo '<div class="alert alert-success text-center" style="width: 20em;">
+                    Cadastro realizado com sucesso
                   </div>'; 
                 } elseif(isset($_SESSION['status']) && $_SESSION['status'] == 2){
                   echo '<div class="alert alert-danger" style="width: 20em;">

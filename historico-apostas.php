@@ -4,6 +4,9 @@
 	require_once 'php/bolao.php';
 	require_once 'php/usuario.php';
 	require_once 'php/jogo.php';
+
+	require_once 'php/administrador-sistema.php';
+	require_once 'php/administrador-bolao.php';
 	//require_once 'php/index.php';
 
 
