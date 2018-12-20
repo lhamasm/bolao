@@ -1,0 +1,3 @@
+1:SisBolao:0:profissionais:Bolão Panela de Barro:Quem será o próximo MasterChef Brasil 2018?:2:111.111.111-11*222.222.222-22:0*0*0*0*0*1:ganhador:::0:31/12/2018:111.111.111-11*100,00*adriana*20/12/2018;111.111.111-11*50,00*alex*20/12/2018;222.222.222-22*30,00*roberta*20/12/2018;
+2:SisBolao:0:profissionais:Bolão Colher de Pau:Quem será que vai voltar da repescagem?:10::0*0*0*1*0*0:ganhador:::0:31/12/2018::
+3:111.111.111-11:0:profissionais:Meu bolão::2:111.111.111-11:1*1*1*0*0*0:tema:::0:31/12/2018:111.111.111-11*50,00*nordestina*20/12/2018;
