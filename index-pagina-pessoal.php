@@ -297,10 +297,10 @@
 									</div>
 									<div class="modal-body">
 										<?php
-											$cont = 0;
+											$count = 0;
 											echo '<ul class="list-group list-group-flush">';
 											for($i = 0; $i < count($jogos); $i++){
-												if($jogos[$i]->getId() == '1'){
+												if($jogos[$i]->getTipo() == '1'){
 													$count += 1;
 													if($count == 1){
 														echo '<li class="list-group-item list-group-item-info">' . $jogos[$i]->getData() . ' <a href="#" onclick="participantes(\'resultado-' . $count . '\')"><i class="fas fa-plus-circle"></i></a></li>';
@@ -312,11 +312,12 @@
 														echo '<li class="list-group-item">' . '<strong>Ingredientes</strong>: ';
 
 														$ingredientes = $jogos[$i]->getIngredientes();
+														$ingredientes = explode('*', $ingredientes);
 														for($j=0; $j<count($ingredientes)-1; $j++){
 															echo $ingredientes[$j] . ', ';
 														}
-														if($count($ingredientes) > 0){
-															echo $ingredientes[$j] . '</li>';
+														if(count($ingredientes) > 0){
+															echo $ingredientes[count($ingredientes)-1] . '</li>';
 														}
 
 														echo '</ol>
@@ -332,11 +333,12 @@
 														echo '<li class="list-group-item">' . '<strong>Ingredientes</strong>: ';
 
 														$ingredientes = $jogos[$i]->getIngredientes();
+														$ingredientes = explode('*', $ingredientes);
 														for($j=0; $j<count($ingredientes)-1; $j++){
 															echo $ingredientes[$j] . ', ';
 														}
-														if($count($ingredientes) > 0){
-															echo $ingredientes[$j] . '</li>';
+														if(count($ingredientes) > 0){
+															echo $ingredientes[count($ingredientes)-1] . '</li>';
 														}
 
 														echo '</ol>
@@ -345,7 +347,7 @@
 												}
 											}
 											echo '</ul>';
-											if($cont == 0){
+											if($count == 0){
 												echo '<p>Não há resultados disponíveis para esse jogo</p>';
 											}
 										?>
@@ -375,7 +377,7 @@
 											$count = 0;
 											echo '<ul class="list-group list-group-flush">';
 											for($i = 0; $i < count($jogos); $i++){
-												if($jogos[$i]->getId() == '2'){
+												if($jogos[$i]->getTipo() == '2'){
 													$count += 1;
 													if($count == 1){
 														echo '<li class="list-group-item list-group-item-info">' . $jogos[$i]->getData() . ' <a href="#" onclick="participantes(\'resultado-' . $count . '\')"><i class="fas fa-plus-circle"></i></a></li>';
@@ -387,12 +389,27 @@
 														echo '<li class="list-group-item">' . '<strong>Ingredientes</strong>: ';
 
 														$ingredientes = $jogos[$i]->getIngredientes();
+														$ingredientes = explode('*', $ingredientes);
 														for($j=0; $j<count($ingredientes)-1; $j++){
 															echo $ingredientes[$j] . ', ';
 														}
-														if($count($ingredientes) > 0){
-															echo $ingredientes[$j] . '</li>';
+														if(count($ingredientes) > 0){
+															echo $ingredientes[count($ingredientes)-1] . '</li>';
 														}
+
+														$equipes = $jogos[$i]->getEquipes();
+														$e = explode('-', $equipes);
+														echo '<li class="list-group-item">' . '<strong>Equipe: </strong>: ' . $e[0];
+														echo '<div id="equipe-' . $count . '" style="display: none;">
+																<ol class="list-group" style="font-family: robotok;">'; 
+
+														$integrantes = explode(';', $e[1]);
+														for($j=0; $j<count($integrantes); $j++){
+															echo '<li class="list-group-item">' . $integrantes[$j] . '</li>';
+														}
+
+														echo '</ol>
+																</div>';
 
 														echo '</ol>
 																</div>';
@@ -407,11 +424,12 @@
 														echo '<li class="list-group-item">' . '<strong>Ingredientes</strong>: ';
 
 														$ingredientes = $jogos[$i]->getIngredientes();
+														$ingredientes = explode('*', $ingredientes);
 														for($j=0; $j<count($ingredientes)-1; $j++){
 															echo $ingredientes[$j] . ', ';
 														}
-														if($count($ingredientes) > 0){
-															echo $ingredientes[$j] . '</li>';
+														if(count($ingredientes) > 0){
+															echo $ingredientes[count($ingredientes)-1] . '</li>';
 														}
 
 														$equipes = $jogos[$i]->getEquipes();
@@ -461,7 +479,7 @@
 											echo '<ul class="list-group list-group-flush">';
 											$count = 0;
 											for($i = 0; $i < count($jogos); $i++){
-												if($jogos[$i]->getId() == '3'){
+												if($jogos[$i]->getTipo() == '3'){
 													$count += 1;
 													if($count == 1){
 														echo '<li class="list-group-item list-group-item-info">' . $jogos[$i]->getData() . ' <a href="#" onclick="participantes(\'resultado-' . $count . '\')"><i class="fas fa-plus-circle"></i></a></li>';
@@ -473,11 +491,12 @@
 														echo '<li class="list-group-item">' . '<strong>Ingredientes</strong>: ';
 
 														$ingredientes = $jogos[$i]->getIngredientes();
+														$ingredientes = explode('*', $ingredientes);
 														for($j=0; $j<count($ingredientes)-1; $j++){
 															echo $ingredientes[$j] . ', ';
 														}
-														if($count($ingredientes) > 0){
-															echo $ingredientes[$j] . '</li>';
+														if(count($ingredientes) > 0){
+															echo $ingredientes[count($ingredientes)-1] . '</li>';
 														}
 
 														echo '</ol>
@@ -493,10 +512,11 @@
 														echo '<li class="list-group-item">' . '<strong>Ingredientes</strong>: ';
 
 														$ingredientes = $jogos[$i]->getIngredientes();
+														$ingredientes = explode('*', $ingredientes);
 														for($j=0; $j<count($ingredientes)-1; $j++){
-															echo $ingredientes[$j] . ', ';
+															echo $ingredientes[count($ingredientes)-1] . ', ';
 														}
-														if($count($ingredientes) > 0){
+														if(count($ingredientes) > 0){
 															echo $ingredientes[$j] . '</li>';
 														}
 
@@ -545,7 +565,7 @@
 											echo '<ul class="list-group list-group-flush">';
 											$count = 0;
 											for($i = 0; $i < count($jogos); $i++){
-												if($jogos[$i]->getId() == '4'){
+												if($jogos[$i]->getTipo() == '4'){
 													$count += 1;
 													if($count == 1){
 														echo '<li class="list-group-item list-group-item-info">' . $jogos[$i]->getData() . ' <a href="#" onclick="participantes(\'resultado-' . $count . '\')"><i class="fas fa-plus-circle"></i></a></li>';
@@ -557,11 +577,12 @@
 														echo '<li class="list-group-item">' . '<strong>Ingredientes</strong>: ';
 
 														$ingredientes = $jogos[$i]->getIngredientes();
+														$ingredientes = explode('*', $ingredientes);
 														for($j=0; $j<count($ingredientes)-1; $j++){
 															echo $ingredientes[$j] . ', ';
 														}
-														if($count($ingredientes) > 0){
-															echo $ingredientes[$j] . '</li>';
+														if(count($ingredientes) > 0){
+															echo $ingredientes[count($ingredientes)-1] . '</li>';
 														}
 
 														echo '</ol>
@@ -577,11 +598,12 @@
 														echo '<li class="list-group-item">' . '<strong>Ingredientes</strong>: ';
 
 														$ingredientes = $jogos[$i]->getIngredientes();
+														$ingredientes = explode('*', $ingredientes);
 														for($j=0; $j<count($ingredientes)-1; $j++){
 															echo $ingredientes[$j] . ', ';
 														}
-														if($count($ingredientes) > 0){
-															echo $ingredientes[$j] . '</li>';
+														if(count($ingredientes) > 0){
+															echo $ingredientes[count($ingredientes)-1] . '</li>';
 														}
 
 														echo '</ol>
@@ -601,7 +623,7 @@
 											echo '<ul class="list-group list-group-flush">';
 											$count = 0;
 											for($i = 0; $i < count($jogos); $i++){
-												if($jogos[$i]->getId() == '5'){
+												if($jogos[$i]->getTipo() == '5'){
 													$count += 1;
 													if($count == 1){
 														echo '<li class="list-group-item list-group-item-info">' . $jogos[$i]->getData() . ' <a href="#" onclick="participantes(\'resultado-' . $count . '\')"><i class="fas fa-plus-circle"></i></a></li>';
@@ -613,11 +635,12 @@
 														echo '<li class="list-group-item">' . '<strong>Ingredientes</strong>: ';
 
 														$ingredientes = $jogos[$i]->getIngredientes();
+														$ingredientes = explode('*', $ingredientes);
 														for($j=0; $j<count($ingredientes)-1; $j++){
 															echo $ingredientes[$j] . ', ';
 														}
-														if($count($ingredientes) > 0){
-															echo $ingredientes[$j] . '</li>';
+														if(count($ingredientes) > 0){
+															echo $ingredientes[count($ingredientes)-1] . '</li>';
 														}
 
 														echo '</ol>
@@ -633,11 +656,12 @@
 														echo '<li class="list-group-item">' . '<strong>Ingredientes</strong>: ';
 
 														$ingredientes = $jogos[$i]->getIngredientes();
+														$ingredientes = explode('*', $ingredientes);
 														for($j=0; $j<count($ingredientes)-1; $j++){
 															echo $ingredientes[$j] . ', ';
 														}
-														if($count($ingredientes) > 0){
-															echo $ingredientes[$j] . '</li>';
+														if(count($ingredientes) > 0){
+															echo $ingredientes[count($ingredientes)-1] . '</li>';
 														}
 
 														echo '</ol>
@@ -657,7 +681,7 @@
 											echo '<ul class="list-group list-group-flush">';
 											$count = 0;
 											for($i = 0; $i < count($jogos); $i++){
-												if($jogos[$i]->getId() == '6'){
+												if($jogos[$i]->getTipo() == '6'){
 													$count += 1;
 													if($count == 1){
 														echo '<li class="list-group-item list-group-item-info">' . $jogos[$i]->getData() . ' <a href="#" onclick="participantes(\'resultado-' . $count . '\')"><i class="fas fa-plus-circle"></i></a></li>';
@@ -669,11 +693,12 @@
 														echo '<li class="list-group-item">' . '<strong>Ingredientes</strong>: ';
 
 														$ingredientes = $jogos[$i]->getIngredientes();
+														$ingredientes = explode('*', $ingredientes);
 														for($j=0; $j<count($ingredientes)-1; $j++){
 															echo $ingredientes[$j] . ', ';
 														}
-														if($count($ingredientes) > 0){
-															echo $ingredientes[$j] . '</li>';
+														if(count($ingredientes) > 0){
+															echo $ingredientes[count($ingredientes)-1] . '</li>';
 														}
 
 														echo '</ol>
@@ -689,11 +714,12 @@
 														echo '<li class="list-group-item">' . '<strong>Ingredientes</strong>: ';
 
 														$ingredientes = $jogos[$i]->getIngredientes();
+														$ingredientes = explode('*', $ingredientes);
 														for($j=0; $j<count($ingredientes)-1; $j++){
 															echo $ingredientes[$j] . ', ';
 														}
-														if($count($ingredientes) > 0){
-															echo $ingredientes[$j] . '</li>';
+														if(count($ingredientes) > 0){
+															echo $ingredientes[count($ingredientes)-1] . '</li>';
 														}
 
 														echo '</ol>
