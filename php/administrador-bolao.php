@@ -1,6 +1,13 @@
 <?php
 
+	require_once 'sistema.php';
 	require_once 'administrador.php';
+	require_once 'jogo.php';
+	require_once 'bolao.php';
+	require_once 'ArquivoJogos.php';
+	require_once 'ArquivoUsuario.php';
+	require_once 'ArquivoBolao.php';
+	require_once 'facade.php';
 
 	class AdministradorBolao extends Administrador {
 		protected $bolao;

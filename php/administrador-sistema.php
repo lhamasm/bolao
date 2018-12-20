@@ -22,7 +22,7 @@
 			for($i = 0; $i < count($jogos); $i++){
 				if($jogos[$i]->getTipo() == $tipo && $jogos[$i]->getData() == $dataProva){
 					$_SESSION['status'] = 2;
-					//header('Location: ../adm-page#cadastrarResultados.php');
+					header('Location: ../adm-page.php');
 			  		//echo 'Já existe um bolão com o mesmo nome, administrador e campeonato';
 					exit();	
 				}
@@ -41,7 +41,7 @@
 
 			$_SESSION['status'] = 3;
 			//echo "Bolão cadastrado com sucesso!";
-			//header('Location: ../adm-page#cadastrarResultados.php');
+			header('Location: ../adm-page.php');
 			exit();
 		}
 

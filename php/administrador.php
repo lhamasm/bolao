@@ -2,9 +2,6 @@
 
 	require_once 'sistema.php';
 	require_once 'usuario.php';
-	require_once 'apostador.php';
-	require_once 'administrador-sistema.php';
-	require_once 'administrador-bolao.php';
 	require_once 'bolao.php';
 	require_once 'facade.php';
 	require_once 'ArquivoBolao.php';

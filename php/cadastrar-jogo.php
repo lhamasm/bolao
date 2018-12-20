@@ -8,7 +8,9 @@
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-		$campeonato = $_REQUEST['campeonato'];
+		$campeonato = $_REQUEST['camp'];
+
+		echo $campeonato;
 
 		$ano = $_REQUEST['ano'];
 

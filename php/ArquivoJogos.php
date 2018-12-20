@@ -19,7 +19,8 @@
 
 					if($jogo != ''){
 						$dados = explode(':', $jogo);
-						$j = new Jogo($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $ganhador, $ingredientes);
+						$j = new Jogo($dados[0], $dados[1], $dados[2], $dados[3], $dados[4], $dados[5], $dados[6]);
+						$j->setEquipes($dados[8]);
 
 		        		$sistema->setJogos($j);
 					}
@@ -43,6 +44,8 @@
 			}
 			if(count($jogo->getIngredientes()) > 0){
 				$cadastro = $cadastro . $jogo->getIngredientes()[count($jogo->getIngredientes())-1] . ':';
+			} else {
+				$cadastro = $cadastro . ':';
 			}
 
 			$equipe = $jogo->getEquipes();
@@ -63,10 +66,15 @@
 					$cadastro = $cadastro . $equipe[$i][$j] . ';';
 				}
 				if(count($equipe[$i]) > 0){
-					$cadastro = $cadastro . $equipe[$i][count($equipe[$i])-1] . PHP_EOL;
+					$cadastro = $cadastro . $equipe[$i][count($equipe[$i])-1];
 				}
 			}
 
+			if(count($equipe) == 0){
+				$cadastro = $cadastro . ':';
+			}
+
+			echo $cadastro . PHP_EOL;
 			$arquivo = fopen($nome, 'a+') or die("Não foi possível abrir o arquivo");
 			fwrite($arquivo, $cadastro);
 			fclose($arquivo);
