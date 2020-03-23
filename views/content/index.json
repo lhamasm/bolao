@@ -1,0 +1,142 @@
+{
+	"programa" : {
+		"texto" : "<p>O <strong>MasterChef</strong> é o maior programa de culinária do Brasil, onde cozinheiros amadores ou profissionais de todo o país competem por vários prêmios.O programa é apresentado por <strong>Ana Paula Padrão</strong>. Os cozinheiros passam por várias etapas onde serão julgados por três jurados: <strong>Erick Jacquin</strong>, <strong>Paola Carosella</strong> e <strong>Henrique Fogaça</strong>.</p><p> As principais provas são:<ul><li><strong>Caixa Misteriosa</strong>: Os participantes tem que se virar apenas com os ingredientes da caixa para preparar um delicioso prato que garante a permanência no programa.</li><li><strong>Prova em Equipe</strong>: Na Prova em Equipes, os participantes são divididos em times. Cada time, geralmente, tem que preparar diversos pratos para um público em especial.</li><li><strong>Prova de Eliminação</strong>: Como o próprio nome já diz, na Prova de Eliminação, um dos participantes deixa a competição e volta para casa.</li></ul></p>",
+		"link" : "https://entretenimento.band.uol.com.br/masterchef/profissionais/",
+		"img1" : {
+			"url" : "images/jurados.jpg",
+			"desc" : "Jurados e apresentadora"
+		},
+		"img2" : {
+			"url" : "images/programa.jpg",
+			"desc" : "Participante cozinhando em prova"
+		}
+	},
+	"participantes" : [
+		{
+			"img" : "images/adriana-media.png",
+			"nome" : "Adriana",
+			"desc" : "Mineira de Ituiutaba, Adriana é adepta de uma das linhas gastronômicas que mais crescem nos últimos anos: a cozinha vegana.",
+			"perfilUrl" : "https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/adriana",
+			"eliminado" : true,
+			"lucro" : 1000,
+			"icon" : "images/adriana.jpg"
+		},
+		{
+			"img" : "images/alex-media.jpg",
+			"nome" : "Alex",
+			"desc" : "Descendente de família chinesa, Alex passou a trabalhar na área quando foi morar nos EUA, onde cozinhou em pequenos restaurantes na Flórida.",
+			"perfilUrl" : "https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/alex",
+			"eliminado" : true,
+			"lucro" : 500,
+			"icon" : "images/alex.jpg"
+		},
+		{
+			"img" : "images/andre-media.jpg",
+			"nome" : "André",
+			"desc" : "Andre cresceu vendo o pai fazendo pães. Apesar da pouca idade, possui um currículo extenso e é um dos cozinheiros mais versáteis desta temporada.",
+			"perfilUrl" : "https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/andre-p",
+			"eliminado" : false,
+			"lucro" : 3000,
+			"icon" : "images/andre.jpg"
+		},
+		{
+			"img" : "images/andreR-media.jpg",
+			"nome" : "André R",
+			"desc" : "André cozinha profissionalmente desde 2010 e hoje considera a cozinha italiana sua especialidade.",
+			"perfilUrl" : "https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/andre-r",
+			"eliminado" : true,
+			"lucro" : 0,
+			"icon" : "images/andreR.jpg"
+		},
+		{
+			"img" : "images/daniel-media.jpg",
+			"nome" : "Daniel",
+			"desc" : "Daniel é presidente da Associação dos Cozinheiros Profissionais do Pantanal. Hoje ele comanda o próprio restaurante e sonha alçar voos muito mais altos caso ganhe o MasterChef Profissionais. ",
+			"perfilUrl" : "https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/daniel",
+			"eliminado" : false,
+			"lucro" : 1500,
+			"icon" : "images/daniel.jpg"
+		},
+		{
+			"img" : "images/heaven-media.jpg",
+			"nome" : "Heaven",
+			"desc" : "Cresceu dentro de uma cozinha observando a mãe. Estagiou em restaurantes conceituados na França e em Portugal.",
+			"perfilUrl" : "https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/heaven",
+			"eliminado" : false,
+			"lucro" : 2000,
+			"icon" : "images/heaven.jpg"
+		},
+		{
+			"img" : "images/manuela-media.jpg",
+			"nome" : "Manoela",
+			"desc" : "Passou por alguns restaurantes até chegar na cozinha do DOM, restaurante estrelado do chef Alex Atala.",
+			"perfilUrl" : "https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/manoela",
+			"eliminado" : false,
+			"lucro" : 2500,
+			"icon" : "images/manuela.jpg"
+		},
+		{
+			"img" : "images/marcela-media.jpg",
+			"nome" : "Marcela",
+			"desc" : "Há dois anos, comanda a cozinha do renomado restaurante do chef Gastón Acurio na capital paulista. Sua especialidade são os peixes e frutos do mar.",
+			"perfilUrl" : "https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/marcela",
+			"eliminado" : true,
+			"lucro" : 1000,
+			"icon" : "images/marcela.jpg"
+		},
+		{
+			"img" : "images/paulo-media.jpg",
+			"nome" : "Paulo",
+			"desc" : "Possui um restaurante na pequena Marechal Deodoro, Alagoas, onde combina técnicas diversas de gastronomia com elementos e inspirações de pratos da região. ",
+			"perfilUrl" : "https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/paulo",
+			"eliminado" : true,
+			"lucro" : 1000,
+			"icon" : "images/paulo.jpg"
+		},
+		{
+			"img" : "images/rafael-media.jpg",
+			"nome" : "Rafael",
+			"desc" : "Começou a cozinhar no exterior aos 19 anos e desde então passou pela cozinha de diversos restaurantes renomados na Europa e nos EUA.",
+			"perfilUrl" : "https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/rafael",
+			"eliminado" : false,
+			"lucro" : 3000,
+			"icon" : "images/rafael.jpg"
+		},
+		{
+			"img" : "images/roberta-media.jpg",
+			"nome" : "Roberta",
+			"desc" : "Começou como estagiária no DOM e depois trabalhou no Dalva e Dito, ambos do chef Alex Atala. Também passou pelo badalado Hot Pork, dos chefs Janaína e Jefferson Rueda.",
+			"perfilUrl" : "https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/roberta",
+			"eliminado" : false,
+			"lucro" : 500,
+			"icon" : "images/roberta.jpg"
+		},
+		{
+			"img" : "images/simone-media.jpg",
+			"nome" : "Simone",
+			"desc" : "Já ganhou o prêmio Dólmã de melhor chef de Alagoas em 2015 e ganhou a condecoração de Embaixadora da gastronomia do Alagoas pelo Enchefs.",
+			"perfilUrl" : "https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/simone",
+			"eliminado" : true,
+			"lucro" : 500,
+			"icon" : "images/simone.jpg"
+		},
+		{
+			"img" : "images/thalles-media.jpg",
+			"nome" : "Thales",
+			"desc" : "É professor de gastronomia, já teve uma empresa de eventos e trabalhou como personal chef. Formado pela Universidade Católica de Brasília com menção honrosa acadêmica.",
+			"perfilUrl" : "https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/thales",
+			"eliminado" : true,
+			"lucro" : 1500,
+			"icon" : "images/thalles.jpg"
+		},
+		{
+			"img" : "images/will-media.jpg",
+			"nome" : "William",
+			"desc" : "Viajou para Espanha para estudar cozinha criativa no Instituto El Cett, trabalhou em restaurantes estrelados por lá como o DiverXo e o Comerç 24. Hoje é subchef do Manioca.",
+			"perfilUrl" : "https://entretenimento.band.uol.com.br/masterchef/profissionais/participantes/2018/william",
+			"eliminado" : false,
+			"lucro" : 2500,
+			"icon" : "images/will.jpg"
+		}
+	]
+}

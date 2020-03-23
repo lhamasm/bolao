@@ -1,0 +1,115 @@
+<!doctype html>
+
+<html lang="pt-br" ng-app="bolaoApp">
+	
+	<head>
+		<meta content="pt-br" http-equiv="Content-Language" />    
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Bolão MasterChef Brasil</title>
+
+		 <!-- Icone da aba -->
+	    <link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/images/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/images/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/images/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/images/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/images/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon-180x180.png">
+		<link rel="shortcut icon" type="image/png" sizes="192x192"  href="/images/android-icon-192x192.png">
+		<link rel="shortcut icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="shortcut icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
+		<link rel="shortcut icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/images/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+
+	    <link rel="stylesheet" type="text/css" href="/css/site.css">
+
+	    <!-- Font Awesome -->
+	    <link rel="stylesheet" href="/lib/fontawesome/css/all.css">
+
+	    <!-- Jquery -->
+	    <script src="/lib/jquery/jquery.min.js"></script>
+
+	    <!-- Popper -->
+   		<script src="/lib/popper/popper.min.js"></script>
+
+	    <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+
+	    <!-- Bootstrap JS -->
+	    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+   		<!-- Angular Js -->
+   		<script src="/lib/angular/angular.js"></script>
+  		<script src="/lib/angular/angular-route.js"></script>
+  		<script src="/lib/angular/angular-sanitize.js"></script>
+
+   		<!-- App module -->
+   		<script src="/controllers/app.module.js"></script>
+   		<script src="/controllers/app.config.js"></script>
+   		<script src="/controllers/filters.js"></script>
+   		<script src="/controllers/pInicialCtrl.js"></script>
+    </head>
+
+	<body data-spy="scroll" data-target=".navbar" ng-cloack>
+		<header>
+	      	<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgba(248,249,250,0.7);">
+	        	<div class="container">
+
+		          	<a class="navbar-brand" href="index-principal.html">
+		            	<img style="width: 2.5em" src="/images/logo-vermelho.png">
+		          	</a>
+
+		          	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-collapse">
+		            	<span class="navbar-toggler-icon"></span>
+		          	</button>
+
+		          	<div class="collapse navbar-collapse" id="nav-collapse">
+		            	<ul class="navbar-nav">
+		              		<li class="nav-item">
+		                		<a class="nav-link" href="#programa">O programa</a>
+		              		</li>
+
+			              	<li class="nav-item divisor bg-danger d-none d-lg-block"></li>
+
+			              	<li class="nav-item">
+			                	<a class="nav-link" href="#participantes">Os participantes</a>
+			              	</li>
+
+			              	<li class="nav-item divisor bg-danger d-none d-lg-block"></li>
+
+			              	<li class="nav-item">
+			                	<a class="nav-link" href="#como-jogar">Como jogar</a>
+			              	</li>
+
+			              	<li class="nav-item divisor bg-danger d-none d-lg-block"></li>
+
+			              	<li class="nav-item">
+			                	<a class="nav-link" href="#noticias">Noticias</a>
+			              	</li>
+		            	</ul>
+		            	
+		            	<div class="row" style="margin-left: 2em;">
+							<a class="btn btn-outline-info" style="height: 2.5em; margin-left: 5em; margin-top: 1em;" href="#!/logar">Entrar</a>
+
+		            		<vr class="nav-item divisor d-none d-lg-block" style="background-color: black;">
+
+		            		<a class="mt-lg-1 ml-lg-3 btn btn-outline-danger" style="height: 2.5em;" href="#!/cadastrar">Cadastrar</a>
+		        		</div>
+	          		</div>
+	        	</div>
+	    	</nav>
+		</header>
+
+		<div ng-view>
+
+		</div>
+
+	</body>
+
+</html>

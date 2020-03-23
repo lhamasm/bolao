@@ -1,0 +1,419 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+section {
+  height: 100vh;
+}
+
+body {
+	background: url(../images/participantes.png),
+	linear-gradient(90deg, #dc3545, #17a2b8);
+	background-attachment: fixed;
+}
+
+@media (max-width: 418px) {
+	#programa .texto {
+		font-size: 0.8rem !important;
+	}
+}
+
+@media (max-width: 488px) and (min-width: 418.1px) {
+	#programa .texto {
+		font-size: 0.9rem !important;
+	}
+}
+
+/*Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) {
+
+	#home {
+		padding: 7em 0;
+	}
+
+	#home h1 {
+		font-size: 2.5em;
+	}
+
+	#home p {
+		font-size: 0.9em;
+	}
+
+	#carousel-noticias{
+		width: 100%;
+		height: 70%;
+	}
+
+	#carousel-noticias .carousel-caption h2 {
+		font-size: 1.0rem;
+	}
+
+	#programa .texto {
+		margin-left: 1em;
+		margin-right: 1em;
+	}
+}
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+	#home {
+		padding: 7em 0;
+	}
+
+	#home h1 {
+		font-size: 2.5em;
+	}
+
+	#home p {
+		font-size: 0.9em;
+	}
+
+	#carousel-noticias{
+		width: 100%;
+		height: 70%;
+	}
+
+	#carousel-noticias .carousel-caption h2 {
+		font-size: 1.0rem;
+	}
+
+	#carousel-noticias .carousel-caption p {
+		font-size: 0.8rem;
+	}
+	
+}
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+	#home {
+		padding: 7em 0;
+	}
+
+	#home h1 {
+		font-size: 3.0em;
+	}
+
+	#home p {
+		font-size: 1.1em;
+	}
+
+	#carousel-noticias{
+		width: 100%;
+		height: 70%;
+	}
+
+	#ranking{
+		width: 100%;
+		height: 90%;
+		text-align: center;
+	}
+
+	#ranking li{
+		list-style: none;
+		margin-left: -1em;
+		border-bottom: 1px solid #f0f0f0
+	}
+
+	#ranking h4 {
+		font-size: 0.7em;
+	}
+
+	#ranking img {
+		font-size: 0.7em;
+	}
+
+	#carousel-noticias .carousel-caption h2 {
+		font-size: 1.5rem;
+	}
+
+	#carousel-noticias .carousel-caption p {
+		font-size: 1.0rem;
+	}
+
+	.scroll {
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+
+}
+/* Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+
+	#home {
+		padding: 16em 0;
+	}
+
+	#home h1 {
+		font-size: 3.5em;
+	}
+
+	#home p {
+		font-size: 1.3em;
+	}
+
+	#ranking{
+		width: 100%;
+		height: 91%;
+		text-align: center;
+	}
+
+	#ranking h4 {
+		font-size: 0.8em;
+	}
+
+	#ranking img {
+		font-size: 0.7em;
+	}
+
+	.scroll {
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+
+}
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+
+	header {
+		font-size: 1.3em;
+	}
+
+	#home {
+		padding: 16em 0;
+	}
+
+	#home h1 {
+		font-size: 3.5em;
+	}
+
+	#home p {
+		font-size: 1.3em;
+	}
+
+	.scroll {
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+}
+
+@media (max-height: 599.99px){ 
+	.card-text {
+		font-size: 0.7em;
+	}
+
+	#carousel-participantes {
+		margin-top: -3.5em;
+	}
+	
+	#carousel-participantes, #carousel-participantes .card, #ranking, .scroll{
+		max-width: 15em;
+		max-height: 27em;
+		height: auto;
+		width: auto;
+	}
+
+	#img-programa img{
+		display: none;
+	}
+}
+
+@media (min-height: 600px) and (max-height: 643.9px){
+	.card-text {
+		font-size: 0.7em;
+	}
+
+	#carousel-participantes {
+		margin-top: -3.5em;
+	}
+	
+	#carousel-participantes, #carousel-participantes .card, #ranking, .scroll{
+		max-width: 15em;
+		max-height: 27em;
+		height: auto;
+		width: auto;
+	}
+
+	#img-programa img{
+		max-height: 10em;
+		height: auto;
+		width: auto;
+	}
+
+}
+
+@media (min-height: 644px) and (max-height: 700px){
+	.card-text {
+		font-size: 0.7em;
+	}
+
+	#img-programa img{
+		max-height: 27em;
+		height: auto;
+		width: auto;
+	}
+
+	#carousel-participantes {
+		margin-top: -3.5em;
+	}
+
+	#carousel-participantes, #carousel-participantes .card, #ranking, .scroll{
+		max-width: 15em;
+		max-height: 27em;
+		height: auto;
+		width: auto;
+	}
+
+}
+
+@media (min-height: 700.1px) and (max-height: 759.99px){
+	.card-text {
+		font-size: 0.7em;
+	}
+
+	#img-programa img{
+		margin-top: 2.5em;
+		max-height: 27em;
+		height: auto;
+		width: auto;
+	}
+
+	#carousel-participantes {
+		margin-top: -3.5em;
+	}
+
+	#carousel-participantes, #carousel-participantes .card, #ranking, .scroll{
+		max-width: 17em;
+		max-height: 33em;
+		height: auto;
+		width: auto;
+	}
+
+}
+
+@media (min-height: 760px) and (max-height: 809.99px){
+	.card-text {
+		font-size: 0.7em;
+	}
+
+	#img-programa img{
+		margin-top: 3em;
+		max-height: 27em;
+		height: auto;
+		width: auto;
+	}
+
+	#carousel-participantes {
+		margin-top: -3.5em;
+	}
+
+	#carousel-participantes, #carousel-participantes .card, #ranking, .scroll{
+		max-width: 22em;
+		max-height: 36em;
+		height: auto;
+		width: auto;
+	}
+
+}
+
+@media (min-height: 810px) and (max-height: 894.99px){
+	.card-text {
+		font-size: 0.7em;
+	}
+
+	#img-programa img{
+		margin-top: 3em;
+		max-height: 27em;
+		height: auto;
+		width: auto;
+	}
+
+	#carousel-participantes, #carousel-participantes .card, #ranking, .scroll{
+		max-width: 22em;
+		max-height: 36em;
+		height: auto;
+		width: auto;
+	}
+}
+
+@media (min-height: 895px){
+	#programa{
+		padding: 7em 0 3.0em 0 !important;
+	}
+
+	.card-text {
+		font-size: 1em;
+	}
+
+	#img-programa img{
+		margin-top: 3em;
+		max-height: 27em;
+		height: auto;
+		width: auto;
+	}
+
+	#carousel-participantes, #carousel-participantes .card, .scroll{
+		max-width: 22em;
+		max-height: 36em;
+		height: auto;
+		width: auto;
+	}
+
+}
+
+#programa .texto {
+	text-align: justify; 
+	-moz-column-count: 2; 
+	-webkit-column-count: 2; 
+	column-count: 2; 
+	font-size: 1rem;
+}
+
+#programa, #como-jogar, #forum {
+	background-color: #f8f9fa;
+}
+
+#programa, #participantes, #como-jogar, #noticias, #forum {
+	padding: 5em 0 3.0em 0;
+}
+
+#como-jogar i {
+	font-size: 5em; 
+	color: #B22222;
+}
+
+#carousel-noticias{
+	width: 100%;
+}
+
+#ranking {
+	background-color: rgba(248,249,250,0.7); 
+	border-radius: 25px;
+}
+
+.nome-ranking {
+	color: #17a2b8;
+}
+
+.eliminado {
+	color: #6c757d;
+}
+
+.grayscale{
+	filter: grayscale(100%);
+}
+
+.nome{
+	font-size: 3em;
+	font-family: biysk;
+}
+
+.dinheiro {
+	font-size: 1.2em;
+}
+
+.fundo-titulo {
+	background: rgba(0,0,0,0.7);
+	padding: 0 1em;
+}
