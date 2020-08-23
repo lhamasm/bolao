@@ -1,0 +1,284 @@
+<!doctype html>
+
+<html lang="pt-br" ng-app="bolaoApp">
+	
+	<head>
+		<meta content="pt-br" http-equiv="Content-Language" />    
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Bolão MasterChef Brasil</title>
+
+		 <!-- Icone da aba -->
+	    <link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/images/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/images/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/images/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/images/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/images/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon-180x180.png">
+		<link rel="shortcut icon" type="image/png" sizes="192x192"  href="/images/android-icon-192x192.png">
+		<link rel="shortcut icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="shortcut icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
+		<link rel="shortcut icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/images/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+
+	    <link rel="stylesheet" type="text/css" href="/css/site.css">
+	    <link rel="stylesheet" type="text/css" href="/css/index.css">
+
+	    <!-- Font Awesome -->
+	    <link rel="stylesheet" href="/lib/fontawesome/css/all.css">
+
+	    <!-- Jquery -->
+	    <script src="/lib/jquery/jquery.min.js"></script>
+
+	    <!-- Popper -->
+   		<script src="/lib/popper/popper.min.js"></script>
+
+	    <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+
+	    <!-- Bootstrap JS -->
+	    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+   		<!-- Angular Js -->
+   		<script src="/lib/angular/angular.js"></script>
+  		<script src="/lib/angular/angular-route.js"></script>
+  		<script src="/lib/angular/angular-sanitize.js"></script>
+
+   		<!-- App module -->
+   		<script src="/controllers/app.module.js"></script>
+   		<script src="/controllers/filters.js"></script>
+   		<script src="/controllers/pInicialCtrl.js"></script>
+    </head>
+
+	<body data-spy="scroll" data-target=".navbar" ng-cloack>
+		<header>
+	      	<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgba(248,249,250,0.7);">
+	        	<div class="container">
+
+		          	<a class="navbar-brand" href="index-principal.html">
+		            	<img style="width: 2.5em" src="/images/logo-vermelho.png">
+		          	</a>
+
+		          	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-collapse">
+		            	<span class="navbar-toggler-icon"></span>
+		          	</button>
+
+		          	<div class="collapse navbar-collapse" id="nav-collapse">
+		            	<ul class="navbar-nav">
+		              		<li class="nav-item">
+		                		<a class="nav-link" href="#programa">O programa</a>
+		              		</li>
+
+			              	<li class="nav-item divisor bg-danger d-none d-lg-block"></li>
+
+			              	<li class="nav-item">
+			                	<a class="nav-link" href="#participantes">Os participantes</a>
+			              	</li>
+
+			              	<li class="nav-item divisor bg-danger d-none d-lg-block"></li>
+
+			              	<li class="nav-item">
+			                	<a class="nav-link" href="#como-jogar">Como jogar</a>
+			              	</li>
+
+			              	<li class="nav-item divisor bg-danger d-none d-lg-block"></li>
+
+			              	<li class="nav-item">
+			                	<a class="nav-link" href="#noticias">Noticias</a>
+			              	</li>
+		            	</ul>
+		            	
+		            	<div class="row" style="margin-left: 2em;">
+							<a class="btn btn-outline-info" style="height: 2.5em; margin-left: 5em; margin-top: 1em;" href="#!/logar">Entrar</a>
+
+		            		<vr class="nav-item divisor d-none d-lg-block" style="background-color: black;">
+
+		            		<a class="mt-lg-1 ml-lg-3 btn btn-outline-danger" style="height: 2.5em;" href="#!/cadastrar">Cadastrar</a>
+		        		</div>
+	          		</div>
+	        	</div>
+	    	</nav>
+		</header>
+
+		<section id="home">
+	    	<div class="container">
+	    		<div class="row">
+	    			<div class="col-12">
+			    		<div class="text-center text-white justify-content-center">
+			    			<h1 style="font-family: grooving;" class="display-4">BOLÃO MASTERCHEF BRASIL</h1>
+
+				    		<p>Aposte com seus amigos quem vai ser o mais novo MasterChef do Brasil</p>
+
+				    		<a class="btn btn-danger btn-lg" style="width: 10em; font-family: grooving;" href="#!/cadastrar">Cadastre-se</a>
+			    		</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	    </section>
+		    
+	    <section id="programa">
+	    	<div class="container">
+	    		<h1 class="nome">O Programa</h1>
+	    		<div class="row">
+	    			<div class="texto">
+	    				<ng-bind-html ng-bind-html="viewdata.programa.texto | html"></ng-bind-html>
+	    				<a class="d-block text-right" href={{viewdata.programa.link}} target="_blank">Veja Mais</a>	
+	    			</div>
+	    		</div>
+
+	    		<div class="row d-none d-sm-inline">
+	    			<div class="col-12" id="img-programa">
+	    				<img class="img-fluid rounded col-md-4 offset-md-1" alt={{viewdata.programa.img1.desc}} src={{viewdata.programa.img1.url}}></img>
+	    				<img class="img-fluid rounded col-md-4 offset-md-2" alt={{viewdata.programa.img2.desc}} src={{viewdata.programa.img2.url}}></img>
+	    			</div>
+	    		</div>
+	    	</div>
+	    </section>
+
+	    <section id="participantes">
+	    	<div class="container">
+	    		<div class="row">
+	    			<div class="col-10 offset-sm-1 col-md-6 offset-md-1">
+	                    <h1 class="nome text-white" style="font-family: biysk">Os Participantes</h1>
+	                    <div id="carousel-participantes" class="carousel slide carrossel" data-ride="carousel">
+	                        <div class="carousel-inner">
+	                            <div class="carousel-item" ng-repeat="participante in viewdata.participantes" ng-class="{ 'active' : $first }">
+									<div class="card shadow">
+										<img class="card-img" ng-src="{{participante.img}}">
+										<div class="card-body">
+											<h4 class="card-title"><kbd>{{participante.nome}}</kbd></h4>
+											<p align="justify" class="card-text">{{participante.desc}} </p>
+											<a class="btn btn-outline-info btn-sm" href="{{participante.perfilUrl}}" target="_blank">Saiba Mais</a>
+										</div>
+									</div>
+	                            </div>
+	                        </div>
+	                        <a class="carousel-control-prev" href="#carousel-participantes" data-slide="prev">
+								<span class="carousel-control-prev-icon"></span>
+							</a>
+							<a class="carousel-control-next" href="#carousel-participantes" data-slide="next">
+								<span class="carousel-control-next-icon"></span>
+							</a>
+	                    </div>
+	                </div>
+	                <div class="col-12 col-md-4 d-none d-md-block">
+	                    <h1 class="nome text-white" style="text-align: center;">Ranking</h1>
+	                    <div id="ranking" class="pt-2 scroll">
+		                    <ol>
+								<li class="mb-3" ng-repeat="participante in viewdata.participantes | orderBy: ['-eliminado', 'lucro']:true">
+									<div class="row">
+		                                <div class="col-lg-5 col-xl-5 col-md-5">
+											<img class="rounded-circle img-fluid" ng-class="{ 'grayscale' : participante.eliminado }" ng-src="{{participante.icon}}">
+										</div>
+		                                <div class="col-lg-5 col-xl-5 col-md-5">
+											<h6 class="d-inline" ng-class="{ 'eliminado' : participante.eliminado, 'nome-ranking' : !participante.eliminado}">{{participante.nome}}</h6><br>
+											<h6 class="d-inline">R${{participante.lucro}} </h6>
+										</div>
+		                            </div>
+								</li>
+							</ol>
+	                    </div>
+	                </div>
+				</div>
+			</div>
+		</section>
+		    
+	    <section id="como-jogar">
+	    	<div id="blank-space" class="container" >
+	    		<h1 class="nome text-center py-4">Como jogar</h1>
+
+	    		<div class="row">
+	    			<div class="col-md-6 col-lg-3">
+	    				<i class="d-block text-center fas fa-user-circle pb-1"></i>
+	    				<h4 style="font-family:grooving;" class="text-center">CADASTRE-SE</h4>
+	    				<p class="lead" style="text-align: center">Crie uma conta e inicie a sessão para começar a jogar</p>
+	    			</div>
+
+	    			<div class="col-md-6 col-lg-3">
+	    				<i class="d-block text-center fas fa-check-circle text-center pb-1"></i>
+	    				<h4 style="font-family:grooving;" class="text-center">ESCOLHA UM BOLÃO</h4>
+	    				<p class="lead" style="text-align: center">Escolha um bolão e convide outras pessoas para jogar ou crie o seu bolão particular e jogue com seus amigos</p>
+
+	    			</div>
+
+	    			<div class="col-md-6 col-lg-3">
+	    				<i style="color: #B22222;" class="d-block text-center fas fa-dollar-sign text-center pb-1"></i>
+	    				<h4 style="font-family:grooving;" class="text-center">FAÇA SUAS APOSTAS</h4>
+	    				<p class="lead" style="text-align: center">Os valores das apostas devem estar entre R$20,00 e R$1000,00</p>
+
+	    			</div>
+
+	    			<div class="col-md-6 col-lg-3">
+	    				<i class="d-block text-center fas fa-check-double text-center pb-1"></i>
+	    				<h4 style="font-family:grooving;" class="text-center">ACOMPANHE</h4>
+	    				<p class="lead" style="text-align: center">Acesse seus bolões para saber quem está apostando, quais os valores das apostas e quanto o bolão está valendo</p>
+
+	    			</div>
+
+	    		</div>
+	    		<h3 class="text-center py-4" style="font-size: 2.3em; font-family:grooving;">DIVIRTA-SE</h3>
+	    	</div>
+	    </section>
+
+	    <section id="noticias">
+	    	<div class="container">
+	    		<div class="row">
+	    			<div class="col-6 offset-3">
+	    				<h1 class="nome text-white pt-1 pb-4">Noticias</h1>
+
+				    	<div id="carousel-noticias" class="carousel slide" data-ride="carousel">
+				    		<div class="carousel-inner">
+
+				    			<div class="carousel-item active">
+				    				<a href="https://entretenimento.band.uol.com.br/masterchef/profissionais/noticias/100000935607/internet-vai-a-loucura-e-comemora-eliminacao-de-thales.html"><img class="img-fluid" src="images/thales-eliminacao.jpg"></a>
+				    				<div class="carousel-caption fundo-titulo">
+				    					<h2 style="text-align: left;">Internet vai à loucura e comemora eliminação de Thales</h2>
+				    					<p class="d-none d-sm-block" style="text-align: left; color: rgba(248,249,250,0.7);">Participante que no início cativou o público por sua história de vida se tornou o grande ranço dessa edição</p>
+				    				</div>
+				    			</div>
+
+				    			<div class="carousel-item">
+				    				<a href="https://entretenimento.band.uol.com.br/masterchef/profissionais/fotos/10000013838/cozinheiros-preparam-pratos-monocromaticos-para-eliminacao.html"><img class="img-fluid" src="images/mono-prato.jpg"></a>
+				    				<div class="carousel-caption fundo-titulo">
+				    					<h2 style="text-align: left;">Cozinheiros preparam pratos monocromáticos para eliminação</h2>
+				    					<p class="d-none d-sm-block" style="text-align: left; color: rgba(248,249,250,0.7);">Tema da prova de eliminação exige dos participantes a construção de pratos monocromáticos nas cores laranja, vermelho, amarelo e roxo</p>
+				    				</div>				    				
+				    			</div>
+
+				    			<div class="carousel-item">
+				    				<a href="https://entretenimento.band.uol.com.br/masterchef/profissionais/noticias/100000935344/participantes-cozinham-na-natureza-e-precisam-fazer-o-proprio-fogo.html"><img class="img-fluid" src="images/prova-equipe.jpg"></a>
+				    				<div class="carousel-caption fundo-titulo">
+				    					<h2 style="text-align: left;">Participantes cozinham em meio à natureza e precisam fazer o próprio fogo</h2>
+				    					<p class="d-none d-sm-block" style="text-align: left; color: rgba(248,249,250,0.7);">Divididos em dois times, os cozinheiros profissionais deverão voltar às origens da gastronomia</p>
+				    				</div>	
+				    			</div>
+
+				    			<a class="carousel-control-prev" href="#carousel-noticias" data-slide="prev"><span class="carousel-control-prev-icon"></span></a>
+				    			<a class="carousel-control-next" href="#carousel-noticias" data-slide="next"><span class="carousel-control-next-icon"></span></a>
+				    			
+				    		</div>
+				    	</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	    </section>
+
+	    <footer style="background-color: #B22222">
+	  		<nav class="navbar navbar-expand-lg text-white navbar-dark">
+	    		<div class="container justify-content-center">
+	      			<ul class="navbar-nav">
+	       	 			<li class="nav-item">&copy Bolão MasterChef Brasil</li>
+	      			</ul>
+	    		</div>
+	  		</nav>
+		</footer> 
+
+	</body>
+
+</html>

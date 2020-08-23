@@ -1,0 +1,41 @@
+[curl] / : homepage [get]
+[curl] /login : [post]
+[curl] /signup : [post]
+[curl] /recoverpassword : [post]
+
+--- general user logged in ---
+
+:: [surl] /faq : [get] ::
+:: [surl] /termsAndConditions : [get] ::
+:: [surl] /reportbugs : [post] ::
+
+[curl] /home :  [surl] /jackpots [get]
+				[surl] /jackpots/{id}/bets [post]
+				[surl] /competitions [get]
+				[surl] /competitions/{id}/results [get]
+				[surl] /jackpots?finished=true [get]
+
+[curl] /invites : [get] [post]
+[curl] /user : [get] [put] [delete]
+
+[curl] /jackpots : [post]
+[curl] /jackpots?creator={username} : my-jackpots page [get] [put]
+
+[curl] /mybets?current=true : [get] [put] [delete]
+[curl] /mybets : [get] 
+
+--- admin user logged in ---
+
+:: [surl] /faq : [put] ::
+:: [surl] /faq : [get] [put] ::
+
+[curl] /home :  Updating the [curl] / info
+				[surl] /competitions [get] [post] [put]
+				[surl] /competitions/{id}/competitors [get] :        [surl] /competitions/{id}/competitors/{id} [put]
+				[surl] /competitions/{id}/competitors/{id} [put]
+				[surl] /news [get] [post] [put] [delete]
+
+[curl] /_____   [surl] /competitions/{id}/results [post]
+[curl] /_____   [surl] /jackpots [post]
+[curl] /users [get] [delete] [put]
+[curl] /jackpots [get] [put] [delete]

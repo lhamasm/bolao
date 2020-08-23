@@ -1,0 +1,36 @@
+@font-face{
+	font-family: grooving;
+	src: url(fonts/Aa.otf);
+}
+
+@font-face {
+	font-family: biysk;
+	src: url(fonts/Biysk.ttf);
+}
+
+@font-face {
+	font-family: joy;
+	src: url("fonts/Joy Kim.otf");
+}
+
+header {
+	font-family: biysk, Helvetica,Arial,sans-serif;
+	font-size: 1.4em;
+}
+
+ol li {
+	font-size: 1em;
+	font-family: grooving;
+}
+
+.divisor {
+	width: 1px;
+	margin: 12px 15px;
+}
+
+/*
+.footer {
+	opacity: 0.7;
+}
+
+*/
