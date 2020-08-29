@@ -1,6 +1,6 @@
 [curl] / : homepage [get]
-[curl] /login : [post]
-[curl] /signup : [post]
+[curl] /login : [surl] /users/login [post]
+[curl] /signup : [surl] /users [post]
 [curl] /recoverpassword : [post]
 
 --- general user logged in ---
